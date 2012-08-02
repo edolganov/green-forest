@@ -1,0 +1,41 @@
+<project name="common-utils" default="deploy" basedir=".">
+
+    <target name="init" description="Build initialization">
+        <property file="build.properties"/>
+
+        <path id="libs">
+            <fileset dir="${module.third-party.dir}" includes="${module.third-party.lib}"/>
+			<fileset dir="${project.path.utils}/build" includes="*.jar"/>
+       </path>
+    </target>
+
+    <target name="clean" depends="init">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="deploy" depends="clean">
+        <mkdir dir="${module.build.dir}"/>
+
+        <javac srcdir="${module.src.dir}"
+               destdir="${module.build.dir}"
+               debug="${compiler.debug}"
+               optimize="${compiler.optimize}"
+               deprecation="${compiler.deprecation}"
+               encoding="${compiler.encoding}">
+            <classpath refid="libs"/>
+        </javac>
+
+        <copy todir="${module.build.dir}">
+            <fileset dir="${module.src.dir}">
+                <include name="**/*"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+
+        <jar jarfile="${module.dist.dir}/${module.name}.jar">
+            <fileset dir="${module.build.dir}"/>
+        </jar>
+    </target>
+
+</project>
+
