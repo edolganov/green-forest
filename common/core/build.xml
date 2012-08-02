@@ -1,0 +1,60 @@
+<project name="Module build" default="deploy" basedir=".">
+    <property file="build.properties"/>
+	
+	<target name="build-dependencies">
+		<ant antfile="${project.path.utils}/build.xml" inheritAll="false" />
+	</target>
+
+    <target name="init" description="Build initialization">
+        <path id="libs">
+            <fileset dir="${module.third-party.dir}" includes="${module.third-party.lib}"/>
+			<fileset dir="${project.path.utils}/build" includes="*.jar"/>
+			<fileset dir="${project.path.api}/build" includes="*.jar"/>
+        </path>
+    </target>
+
+
+    <target name="clean" depends="init">
+        <delete dir="${build.dir}"/>
+    </target>
+
+
+    <target name="deploy" depends="clean">
+        <mkdir dir="${module.build.dir}"/>
+
+        <javac srcdir="${module.src.dir}"
+               destdir="${module.build.dir}"
+               debug="${compiler.debug}"
+               optimize="${compiler.optimize}"
+               deprecation="${compiler.deprecation}"
+               encoding="${compiler.encoding}">
+            <classpath refid="libs"/>
+        </javac>
+
+        <copy todir="${module.build.dir}">
+            <fileset dir="${module.src.dir}">
+                <include name="**/*"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+
+        <jar jarfile="${module.dist.dir}/${module.name}">
+            <fileset dir="${module.build.dir}"/>
+        </jar>
+    </target>
+
+	
+	<target name="stand-alone" depends="build-dependencies,deploy"/>
+	<target name="run-stand-alone" depends="stand-alone">
+		<java classname="ru.dz.swing.core.test.TestFrame" fork="true">
+         <arg value="ru.dz.icar.module.alarms.AlarmModule"/>
+         <classpath>
+           <path refid="libs"/>
+		   <fileset dir="${build.dir}">
+				<filename name="${module.name}"/>
+			</fileset>
+         </classpath>
+       </java>
+	</target>
+</project>
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="icar-server" default="collect-all" basedir=".">
+
+    <target name="clean-all">
+        <ant antfile="./common/utils/build.xml" inheritAll="false" target="clean"/>
+		<ant antfile="./common/api/build.xml" inheritAll="false" target="clean"/>
+		<ant antfile="./common/core/build.xml" inheritAll="false" target="clean"/>
+
+    </target>
+
+    <target name="build-all" depends="clean-all">
+        <ant antfile="./common/utils/build.xml" inheritAll="false"/>
+		<ant antfile="./common/api/build.xml" inheritAll="false"/>
+		<ant antfile="./common/core/build.xml" inheritAll="false"/>
+		
+    </target>
+
+
+    <target name="collect-all" depends="build-all">
+        <delete dir="build"/>
+        <mkdir dir="build"/>
+
+		<copy todir="build">
+			<fileset dir="./common/utils/build" includes="*.jar"/>
+			<fileset dir="./common/api/build" includes="*.jar"/>
+			<fileset dir="./common/core/build" includes="*.jar"/>
+		</copy>
+
+    </target>
+</project>
+
