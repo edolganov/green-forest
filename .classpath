@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="common/utils/src"/>
+	<classpathentry kind="src" path="common/utils/test-src"/>
 	<classpathentry kind="src" path="common/api/src"/>
+	<classpathentry kind="src" path="common/api/test-src"/>
 	<classpathentry kind="src" path="common/core/src"/>
 	<classpathentry kind="src" path="common/core/test-src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
