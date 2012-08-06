@@ -15,18 +15,18 @@ import com.green.forest.api.exception.deploy.DeployException;
 import com.green.forest.api.exception.deploy.NoMappingAnnotationException;
 import com.green.forest.util.Util;
 
-public class ObjectsRepo<T> {
+public class ObjectsRepo {
 	
 	private static Log log = LogFactory.getLog(ObjectsRepo.class);
 	
-	private HashMap<Class<?>, HashSet<Class<T>>> initialMapping = new HashMap<Class<?>, HashSet<Class<T>>>();
+	private HashMap<Class<?>, HashSet<Class<?>>> initialMapping = new HashMap<Class<?>, HashSet<Class<?>>>();
 	
 	
 	private ReadWriteLock rw = new ReentrantReadWriteLock();
 	private Lock readLock = rw.readLock();
 	private Lock writeLock = rw.writeLock();
 	
-	public void put(Class<T> clazz) throws DeployException{
+	public void put(Class<?> clazz) throws DeployException{
 		writeLock.lock();
 		try {
 			
@@ -42,10 +42,10 @@ public class ObjectsRepo<T> {
 		}
 	}
 
-	private void putToMapping(Class<?> type, Class<T> clazz) {
-		HashSet<Class<T>> set = initialMapping.get(type);
+	private void putToMapping(Class<?> type, Class<?> clazz) {
+		HashSet<Class<?>> set = initialMapping.get(type);
 		if(set == null){
-			set = new HashSet<Class<T>>();
+			set = new HashSet<Class<?>>();
 			initialMapping.put(type, set);
 		}
 		if(set.contains(clazz)){
@@ -55,10 +55,10 @@ public class ObjectsRepo<T> {
 		}
 	}
 	
-	Map<Class<?>, HashSet<Class<T>>> getInitalMapping(){
+	Map<Class<?>, HashSet<Class<?>>> getInitalMapping(){
 		readLock.lock();
 		try {
-			return new HashMap<Class<?>, HashSet<Class<T>>>(initialMapping);
+			return new HashMap<Class<?>, HashSet<Class<?>>>(initialMapping);
 		} finally {
 			readLock.unlock();
 		}

@@ -18,15 +18,6 @@ public abstract class Action<I extends Serializable, O extends Serializable> imp
 		this.input = input;
 	}
 	
-	
-	public I input() {
-		return input;
-	}
-
-	public void output(O output) {
-		this.output = output;
-	}
-	
 
 	public I getInput() {
 		return input;
