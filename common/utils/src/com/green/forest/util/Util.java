@@ -1,6 +1,9 @@
 package com.green.forest.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.UUID;
 
 public class Util {
 
@@ -48,6 +51,18 @@ public class Util {
 			throws IllegalStateException {
 		if (!state) {
 			throw new IllegalStateException(errorMsg);
+		}
+	}
+	
+	public static <T extends Throwable> void checkEmpty(Object obj, Class<T> exClass) throws T {
+		if(Util.isEmpty(obj)){
+			try {
+				T t = (T)exClass.newInstance();
+				throw t;
+			}catch(Exception t){
+				throw new IllegalStateException(t);
+			}
+			
 		}
 	}
 
