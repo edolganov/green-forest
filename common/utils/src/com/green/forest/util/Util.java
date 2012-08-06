@@ -56,12 +56,13 @@ public class Util {
 	
 	public static <T extends Throwable> void checkEmpty(Object obj, Class<T> exClass) throws T {
 		if(Util.isEmpty(obj)){
+			T t = null;
 			try {
-				T t = (T)exClass.newInstance();
-				throw t;
-			}catch(Exception t){
-				throw new IllegalStateException(t);
+				t = (T)exClass.newInstance();
+			}catch(Exception ex){
+				throw new IllegalStateException(ex);
 			}
+			throw t;
 			
 		}
 	}
