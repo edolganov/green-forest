@@ -1,4 +1,4 @@
-package com.green.forest.api.action;
+package com.green.forest.api;
 
 import java.io.Serializable;
 
