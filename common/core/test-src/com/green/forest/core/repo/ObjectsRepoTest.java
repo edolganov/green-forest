@@ -18,7 +18,7 @@ public class ObjectsRepoTest extends Assert {
 	@Test
 	public void test_put() throws Exception{
 		
-		ObjectsRepo repo = new ObjectsRepo();
+		ObjectsRepoImpl repo = new ObjectsRepoImpl();
 		repo.put(StringEcho.class);
 		
 		Map<Class<?>, HashSet<Class<?>>> map = repo.getInitalMapping();
@@ -30,7 +30,7 @@ public class ObjectsRepoTest extends Assert {
 	@Test(expected=NoMappingAnnotationException.class)
 	public void test_put_without_mapping() throws Exception{
 		
-		ObjectsRepo repo = new ObjectsRepo();
+		ObjectsRepoImpl repo = new ObjectsRepoImpl();
 		repo.put(HandlerWithoutMapping.class);
 		
 	}
