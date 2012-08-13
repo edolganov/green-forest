@@ -15,9 +15,9 @@ import com.green.forest.api.exception.deploy.DeployException;
 import com.green.forest.api.exception.deploy.NoMappingAnnotationException;
 import com.green.forest.util.Util;
 
-public class ObjectsRepo {
+public class ObjectsRepoImpl {
 	
-	private static Log log = LogFactory.getLog(ObjectsRepo.class);
+	private static Log log = LogFactory.getLog(ObjectsRepoImpl.class);
 	
 	private HashMap<Class<?>, HashSet<Class<?>>> initialMapping = new HashMap<Class<?>, HashSet<Class<?>>>();
 	
