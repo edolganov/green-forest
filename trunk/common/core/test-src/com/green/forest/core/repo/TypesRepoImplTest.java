@@ -12,13 +12,13 @@ import com.green.forest.api.test.action.StringAction;
 import com.green.forest.core.test.model.handler.HandlerWithoutMapping;
 import com.green.forest.core.test.model.handler.StringEcho;
 
-public class ObjectsRepoTest extends Assert {
+public class TypesRepoImplTest extends Assert {
 	
 	
 	@Test
 	public void test_put() throws Exception{
 		
-		ObjectsRepoImpl repo = new ObjectsRepoImpl();
+		TypesRepoImpl repo = new TypesRepoImpl();
 		repo.put(StringEcho.class);
 		
 		Map<Class<?>, HashSet<Class<?>>> map = repo.getInitalMapping();
@@ -30,7 +30,7 @@ public class ObjectsRepoTest extends Assert {
 	@Test(expected=NoMappingAnnotationException.class)
 	public void test_put_without_mapping() throws Exception{
 		
-		ObjectsRepoImpl repo = new ObjectsRepoImpl();
+		TypesRepoImpl repo = new TypesRepoImpl();
 		repo.put(HandlerWithoutMapping.class);
 		
 	}
