@@ -1,7 +1,7 @@
 package com.green.forest.core.repo;
 
-import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import junit.framework.Assert;
 
@@ -15,13 +15,14 @@ import com.green.forest.core.test.model.handler.StringEcho;
 public class TypesRepoImplTest extends Assert {
 	
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test_put() throws Exception{
 		
 		TypesRepoImpl repo = new TypesRepoImpl();
 		repo.put(StringEcho.class);
 		
-		Map<Class<?>, HashSet<Class<?>>> map = repo.getInitalMapping();
+		Map<Class<?>, Set<Class<?>>> map = repo.getInitalMapping();
 		assertTrue(map.get(StringAction.class).contains(StringEcho.class));
 		
 	}
