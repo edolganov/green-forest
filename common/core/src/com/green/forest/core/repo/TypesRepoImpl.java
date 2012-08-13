@@ -40,6 +40,7 @@ public class TypesRepoImpl implements TypesRepo {
 			Class<?>[] types = annotation.value();
 			for(Class<?> type : types){
 				putToMapping(type, handler);
+				
 			}
 		}finally {
 			writeLock.unlock();
