@@ -15,9 +15,9 @@ import com.green.forest.api.exception.deploy.DeployException;
 import com.green.forest.api.exception.deploy.NoMappingAnnotationException;
 import com.green.forest.util.Util;
 
-public class ObjectsRepoImpl {
+public class TypesRepoImpl implements TypesRepo {
 	
-	private static Log log = LogFactory.getLog(ObjectsRepoImpl.class);
+	private static Log log = LogFactory.getLog(TypesRepoImpl.class);
 	
 	private HashMap<Class<?>, HashSet<Class<?>>> initialMapping = new HashMap<Class<?>, HashSet<Class<?>>>();
 	
@@ -26,7 +26,8 @@ public class ObjectsRepoImpl {
 	private Lock readLock = rw.readLock();
 	private Lock writeLock = rw.writeLock();
 	
-	public void put(Class<?> clazz) throws DeployException{
+	@Override
+	public void put(Class<?> clazz) throws DeployException {
 		writeLock.lock();
 		try {
 			
