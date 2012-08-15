@@ -21,7 +21,9 @@ public class TypesRepoImpl implements TypesRepo {
 	
 	private static Log log = LogFactory.getLog(TypesRepoImpl.class);
 	
+	//[target - [handlers]]
 	private HashMap<Class<?>, Set<Class<?>>> initialMapping = new HashMap<Class<?>, Set<Class<?>>>();
+	//[target - [all handlers]]
 	private HashMap<Class<?>, Set<Class<?>>> targetCache = new HashMap<Class<?>, Set<Class<?>>>();
 	
 	
@@ -38,9 +40,8 @@ public class TypesRepoImpl implements TypesRepo {
 			Util.checkEmpty(annotation, NoMappingAnnotationException.class);
 			
 			Class<?>[] types = annotation.value();
-			for(Class<?> type : types){
-				putToMapping(type, handler);
-				
+			for(Class<?> target : types){
+				putToMapping(target, handler);
 			}
 		}finally {
 			writeLock.unlock();
@@ -108,6 +109,7 @@ public class TypesRepoImpl implements TypesRepo {
 		HashSet<Class<?>> allHandlers = new HashSet<Class<?>>();
 		
 		LinkedList<Class<?>> queue = new LinkedList<Class<?>>();
+		queue.addLast(Object.class);
 		queue.addLast(target);
 		
 		while( ! queue.isEmpty()){
@@ -144,16 +146,16 @@ public class TypesRepoImpl implements TypesRepo {
 	}
 
 
-	private void putToMapping(Class<?> type, Class<?> clazz) {
-		Set<Class<?>> set = initialMapping.get(type);
+	private void putToMapping(Class<?> target, Class<?> handler) {
+		Set<Class<?>> set = initialMapping.get(target);
 		if(set == null){
 			set = new HashSet<Class<?>>();
-			initialMapping.put(type, set);
+			initialMapping.put(target, set);
 		}
-		if(set.contains(clazz)){
-			log.warn("mapping already contains "+clazz+" for "+type);
+		if(set.contains(handler)){
+			log.warn("mapping already contains "+handler+" for "+target);
 		} else {
-			set.add(clazz);
+			set.add(handler);
 		}
 	}
 	
