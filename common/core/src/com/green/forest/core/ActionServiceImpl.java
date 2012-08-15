@@ -5,8 +5,21 @@ import java.io.Serializable;
 import com.green.forest.api.Action;
 import com.green.forest.api.ActionService;
 import com.green.forest.api.Handler;
+import com.green.forest.core.config.ConfigService;
+import com.green.forest.core.repo.TypesRepo;
 
 public class ActionServiceImpl implements ActionService {
+	
+	private ConfigService config;
+	private TypesRepo repo;
+	
+	public ActionServiceImpl(ConfigService config) {
+		
+		this.config = config;
+		
+		
+		
+	}
 	
 	
 	public void put(Class<? extends Handler<Action<?,?>>> handlerClass){
