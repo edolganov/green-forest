@@ -15,17 +15,20 @@ import org.apache.commons.logging.LogFactory;
 import com.green.forest.api.annotation.Mapping;
 import com.green.forest.api.exception.deploy.DeployException;
 import com.green.forest.api.exception.deploy.NoMappingAnnotationException;
+import com.green.forest.api.exception.deploy.NotOneHandlerException;
 import com.green.forest.util.Util;
 
 public class TypesRepoImpl implements TypesRepo {
 	
 	private static Log log = LogFactory.getLog(TypesRepoImpl.class);
 	
-	//[target - [handlers]]
+	//[target - [current handlers]]
 	private HashMap<Class<?>, Set<Class<?>>> initialMapping = new HashMap<Class<?>, Set<Class<?>>>();
-	//[target - [all handlers]]
+	
+	//[target - [all handlers (from cur, superclass, interfaces)]]
 	private HashMap<Class<?>, Set<Class<?>>> targetCache = new HashMap<Class<?>, Set<Class<?>>>();
 	
+	private boolean isOneHandler = false;
 	
 	private ReadWriteLock rw = new ReentrantReadWriteLock();
 	private Lock readLock = rw.readLock();
@@ -37,12 +40,24 @@ public class TypesRepoImpl implements TypesRepo {
 		try {
 			
 			Mapping annotation = handler.getAnnotation(Mapping.class);
-			Util.checkEmpty(annotation, NoMappingAnnotationException.class);
-			
-			Class<?>[] types = annotation.value();
-			for(Class<?> target : types){
-				putToMapping(target, handler);
+			if(Util.isEmpty(annotation)){
+				throw new NoMappingAnnotationException(handler);
 			}
+			
+			HashMap<Class<?>, Set<Class<?>>> newMap = new HashMap<Class<?>, Set<Class<?>>>(initialMapping);
+			Class<?>[] targets = annotation.value();
+			for(Class<?> target : targets){
+				putToMapping(newMap, target, handler);
+			}
+			
+			if(isOneHandler){
+				checkForManyHandlers(newMap);
+			}
+			
+			//if ok: replace map, clear cache
+			initialMapping = newMap;
+			targetCache = new HashMap<Class<?>, Set<Class<?>>>();
+			
 		}finally {
 			writeLock.unlock();
 		}
@@ -75,6 +90,36 @@ public class TypesRepoImpl implements TypesRepo {
 			 readLock.unlock();
 		}
 	}
+	
+	@Override
+	public void setOneHandlerOnly(boolean val) {
+		writeLock.lock();
+		try {
+			
+			if(val && !isOneHandler){
+				checkForManyHandlers(initialMapping);
+			}
+			
+			this.isOneHandler = val;
+			
+		}finally {
+			writeLock.unlock();
+		}
+	}
+
+
+	@Override
+	public boolean isOneHandlerOnly() {
+		readLock.lock();
+		try {
+			
+			return isOneHandler;
+			
+		} finally {
+			readLock.unlock();
+		}
+		
+	}
 
 	
 	@Deprecated
@@ -106,6 +151,13 @@ public class TypesRepoImpl implements TypesRepo {
 	
 	private void putToTargetCache(Class<?> target) {
 		
+		Set<Class<?>> allHandlers = getAllHandlers(initialMapping, target);
+		targetCache.put(target, allHandlers);
+	}
+
+
+	private Set<Class<?>> getAllHandlers(HashMap<Class<?>, Set<Class<?>>> map, Class<?> target) {
+		
 		HashSet<Class<?>> allHandlers = new HashSet<Class<?>>();
 		
 		LinkedList<Class<?>> queue = new LinkedList<Class<?>>();
@@ -114,7 +166,7 @@ public class TypesRepoImpl implements TypesRepo {
 		
 		while( ! queue.isEmpty()){
 			Class<?> curTarget = queue.removeFirst();
-			Set<Class<?>> curHandlersTypes = initialMapping.get(curTarget);
+			Set<Class<?>> curHandlersTypes = map.get(curTarget);
 			if( ! Util.isEmpty(curHandlersTypes)){
 				allHandlers.addAll(curHandlersTypes);
 			}
@@ -131,9 +183,7 @@ public class TypesRepoImpl implements TypesRepo {
 				}
 			}
 		}
-		
-		targetCache.put(target, allHandlers);
-		
+		return allHandlers;
 	}
 	
 	private Set<Class<?>> getFromTargetCache(Class<?> target) {
@@ -146,16 +196,29 @@ public class TypesRepoImpl implements TypesRepo {
 	}
 
 
-	private void putToMapping(Class<?> target, Class<?> handler) {
-		Set<Class<?>> set = initialMapping.get(target);
+	private void putToMapping(HashMap<Class<?>, Set<Class<?>>> map, Class<?> target, Class<?> handler) {
+		Set<Class<?>> set = map.get(target);
 		if(set == null){
 			set = new HashSet<Class<?>>();
-			initialMapping.put(target, set);
+			map.put(target, set);
 		}
 		if(set.contains(handler)){
 			log.warn("mapping already contains "+handler+" for "+target);
 		} else {
 			set.add(handler);
+		}
+	}
+
+
+	private void checkForManyHandlers(HashMap<Class<?>, Set<Class<?>>> map) {
+		
+		Set<Class<?>> targets = map.keySet();
+		
+		for(Class<?> target : targets){
+			Set<Class<?>> all = getAllHandlers(map, target);
+			if(all.size() > 1){
+				throw new NotOneHandlerException(target, all);
+			}
 		}
 	}
 	

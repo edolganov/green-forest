@@ -53,19 +53,6 @@ public class Util {
 			throw new IllegalStateException(errorMsg);
 		}
 	}
-	
-	public static <T extends Throwable> void checkEmpty(Object obj, Class<T> exClass) throws T {
-		if(Util.isEmpty(obj)){
-			T t = null;
-			try {
-				t = (T)exClass.newInstance();
-			}catch(Exception ex){
-				throw new IllegalStateException(ex);
-			}
-			throw t;
-			
-		}
-	}
 
 	public static <T> ArrayList<T> list(T... elems) {
 		ArrayList<T> list = new ArrayList<T>();

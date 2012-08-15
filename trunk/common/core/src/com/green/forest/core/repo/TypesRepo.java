@@ -2,12 +2,17 @@ package com.green.forest.core.repo;
 
 import java.util.Set;
 
-import com.green.forest.api.exception.deploy.DeployException;
+import com.green.forest.api.exception.deploy.NoMappingAnnotationException;
+import com.green.forest.api.exception.deploy.NotOneHandlerException;
 
 public interface TypesRepo {
 	
-	public void put(Class<?> handler) throws DeployException;
+	void setOneHandlerOnly(boolean val) throws NotOneHandlerException;
 	
-	public Set<Class<?>> getTypes(Class<?> target);
+	boolean isOneHandlerOnly();
+	
+	void put(Class<?> handler) throws NoMappingAnnotationException, NotOneHandlerException;
+	
+	Set<Class<?>> getTypes(Class<?> target);
 
 }
