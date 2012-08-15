@@ -21,20 +21,31 @@ public class TypesRepoImplTest extends Assert {
 	public void test_get(){
 		
 		TypesRepoImpl repo = new TypesRepoImpl();
-		repo.put(TestHandler_A.class);
-		repo.put(TestHandler_B.class);
-		repo.put(TestHandler_C.class);
-		repo.put(TestHandler_All.class);
+		repo.put(TestHandler_superclass.class);
+		repo.put(TestHandler_interface.class);
+		repo.put(TestHandler_final_class.class);
+		repo.put(TestHandler_object.class);
 		
-		testContainsOnly(repo.getTypes(TestTarget_A.class), TestHandler_A.class, TestHandler_All.class);
-		testContainsOnly(repo.getTypes(TestTarget_B.class), TestHandler_B.class, TestHandler_C.class, TestHandler_All.class);
+		containsOnly(repo.getTypes(TestTarget_superclass.class), 
+				TestHandler_superclass.class, 
+				TestHandler_object.class);
+		
+		containsOnly(repo.getTypes(TestTarget_interface.class), 
+				TestHandler_interface.class, 
+				TestHandler_object.class);
+		
+		containsOnly(repo.getTypes(TestTarget_final_class.class), 
+				TestHandler_superclass.class, 
+				TestHandler_interface.class, 
+				TestHandler_final_class.class, 
+				TestHandler_object.class);
 		
 		
 	}
 	
-	private void testContainsOnly(Set<Class<?>> types, Class<?>... classes){
+	private void containsOnly(Set<Class<?>> types, Class<?>... classes){
 		if( ! Util.isEmpty(classes)){
-			assertEquals(classes.length, types.size());
+			assertEquals("types: "+types, classes.length, types.size());
 			for(Class<?> clazz : classes){
 				assertTrue("type "+clazz, types.contains(clazz));
 			}
@@ -65,23 +76,23 @@ public class TypesRepoImplTest extends Assert {
 
 }
 
-class TestTarget_A {}
+class TestTarget_superclass {}
 
-interface TestTarget_B {}
+interface TestTarget_interface {}
 
-class TestTarget_C extends TestTarget_A implements TestTarget_B {}
+class TestTarget_final_class extends TestTarget_superclass implements TestTarget_interface {}
 
 
-@Mapping(TestTarget_A.class)
-class TestHandler_A {}
+@Mapping(TestTarget_superclass.class)
+class TestHandler_superclass {}
 
-@Mapping(TestTarget_B.class)
-class TestHandler_B {}
+@Mapping(TestTarget_interface.class)
+class TestHandler_interface {}
 
-@Mapping(TestTarget_C.class)
-class TestHandler_C {}
+@Mapping(TestTarget_final_class.class)
+class TestHandler_final_class {}
 
 @Mapping(Object.class)
-class TestHandler_All {}
+class TestHandler_object {}
 
 
