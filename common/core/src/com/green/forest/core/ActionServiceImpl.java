@@ -14,9 +14,9 @@ public class ActionServiceImpl implements ActionService {
 	private ConfigService config;
 	private TypesRepo handlersTypeRepo;
 	
-	public ActionServiceImpl(ConfigService config) {
+	public ActionServiceImpl(ConfigService configService) {
 		
-		this.config = config;
+		this.config = configService;
 		
 		Class<?> typeRepoClass = config.getValue(new TypesRepoClass());
 		
