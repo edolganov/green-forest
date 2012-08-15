@@ -1,0 +1,6 @@
+#Abbreviate package names
+com.green.forest={gf}
+com.green.forest.util={util}
+com.green.forest.api={api}
+com.green.forest.core={core}
+com.green.forest.components={comp}
