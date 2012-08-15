@@ -123,7 +123,11 @@ public class ConfigServiceImpl extends ConfigService {
 			
 		} else {
 			if(key.hasDefaultValue()){
-				return key.getDefaultValue();
+				try {
+					return key.getDefaultValue();
+				} catch (Exception e) {
+					throw new IllegalStateException("can't get default value for key "+type.getName(), e);
+				}
 			} else {
 				throw new IllegalStateException("unknown key "+type.getName());
 			}

@@ -1,8 +1,8 @@
 package com.green.forest.api.exception.deploy;
 
-import com.green.forest.api.exception.InvocationException;
+import com.green.forest.api.exception.BaseException;
 
-public abstract class DeployException extends InvocationException {
+public abstract class DeployException extends BaseException {
 
 	public DeployException() {
 		super();
