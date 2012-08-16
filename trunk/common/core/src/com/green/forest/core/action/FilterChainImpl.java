@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.green.forest.api.Filter;
 import com.green.forest.api.FilterChain;
-import com.green.forest.util.Util;
 
 public class FilterChainImpl {
 	
@@ -47,9 +46,7 @@ class FilterChainItem implements FilterChain {
 
 	void invoke(){
 		Filter filter = owner.getFilter(index);
-		if( ! Util.isEmpty(filter)){
-			filter.invoke(this);
-		}
+		filter.invoke(this);
 	}
 
 	@Override
