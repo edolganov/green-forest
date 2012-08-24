@@ -10,8 +10,8 @@ import com.green.forest.api.annotation.Mapping;
 import com.green.forest.api.exception.deploy.NoMappingAnnotationException;
 import com.green.forest.api.exception.deploy.NotOneHandlerException;
 import com.green.forest.api.test.action.StringAction;
-import com.green.forest.core.test.model.handler.HandlerWithoutMapping;
-import com.green.forest.core.test.model.handler.StringEcho;
+import com.green.forest.api.test.handler.HandlerWithoutMapping;
+import com.green.forest.api.test.handler.StringEcho;
 import com.green.forest.util.Util;
 
 public abstract class AbstractTypesRepoTest extends Assert {

@@ -15,6 +15,7 @@ import com.green.forest.api.exception.invoke.NullActionException;
 import com.green.forest.api.key.core.actionservice.TypesRepoClass;
 import com.green.forest.core.CoreUtil;
 import com.green.forest.core.config.ConfigService;
+import com.green.forest.core.config.ConfigServiceImpl;
 import com.green.forest.core.context.StaticContext;
 import com.green.forest.core.repo.TypesRepo;
 import com.green.forest.util.Util;
@@ -28,6 +29,10 @@ public class ActionServiceImpl implements ActionService {
 	Set<Class<?>> filterTypes;
 	TypesRepo interceptorTypes;
 	TypesRepo handlerTypes;
+	
+	public ActionServiceImpl() {
+		this(new ConfigServiceImpl());
+	}
 	
 	public ActionServiceImpl(ConfigService configService) {
 		
