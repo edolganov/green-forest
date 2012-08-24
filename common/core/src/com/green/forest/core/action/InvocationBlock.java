@@ -18,7 +18,8 @@ public class InvocationBlock {
 	
 	public Object invoke(Action<?,?> action) {
 		
-		context.handlerType = resourseService.getHandlerType(action);
+		resourseService.checkHandlerType(action);
+		
 		context.addAll(owner.staticContext);
 		
 		invokeFilterBlock(action);
@@ -33,8 +34,9 @@ public class InvocationBlock {
 	
 
 	private Object invokeMappingBlock(Action<?,?> action) {
-		// TODO Auto-generated method stub
-		return null;
+		MappingBlock block = new MappingBlock(this);
+		Object out = block.invoke(action);
+		return out;
 	}
 
 }
