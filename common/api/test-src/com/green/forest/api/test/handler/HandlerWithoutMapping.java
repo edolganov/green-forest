@@ -1,4 +1,4 @@
-package com.green.forest.core.test.model.handler;
+package com.green.forest.api.test.handler;
 
 import com.green.forest.api.Handler;
 import com.green.forest.api.test.action.EmptyAction;
