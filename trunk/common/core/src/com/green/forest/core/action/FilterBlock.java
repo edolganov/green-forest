@@ -1,37 +1,29 @@
 package com.green.forest.core.action;
 
 import java.util.List;
-import java.util.Set;
 
 import com.green.forest.api.Action;
 import com.green.forest.api.Filter;
+import com.green.forest.core.deploy.ResourseService;
 
 
 public class FilterBlock {
 	
 	InvocationBlock owner;
-	ActionServiceImpl service;
-	Set<Class<?>> filterTypes;
+	ResourseService resourseService;
 	
 	public FilterBlock(InvocationBlock owner) {
 		
 		this.owner = owner;
-		
-		service = owner.owner;
-		filterTypes = service.filterTypes;
+		resourseService = owner.resourseService;
 	}
 	
 	public void invoke(Action<?,?> action) {
 		
-		List<Filter> filters = getFilters(action);
+		List<Filter> filters = resourseService.getFilters(action);
 		FilterChainImpl chain = new FilterChainImpl(this, filters);
 		chain.invoke();
 		
-	}
-
-	private List<Filter> getFilters(Action<?,?> action) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

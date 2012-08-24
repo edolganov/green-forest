@@ -1,48 +1,28 @@
 package com.green.forest.core.action;
 
-import java.util.Set;
-
 import com.green.forest.api.Action;
-import com.green.forest.api.exception.invoke.HandlerNotFoundException;
-import com.green.forest.api.exception.invoke.NotOneHandlerException;
 import com.green.forest.core.context.InvocationContext;
-import com.green.forest.util.Util;
+import com.green.forest.core.deploy.ResourseService;
 
 
 public class InvocationBlock {
 	
 	ActionServiceImpl owner;
+	ResourseService resourseService;
 	InvocationContext context = new InvocationContext();
 	
 	public InvocationBlock(ActionServiceImpl owner){
 		this.owner = owner;
+		resourseService = owner.resourseService;
 	}
 	
 	public Object invoke(Action<?,?> action) {
 		
-		context.handlerType = getHandlerType(action);
+		context.handlerType = resourseService.getHandlerType(action);
 		context.addAll(owner.staticContext);
 		
 		invokeFilterBlock(action);
 		Object out = invokeMappingBlock(action);
-		return out;
-	}
-
-
-	private Class<?> getHandlerType(Action<?,?> action) {
-		
-		Class<?> clazz = action.getClass();
-		Set<Class<?>> handlers = owner.handlerTypes.getTypes(clazz);
-		
-		if(Util.isEmpty(handlers)){
-			throw new HandlerNotFoundException(action);
-		}
-		
-		if(handlers.size() > 1){
-			throw new NotOneHandlerException(action, handlers);
-		}
-		
-		Class<?> out = handlers.iterator().next();
 		return out;
 	}
 	
