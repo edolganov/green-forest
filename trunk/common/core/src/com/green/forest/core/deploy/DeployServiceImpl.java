@@ -10,6 +10,7 @@ import com.green.forest.api.DeployService;
 import com.green.forest.api.Filter;
 import com.green.forest.api.Handler;
 import com.green.forest.api.Interceptor;
+import com.green.forest.api.exception.UnexpectedException;
 import com.green.forest.api.exception.invoke.HandlerNotFoundException;
 import com.green.forest.api.exception.invoke.NotOneHandlerException;
 import com.green.forest.api.key.core.actionservice.TypesRepoClass;
@@ -54,8 +55,27 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	}
 
 	@Override
-	public Class<?> getHandlerType(Action<?,?> action)
-			throws HandlerNotFoundException, NotOneHandlerException{
+	public void checkHandlerType(Action<?,?> action){
+		getHandlerType(action);
+	}
+	
+	@Override
+	public Handler<?> getHandler(Action<?, ?> action) {
+		
+		Class<?> handlerType = getHandlerType(action);
+		Handler<?> out = null;
+		
+		try {
+			Object newInstance = handlerType.newInstance();
+			out = (Handler<?>) newInstance;
+		}catch (Exception e) {
+			throw new UnexpectedException("can't create handler by "+handlerType, e);
+		}
+		
+		return out;
+	}
+	
+	private Class<?> getHandlerType(Action<?,?> action){
 		
 		Class<?> clazz = action.getClass();
 		Set<Class<?>> handlers = handlerTypes.getTypes(clazz);
@@ -76,6 +96,50 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	public List<Filter> getFilters(Action<?, ?> action) {
 
 		return new ArrayList<Filter>();
+	}
+	
+	
+	
+	
+	
+
+
+	@Override
+	public void setHandlerBlocking(Class<? extends Handler<?>> clazz,
+			boolean val) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setInterceptorBlocking(Class<? extends Interceptor<?>> clazz,
+			boolean val) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setFilterBlocking(Class<? extends Filter> clazz, boolean val) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setActionBlocking(Class<? extends Action<?, ?>> clazz,
+			boolean val) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void removeHandler(Class<? extends Handler<?>> clazz) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void removeInterceptor(Class<? extends Interceptor<?>> clazz) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void removeFilter(Class<? extends Filter> clazz) {
+		throw new UnsupportedOperationException();
 	}
 
 }
