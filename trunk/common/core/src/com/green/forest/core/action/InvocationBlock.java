@@ -1,42 +1,40 @@
 package com.green.forest.core.action;
 
+import java.util.List;
+
 import com.green.forest.api.Action;
-import com.green.forest.core.context.InvocationContext;
-import com.green.forest.core.deploy.ResourseService;
+import com.green.forest.api.Filter;
+import com.green.forest.api.Handler;
+import com.green.forest.api.Interceptor;
+import com.green.forest.core.action.filter.FiltersBlock;
 
 
 public class InvocationBlock {
 	
-	ActionServiceImpl owner;
-	ResourseService resourseService;
-	InvocationContext context = new InvocationContext();
+	InvocationContext c;
 	
-	public InvocationBlock(ActionServiceImpl owner){
-		this.owner = owner;
-		resourseService = owner.resourseService;
+	public InvocationBlock(ActionServiceImpl actionService, Action<?,?> action){
+		
+		c = new InvocationContext();
+		c.actionService = actionService;
+		c.action = action;
 	}
 	
-	public Object invoke(Action<?,?> action) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void invoke() {
 		
-		resourseService.checkHandlerType(action);
+		c.actionService.resourseService.checkHandlerType(c.action);
 		
-		context.addAll(owner.staticContext);
-		
-		invokeFilterBlock(action);
-		Object out = invokeMappingBlock(action);
-		return out;
-	}
-	
-	private void invokeFilterBlock(Action<?,?> action){
-		FilterBlock block = new FilterBlock(this);
-		block.invoke(action);
-	}
-	
+		List<Filter> filters = c.actionService.resourseService.getFilters(c.action);
+		List<Interceptor<?>> interceptors = c.actionService.resourseService.getInterceptors(c.action);
+		Handler handler = c.actionService.resourseService.getHandler(c.action);
 
-	private Object invokeMappingBlock(Action<?,?> action) {
-		MappingBlock block = new MappingBlock(this);
-		Object out = block.invoke(action);
-		return out;
+		c.filters = filters;
+		c.interceptors = (List)interceptors;
+		c.handler = handler;
+		
+		FiltersBlock block = new FiltersBlock(c);
+		block.invoke();
 	}
 
 }
