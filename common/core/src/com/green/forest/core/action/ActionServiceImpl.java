@@ -13,8 +13,8 @@ import com.green.forest.util.Util;
 
 public class ActionServiceImpl implements ActionService {
 	
-	StaticContext staticContext = new StaticContext();
-	ResourseService resourseService;
+	public ResourseService resourseService;
+	public StaticContext staticContext = new StaticContext();
 	
 	public ActionServiceImpl(ResourseService resourseService) {
 		this.resourseService = resourseService;
@@ -31,8 +31,10 @@ public class ActionServiceImpl implements ActionService {
 				throw new NullActionException();
 			}
 			
-			InvocationBlock block = new InvocationBlock(this);
-			Object out = block.invoke(action);
+			InvocationBlock block = new InvocationBlock(this, action);
+			block.invoke();
+			
+			Object out = action.getOutput();
 			return (O)out;
 			
 		} catch (BaseException e) {

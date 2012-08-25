@@ -98,6 +98,12 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		return new ArrayList<Filter>();
 	}
 	
+	@Override
+	public List<Interceptor<?>> getInterceptors(Action<?, ?> action) {
+		
+		return new ArrayList<Interceptor<?>>();
+	}
+	
 	
 	
 	
