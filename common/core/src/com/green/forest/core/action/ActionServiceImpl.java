@@ -4,9 +4,8 @@ import java.io.Serializable;
 
 import com.green.forest.api.Action;
 import com.green.forest.api.ActionService;
-import com.green.forest.api.exception.BaseException;
-import com.green.forest.api.exception.UnexpectedException;
 import com.green.forest.api.exception.invoke.NullActionException;
+import com.green.forest.core.CoreUtil;
 import com.green.forest.core.context.StaticContext;
 import com.green.forest.core.deploy.ResourseService;
 import com.green.forest.util.Util;
@@ -37,10 +36,8 @@ public class ActionServiceImpl implements ActionService {
 			Object out = action.getOutput();
 			return (O)out;
 			
-		} catch (BaseException e) {
-			throw e;
 		} catch (Exception e) {
-			throw new UnexpectedException(e);
+			throw CoreUtil.convertException(e, "can't invoke "+action);
 		}
 
 	}
