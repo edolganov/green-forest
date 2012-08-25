@@ -10,7 +10,7 @@ import com.green.forest.api.DeployService;
 import com.green.forest.api.Filter;
 import com.green.forest.api.Handler;
 import com.green.forest.api.Interceptor;
-import com.green.forest.api.exception.UnexpectedException;
+import com.green.forest.api.exception.ExternalException;
 import com.green.forest.api.exception.invoke.HandlerNotFoundException;
 import com.green.forest.api.exception.invoke.NotOneHandlerException;
 import com.green.forest.api.key.core.actionservice.TypesRepoClass;
@@ -69,7 +69,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 			Object newInstance = handlerType.newInstance();
 			out = (Handler<?>) newInstance;
 		}catch (Exception e) {
-			throw new UnexpectedException("can't create handler by "+handlerType, e);
+			throw new ExternalException("can't create handler by "+handlerType, e);
 		}
 		
 		return out;
@@ -101,7 +101,22 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	@Override
 	public List<Interceptor<?>> getInterceptors(Action<?, ?> action) {
 		
-		return new ArrayList<Interceptor<?>>();
+		Class<?> clazz = action.getClass();
+		Set<Class<?>> set = interceptorTypes.getTypes(clazz);
+		
+		ArrayList<Interceptor<?>> out = new ArrayList<Interceptor<?>>();
+		
+		for(Class<?> interceptorType : set){
+			try {
+				Object newInstance = interceptorType.newInstance();
+				Interceptor<?> interceptor = (Interceptor<?>) newInstance;
+				out.add(interceptor);
+			}catch (Exception e) {
+				throw new ExternalException("can't create interceptor by "+interceptorType, e);
+			}
+		}
+		
+		return out;
 	}
 	
 	

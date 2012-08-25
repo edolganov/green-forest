@@ -2,6 +2,7 @@ package com.green.forest.core.action.filter;
 
 import com.green.forest.api.Filter;
 import com.green.forest.api.FilterChain;
+import com.green.forest.core.CoreUtil;
 import com.green.forest.core.action.InvocationContext;
 import com.green.forest.core.action.interceptor.InterceptorsBlock;
 
@@ -50,13 +51,18 @@ class FilterChainItem implements FilterChain {
 	}
 
 	void invoke(){
+		
 		Filter filter = owner.getItem(index);
-		filter.invoke(owner.c.action, this);
+		try {
+			filter.invoke(owner.c.action, this);
+		}catch (Exception e) {
+			throw CoreUtil.convertException(e, "can't invoke "+owner.c.action+" by "+filter);
+		}
 	}
 
 	@Override
 	public void doNext() {
-		int nextIndex = index++;
+		int nextIndex = index + 1;
 		if( owner.hasItem(nextIndex)){
 			FilterChainItem next = new FilterChainItem(owner, nextIndex);
 			next.invoke();

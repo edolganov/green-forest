@@ -2,6 +2,7 @@ package com.green.forest.core.action.interceptor;
 
 import com.green.forest.api.Interceptor;
 import com.green.forest.api.InterceptorChain;
+import com.green.forest.core.CoreUtil;
 import com.green.forest.core.action.InvocationContext;
 import com.green.forest.core.action.handler.HandlerBlock;
 
@@ -16,7 +17,8 @@ public class InterceptorChainImpl {
 	public void invoke() {
 		int firstIndex = 0;
 		if(hasItem(firstIndex)){
-			
+			InterceptorChainItem first = new InterceptorChainItem(this, firstIndex);
+			first.invoke();
 		} else {
 			doHandlerBlock();
 		}
@@ -39,11 +41,37 @@ public class InterceptorChainImpl {
 }
 
 class InterceptorChainItem implements InterceptorChain {
+	
+	InterceptorChainImpl owner;
+	int index;
+
+	public InterceptorChainItem(InterceptorChainImpl owner, int index) {
+		super();
+		this.owner = owner;
+		this.index = index;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	void invoke(){
+		
+		Interceptor interceptor = owner.getItem(index);
+		try {
+			interceptor.invoke(owner.c.action, this);
+		}catch (Exception e) {
+			throw CoreUtil.convertException(e, "can't invoke "+owner.c.action+" by "+interceptor);
+		}
+	}
+
 
 	@Override
 	public void doNext() {
-		// TODO Auto-generated method stub
-		
+		int nextIndex = index + 1;
+		if( owner.hasItem(nextIndex)){
+			InterceptorChainItem next = new InterceptorChainItem(owner, nextIndex);
+			next.invoke();
+		} else {
+			owner.doHandlerBlock();
+		}
 	}
 	
 }

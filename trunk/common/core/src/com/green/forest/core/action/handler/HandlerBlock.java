@@ -1,7 +1,7 @@
 package com.green.forest.core.action.handler;
 
 import com.green.forest.api.exception.BaseException;
-import com.green.forest.api.exception.UnexpectedException;
+import com.green.forest.api.exception.ExternalException;
 import com.green.forest.core.action.InvocationContext;
 
 public class HandlerBlock {
@@ -20,7 +20,7 @@ public class HandlerBlock {
 		} catch (BaseException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new UnexpectedException("can't invoke "+c.action+" by "+c.handler, e);
+			throw new ExternalException("can't invoke "+c.action+" by "+c.handler, e);
 		}
 	}
 
