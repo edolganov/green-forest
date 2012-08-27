@@ -8,9 +8,9 @@ import com.green.forest.api.test.action.StringAction;
 import com.green.forest.api.test.handler.HandlerWithoutMapping;
 import com.green.forest.api.test.handler.StringEcho;
 import com.green.forest.core.Engine;
-import com.green.forest.core.engine.EngineTestUtil;
+import com.green.forest.core.engine.EngineTest;
 
-public class BasicTest extends EngineTestUtil {
+public class BasicTest extends EngineTest {
 	
 	
 	
@@ -37,7 +37,7 @@ public class BasicTest extends EngineTestUtil {
 	public void test_invoke(){
 		
 		Engine engine = new Engine();
-		prepareTrace(engine);
+		enableTracing(engine);
 		
 		engine.putHandler(StringEcho.class);
 		
