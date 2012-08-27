@@ -1,6 +1,7 @@
 package com.green.forest.core.deploy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -23,7 +24,8 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	
 	TypesRepo handlerTypes;
 	TypesRepo interceptorTypes;
-	CopyOnWriteArraySet<Class<?>> filterTypes;
+	CopyOnWriteArraySet<Class<?>> filterTypes = new CopyOnWriteArraySet<Class<?>>();
+	OrderComparator orderComparator = new OrderComparator();
 	
 	public DeployServiceImpl(ConfigService config) {
 		
@@ -34,9 +36,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		
 		handlerTypes = CoreUtil.createInstance(typeRepoClass);
 		handlerTypes.setOneHandlerOnly(true);
-		
-		filterTypes = new CopyOnWriteArraySet<Class<?>>();
-		
+
 	}
 
 	@Override
@@ -115,6 +115,9 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 				throw new ExternalException("can't create interceptor by "+interceptorType, e);
 			}
 		}
+		
+		
+		Collections.sort(out, orderComparator);
 		
 		return out;
 	}
