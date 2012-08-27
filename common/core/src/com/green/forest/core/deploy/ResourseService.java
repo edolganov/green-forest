@@ -13,7 +13,7 @@ public interface ResourseService {
 	
 	Handler<?> getHandler(Action<?, ?> action) throws HandlerNotFoundException, NotOneHandlerException;
 
-	List<Filter> getFilters(Action<?, ?> action);
+	List<Filter> getFilters();
 
 	List<Interceptor<?>> getInterceptors(Action<?, ?> action);
 

@@ -28,7 +28,7 @@ public class InvocationBlock {
 		c.isTraceHandlers = c.config.isTrue(new TraceHandlers());
 		
 		//prepare handlers
-		c.filters = c.actions.resourse.getFilters(c.action);
+		c.filters = c.actions.resourse.getFilters();
 		c.interceptors = (List)c.actions.resourse.getInterceptors(c.action);
 		c.handler = c.actions.resourse.getHandler(c.action);
 		

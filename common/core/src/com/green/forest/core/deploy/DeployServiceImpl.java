@@ -89,9 +89,23 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	}
 
 	@Override
-	public List<Filter> getFilters(Action<?, ?> action) {
-
-		return new ArrayList<Filter>();
+	public List<Filter> getFilters() {
+		
+		ArrayList<Filter> out = new ArrayList<Filter>();
+		
+		for(Class<?> filterType : filterTypes){
+			try {
+				Object newInstance = filterType.newInstance();
+				Filter filter = (Filter) newInstance;
+				out.add(filter);
+			}catch (Exception e) {
+				throw new ExternalException("can't create filter by "+filterType, e);
+			}
+		}
+		
+		Collections.sort(out, orderComparator);
+		
+		return out;
 	}
 	
 	@Override
