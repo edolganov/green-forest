@@ -15,6 +15,8 @@ public class HandlerBlock {
 	@SuppressWarnings("unchecked")
 	public void invoke() {
 		
+		c.addToTrace(c.handler);
+		
 		try {
 			c.handler.invoke(c.action);
 		} catch (BaseException e) {

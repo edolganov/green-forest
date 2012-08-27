@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import com.green.forest.api.Action;
+import com.green.forest.api.ConfigService;
 import com.green.forest.api.DeployService;
 import com.green.forest.api.Filter;
 import com.green.forest.api.Handler;
@@ -16,7 +17,6 @@ import com.green.forest.api.exception.invoke.HandlerNotFoundException;
 import com.green.forest.api.exception.invoke.NotOneHandlerException;
 import com.green.forest.api.key.core.actionservice.TypesRepoClass;
 import com.green.forest.core.CoreUtil;
-import com.green.forest.core.config.ConfigService;
 import com.green.forest.core.repo.TypesRepo;
 import com.green.forest.util.Util;
 
@@ -54,10 +54,6 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		filterTypes.add(clazz);
 	}
 
-	@Override
-	public void checkHandlerType(Action<?,?> action){
-		getHandlerType(action);
-	}
 	
 	@Override
 	public Handler<?> getHandler(Action<?, ?> action) {

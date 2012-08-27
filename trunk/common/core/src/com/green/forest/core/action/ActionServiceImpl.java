@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.green.forest.api.Action;
 import com.green.forest.api.ActionService;
+import com.green.forest.api.ConfigService;
 import com.green.forest.api.exception.invoke.NullActionException;
 import com.green.forest.core.CoreUtil;
 import com.green.forest.core.context.StaticContext;
@@ -12,11 +13,14 @@ import com.green.forest.util.Util;
 
 public class ActionServiceImpl implements ActionService {
 	
-	public ResourseService resourseService;
+	public ResourseService resourse;
+	public ConfigService config;
+	
 	public StaticContext staticContext = new StaticContext();
 	
-	public ActionServiceImpl(ResourseService resourseService) {
-		this.resourseService = resourseService;
+	public ActionServiceImpl(ConfigService config, ResourseService resourseService) {
+		this.resourse = resourseService;
+		this.config = config;
 	}
 	
 

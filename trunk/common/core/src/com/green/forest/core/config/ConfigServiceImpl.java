@@ -7,13 +7,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import com.green.forest.api.ConfigService;
 import com.green.forest.api.config.ConfigKey;
 import com.green.forest.core.config.converter.AbstractConverter;
 import com.green.forest.core.config.converter.ConfigKeyConverters;
 import com.green.forest.util.Util;
 
 
-public class ConfigServiceImpl extends ConfigService {
+public class ConfigServiceImpl implements ConfigService {
 	
 	private static final String PROPS_CONFIG_PREFFIX = "config.";
 	
@@ -43,6 +44,7 @@ public class ConfigServiceImpl extends ConfigService {
 	} 
 	
 	
+	@Override
 	public <T> void addValue(Class<? extends ConfigKey<T>> keyType, T value){
 		Util.checkArgumentForEmpty(keyType, "type is null");
 		
@@ -106,6 +108,12 @@ public class ConfigServiceImpl extends ConfigService {
 		}finally{
 			readLock.unlock();
 		}
+	}
+	
+	@Override
+	public boolean isTrue(ConfigKey<Boolean> key) {
+		Boolean val = getValue(key);
+		return Boolean.TRUE.equals(val);
 	}
 
 	@SuppressWarnings("unchecked")

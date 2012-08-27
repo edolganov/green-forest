@@ -1,7 +1,5 @@
 package com.green.forest.core.engine.handler;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import com.green.forest.api.exception.deploy.NoMappingAnnotationException;
@@ -10,8 +8,9 @@ import com.green.forest.api.test.action.StringAction;
 import com.green.forest.api.test.handler.HandlerWithoutMapping;
 import com.green.forest.api.test.handler.StringEcho;
 import com.green.forest.core.Engine;
+import com.green.forest.core.engine.EngineTestUtil;
 
-public class BasicTest extends Assert {
+public class BasicTest extends EngineTestUtil {
 	
 	
 	
@@ -38,11 +37,16 @@ public class BasicTest extends Assert {
 	public void test_invoke(){
 		
 		Engine engine = new Engine();
+		prepareTrace(engine);
+		
 		engine.putHandler(StringEcho.class);
 		
-		String param = "test";
-		String result = engine.invoke(new StringAction(param));
-		assertEquals(param, result);
+		StringAction action = new StringAction("test");
+		engine.invoke(action);
+		
+		checkTrace(action, 
+				StringEcho.class);
+		
 		
 	}
 

@@ -55,6 +55,9 @@ class InterceptorChainItem implements InterceptorChain {
 	void invoke(){
 		
 		Interceptor interceptor = owner.getItem(index);
+		
+		owner.c.addToTrace(interceptor);
+		
 		try {
 			interceptor.invoke(owner.c.action, this);
 		}catch (Exception e) {

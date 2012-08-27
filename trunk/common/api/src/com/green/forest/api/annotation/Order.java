@@ -10,6 +10,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Order {
 	
-    int value() default Integer.MAX_VALUE;
+	public static final int DEFAULT_VAL = Integer.MAX_VALUE - 1;
+	
+    int value() default DEFAULT_VAL;
 
 }
