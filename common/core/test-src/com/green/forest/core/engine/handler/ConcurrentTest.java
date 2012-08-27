@@ -7,11 +7,11 @@ import com.green.forest.api.exception.invoke.HandlerNotFoundException;
 import com.green.forest.api.test.action.StringAction;
 import com.green.forest.api.test.handler.StringEcho;
 import com.green.forest.core.Engine;
-import com.green.forest.core.engine.EngineTestUtil;
+import com.green.forest.core.engine.EngineTest;
 import com.green.forest.util.test.concurrent.ThreadRacer;
 import com.green.forest.util.test.concurrent.ThreadsRace;
 
-public class ConcurrentTest extends EngineTestUtil {
+public class ConcurrentTest extends EngineTest {
 	
 	@Ignore
 	@Test(expected=HandlerNotFoundException.class)

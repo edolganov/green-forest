@@ -8,9 +8,9 @@ import com.green.forest.core.Engine;
 
 import junit.framework.Assert;
 
-public class EngineTestUtil extends Assert {
+public class EngineTest extends Assert {
 	
-	public static void prepareTrace(Engine engine){
+	public static void enableTracing(Engine engine){
 		engine.addValue(TraceHandlers.class, true);
 	}
 	
