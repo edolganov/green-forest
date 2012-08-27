@@ -1,5 +1,6 @@
 package com.green.forest.core.engine.handler;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.green.forest.api.exception.deploy.NoMappingAnnotationException;
@@ -12,6 +13,24 @@ import com.green.forest.core.engine.EngineTest;
 
 public class BasicTest extends EngineTest {
 	
+	
+	@Ignore
+	@Test
+	public void test_inject(){
+		
+		fail("todo");
+		
+	}
+	
+	
+	
+	@Test
+	public void test_sub_invoke(){
+		
+		
+		fail("todo");
+		
+	}
 	
 	
 	
