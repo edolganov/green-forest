@@ -53,6 +53,9 @@ class FilterChainItem implements FilterChain {
 	void invoke(){
 		
 		Filter filter = owner.getItem(index);
+		
+		owner.c.addToTrace(filter);
+		
 		try {
 			filter.invoke(owner.c.action, this);
 		}catch (Exception e) {
