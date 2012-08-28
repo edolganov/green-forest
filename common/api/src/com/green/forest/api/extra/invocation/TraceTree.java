@@ -11,6 +11,11 @@ public class TraceTree {
 		super();
 	}
 
+	public TraceTree(Object... traceTree) {
+		this();
+		//build tree
+	}
+
 	public void addTraceElem(Object ob) {
 		level.add(new TraceElem(ob.getClass()));
 	}
