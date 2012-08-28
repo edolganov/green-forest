@@ -1,12 +1,15 @@
 package com.green.forest.core.engine;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import com.green.forest.api.Action;
+import com.green.forest.api.extra.invocation.TraceElem;
+import com.green.forest.api.extra.invocation.TraceTree;
 import com.green.forest.api.key.core.action.TraceHandlers;
 import com.green.forest.core.Engine;
-
-import junit.framework.Assert;
 
 public class EngineTest extends Assert {
 	
@@ -15,14 +18,22 @@ public class EngineTest extends Assert {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void checkTrace(Action<?,?> action, Class<?>... classes){
-		List<Class<?>> trace = (List<Class<?>>)action.getAttr(TraceHandlers.ATTR_KEY);
+	public static void checkTrace(Action<?,?> action, Object... traceTree){
+		TraceTree trace = (TraceTree)action.getAttr(TraceHandlers.ATTR_KEY);
+		List<TraceElem> level = trace.getLevel();
 		
-		assertEquals(classes.length, trace.size());
+		fail("todo check trace tree");
 		
-		for (int i = 0; i < classes.length; i++) {
-			Class<?> curClass = classes[i];
-			assertEquals(curClass, trace.get(i));
+		LinkedList<TraceElem> queue = new LinkedList<TraceElem>();
+		queue.addAll(level);
+		
+		for (int i = 0; i < traceTree.length; i++) {
+			Object ob = traceTree[i];
+			if(ob instanceof Class){
+				
+				queue.removeFirst();
+			}
+			//assertEquals(curClass, trace.get(i));
 		}
 	}
 

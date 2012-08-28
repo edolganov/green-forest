@@ -5,11 +5,16 @@ import org.junit.Test;
 
 import com.green.forest.api.exception.deploy.NoMappingAnnotationException;
 import com.green.forest.api.exception.invoke.HandlerNotFoundException;
+import com.green.forest.api.test.action.EmptyAction;
 import com.green.forest.api.test.action.StringAction;
 import com.green.forest.api.test.handler.HandlerWithoutMapping;
 import com.green.forest.api.test.handler.StringEcho;
 import com.green.forest.core.Engine;
 import com.green.forest.core.engine.EngineTest;
+import com.green.forest.core.engine.filter.model.BeginFilter;
+import com.green.forest.core.engine.handler.model.SubInvoke;
+import com.green.forest.core.engine.interceptor.model.BeginForAllByAnn;
+import com.green.forest.core.engine.interceptor.model.FirstByAnn;
 
 public class BasicTest extends EngineTest {
 	
@@ -27,8 +32,26 @@ public class BasicTest extends EngineTest {
 	@Test
 	public void test_sub_invoke(){
 		
+		Engine engine = new Engine();
+		enableTracing(engine);
 		
-		fail("todo");
+		engine.putHandler(SubInvoke.class);
+		engine.putHandler(StringEcho.class);
+		engine.putFilter(BeginFilter.class);
+		engine.putInterceptor(BeginForAllByAnn.class);
+		engine.putInterceptor(FirstByAnn.class);
+		
+		EmptyAction action = new EmptyAction();
+		engine.invoke(action);
+		
+		checkTrace(action, 
+				BeginFilter.class,
+				BeginForAllByAnn.class,
+				SubInvoke.class,
+				BeginForAllByAnn.class,
+				FirstByAnn.class,
+				StringEcho.class
+				);
 		
 	}
 	

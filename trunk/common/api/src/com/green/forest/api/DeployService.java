@@ -16,20 +16,20 @@ public interface DeployService {
 	
 	//in future...
 	
-	void setHandlerBlocking(Class<? extends Handler<?>> clazz, boolean val);
+	//void setHandlerBlocking(Class<? extends Handler<?>> clazz, boolean val);
 	
-	void setInterceptorBlocking(Class<? extends Interceptor<?>> clazz, boolean val);
+	//void setInterceptorBlocking(Class<? extends Interceptor<?>> clazz, boolean val);
 	
-	void setFilterBlocking(Class<? extends Filter> clazz, boolean val);
+	//void setFilterBlocking(Class<? extends Filter> clazz, boolean val);
 	
-	void setActionBlocking(Class<? extends Action<?, ?>> clazz, boolean val);
+	//void setActionBlocking(Class<? extends Action<?, ?>> clazz, boolean val);
 	
 	
-	void removeHandler(Class<? extends Handler<?>> clazz);
+	//void removeHandler(Class<? extends Handler<?>> clazz);
 	
-	void removeInterceptor(Class<? extends Interceptor<?>> clazz);
+	//void removeInterceptor(Class<? extends Interceptor<?>> clazz);
 	
-	void removeFilter(Class<? extends Filter> clazz);
+	//void removeFilter(Class<? extends Filter> clazz);
 	
 	
 

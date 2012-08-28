@@ -38,7 +38,7 @@ public class ConcurrentTest extends EngineTest {
 			@Override
 			public void invoke() throws Exception {
 				
-				engine.removeHandler(StringEcho.class);
+				//engine.removeHandler(StringEcho.class);
 				fire("handler removed");
 			}
 		});

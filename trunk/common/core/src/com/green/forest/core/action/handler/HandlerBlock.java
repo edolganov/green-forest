@@ -4,6 +4,7 @@ import com.green.forest.api.exception.BaseException;
 import com.green.forest.api.exception.ExternalException;
 import com.green.forest.core.action.InvocationContext;
 
+@SuppressWarnings({ "unchecked"})
 public class HandlerBlock {
 	
 	InvocationContext c;
@@ -12,10 +13,9 @@ public class HandlerBlock {
 		this.c = context;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void invoke() {
 		
-		c.addToTrace(c.handler);
+		c.init(c.handler);
 		
 		try {
 			c.handler.invoke(c.action);
@@ -25,5 +25,6 @@ public class HandlerBlock {
 			throw new ExternalException("can't invoke "+c.action+" by "+c.handler, e);
 		}
 	}
+
 
 }

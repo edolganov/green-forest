@@ -6,18 +6,12 @@ public class ExternalException extends BaseException {
 		super();
 	}
 
-	public ExternalException(String message, Throwable cause) {
+	public ExternalException(String message, Exception cause) {
 		super(message, cause);
 	}
-
-	public ExternalException(String message) {
-		super(message);
-	}
-
-	public ExternalException(Throwable cause) {
-		super(cause);
-	}
 	
-	
+	public Exception getOriginal(){
+		return (Exception) getCause();
+	}
 
 }
