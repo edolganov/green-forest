@@ -132,48 +132,5 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		return out;
 	}
 	
-	
-	
-	
-	
-
-
-	@Override
-	public void setHandlerBlocking(Class<? extends Handler<?>> clazz,
-			boolean val) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void setInterceptorBlocking(Class<? extends Interceptor<?>> clazz,
-			boolean val) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void setFilterBlocking(Class<? extends Filter> clazz, boolean val) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void setActionBlocking(Class<? extends Action<?, ?>> clazz,
-			boolean val) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void removeHandler(Class<? extends Handler<?>> clazz) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void removeInterceptor(Class<? extends Interceptor<?>> clazz) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void removeFilter(Class<? extends Filter> clazz) {
-		throw new UnsupportedOperationException();
-	}
 
 }

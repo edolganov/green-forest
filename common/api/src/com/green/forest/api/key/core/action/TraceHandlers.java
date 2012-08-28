@@ -1,14 +1,12 @@
 package com.green.forest.api.key.core.action;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.green.forest.api.Action;
 import com.green.forest.api.config.ConfigKey;
+import com.green.forest.api.extra.invocation.TraceTree;
 
 public class TraceHandlers extends ConfigKey<Boolean> {
 	
-	public static final String ATTR_KEY = "gf.core.action.HandlersTrace";
+	public static final String ATTR_KEY = "gf.core.action.TraceTree";
 
 	@Override
 	public boolean hasDefaultValue() {
@@ -20,14 +18,13 @@ public class TraceHandlers extends ConfigKey<Boolean> {
 		return Boolean.FALSE;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static List<Class<?>> getOrCreateTraceList(Action<?, ?> action){
-		List<Class<?>> list = (List<Class<?>>) action.getAttr(ATTR_KEY);
-		if(list == null){
-			list = new ArrayList<Class<?>>();
-			action.putAttr(ATTR_KEY, list);
+	public static TraceTree getOrCreateTrace(Action<?, ?> action){
+		TraceTree trace = (TraceTree) action.getAttr(ATTR_KEY);
+		if(trace == null){
+			trace = new TraceTree();
+			action.putAttr(ATTR_KEY, trace);
 		}
-		return list;
+		return trace;
 	}
 
 }

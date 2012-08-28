@@ -21,7 +21,7 @@ public class OrderComparator implements Comparator<Object>{
 			bOrder = bOrderAnn.value();
 		}
 		
-		return Integer.compare(aOrder, bOrder);
+		return (aOrder<bOrder ? -1 : (aOrder==bOrder ? 0 : 1));
 	}
 
 }

@@ -40,6 +40,7 @@ public class InterceptorChainImpl {
 
 }
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 class InterceptorChainItem implements InterceptorChain {
 	
 	InterceptorChainImpl owner;
@@ -51,12 +52,11 @@ class InterceptorChainItem implements InterceptorChain {
 		this.index = index;
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	void invoke(){
 		
 		Interceptor interceptor = owner.getItem(index);
 		
-		owner.c.addToTrace(interceptor);
+		owner.c.init(interceptor);
 		
 		try {
 			interceptor.invoke(owner.c.action, this);
@@ -64,7 +64,6 @@ class InterceptorChainItem implements InterceptorChain {
 			throw CoreUtil.convertException(e, "can't invoke "+owner.c.action+" by "+interceptor);
 		}
 	}
-
 
 	@Override
 	public void doNext() {
