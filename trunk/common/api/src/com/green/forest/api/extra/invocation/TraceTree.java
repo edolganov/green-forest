@@ -3,9 +3,11 @@ package com.green.forest.api.extra.invocation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.green.forest.util.Util;
+
 public class TraceTree {
 	
-	private List<TraceElem> level = new ArrayList<TraceElem>();
+	private List<TraceItem> level = new ArrayList<TraceItem>();
 	
 	public TraceTree() {
 		super();
@@ -13,23 +15,82 @@ public class TraceTree {
 
 	public TraceTree(Object... traceTree) {
 		this();
-		//build tree
+		buildTree(traceTree);
 	}
 
-	public void addTraceElem(Object ob) {
-		level.add(new TraceElem(ob.getClass()));
+	private void buildTree(Object[] traceTree) {
+		if(Util.isEmpty(traceTree)){
+			return;
+		}
+		for(Object ob : traceTree){
+			addItem(this, ob);
+		}
+	}
+	
+	private void addItem(TraceTree trace, Object ob){
+		//signle
+		if(ob instanceof Class){
+			trace.createItem(ob);
+		}
+		//complex
+		else if(ob instanceof List<?>){
+			List<?> itemAndSubTraces = (List<?>)ob;
+			Object itemOb = itemAndSubTraces.get(0);
+			if(itemOb instanceof Class){
+				trace.createItem(itemOb);
+			} else {
+				throw new IllegalStateException("invalid type of elem: "+itemOb);
+			}
+			for(int i=1; i < itemAndSubTraces.size(); ++i){
+				
+				TraceTree subTrace = new TraceTree();
+				trace.addSubTraceToLastItem(subTrace);
+				
+				Object subTraceObj = itemAndSubTraces.get(i);
+				addItem(subTrace, subTraceObj);
+			}
+		}
+		//unknown
+		else {
+			throw new IllegalArgumentException("invalid type of elem: "+ob);
+		}
 	}
 
-	public void addSubTrace(TraceTree subTrace) {
+	public void createItem(Object ob) {
+		Class<?> clazz = null;
+		if(ob instanceof Class){
+			clazz = (Class<?>)ob;
+		}else {
+			clazz = ob.getClass();
+		}
+		level.add(new TraceItem(clazz));
+	}
+
+	public void addSubTraceToLastItem(TraceTree subTrace) {
 		if(level.isEmpty()){
 			throw new IllegalStateException("can't add sub tree for empty tree");
 		}
-		TraceElem last = level.get(level.size()-1);
+		TraceItem last = level.get(level.size()-1);
 		last.addSubTrace(subTrace);
 	}
 	
-	public List<TraceElem> getLevel(){
-		return new ArrayList<TraceElem>(level);
+	public TraceItem getItem(int index){
+		return level.get(index);
+	}
+	
+	public TraceItem getLastItem(){
+		if(level.size() == 0){
+			return null;
+		}
+		return level.get(level.size()-1);
+	}
+	
+	public int getSize(){
+		return level.size();
+	}
+	
+	public List<TraceItem> getItems(){
+		return new ArrayList<TraceItem>(level);
 	}
 
 }

@@ -8,6 +8,14 @@ public class LangTest extends Assert {
 	
 	
 	@Test
+	public void test_class_of_class(){
+		
+		assertEquals(Class.class, String.class.getClass());
+		
+	}
+	
+	
+	@Test
 	public void test_get_superclass_from_interface(){
 		
 		assertNull(LangTest_A.class.getSuperclass());
