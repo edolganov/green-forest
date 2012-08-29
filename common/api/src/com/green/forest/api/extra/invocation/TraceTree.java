@@ -30,14 +30,14 @@ public class TraceTree {
 	private void addItem(TraceTree trace, Object ob){
 		//signle
 		if(ob instanceof Class){
-			trace.createItem(ob);
+			trace.createAndAddItem(ob);
 		}
 		//complex
 		else if(ob instanceof List<?>){
 			List<?> itemAndSubTraces = (List<?>)ob;
 			Object itemOb = itemAndSubTraces.get(0);
 			if(itemOb instanceof Class){
-				trace.createItem(itemOb);
+				trace.createAndAddItem(itemOb);
 			} else {
 				throw new IllegalStateException("invalid type of elem: "+itemOb);
 			}
@@ -56,14 +56,15 @@ public class TraceTree {
 		}
 	}
 
-	public void createItem(Object ob) {
+	public void createAndAddItem(Object ob) {
 		Class<?> clazz = null;
 		if(ob instanceof Class){
 			clazz = (Class<?>)ob;
 		}else {
 			clazz = ob.getClass();
 		}
-		level.add(new TraceItem(clazz));
+		TraceItem item = new TraceItem(clazz);
+		level.add(item);
 	}
 
 	public void addSubTraceToLastItem(TraceTree subTrace) {

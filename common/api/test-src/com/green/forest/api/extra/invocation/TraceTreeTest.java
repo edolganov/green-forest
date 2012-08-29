@@ -18,6 +18,80 @@ public class TraceTreeTest extends Assert {
 		fail("todo");
 	}
 	
+	
+	@Test
+	public void test_equals(){
+		
+		assertTrue(new TraceTree().equals(new TraceTree()));
+		
+		TraceTree trace1 = new TraceTree(
+				String.class,
+				Util.list(Byte.class, 
+						Util.list(Object.class),
+						Util.list(Long.class,
+								Character.class)),
+				Integer.class
+				);
+		
+		assertTrue(trace1.equals(new TraceTree(
+				String.class,
+				Util.list(Byte.class, 
+						Util.list(Object.class),
+						Util.list(Long.class,
+								Character.class)),
+				Integer.class
+				)));
+		
+		assertFalse(trace1.equals(new TraceTree()));
+		
+		assertFalse(trace1.equals(new TraceTree(
+				String.class,
+				Util.list(Byte.class, 
+						Util.list(Object.class),
+						Util.list(Long.class)), //<--
+				Integer.class
+				)));
+		
+		assertFalse(trace1.equals(new TraceTree(
+				String.class,
+				Util.list(Byte.class, 
+						Util.list(Long.class, //<--
+								Character.class)),
+						Util.list(Object.class),
+				Integer.class
+				)));
+		
+		assertFalse(trace1.equals(new TraceTree(
+				String.class,
+				Util.list(Byte.class, 
+						Util.list(Object.class),
+						Util.list(Long.class,
+								Character.class,
+								Character.class)),//<--
+				Integer.class
+				)));
+		
+		assertFalse(trace1.equals(new TraceTree(
+				String.class,
+				Util.list(Byte.class, 
+						Util.list(Object.class),
+						Util.list(Long.class,
+								Character.class)),
+				Integer.class,
+				Integer.class //<--
+				)));
+		
+		assertTrue(trace1.equals(new TraceTree(
+				String.class,
+				Util.list(Byte.class, 
+						Util.list(Object.class),
+						Util.list(Long.class,
+								Character.class))
+					//<--
+				)));
+	}
+	
+	
 	@Test
 	public void test_build(){
 		

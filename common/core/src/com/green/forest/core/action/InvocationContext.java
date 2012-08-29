@@ -39,7 +39,7 @@ public class InvocationContext implements InvocationControll {
 	public void addToTrace(Object ob) {
 		if(isTraceHandlers){
 			TraceTree trace = TraceHandlers.getOrCreateTrace(action);
-			trace.createItem(ob);
+			trace.createAndAddItem(ob);
 		}
 	}
 
