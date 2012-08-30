@@ -32,26 +32,20 @@ public class TraceTree {
 	}
 	
 	private void addItem(TraceTree trace, Object ob){
-		//signle
+		//item
 		if(ob instanceof Class){
 			trace.createAndAddItem(ob);
 		}
-		//complex
+		//item's sub trace
 		else if(ob instanceof List<?>){
-			List<?> itemAndSubTraces = (List<?>)ob;
-			Object itemOb = itemAndSubTraces.get(0);
-			if(itemOb instanceof Class){
-				trace.createAndAddItem(itemOb);
-			} else {
-				throw new IllegalStateException("invalid type of elem: "+itemOb);
-			}
-			for(int i=1; i < itemAndSubTraces.size(); ++i){
-				
-				TraceTree subTrace = new TraceTree();
-				trace.addSubTraceToLastItem(subTrace);
-				
-				Object subTraceObj = itemAndSubTraces.get(i);
-				addItem(subTrace, subTraceObj);
+			
+			TraceTree subTrace = new TraceTree();
+			trace.addSubTraceToLastItem(subTrace);
+			
+			List<?> subItems = (List<?>)ob;
+			for(int i=1; i < subItems.size(); ++i){
+				Object subItem = subItems.get(i);
+				addItem(subTrace, subItem);
 			}
 		}
 		//unknown
