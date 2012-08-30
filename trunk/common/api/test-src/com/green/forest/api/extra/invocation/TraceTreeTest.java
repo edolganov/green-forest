@@ -18,6 +18,35 @@ public class TraceTreeTest extends Assert {
 		fail("todo");
 	}
 	
+	@Ignore
+	@Test
+	public void test_toString(){
+		
+		System.out.println(new TraceTree());
+		System.out.println();
+		
+		TraceTree trace = new TraceTree(
+				String.class,
+				Util.list(Byte.class, 
+						Util.list(Object.class),
+						Util.list(Long.class,
+								Character.class)),
+				Integer.class
+				);
+		
+		System.out.println(trace);
+		System.out.println();
+		
+		System.out.println(new TraceItem(null));
+		System.out.println();
+		
+		System.out.println(trace.getItems().get(0));
+		System.out.println();
+		
+		System.out.println(trace.getItems().get(1));
+		System.out.println();
+	}
+	
 	
 	@Test
 	public void test_equals_and_hash(){
@@ -106,9 +135,11 @@ public class TraceTreeTest extends Assert {
 	@Test
 	public void test_build(){
 		
+		fail("invalid build logic - need replace");
+		
 		TraceTree trace = new TraceTree(
 				String.class,
-				Util.list(Byte.class, 
+				Util.list(Byte.class,
 						Util.list(Object.class),
 						Util.list(Long.class,
 								Character.class)),
@@ -117,6 +148,7 @@ public class TraceTreeTest extends Assert {
 		
 		List<TraceItem> items = trace.getItems();
 		assertEquals(3, items.size());
+		
 		//0
 		assertEquals(String.class, items.get(0).type);
 		assertEquals(0, items.get(0).getSubTraces().size());

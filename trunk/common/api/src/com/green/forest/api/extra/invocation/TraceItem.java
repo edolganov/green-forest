@@ -1,6 +1,11 @@
 package com.green.forest.api.extra.invocation;
 
+import static com.green.forest.api.extra.invocation.TraceTree.appendTabs;
+import static com.green.forest.api.extra.invocation.TraceTree.toStringLevelIndex;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class TraceItem {
@@ -64,6 +69,57 @@ public class TraceItem {
 		} else if (!type.equals(other.type))
 			return false;
 		return true;
+	}
+
+
+
+	@Override
+	public String toString() {
+		
+		boolean rootCall = false;
+		Integer levelIndex = toStringLevelIndex.get();
+		if(levelIndex == null){
+			rootCall = true;
+			levelIndex = 0;
+			toStringLevelIndex.set(levelIndex);
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		appendTabs(sb, levelIndex);
+		sb.append("[TraceItem: ");
+		sb.append(type == null? "null" : type.getName());
+
+		
+		List<TraceTree> items = Collections.emptyList();
+		if(subTraces != null){
+			items = subTraces;
+		}
+		
+		Iterator<TraceTree> i = items.iterator();
+		if ( i.hasNext()){
+			
+			sb.append('\n');
+			
+			while(i.hasNext()) {
+				
+				toStringLevelIndex.set(levelIndex+1);
+				TraceTree e = i.next();
+			    sb.append(e);
+			    toStringLevelIndex.set(levelIndex);
+			    
+			    if (i.hasNext()){
+			    	sb.append('\n');
+			    }
+			}
+		}
+		
+    	sb.append(']');
+		
+		if(rootCall){
+			toStringLevelIndex.remove();
+		}
+		
+		return sb.toString();
 	}
 	
 	
