@@ -15,7 +15,9 @@ import com.green.forest.core.engine.filter.model.BeginFilter;
 import com.green.forest.core.engine.handler.model.SubInvoke;
 import com.green.forest.core.engine.interceptor.model.BeginForAllByAnn;
 import com.green.forest.core.engine.interceptor.model.FirstByAnn;
+import com.green.forest.util.Util;
 
+@SuppressWarnings("unchecked")
 public class BasicTest extends EngineTest {
 	
 	
@@ -26,7 +28,6 @@ public class BasicTest extends EngineTest {
 		fail("todo");
 		
 	}
-	
 	
 	
 	@Test
@@ -47,10 +48,10 @@ public class BasicTest extends EngineTest {
 		checkTrace(action, 
 				BeginFilter.class,
 				BeginForAllByAnn.class,
-				SubInvoke.class,
-				BeginForAllByAnn.class,
-				FirstByAnn.class,
-				StringEcho.class
+				Util.list(SubInvoke.class,
+						BeginForAllByAnn.class,
+						FirstByAnn.class,
+						StringEcho.class)
 				);
 		
 	}
