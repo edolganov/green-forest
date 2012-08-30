@@ -27,9 +27,12 @@ public class TraceTreeTest extends Assert {
 		
 		TraceTree trace = new TraceTree(
 				String.class,
-				Util.list(Byte.class, 
-						Util.list(Object.class),
-						Util.list(Long.class,
+					Util.list(
+						Byte.class, 
+							Util.list(
+								Object.class),
+							Util.list(
+								Long.class,
 								Character.class)),
 				Integer.class
 				);
@@ -56,9 +59,12 @@ public class TraceTreeTest extends Assert {
 		
 		TraceTree trace1 = new TraceTree(
 				String.class,
-				Util.list(Byte.class, 
-						Util.list(Object.class),
-						Util.list(Long.class,
+					Util.list(
+						Byte.class, 
+							Util.list(
+								Object.class),
+							Util.list(
+								Long.class,
 								Character.class)),
 				Integer.class
 				);
@@ -66,9 +72,12 @@ public class TraceTreeTest extends Assert {
 		
 		TraceTree trace2 = new TraceTree(
 				String.class,
-				Util.list(Byte.class, 
-						Util.list(Object.class),
-						Util.list(Long.class,
+					Util.list(
+						Byte.class, 
+							Util.list(
+								Object.class),
+							Util.list(
+								Long.class,
 								Character.class)),
 				Integer.class
 				);
@@ -84,9 +93,12 @@ public class TraceTreeTest extends Assert {
 		
 		TraceTree trace4 = new TraceTree(
 				String.class,
-				Util.list(Byte.class, 
-						Util.list(Object.class),
-						Util.list(Long.class)), //<--
+					Util.list(
+						Byte.class, 
+							Util.list(
+								Object.class),
+							Util.list(
+								Long.class)), //<--
 				Integer.class
 				);
 		assertFalse(trace1.equals(trace4));
@@ -94,18 +106,24 @@ public class TraceTreeTest extends Assert {
 		
 		assertFalse(trace1.equals(new TraceTree(
 				String.class,
-				Util.list(Byte.class, 
-						Util.list(Long.class, //<--
+					Util.list(
+						Byte.class, 
+							Util.list(
+								Long.class, //<--
 								Character.class)),
-						Util.list(Object.class),
+							Util.list(
+								Object.class),
 				Integer.class
 				)));
 		
 		assertFalse(trace1.equals(new TraceTree(
 				String.class,
-				Util.list(Byte.class, 
-						Util.list(Object.class),
-						Util.list(Long.class,
+					Util.list(
+						Byte.class, 
+							Util.list(
+								Object.class),
+							Util.list(
+								Long.class,
 								Character.class,
 								Character.class)),//<--
 				Integer.class
@@ -113,9 +131,12 @@ public class TraceTreeTest extends Assert {
 		
 		assertFalse(trace1.equals(new TraceTree(
 				String.class,
-				Util.list(Byte.class, 
-						Util.list(Object.class),
-						Util.list(Long.class,
+					Util.list(
+						Byte.class, 
+							Util.list(
+								Object.class),
+							Util.list(
+								Long.class,
 								Character.class)),
 				Integer.class,
 				Integer.class //<--
@@ -123,9 +144,12 @@ public class TraceTreeTest extends Assert {
 		
 		assertFalse(trace1.equals(new TraceTree(
 				String.class,
-				Util.list(Byte.class, 
-						Util.list(Object.class),
-						Util.list(Long.class,
+					Util.list(
+						Byte.class, 
+							Util.list(
+								Object.class),
+							Util.list(
+								Long.class,
 								Character.class))
 					//<--
 				)));
@@ -135,13 +159,14 @@ public class TraceTreeTest extends Assert {
 	@Test
 	public void test_build(){
 		
-		fail("invalid build logic - need replace");
-		
 		TraceTree trace = new TraceTree(
 				String.class,
-				Util.list(Byte.class,
-						Util.list(Object.class),
-						Util.list(Long.class,
+				Byte.class,
+					Util.list(
+						Object.class),
+					Util.list(
+						Long.class,
+							Util.list(
 								Character.class)),
 				Integer.class
 				);
