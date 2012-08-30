@@ -20,9 +20,10 @@ public class TraceTreeTest extends Assert {
 	
 	
 	@Test
-	public void test_equals(){
+	public void test_equals_and_hash(){
 		
 		assertTrue(new TraceTree().equals(new TraceTree()));
+		assertTrue(new TraceTree().hashCode() == new TraceTree().hashCode());
 		
 		TraceTree trace1 = new TraceTree(
 				String.class,
@@ -33,24 +34,34 @@ public class TraceTreeTest extends Assert {
 				Integer.class
 				);
 		
-		assertTrue(trace1.equals(new TraceTree(
+		
+		TraceTree trace2 = new TraceTree(
 				String.class,
 				Util.list(Byte.class, 
 						Util.list(Object.class),
 						Util.list(Long.class,
 								Character.class)),
 				Integer.class
-				)));
+				);
 		
-		assertFalse(trace1.equals(new TraceTree()));
+		assertTrue(trace1.equals(trace2));
+		assertTrue(trace1.hashCode() == trace2.hashCode());
 		
-		assertFalse(trace1.equals(new TraceTree(
+		
+		TraceTree trace3 = new TraceTree();
+		assertFalse(trace1.equals(trace3));
+		assertFalse(trace1.hashCode() == trace3.hashCode());
+		
+		
+		TraceTree trace4 = new TraceTree(
 				String.class,
 				Util.list(Byte.class, 
 						Util.list(Object.class),
 						Util.list(Long.class)), //<--
 				Integer.class
-				)));
+				);
+		assertFalse(trace1.equals(trace4));
+		assertFalse(trace1.hashCode() == trace4.hashCode());
 		
 		assertFalse(trace1.equals(new TraceTree(
 				String.class,
@@ -81,7 +92,7 @@ public class TraceTreeTest extends Assert {
 				Integer.class //<--
 				)));
 		
-		assertTrue(trace1.equals(new TraceTree(
+		assertFalse(trace1.equals(new TraceTree(
 				String.class,
 				Util.list(Byte.class, 
 						Util.list(Object.class),
