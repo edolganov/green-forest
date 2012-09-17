@@ -43,7 +43,7 @@ public class TraceTree {
 			trace.addSubTraceToLastItem(subTrace);
 			
 			List<?> subItems = (List<?>)ob;
-			for(int i=1; i < subItems.size(); ++i){
+			for(int i=0; i < subItems.size(); ++i){
 				Object subItem = subItems.get(i);
 				addItem(subTrace, subItem);
 			}
