@@ -14,6 +14,31 @@ import com.gf.test.interceptor.StringReverse;
 
 public class BasicTest extends EngineTest {
 	
+	@Test
+	public void test_inject_invocation_context_from_filter(){
+		fail("todo");
+	}
+	
+	@Test
+	public void test_inject(){
+		fail("todo");
+	}
+	
+	@Test
+	public void test_recursion(){
+		fail("todo");
+	}
+	
+	@Test
+	public void test_sub_sub_invoke(){
+		fail("todo");
+	}
+	
+	@Test
+	public void test_sub_invoke(){
+		fail("todo");
+	}
+	
 	
 	@Test
 	public void test_order_by_annotation() throws Exception {

@@ -16,6 +16,11 @@ import com.gf.test.interceptor.StringReverse;
 public class BasicTest extends EngineTest {
 	
 	@Test
+	public void test_inject(){
+		fail("todo");
+	}
+	
+	@Test
 	public void test_order_by_annotation(){
 		
 		Engine engine = new Engine();
