@@ -9,6 +9,7 @@ public class RecursionHandler extends Handler<RecursionAction>{
 	@Override
 	public void invoke(RecursionAction action) throws Exception {
 		
+		subInvoke(new SubInvokeAction());
 		subInvoke(new RecursionAction());
 		
 	}

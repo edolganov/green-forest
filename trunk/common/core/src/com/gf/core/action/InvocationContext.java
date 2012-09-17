@@ -18,15 +18,14 @@ public class InvocationContext implements InvocationControll {
 	
 	InvocationBlock owner;
 	InvocationContext parent;
+	boolean isTraceHandlers = false;
+	int depth;
+	
 	
 	public ActionServiceImpl actions; 
 	public ConfigService config;
 	public Action<?,?> action;
-	
-	boolean isTraceHandlers = false;
-	
 	public List<Filter> filters;
-	
 	public List<Interceptor> interceptors;
 	public Handler handler;
 	

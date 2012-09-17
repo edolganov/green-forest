@@ -2,7 +2,7 @@ package com.gf.key.core;
 
 import com.gf.config.ConfigKey;
 
-public class InvokeDepth extends ConfigKey<Integer>{
+public class InvokeDepthMaxSize extends ConfigKey<Integer>{
 
 	@Override
 	public boolean hasDefaultValue() {

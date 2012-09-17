@@ -87,11 +87,11 @@ public class ConfigServiceImpl implements ConfigService {
 		try {
 			valueType = (Class<?>)((ParameterizedType) keyType.getGenericSuperclass()).getActualTypeArguments()[0];
 		}catch (Exception e) {
-			throw new IllegalStateException("can't get value type from "+keyType.getName(), e);
+			throw new IllegalStateException("can't get value type from ["+keyType.getName()+"]", e);
 		}
 		
 		AbstractConverter<?> converter = converters.get(valueType);
-		Util.checkState( ! Util.isEmpty(converter), "can't find converter for value type: "+valueType.getName());
+		Util.checkState( ! Util.isEmpty(converter), "can't find converter for value type ["+valueType.getName()+"]");
 		
 		Object value = converter.toValue(rawValue);
 		values.put(keyType, value);
@@ -126,7 +126,7 @@ public class ConfigServiceImpl implements ConfigService {
 				T out = (T) value;
 				return out;
 			}catch (Exception e) {
-				throw new IllegalStateException("can't converting value to valid type for key"+type.getName(), e);
+				throw new IllegalStateException("can't converting value to valid type for key ["+type.getName()+"]", e);
 			}
 			
 		} else {
@@ -134,10 +134,10 @@ public class ConfigServiceImpl implements ConfigService {
 				try {
 					return key.getDefaultValue();
 				} catch (Exception e) {
-					throw new IllegalStateException("can't get default value for key "+type.getName(), e);
+					throw new IllegalStateException("can't get default value for key ["+type.getName()+"]", e);
 				}
 			} else {
-				throw new IllegalStateException("unknown key "+type.getName());
+				throw new IllegalStateException("unknown key ["+type.getName()+"]");
 			}
 		}
 	}
