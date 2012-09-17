@@ -2,7 +2,6 @@ package com.gf.core.engine.handler;
 
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.gf.core.Engine;
@@ -21,7 +20,7 @@ import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.InvokeDepthMaxSizeException;
 import com.gf.extra.invocation.TraceItem;
 import com.gf.extra.invocation.TraceTree;
-import com.gf.key.core.InvokeDepth;
+import com.gf.key.core.InvokeDepthMaxSize;
 import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.StringAction;
 import com.gf.test.handler.HandlerWithoutMapping;
@@ -32,7 +31,6 @@ import com.gf.util.Util;
 public class BasicTest extends EngineTest {
 	
 	
-	@Ignore
 	@Test
 	public void test_inject(){
 		
@@ -48,10 +46,12 @@ public class BasicTest extends EngineTest {
 		
 		Engine engine = new Engine();
 		enableTracing(engine);
-		int depthMaxSize = 42;
-		engine.addValue(InvokeDepth.class, depthMaxSize);
 		
+		int depthMaxSize = 42;
+		engine.addValue(InvokeDepthMaxSize.class, depthMaxSize);
 		engine.putHandler(RecursionHandler.class);
+		engine.putHandler(SubInvoke.class);
+		engine.putHandler(StringEcho.class);
 		
 		RecursionAction action = new RecursionAction();
 		try {
@@ -61,15 +61,15 @@ public class BasicTest extends EngineTest {
 			//ok
 		}
 		
-		int depth = 0;
+		int depth = 1;
 		
 		TraceTree trace = TraceHandlers.getOrCreateTrace(action);
 		while(trace != null){
 			depth++;
 			List<TraceItem> items = trace.getItems();
 			List<TraceTree> subTraces = items.get(0).getSubTraces();
-			if( ! Util.isEmpty(subTraces)){
-				trace = subTraces.get(0);
+			if( subTraces.size() == 2){
+				trace = subTraces.get(1);
 			} else {
 				trace = null;
 			}

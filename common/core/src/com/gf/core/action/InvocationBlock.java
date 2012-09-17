@@ -6,10 +6,15 @@ import java.util.List;
 import com.gf.Action;
 import com.gf.core.action.filter.FiltersBlock;
 import com.gf.core.action.interceptor.InterceptorsBlock;
+import com.gf.exception.invoke.InvokeDepthMaxSizeException;
+import com.gf.key.core.InvokeDepthMaxSize;
 import com.gf.key.core.TraceHandlers;
 
 
 public class InvocationBlock {
+	
+	private boolean isTraceHandlers;
+	private int depthMaxSize;
 	
 	ActionServiceImpl actionService;
 	Action<?,?> action;
@@ -18,6 +23,9 @@ public class InvocationBlock {
 	public InvocationBlock(ActionServiceImpl actionService, Action<?,?> action){
 		this.actionService = actionService;
 		this.action = action;
+		
+		isTraceHandlers = actionService.config.isTrue(new TraceHandlers());
+		depthMaxSize = actionService.config.getValue(new InvokeDepthMaxSize());
 	}
 	
 	public void invoke() {
@@ -44,9 +52,18 @@ public class InvocationBlock {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private InvocationContext createContext(Action<?,?> action, InvocationContext parent, boolean initFilters){
+		
+		//check depth
+		int depth = parent == null? 1 : parent.depth+1;
+		if(depth > depthMaxSize){
+			throw new InvokeDepthMaxSizeException(depthMaxSize);
+		}
+		
+		//create new context
 		InvocationContext c = new InvocationContext();
 		c.owner = this;
 		c.parent = parent;
+		c.depth = depth;
 		c.actions = actionService;
 		c.action = action;
 		
@@ -54,7 +71,7 @@ public class InvocationBlock {
 		c.config = c.actions.config;
 		
 		//prepare flags
-		c.isTraceHandlers = c.config.isTrue(new TraceHandlers());
+		c.isTraceHandlers = isTraceHandlers;
 		
 		//prepare handlers
 		if(initFilters){
