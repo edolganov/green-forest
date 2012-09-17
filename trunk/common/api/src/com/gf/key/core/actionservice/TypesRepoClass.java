@@ -11,7 +11,7 @@ public class TypesRepoClass extends ConfigKey<Class<?>>{
 	
 	@Override
 	public Class<?> getDefaultValue() throws Exception  {
-		return Class.forName("com.green.forest.core.repo.TypesRepoImpl");
+		return Class.forName("com.gf.core.repo.TypesRepoImpl");
 	}
 
 }
