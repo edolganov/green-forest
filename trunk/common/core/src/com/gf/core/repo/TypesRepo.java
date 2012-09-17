@@ -1,0 +1,18 @@
+package com.gf.core.repo;
+
+import java.util.Set;
+
+import com.gf.exception.deploy.NoMappingAnnotationException;
+import com.gf.exception.deploy.NotOneHandlerException;
+
+public interface TypesRepo {
+	
+	void setOneHandlerOnly(boolean val) throws NotOneHandlerException;
+	
+	boolean isOneHandlerOnly();
+	
+	void put(Class<?> handler) throws NoMappingAnnotationException, NotOneHandlerException;
+	
+	Set<Class<?>> getTypes(Class<?> target);
+
+}
