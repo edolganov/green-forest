@@ -48,10 +48,11 @@ public class BasicTest extends EngineTest {
 		checkTrace(action, 
 				BeginFilter.class,
 				BeginForAllByAnn.class,
-				Util.list(SubInvoke.class,
-						BeginForAllByAnn.class,
-						FirstByAnn.class,
-						StringEcho.class)
+				SubInvoke.class,
+					Util.list(
+							BeginForAllByAnn.class,
+							FirstByAnn.class,
+							StringEcho.class)
 				);
 		
 	}
