@@ -30,15 +30,16 @@ import com.gf.util.Util;
 @SuppressWarnings("unchecked")
 public class BasicTest extends EngineTest {
 	
-	
 	@Test
-	public void test_inject(){
-		
+	public void test_inject_invocation_context_from_filter(){
 		fail("todo");
-		
 	}
 	
 	
+	@Test
+	public void test_inject(){
+		fail("todo");
+	}
 	
 	
 	@Test
