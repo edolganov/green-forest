@@ -73,6 +73,9 @@ public class InvocationBlock {
 		//prepare flags
 		c.isTraceHandlers = isTraceHandlers;
 		
+		//prepare context
+		c.staticContextObjects = c.actions.staticContext.getStaticContextObjects();
+		
 		//prepare handlers
 		if(initFilters){
 			c.filters = c.actions.resourse.getFilters();

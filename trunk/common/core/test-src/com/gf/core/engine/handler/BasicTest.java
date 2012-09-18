@@ -42,6 +42,19 @@ public class BasicTest extends EngineTest {
 	}
 	
 	
+	@Test(expected=InvokeDepthMaxSizeException.class)
+	public void test_recursion_if_trace_disable(){
+		Engine engine = new Engine();
+		disableTracing(engine);
+		
+		engine.putHandler(RecursionHandler.class);
+		engine.putHandler(SubInvokeHandler.class);
+		engine.putHandler(StringEcho.class);
+		
+		engine.invoke(new RecursionAction());
+	}
+	
+	
 	@Test
 	public void test_recursion(){
 		

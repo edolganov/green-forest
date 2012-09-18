@@ -56,7 +56,7 @@ class InterceptorChainItem implements InterceptorChain {
 		
 		Interceptor interceptor = owner.getItem(index);
 		
-		owner.c.init(interceptor);
+		owner.c.initMappingObject(interceptor);
 		
 		try {
 			interceptor.invoke(owner.c.action, this);

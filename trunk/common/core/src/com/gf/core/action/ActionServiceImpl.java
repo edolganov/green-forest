@@ -15,12 +15,12 @@ public class ActionServiceImpl implements ActionService {
 	
 	public ResourseService resourse;
 	public ConfigService config;
+	public StaticContext staticContext;
 	
-	public StaticContext staticContext = new StaticContext();
-	
-	public ActionServiceImpl(ConfigService config, ResourseService resourseService) {
+	public ActionServiceImpl(ConfigService config, ResourseService resourseService, StaticContext staticContext) {
 		this.resourse = resourseService;
 		this.config = config;
+		this.staticContext = staticContext;
 	}
 	
 

@@ -15,7 +15,7 @@ public class HandlerBlock {
 	
 	public void invoke() {
 		
-		c.init(c.handler);
+		c.initMappingObject(c.handler);
 		
 		try {
 			c.handler.invoke(c.action);

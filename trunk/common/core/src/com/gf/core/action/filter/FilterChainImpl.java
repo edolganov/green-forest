@@ -54,7 +54,7 @@ class FilterChainItem implements FilterChain {
 		
 		Filter filter = owner.getItem(index);
 		
-		owner.c.addToTrace(filter);
+		owner.c.initFilter(filter);
 		
 		try {
 			filter.invoke(owner.c.action, this);
