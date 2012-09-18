@@ -9,9 +9,9 @@ import com.gf.core.engine.EngineTest;
 import com.gf.core.engine.filter.model.BeginFilter;
 import com.gf.core.engine.handler.model.RecursionAction;
 import com.gf.core.engine.handler.model.RecursionHandler;
-import com.gf.core.engine.handler.model.SubInvoke;
+import com.gf.core.engine.handler.model.SubInvokeHandler;
 import com.gf.core.engine.handler.model.SubInvokeAction;
-import com.gf.core.engine.handler.model.SubSubInvoke;
+import com.gf.core.engine.handler.model.SubSubInvokeHandler;
 import com.gf.core.engine.handler.model.SubSubInvokeAction;
 import com.gf.core.engine.interceptor.model.BeginForAllByAnn;
 import com.gf.core.engine.interceptor.model.FirstByAnn;
@@ -51,7 +51,7 @@ public class BasicTest extends EngineTest {
 		int depthMaxSize = 42;
 		engine.addValue(InvokeDepthMaxSize.class, depthMaxSize);
 		engine.putHandler(RecursionHandler.class);
-		engine.putHandler(SubInvoke.class);
+		engine.putHandler(SubInvokeHandler.class);
 		engine.putHandler(StringEcho.class);
 		
 		RecursionAction action = new RecursionAction();
@@ -86,9 +86,9 @@ public class BasicTest extends EngineTest {
 		Engine engine = new Engine();
 		enableTracing(engine);
 		
-		engine.putHandler(SubInvoke.class);
+		engine.putHandler(SubInvokeHandler.class);
 		engine.putHandler(StringEcho.class);
-		engine.putHandler(SubSubInvoke.class);
+		engine.putHandler(SubSubInvokeHandler.class);
 		engine.putFilter(BeginFilter.class);
 		engine.putInterceptor(BeginForAllByAnn.class);
 		engine.putInterceptor(FirstByAnn.class);
@@ -99,10 +99,10 @@ public class BasicTest extends EngineTest {
 		checkTrace(action, 
 			BeginFilter.class,
 			BeginForAllByAnn.class,
-			SubSubInvoke.class,
+			SubSubInvokeHandler.class,
 				Util.list(
 					BeginForAllByAnn.class,
-					SubInvoke.class,
+					SubInvokeHandler.class,
 						Util.list(
 								BeginForAllByAnn.class,
 								FirstByAnn.class,
@@ -111,7 +111,7 @@ public class BasicTest extends EngineTest {
 				),
 				Util.list(
 					BeginForAllByAnn.class,
-					SubInvoke.class,
+					SubInvokeHandler.class,
 						Util.list(
 								BeginForAllByAnn.class,
 								FirstByAnn.class,
@@ -128,7 +128,7 @@ public class BasicTest extends EngineTest {
 		Engine engine = new Engine();
 		enableTracing(engine);
 		
-		engine.putHandler(SubInvoke.class);
+		engine.putHandler(SubInvokeHandler.class);
 		engine.putHandler(StringEcho.class);
 		engine.putFilter(BeginFilter.class);
 		engine.putInterceptor(BeginForAllByAnn.class);
@@ -140,7 +140,7 @@ public class BasicTest extends EngineTest {
 		checkTrace(action, 
 			BeginFilter.class,
 			BeginForAllByAnn.class,
-			SubInvoke.class,
+			SubInvokeHandler.class,
 				Util.list(
 						BeginForAllByAnn.class,
 						FirstByAnn.class,
