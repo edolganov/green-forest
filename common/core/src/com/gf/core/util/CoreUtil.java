@@ -1,4 +1,4 @@
-package com.gf.core;
+package com.gf.core.util;
 
 import com.gf.exception.BaseException;
 import com.gf.exception.ExternalException;
