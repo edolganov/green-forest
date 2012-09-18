@@ -5,7 +5,7 @@ import com.gf.annotation.Mapping;
 import com.gf.test.action.StringAction;
 
 @Mapping(SubInvokeAction.class)
-public class SubInvoke extends Handler<SubInvokeAction>{
+public class SubInvokeHandler extends Handler<SubInvokeAction>{
 
 	@Override
 	public void invoke(SubInvokeAction action) throws Exception {
