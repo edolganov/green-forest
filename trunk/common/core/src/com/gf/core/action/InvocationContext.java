@@ -11,6 +11,8 @@ import com.gf.Handler;
 import com.gf.Interceptor;
 import com.gf.InvocationControll;
 import com.gf.MappingObject;
+import com.gf.annotation.Inject;
+import com.gf.core.util.ReflectionUtil;
 import com.gf.extra.invocation.TraceTree;
 import com.gf.key.core.TraceHandlers;
 
@@ -34,7 +36,7 @@ public class InvocationContext implements InvocationControll {
 	
 	public void initMappingObject(MappingObject obj){
 		
-		injectStatic(obj);
+		injectStaticAndRuntime(obj);
 		addToTrace(obj);
 		obj.setInvocation(this);
 	}
@@ -55,8 +57,18 @@ public class InvocationContext implements InvocationControll {
 	
 	private void injectStatic(Object obj) {
 		
-//		staticContextObjects;
+	}
+	
+	private void injectStaticAndRuntime(Object obj) {
 		
+	}
+	
+	private void inject(Object obj, Collection<Object> collection){
+		try {
+			ReflectionUtil.injectDataFromContext(obj, collection, Inject.class);
+		}catch (Exception e) {
+			//
+		}
 	}
 	
 

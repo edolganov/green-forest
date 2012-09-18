@@ -2,9 +2,9 @@ package com.gf.core.action.filter;
 
 import com.gf.Filter;
 import com.gf.FilterChain;
-import com.gf.core.CoreUtil;
 import com.gf.core.action.InvocationContext;
 import com.gf.core.action.interceptor.InterceptorsBlock;
+import com.gf.core.util.CoreUtil;
 
 public class FilterChainImpl {
 	
