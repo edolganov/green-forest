@@ -34,7 +34,18 @@ import com.gf.util.Util;
 public class BasicTest extends EngineTest {
 	
 	@Test
-	public void test_inject_invocation_context_from_filter(){
+	public void test_inject_runtime_context_from_filter(){
+		fail("todo");
+	}
+	
+	
+	@Test
+	public void test_inject_from_duplicates(){
+		fail("todo");
+	}
+	
+	@Test
+	public void test_inject_unknown(){
 		fail("todo");
 	}
 	
@@ -42,9 +53,6 @@ public class BasicTest extends EngineTest {
 	public void test_inject(){
 		
 		fail("todo");
-		
-		Engine engine = new Engine();
-		engine.addToContext(new Object());
 		
 	}
 	
