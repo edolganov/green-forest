@@ -9,6 +9,8 @@ import com.gf.core.engine.EngineTest;
 import com.gf.core.engine.filter.model.BeginFilter;
 import com.gf.core.engine.handler.model.RecursionAction;
 import com.gf.core.engine.handler.model.RecursionHandler;
+import com.gf.core.engine.handler.model.StaticInjectHandler;
+import com.gf.core.engine.handler.model.StaticServiceImpl;
 import com.gf.core.engine.handler.model.SubInvokeHandler;
 import com.gf.core.engine.handler.model.SubInvokeAction;
 import com.gf.core.engine.handler.model.SubSubInvokeHandler;
@@ -22,6 +24,7 @@ import com.gf.extra.invocation.TraceItem;
 import com.gf.extra.invocation.TraceTree;
 import com.gf.key.core.InvokeDepthMaxSize;
 import com.gf.key.core.TraceHandlers;
+import com.gf.test.action.EmptyAction;
 import com.gf.test.action.StringAction;
 import com.gf.test.handler.HandlerWithoutMapping;
 import com.gf.test.handler.StringEcho;
@@ -31,14 +34,30 @@ import com.gf.util.Util;
 public class BasicTest extends EngineTest {
 	
 	@Test
-	public void test_inject_invocation_context_from_filter(){
+	public void test_inject_runtime_context_from_filter(){
 		fail("todo");
 	}
 	
 	
 	@Test
-	public void test_inject(){
+	public void test_inject_from_duplicates(){
 		fail("todo");
+	}
+	
+	@Test
+	public void test_inject_unknown(){
+		fail("todo");
+	}
+	
+	@Test
+	public void test_inject(){
+		
+		Engine engine = new Engine();
+		engine.addToContext(new StaticServiceImpl());
+		engine.putHandler(StaticInjectHandler.class);
+		
+		engine.invoke(new EmptyAction());
+		
 	}
 	
 	
