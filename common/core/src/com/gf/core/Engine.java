@@ -5,6 +5,7 @@ import java.io.Serializable;
 import com.gf.Action;
 import com.gf.ActionService;
 import com.gf.ConfigService;
+import com.gf.ContextService;
 import com.gf.DeployService;
 import com.gf.Filter;
 import com.gf.Handler;
@@ -12,26 +13,30 @@ import com.gf.Interceptor;
 import com.gf.config.ConfigKey;
 import com.gf.core.action.ActionServiceImpl;
 import com.gf.core.config.ConfigServiceImpl;
+import com.gf.core.context.ContextServiceImpl;
+import com.gf.core.context.StaticContext;
 import com.gf.core.deploy.DeployServiceImpl;
 import com.gf.core.deploy.ResourseService;
 import com.gf.exception.BaseException;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
 
-public class Engine implements ActionService, DeployService, ConfigService {
+public class Engine implements ActionService, DeployService, ConfigService, ContextService {
 	
 	private ConfigService config;
 	private DeployService deploy;
-	private ResourseService resourse;
 	private ActionService actions;
+	private ContextService context;
 	
 	
 	public Engine() {
 		
 		config = new ConfigServiceImpl();
 		deploy = new DeployServiceImpl(config);
-		resourse = (ResourseService)deploy;
-		actions = new ActionServiceImpl(config, resourse);
+		context = new ContextServiceImpl(config);
+		actions = new ActionServiceImpl(config, 
+				(ResourseService)deploy,
+				(StaticContext)context);
 		
 	}
 	
@@ -78,6 +83,12 @@ public class Engine implements ActionService, DeployService, ConfigService {
 	@Override
 	public <T> void addValue(Class<? extends ConfigKey<T>> keyType, T value) {
 		config.addValue(keyType, value);
+	}
+	
+
+	@Override
+	public void addToContext(Object object) {
+		context.addToContext(object);
 	}
 	
 

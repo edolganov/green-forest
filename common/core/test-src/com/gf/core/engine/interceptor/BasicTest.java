@@ -40,8 +40,27 @@ public class BasicTest extends EngineTest {
 	
 	@Test
 	public void test_inject(){
+		
 		fail("todo");
+		
+		Engine engine = new Engine();
+		engine.addToContext(new Object());
+		
 	}
+	
+	@Test(expected=InvokeDepthMaxSizeException.class)
+	public void test_recursion_if_trace_disable(){
+		Engine engine = new Engine();
+		disableTracing(engine);
+		
+		engine.putInterceptor(RecursionInterveptor.class);
+		engine.putHandler(RecursionHandler.class);
+		engine.putHandler(SubInvokeHandler.class);
+		engine.putHandler(StringEcho.class);
+		
+		engine.invoke(new RecursionAction());
+	}
+	
 	
 	@Test
 	public void test_recursion(){

@@ -1,5 +1,9 @@
 package com.gf.core.context;
 
-public class StaticContext {
+import java.util.Collection;
+
+public interface StaticContext {
+
+	Collection<Object> getStaticContextObjects();
 
 }

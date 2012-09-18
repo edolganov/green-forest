@@ -1,6 +1,7 @@
 package com.gf.core.action;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import com.gf.Action;
@@ -28,19 +29,36 @@ public class InvocationContext implements InvocationControll {
 	public List<Filter> filters;
 	public List<Interceptor> interceptors;
 	public Handler handler;
+	public Collection<Object> staticContextObjects;
 	
 	
-	public void init(MappingObject obj){
+	public void initMappingObject(MappingObject obj){
+		
+		injectStatic(obj);
 		addToTrace(obj);
 		obj.setInvocation(this);
 	}
+
+	public void initFilter(Filter obj){
+		
+		injectStatic(obj);
+		addToTrace(obj);
+		
+	}
 	
-	public void addToTrace(Object ob) {
+	private void addToTrace(Object ob) {
 		if(isTraceHandlers){
 			TraceTree trace = TraceHandlers.getOrCreateTrace(action);
 			trace.createAndAddItem(ob);
 		}
 	}
+	
+	private void injectStatic(Object obj) {
+		
+//		staticContextObjects;
+		
+	}
+	
 
 	@Override
 	public <I extends Serializable, O extends Serializable> O subInvoke(

@@ -16,6 +16,10 @@ public class EngineTest extends Assert {
 		engine.addValue(TraceHandlers.class, true);
 	}
 	
+	public static void disableTracing(Engine engine){
+		engine.addValue(TraceHandlers.class, false);
+	}
+	
 	public static void checkTrace(Action<?,?> action, Object... traceTree){
 		TraceTree expected = new TraceTree(traceTree);
 		TraceTree actual = TraceHandlers.getOrCreateTrace(action);
