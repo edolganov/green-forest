@@ -1,10 +1,14 @@
 package com.gf.core.engine.interceptor;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import com.gf.core.Engine;
 import com.gf.core.engine.EngineTest;
 import com.gf.core.engine.filter.model.BeginFilter;
+import com.gf.core.engine.handler.model.RecursionAction;
+import com.gf.core.engine.handler.model.RecursionHandler;
 import com.gf.core.engine.handler.model.SubInvokeAction;
 import com.gf.core.engine.handler.model.SubInvokeHandler;
 import com.gf.core.engine.handler.model.SubSubInvokeAction;
@@ -12,9 +16,15 @@ import com.gf.core.engine.handler.model.SubSubInvokeHandler;
 import com.gf.core.engine.interceptor.model.BeginForAllByAnn;
 import com.gf.core.engine.interceptor.model.EndForAllByAnn;
 import com.gf.core.engine.interceptor.model.FirstByAnn;
+import com.gf.core.engine.interceptor.model.RecursionInterveptor;
 import com.gf.core.engine.interceptor.model.SecondByAnn;
 import com.gf.core.engine.interceptor.model.SubInvokeInterceptor;
 import com.gf.core.engine.interceptor.model.SubSubInvokeInterceptor;
+import com.gf.exception.invoke.InvokeDepthMaxSizeException;
+import com.gf.extra.invocation.TraceItem;
+import com.gf.extra.invocation.TraceTree;
+import com.gf.key.core.InvokeDepthMaxSize;
+import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.StringAction;
 import com.gf.test.handler.StringEcho;
 import com.gf.test.interceptor.StringReverse;
@@ -35,7 +45,42 @@ public class BasicTest extends EngineTest {
 	
 	@Test
 	public void test_recursion(){
-		fail("todo");
+		
+		Engine engine = new Engine();
+		enableTracing(engine);
+		
+		int depthMaxSize = 42;
+		engine.addValue(InvokeDepthMaxSize.class, depthMaxSize);
+		
+		engine.putInterceptor(RecursionInterveptor.class);
+		engine.putHandler(RecursionHandler.class);
+		engine.putHandler(SubInvokeHandler.class);
+		engine.putHandler(StringEcho.class);
+		
+		RecursionAction action = new RecursionAction();
+		try {
+			engine.invoke(action);
+			fail("ex exp");
+		}catch (InvokeDepthMaxSizeException e) {
+			//ok
+		}
+		
+		int depth = 1;
+		
+		TraceTree trace = TraceHandlers.getOrCreateTrace(action);
+		while(trace != null){
+			depth++;
+			List<TraceItem> items = trace.getItems();
+			List<TraceTree> subTraces = items.get(0).getSubTraces();
+			if( subTraces.size() == 2){
+				trace = subTraces.get(1);
+			} else {
+				trace = null;
+			}
+		}
+		
+		assertEquals(depthMaxSize, depth);
+		
 	}
 	
 	@Test
