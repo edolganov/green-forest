@@ -1,7 +1,8 @@
-package com.gf.core.engine.interceptor;
+package com.gf.core.engine.handler;
 
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.gf.core.Engine;
@@ -9,59 +10,70 @@ import com.gf.core.engine.EngineTest;
 import com.gf.core.engine.filter.model.BeginFilter;
 import com.gf.core.engine.handler.model.RecursionAction;
 import com.gf.core.engine.handler.model.RecursionHandler;
-import com.gf.core.engine.handler.model.SubInvokeAction;
 import com.gf.core.engine.handler.model.SubInvokeHandler;
-import com.gf.core.engine.handler.model.SubSubInvokeAction;
+import com.gf.core.engine.handler.model.SubInvokeAction;
 import com.gf.core.engine.handler.model.SubSubInvokeHandler;
+import com.gf.core.engine.handler.model.SubSubInvokeAction;
 import com.gf.core.engine.interceptor.model.BeginForAllByAnn;
-import com.gf.core.engine.interceptor.model.EndForAllByAnn;
 import com.gf.core.engine.interceptor.model.FirstByAnn;
-import com.gf.core.engine.interceptor.model.RecursionInterveptor;
-import com.gf.core.engine.interceptor.model.SecondByAnn;
-import com.gf.core.engine.interceptor.model.SubInvokeInterceptor;
-import com.gf.core.engine.interceptor.model.SubSubInvokeInterceptor;
+import com.gf.exception.deploy.NoMappingAnnotationException;
+import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.InvokeDepthMaxSizeException;
 import com.gf.extra.invocation.TraceItem;
 import com.gf.extra.invocation.TraceTree;
 import com.gf.key.core.InvokeDepthMaxSize;
 import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.StringAction;
+import com.gf.test.handler.HandlerWithoutMapping;
 import com.gf.test.handler.StringEcho;
-import com.gf.test.interceptor.StringReverse;
 import com.gf.util.Util;
+import com.gf.util.test.concurrent.ThreadRacer;
+import com.gf.util.test.concurrent.ThreadsRace;
 
 @SuppressWarnings("unchecked")
-public class BasicTest extends EngineTest {
-	
-	@Test
-	public void test_inject_runtime_context_from_filter(){
-		fail("todo");
-	}
+public class InvokeTest extends EngineTest {
 	
 	
-	@Test
-	public void test_inject_from_duplicates(){
-		fail("todo");
-	}
-	
-	@Test
-	public void test_inject_unknown(){
-		fail("todo");
-	}
-	
-	@Test
-	public void test_inject(){
+	@Ignore
+	@Test(expected=HandlerNotFoundException.class)
+	public void test_no_handler_concurrent(){
 		
-		fail("todo");
+		final Engine engine = new Engine();
+		
+		ThreadsRace race = new ThreadsRace();
+		
+		race.startFromBegin(new ThreadRacer(){
+
+			@Override
+			public void invoke() throws Exception {
+				
+				engine.putHandler(StringEcho.class);
+				fireAndWait("handler added", "handler removed");
+				engine.invoke(new StringAction("test"));
+			}
+			
+		});
+		
+		race.startWithEvent("handler added", new ThreadRacer() {
+			
+			@Override
+			public void invoke() throws Exception {
+				
+				//engine.removeHandler(StringEcho.class);
+				fire("handler removed");
+			}
+		});
+		
+		race.invokeWithRuntimeExceptions();
 		
 	}
+	
 	
 	@Test(expected=InvokeDepthMaxSizeException.class)
 	public void test_recursion_if_trace_disable(){
 		Engine engine = new Engine();
 		disableTracing(engine);
 		
-		engine.putInterceptor(RecursionInterveptor.class);
 		engine.putHandler(RecursionHandler.class);
 		engine.putHandler(SubInvokeHandler.class);
 		engine.putHandler(StringEcho.class);
@@ -78,8 +90,6 @@ public class BasicTest extends EngineTest {
 		
 		int depthMaxSize = 42;
 		engine.addValue(InvokeDepthMaxSize.class, depthMaxSize);
-		
-		engine.putInterceptor(RecursionInterveptor.class);
 		engine.putHandler(RecursionHandler.class);
 		engine.putHandler(SubInvokeHandler.class);
 		engine.putHandler(StringEcho.class);
@@ -107,8 +117,8 @@ public class BasicTest extends EngineTest {
 		}
 		
 		assertEquals(depthMaxSize, depth);
-		
 	}
+	
 	
 	@Test
 	public void test_sub_sub_invoke(){
@@ -116,8 +126,6 @@ public class BasicTest extends EngineTest {
 		Engine engine = new Engine();
 		enableTracing(engine);
 		
-		engine.putInterceptor(SubSubInvokeInterceptor.class);
-		engine.putInterceptor(SubInvokeInterceptor.class);
 		engine.putHandler(SubInvokeHandler.class);
 		engine.putHandler(StringEcho.class);
 		engine.putHandler(SubSubInvokeHandler.class);
@@ -131,10 +139,10 @@ public class BasicTest extends EngineTest {
 		checkTrace(action, 
 			BeginFilter.class,
 			BeginForAllByAnn.class,
-			SubSubInvokeInterceptor.class,
+			SubSubInvokeHandler.class,
 				Util.list(
 					BeginForAllByAnn.class,
-					SubInvokeInterceptor.class,
+					SubInvokeHandler.class,
 						Util.list(
 								BeginForAllByAnn.class,
 								FirstByAnn.class,
@@ -143,7 +151,7 @@ public class BasicTest extends EngineTest {
 				),
 				Util.list(
 					BeginForAllByAnn.class,
-					SubInvokeInterceptor.class,
+					SubInvokeHandler.class,
 						Util.list(
 								BeginForAllByAnn.class,
 								FirstByAnn.class,
@@ -153,13 +161,13 @@ public class BasicTest extends EngineTest {
 			);
 	}
 	
+	
 	@Test
 	public void test_sub_invoke(){
 		
 		Engine engine = new Engine();
 		enableTracing(engine);
 		
-		engine.putInterceptor(SubInvokeInterceptor.class);
 		engine.putHandler(SubInvokeHandler.class);
 		engine.putHandler(StringEcho.class);
 		engine.putFilter(BeginFilter.class);
@@ -172,40 +180,34 @@ public class BasicTest extends EngineTest {
 		checkTrace(action, 
 			BeginFilter.class,
 			BeginForAllByAnn.class,
-			SubInvokeInterceptor.class,
+			SubInvokeHandler.class,
 				Util.list(
 						BeginForAllByAnn.class,
 						FirstByAnn.class,
 						StringEcho.class)
 			);
+		
 	}
 	
 	
-	@Test
-	public void test_order_by_annotation() throws Exception {
+	
+	@Test(expected=NoMappingAnnotationException.class)
+	public void test_no_mapping(){
 		
 		Engine engine = new Engine();
-		enableTracing(engine);
-		
-		engine.putHandler(StringEcho.class);
-		engine.putInterceptor(FirstByAnn.class);
-		engine.putInterceptor(SecondByAnn.class);
-		engine.putInterceptor(BeginForAllByAnn.class);
-		engine.putInterceptor(EndForAllByAnn.class);
-		engine.putInterceptor(StringReverse.class);
-		
-		StringAction action = new StringAction("test");
-		engine.invoke(action);
-		
-		checkTrace(action, 
-				BeginForAllByAnn.class,
-				FirstByAnn.class,
-				SecondByAnn.class,
-				StringReverse.class,
-				EndForAllByAnn.class,
-				StringEcho.class);
+		engine.putHandler(HandlerWithoutMapping.class);
 	}
 	
+
+
+	@Test(expected=HandlerNotFoundException.class)
+	public void test_no_handler(){
+		
+		Engine engine = new Engine();
+		String param = "test";
+		engine.invoke(new StringAction(param));
+		
+	}
 	
 	@Test
 	public void test_invoke(){
@@ -214,14 +216,13 @@ public class BasicTest extends EngineTest {
 		enableTracing(engine);
 		
 		engine.putHandler(StringEcho.class);
-		engine.putInterceptor(StringReverse.class);
 		
 		StringAction action = new StringAction("test");
 		engine.invoke(action);
 		
 		checkTrace(action, 
-				StringReverse.class,
 				StringEcho.class);
+		
 		
 	}
 

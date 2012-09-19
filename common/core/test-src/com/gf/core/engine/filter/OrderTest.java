@@ -11,14 +11,9 @@ import com.gf.core.engine.filter.model.SecondFilter;
 import com.gf.core.engine.filter.model.UnorderedFilter;
 import com.gf.test.action.StringAction;
 import com.gf.test.handler.StringEcho;
-import com.gf.test.interceptor.StringReverse;
 
-public class BasicTest extends EngineTest {
-	
-	@Test
-	public void test_inject(){
-		fail("todo");
-	}
+public class OrderTest extends EngineTest {
+
 	
 	@Test
 	public void test_order_by_annotation(){
@@ -43,27 +38,6 @@ public class BasicTest extends EngineTest {
 				UnorderedFilter.class,
 				EndFilter.class,
 				StringEcho.class);
-	}
-	
-	
-	@Test
-	public void test_invoke(){
-		
-		Engine engine = new Engine();
-		enableTracing(engine);
-		
-		engine.putHandler(StringEcho.class);
-		engine.putFilter(FirstFilter.class);
-		engine.putInterceptor(StringReverse.class);
-		
-		StringAction action = new StringAction("test");
-		engine.invoke(action);
-		
-		checkTrace(action,
-				FirstFilter.class,
-				StringReverse.class,
-				StringEcho.class);
-		
 	}
 	
 
