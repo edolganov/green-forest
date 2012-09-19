@@ -14,6 +14,11 @@ import com.gf.test.action.EmptyAction;
 
 public class InjectTest extends AbstractEngineTest {
 	
+	@Test
+	public void test_inject_from_invocation_context_in_sub_invoke(){
+		fail("todo");
+	}
+	
 	
 	@Test
 	public void test_inject_invocation_context_from_filter(){
