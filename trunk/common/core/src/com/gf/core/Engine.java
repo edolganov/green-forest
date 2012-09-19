@@ -33,7 +33,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 		
 		config = new ConfigServiceImpl();
 		deploy = new DeployServiceImpl(config);
-		context = new ContextServiceImpl(config);
+		context = new ContextServiceImpl();
 		actions = new ActionServiceImpl(config, 
 				(ResourseService)deploy,
 				(StaticContext)context);

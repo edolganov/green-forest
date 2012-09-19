@@ -10,19 +10,22 @@ import com.gf.Handler;
 import com.gf.Interceptor;
 import com.gf.MappingObject;
 import com.gf.annotation.Inject;
+import com.gf.core.context.ContextRepository;
 import com.gf.core.util.ReflectionUtil;
 import com.gf.extra.invocation.TraceTree;
 import com.gf.key.core.TraceHandlers;
 import com.gf.service.ConfigService;
+import com.gf.service.InvocationContextService;
 import com.gf.service.InvocationService;
 
 @SuppressWarnings("rawtypes")
-public class InvocationContext implements InvocationService {
+public class InvocationContext implements InvocationService, InvocationContextService {
 	
 	InvocationBlock owner;
 	InvocationContext parent;
 	boolean isTraceHandlers = false;
 	int depth;
+	ContextRepository invocationContext = new ContextRepository();
 	
 	
 	public ActionServiceImpl actions; 
@@ -36,17 +39,28 @@ public class InvocationContext implements InvocationService {
 	
 	public void initMappingObject(MappingObject obj){
 		
-		injectStaticAndRuntime(obj);
+		injectAllContexts(obj);
 		addToTrace(obj);
 		obj.setInvocation(this);
 	}
 
 	public void initFilter(Filter obj){
 		
-		injectStatic(obj);
+		injectStaticContext(obj);
 		addToTrace(obj);
+		obj.setInvocationContext(this);
 		
 	}
+	
+	
+	private void injectAllContexts(Object obj) {
+		injectStaticContext(obj);
+	}
+	
+	private void injectStaticContext(Object obj) {
+		inject(obj, staticContextObjects);
+	}
+	
 	
 	private void addToTrace(Object ob) {
 		if(isTraceHandlers){
@@ -54,15 +68,6 @@ public class InvocationContext implements InvocationService {
 			trace.createAndAddItem(ob);
 		}
 	}
-	
-	private void injectStaticAndRuntime(Object obj) {
-		injectStatic(obj);
-	}
-	
-	private void injectStatic(Object obj) {
-		inject(obj, staticContextObjects);
-	}
-	
 
 	
 	private void inject(Object obj, Collection<Object> collection){
@@ -81,6 +86,11 @@ public class InvocationContext implements InvocationService {
 		}
 		
 		return (O)owner.subInvoke(this, subAction);
+	}
+
+	@Override
+	public void addToInvocationContext(Object ob) {
+		invocationContext.add(ob);
 	}
 	
 
