@@ -7,8 +7,11 @@ import com.gf.core.engine.AbstractEngineTest;
 import com.gf.core.engine.context.model.FirstInvocationContextSetterFilter;
 import com.gf.core.engine.context.model.FirstInvocationServiceExpectedFilter;
 import com.gf.core.engine.context.model.InvocationContextDuplicatesChecker;
+import com.gf.core.engine.context.model.RewriteStaticContextFilter;
 import com.gf.core.engine.context.model.SecondInvocationContextSetterFilter;
 import com.gf.core.engine.context.model.SecondInvocationServiceExpectedFilter;
+import com.gf.core.engine.context.model.SecondStaticServiceExpectedFilter;
+import com.gf.core.engine.model.StaticServiceImpl;
 import com.gf.test.action.EmptyAction;
 import com.gf.test.handler.EmptyHandler;
 
@@ -17,7 +20,13 @@ public class InvocationContextTest extends AbstractEngineTest {
 	
 	@Test
 	public void test_rewrite_static_context(){
-		fail("todo");
+		
+		Engine engine = new Engine();
+		engine.addToContext(new StaticServiceImpl());
+		engine.putFilter(RewriteStaticContextFilter.class);
+		engine.putFilter(SecondStaticServiceExpectedFilter.class);
+		engine.putHandler(EmptyHandler.class);
+		engine.invoke(new EmptyAction());
 	}
 	
 	@Test

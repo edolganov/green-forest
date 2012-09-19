@@ -59,8 +59,8 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 		Collection<Object> invocationContextObjects = invocationContext.getAll();
 		
 		ArrayList<Object> list = new ArrayList<Object>();
-		list.addAll(staticContextObjects);
 		list.addAll(invocationContextObjects);
+		list.addAll(staticContextObjects);
 
 		inject(obj, list);
 		
