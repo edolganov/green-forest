@@ -8,6 +8,6 @@
 	<classpathentry kind="src" path="common/core/test-src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="thirdparty/commons-logging-1.1.1.jar" sourcepath="thirdparty-sources/commons-logging-1.1.1-sources.jar"/>
-	<classpathentry kind="lib" path="thirdparty/runtime/junit-4.8.1.jar" sourcepath="thirdparty-sources/runtime/junit-4.8.1-sources.jar"/>
+	<classpathentry kind="lib" path="thirdparty/junit-4.8.1.jar" sourcepath="thirdparty-sources/junit-4.8.1-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
