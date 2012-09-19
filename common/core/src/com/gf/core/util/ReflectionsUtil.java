@@ -9,7 +9,7 @@ import java.util.List;
 import com.gf.exception.invoke.InjectException;
 import com.gf.exception.invoke.ObjectToInjectNotFoundException;
 
-public class ReflectionUtil {
+public class ReflectionsUtil {
 
 
 	public static void injectDataFromContext(Object ob, Collection<Object> collection, 

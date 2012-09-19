@@ -12,7 +12,7 @@ import com.gf.Interceptor;
 import com.gf.MappingObject;
 import com.gf.annotation.Inject;
 import com.gf.core.context.ContextRepository;
-import com.gf.core.util.ReflectionUtil;
+import com.gf.core.util.ReflectionsUtil;
 import com.gf.extra.invocation.TraceTree;
 import com.gf.key.core.TraceHandlers;
 import com.gf.service.ConfigService;
@@ -76,7 +76,7 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 
 	
 	private void inject(Object obj, Collection<Object> collection){
-		ReflectionUtil.injectDataFromContext(obj, collection, Inject.class);
+		ReflectionsUtil.injectDataFromContext(obj, collection, Inject.class);
 	}
 	
 
