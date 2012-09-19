@@ -3,7 +3,7 @@ package com.gf.test.handler;
 import com.gf.Handler;
 import com.gf.test.action.EmptyAction;
 
-public class HandlerWithoutMapping extends Handler<EmptyAction>{
+public class WithoutMappingHandler extends Handler<EmptyAction>{
 
 	@Override
 	public void invoke(EmptyAction action) throws Exception {
