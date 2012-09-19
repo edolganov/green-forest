@@ -1,10 +1,10 @@
 package com.gf.core.action.interceptor;
 
 import com.gf.Interceptor;
-import com.gf.InterceptorChain;
 import com.gf.core.action.InvocationContext;
 import com.gf.core.action.handler.HandlerBlock;
 import com.gf.core.util.CoreUtil;
+import com.gf.service.InterceptorChain;
 
 public class InterceptorChainImpl {
 	

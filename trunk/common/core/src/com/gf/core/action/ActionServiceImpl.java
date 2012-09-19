@@ -3,12 +3,12 @@ package com.gf.core.action;
 import java.io.Serializable;
 
 import com.gf.Action;
-import com.gf.ActionService;
-import com.gf.ConfigService;
 import com.gf.core.context.StaticContext;
 import com.gf.core.deploy.ResourseService;
 import com.gf.core.util.CoreUtil;
 import com.gf.exception.invoke.NullActionException;
+import com.gf.service.ActionService;
+import com.gf.service.ConfigService;
 import com.gf.util.Util;
 
 public class ActionServiceImpl implements ActionService {

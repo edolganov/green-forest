@@ -3,7 +3,7 @@ package com.gf.core.engine.interceptor;
 import org.junit.Test;
 
 import com.gf.core.Engine;
-import com.gf.core.engine.EngineTest;
+import com.gf.core.engine.AbstractEngineTest;
 import com.gf.core.engine.interceptor.model.BeginForAllByAnn;
 import com.gf.core.engine.interceptor.model.EndForAllByAnn;
 import com.gf.core.engine.interceptor.model.FirstByAnn;
@@ -13,7 +13,7 @@ import com.gf.test.handler.StringEcho;
 import com.gf.test.interceptor.StringReverse;
 
 @SuppressWarnings("unchecked")
-public class OrderTest extends EngineTest {
+public class OrderTest extends AbstractEngineTest {
 	
 	
 	@Test

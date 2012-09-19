@@ -3,19 +3,20 @@ package com.gf.core.engine.handler;
 import org.junit.Test;
 
 import com.gf.core.Engine;
-import com.gf.core.engine.EngineTest;
+import com.gf.core.engine.AbstractEngineTest;
 import com.gf.core.engine.handler.model.InjectUnknownHandler;
 import com.gf.core.engine.handler.model.StaticInjectHandler;
-import com.gf.core.engine.handler.model.StaticServiceImpl;
-import com.gf.core.engine.handler.model.StaticServiceImpl2;
+import com.gf.core.engine.model.StaticServiceImpl;
+import com.gf.core.engine.model.StaticServiceImpl2;
 import com.gf.exception.invoke.ObjectToInjectNotFoundException;
 import com.gf.test.action.EmptyAction;
 
 
-public class InjectTest extends EngineTest {
+public class InjectTest extends AbstractEngineTest {
+	
 	
 	@Test
-	public void test_inject_runtime_context_from_filter(){
+	public void test_inject_invocation_context_from_filter(){
 		fail("todo");
 	}
 	

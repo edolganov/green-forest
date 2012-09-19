@@ -7,10 +7,10 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import com.gf.ConfigService;
 import com.gf.config.ConfigKey;
 import com.gf.core.config.converter.AbstractConverter;
 import com.gf.core.config.converter.ConfigKeyConverters;
+import com.gf.service.ConfigService;
 import com.gf.util.Util;
 
 

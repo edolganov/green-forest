@@ -5,19 +5,19 @@ import java.util.Collection;
 import java.util.List;
 
 import com.gf.Action;
-import com.gf.ConfigService;
 import com.gf.Filter;
 import com.gf.Handler;
 import com.gf.Interceptor;
-import com.gf.InvocationControll;
 import com.gf.MappingObject;
 import com.gf.annotation.Inject;
 import com.gf.core.util.ReflectionUtil;
 import com.gf.extra.invocation.TraceTree;
 import com.gf.key.core.TraceHandlers;
+import com.gf.service.ConfigService;
+import com.gf.service.InvocationService;
 
 @SuppressWarnings("rawtypes")
-public class InvocationContext implements InvocationControll {
+public class InvocationContext implements InvocationService {
 	
 	InvocationBlock owner;
 	InvocationContext parent;

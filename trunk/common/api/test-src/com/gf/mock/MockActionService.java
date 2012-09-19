@@ -3,7 +3,7 @@ package com.gf.mock;
 import java.io.Serializable;
 
 import com.gf.Action;
-import com.gf.ActionService;
+import com.gf.service.ActionService;
 
 public class MockActionService implements ActionService {
 

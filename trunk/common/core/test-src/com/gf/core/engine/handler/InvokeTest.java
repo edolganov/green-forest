@@ -6,7 +6,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.gf.core.Engine;
-import com.gf.core.engine.EngineTest;
+import com.gf.core.engine.AbstractEngineTest;
 import com.gf.core.engine.filter.model.BeginFilter;
 import com.gf.core.engine.handler.model.RecursionAction;
 import com.gf.core.engine.handler.model.RecursionHandler;
@@ -31,7 +31,7 @@ import com.gf.util.test.concurrent.ThreadRacer;
 import com.gf.util.test.concurrent.ThreadsRace;
 
 @SuppressWarnings("unchecked")
-public class InvokeTest extends EngineTest {
+public class InvokeTest extends AbstractEngineTest {
 	
 	
 	@Ignore

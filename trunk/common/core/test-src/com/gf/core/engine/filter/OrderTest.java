@@ -3,7 +3,7 @@ package com.gf.core.engine.filter;
 import org.junit.Test;
 
 import com.gf.core.Engine;
-import com.gf.core.engine.EngineTest;
+import com.gf.core.engine.AbstractEngineTest;
 import com.gf.core.engine.filter.model.BeginFilter;
 import com.gf.core.engine.filter.model.EndFilter;
 import com.gf.core.engine.filter.model.FirstFilter;
@@ -12,7 +12,7 @@ import com.gf.core.engine.filter.model.UnorderedFilter;
 import com.gf.test.action.StringAction;
 import com.gf.test.handler.StringEcho;
 
-public class OrderTest extends EngineTest {
+public class OrderTest extends AbstractEngineTest {
 
 	
 	@Test

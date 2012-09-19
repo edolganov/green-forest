@@ -3,13 +3,13 @@ package com.gf.core.engine.filter;
 import org.junit.Test;
 
 import com.gf.core.Engine;
-import com.gf.core.engine.EngineTest;
+import com.gf.core.engine.AbstractEngineTest;
 import com.gf.core.engine.filter.model.FirstFilter;
 import com.gf.test.action.StringAction;
 import com.gf.test.handler.StringEcho;
 import com.gf.test.interceptor.StringReverse;
 
-public class InvokeTest extends EngineTest {
+public class InvokeTest extends AbstractEngineTest {
 	
 	
 	@Test
