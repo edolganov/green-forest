@@ -9,18 +9,17 @@ public class ContextRepository {
 	private CopyOnWriteArrayList<Object> list = new CopyOnWriteArrayList<Object>();
 	
 	public synchronized void add(Object ob) {
-		if( ! exists(ob)){
-			list.add(0, ob);
-		}
+		removeExists(ob);
+		list.add(0, ob);
 	}
 	
-	private boolean exists(Object ob) {
-		for(Object candidat : list){
-			if(candidat == ob){
-				return true; 
+	private void removeExists(Object ob) {
+		for (int i = list.size()-1; i>-1; i--) {
+			Object candidat = list.get(i);
+			if(candidat.equals(ob)){
+				list.remove(i);
 			}
 		}
-		return false;
 	}
 
 	public Collection<Object> getAll() {

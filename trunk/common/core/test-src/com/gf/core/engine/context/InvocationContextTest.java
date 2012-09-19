@@ -6,6 +6,7 @@ import com.gf.core.Engine;
 import com.gf.core.engine.AbstractEngineTest;
 import com.gf.core.engine.context.model.FirstInvocationContextSetterFilter;
 import com.gf.core.engine.context.model.FirstInvocationServiceExpectedFilter;
+import com.gf.core.engine.context.model.InvocationContextDuplicatesChecker;
 import com.gf.core.engine.context.model.SecondInvocationContextSetterFilter;
 import com.gf.core.engine.context.model.SecondInvocationServiceExpectedFilter;
 import com.gf.test.action.EmptyAction;
@@ -21,7 +22,12 @@ public class InvocationContextTest extends AbstractEngineTest {
 	
 	@Test
 	public void test_for_duplicates(){
-		fail("todo");
+		
+		Engine engine = new Engine();
+		engine.putFilter(InvocationContextDuplicatesChecker.class);
+		engine.putHandler(EmptyHandler.class);
+		engine.invoke(new EmptyAction());
+		
 	}
 	
 	@Test
