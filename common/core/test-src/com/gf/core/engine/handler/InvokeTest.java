@@ -24,7 +24,7 @@ import com.gf.extra.invocation.TraceTree;
 import com.gf.key.core.InvokeDepthMaxSize;
 import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.StringAction;
-import com.gf.test.handler.HandlerWithoutMapping;
+import com.gf.test.handler.WithoutMappingHandler;
 import com.gf.test.handler.StringEcho;
 import com.gf.util.Util;
 import com.gf.util.test.concurrent.ThreadRacer;
@@ -195,7 +195,7 @@ public class InvokeTest extends EngineTest {
 	public void test_no_mapping(){
 		
 		Engine engine = new Engine();
-		engine.putHandler(HandlerWithoutMapping.class);
+		engine.putHandler(WithoutMappingHandler.class);
 	}
 	
 

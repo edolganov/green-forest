@@ -11,7 +11,7 @@ import com.gf.core.repo.TypesRepo;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
 import com.gf.test.action.StringAction;
-import com.gf.test.handler.HandlerWithoutMapping;
+import com.gf.test.handler.WithoutMappingHandler;
 import com.gf.test.handler.StringEcho;
 import com.gf.util.Util;
 
@@ -154,7 +154,7 @@ public abstract class AbstractTypesRepoTest extends Assert {
 	public void test_put_without_mapping() throws Exception{
 		
 		TypesRepo repo = getRepo();
-		repo.put(HandlerWithoutMapping.class);
+		repo.put(WithoutMappingHandler.class);
 		
 	}
 

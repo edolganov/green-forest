@@ -2,14 +2,13 @@ package com.gf.core.context;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.CopyOnWriteArraySet;
-
+import java.util.concurrent.CopyOnWriteArrayList;
 import com.gf.ConfigService;
 import com.gf.ContextService;
 
 public class ContextServiceImpl implements ContextService, StaticContext {
 	
-	private CopyOnWriteArraySet<Object> set = new CopyOnWriteArraySet<Object>();
+	private CopyOnWriteArrayList<Object> list = new CopyOnWriteArrayList<Object>();
 	
 	ConfigService config;
 
@@ -19,12 +18,12 @@ public class ContextServiceImpl implements ContextService, StaticContext {
 
 	@Override
 	public void addToContext(Object ob) {
-		set.add(ob);
+		list.add(ob);
 	}
 
 	@Override
 	public Collection<Object> getStaticContextObjects() {
-		ArrayList<Object> out = new ArrayList<Object>(set);
+		ArrayList<Object> out = new ArrayList<Object>(list);
 		return out;
 	}
 
