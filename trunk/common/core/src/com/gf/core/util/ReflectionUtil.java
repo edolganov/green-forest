@@ -6,28 +6,33 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.gf.exception.invoke.InjectException;
+import com.gf.exception.invoke.ObjectToInjectNotFoundException;
+
 public class ReflectionUtil {
 
 
-	public static void injectDataFromContext(Object ob, Collection<Object> collection, Class<? extends Annotation> annotationClass) throws Exception {
+	public static void injectDataFromContext(Object ob, Collection<Object> collection, 
+			Class<? extends Annotation> annotationClass) throws InjectException {
 		
 		injectDataFromContext(ob, collection, annotationClass, true);
 	}
 	
-	public static void injectDataFromContext(Object ob, Collection<Object> collection, Class<? extends Annotation> annotationClass, boolean exceptionIfNotFound) throws Exception {
+	public static void injectDataFromContext(Object ob, Collection<Object> collection, 
+			Class<? extends Annotation> annotationClass, boolean exceptionIfNotFound) throws InjectException {
 		
 		List<Field> requiredField = getRequiredFields(ob, annotationClass);
 		for (Field field : requiredField) {
 			Object objectToInject = findObjectToInject(field, collection);
 			if(objectToInject == null){
 				if(exceptionIfNotFound){
-					throw new IllegalStateException("can't find object to inject by "+field+" for "+ob);
+					throw new ObjectToInjectNotFoundException(ob, field);
 				}
 			} else {
 				try {
 					inject(field, ob, objectToInject);
 				}catch (Exception e) {
-					throw new IllegalStateException("can't set value for "+field);
+					throw new InjectException("can't set value for ["+field+"] of "+ob, e);
 				}
 
 			}

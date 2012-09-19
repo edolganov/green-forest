@@ -2,9 +2,23 @@ package com.gf.exception.invoke;
 
 public class InjectException extends InvocationException {
 
-	public InjectException(Object ob, Throwable cause) {
-		super("can't inject data to object "+ob, cause);
+	public InjectException() {
+		super();
 	}
+
+	public InjectException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public InjectException(String message) {
+		super(message);
+	}
+
+	public InjectException(Throwable cause) {
+		super(cause);
+	}
+	
+	
 	
 	
 
