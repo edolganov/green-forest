@@ -23,7 +23,7 @@ public class InvocationContextDuplicatesChecker extends Filter {
 		
 		ContextRepository context = ReflectionsUtil.getField(invocationContext, "invocationContext");
 		Collection<Object> all = context.getAll();
-		Assert.assertEquals(1, all.size());
+		Assert.assertEquals(2, all.size());
 		
 	}
 
