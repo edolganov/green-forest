@@ -1,5 +1,5 @@
 package com.gf.core.engine.model;
 
-public interface RuntimeService {
+public interface OtherService {
 
 }

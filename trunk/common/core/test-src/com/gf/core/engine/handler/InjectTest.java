@@ -4,8 +4,12 @@ import org.junit.Test;
 
 import com.gf.core.Engine;
 import com.gf.core.engine.AbstractEngineTest;
+import com.gf.core.engine.filter.model.InvocationContextSetterFilter;
+import com.gf.core.engine.handler.model.InjectAllHandler;
 import com.gf.core.engine.handler.model.InjectUnknownHandler;
-import com.gf.core.engine.handler.model.StaticInjectHandler;
+import com.gf.core.engine.handler.model.InjectStaticHandler;
+import com.gf.core.engine.handler.model.SubInvokeAction;
+import com.gf.core.engine.handler.model.SubInvokeForInjectHandler;
 import com.gf.core.engine.model.StaticServiceImpl;
 import com.gf.core.engine.model.StaticServiceImpl2;
 import com.gf.exception.invoke.ObjectToInjectNotFoundException;
@@ -16,13 +20,26 @@ public class InjectTest extends AbstractEngineTest {
 	
 	@Test
 	public void test_inject_invocation_context_in_sub_invoke(){
-		fail("todo");
+		
+		Engine engine = new Engine();
+		engine.addToContext(new StaticServiceImpl());
+		engine.putFilter(InvocationContextSetterFilter.class);
+		engine.putHandler(SubInvokeForInjectHandler.class);
+		engine.putHandler(InjectAllHandler.class);
+		
+		engine.invoke(new SubInvokeAction());
 	}
 	
 	
 	@Test
 	public void test_inject_invocation_context_from_filter(){
-		fail("todo");
+		
+		Engine engine = new Engine();
+		engine.addToContext(new StaticServiceImpl());
+		engine.putFilter(InvocationContextSetterFilter.class);
+		engine.putHandler(InjectAllHandler.class);
+		
+		engine.invoke(new EmptyAction());
 	}
 	
 	
@@ -32,7 +49,7 @@ public class InjectTest extends AbstractEngineTest {
 		Engine engine = new Engine();
 		engine.addToContext(new StaticServiceImpl());
 		engine.addToContext(new StaticServiceImpl2());
-		engine.putHandler(StaticInjectHandler.class);
+		engine.putHandler(InjectStaticHandler.class);
 		
 		engine.invoke(new EmptyAction());
 		
@@ -53,7 +70,7 @@ public class InjectTest extends AbstractEngineTest {
 		
 		Engine engine = new Engine();
 		engine.addToContext(new StaticServiceImpl());
-		engine.putHandler(StaticInjectHandler.class);
+		engine.putHandler(InjectStaticHandler.class);
 		
 		engine.invoke(new EmptyAction());
 		

@@ -4,8 +4,10 @@ import org.junit.Test;
 
 import com.gf.core.Engine;
 import com.gf.core.engine.AbstractEngineTest;
+import com.gf.core.engine.filter.model.InvocationContextSetterFilter;
+import com.gf.core.engine.interceptor.model.InjectAllInterceptor;
 import com.gf.core.engine.interceptor.model.InjectUnknownInterceptor;
-import com.gf.core.engine.interceptor.model.StaticInjectInterceptor;
+import com.gf.core.engine.interceptor.model.InjectStaticInterceptor;
 import com.gf.core.engine.model.StaticServiceImpl;
 import com.gf.core.engine.model.StaticServiceImpl2;
 import com.gf.exception.invoke.ObjectToInjectNotFoundException;
@@ -17,8 +19,14 @@ public class InjectTest extends AbstractEngineTest {
 	
 	@Test
 	public void test_inject_invocation_context_from_filter(){
-		fail("todo");
-	}
+		
+		Engine engine = new Engine();
+		engine.addToContext(new StaticServiceImpl());
+		engine.putFilter(InvocationContextSetterFilter.class);
+		engine.putInterceptor(InjectAllInterceptor.class);
+		engine.putHandler(EmptyHandler.class);
+		
+		engine.invoke(new EmptyAction());	}
 	
 	
 	@Test
@@ -27,7 +35,7 @@ public class InjectTest extends AbstractEngineTest {
 		Engine engine = new Engine();
 		engine.addToContext(new StaticServiceImpl());
 		engine.addToContext(new StaticServiceImpl2());
-		engine.putInterceptor(StaticInjectInterceptor.class);
+		engine.putInterceptor(InjectStaticInterceptor.class);
 		engine.putHandler(EmptyHandler.class);
 		
 		engine.invoke(new EmptyAction());
@@ -50,7 +58,7 @@ public class InjectTest extends AbstractEngineTest {
 		
 		Engine engine = new Engine();
 		engine.addToContext(new StaticServiceImpl());
-		engine.putInterceptor(StaticInjectInterceptor.class);
+		engine.putInterceptor(InjectStaticInterceptor.class);
 		engine.putHandler(EmptyHandler.class);
 		
 		engine.invoke(new EmptyAction());

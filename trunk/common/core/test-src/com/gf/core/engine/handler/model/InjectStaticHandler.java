@@ -9,7 +9,7 @@ import com.gf.core.engine.model.StaticService;
 import com.gf.test.action.EmptyAction;
 
 @Mapping(EmptyAction.class)
-public class StaticInjectHandler extends Handler<EmptyAction> {
+public class InjectStaticHandler extends Handler<EmptyAction> {
 	
 	@Inject
 	private StaticService staticService;
