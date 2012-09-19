@@ -8,7 +8,7 @@ import com.gf.annotation.Inject;
 import com.gf.core.engine.model.StaticService;
 import com.gf.service.FilterChain;
 
-public class StaticInjectFilter extends Filter {
+public class InjectStaticFilter extends Filter {
 	
 	@Inject
 	private StaticService staticService;

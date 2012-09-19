@@ -5,7 +5,7 @@ import org.junit.Test;
 import com.gf.core.Engine;
 import com.gf.core.engine.AbstractEngineTest;
 import com.gf.core.engine.filter.model.InjectUnknownFilter;
-import com.gf.core.engine.filter.model.StaticInjectFilter;
+import com.gf.core.engine.filter.model.InjectStaticFilter;
 import com.gf.core.engine.model.StaticServiceImpl;
 import com.gf.core.engine.model.StaticServiceImpl2;
 import com.gf.exception.invoke.ObjectToInjectNotFoundException;
@@ -28,7 +28,7 @@ public class InjectTest extends AbstractEngineTest {
 		Engine engine = new Engine();
 		engine.addToContext(new StaticServiceImpl());
 		engine.addToContext(new StaticServiceImpl2());
-		engine.putFilter(StaticInjectFilter.class);
+		engine.putFilter(InjectStaticFilter.class);
 		engine.putHandler(EmptyHandler.class);
 		
 		engine.invoke(new EmptyAction());
@@ -51,7 +51,7 @@ public class InjectTest extends AbstractEngineTest {
 		
 		Engine engine = new Engine();
 		engine.addToContext(new StaticServiceImpl());
-		engine.putFilter(StaticInjectFilter.class);
+		engine.putFilter(InjectStaticFilter.class);
 		engine.putHandler(EmptyHandler.class);
 		
 		engine.invoke(new EmptyAction());

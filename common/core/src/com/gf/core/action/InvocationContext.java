@@ -1,6 +1,7 @@
 package com.gf.core.action;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	InvocationContext parent;
 	boolean isTraceHandlers = false;
 	int depth;
-	ContextRepository invocationContext = new ContextRepository();
+	ContextRepository invocationContext;
 	
 	
 	public ActionServiceImpl actions; 
@@ -54,7 +55,15 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	
 	
 	private void injectAllContexts(Object obj) {
-		injectStaticContext(obj);
+		
+		Collection<Object> invocationContextObjects = invocationContext.getAll();
+		
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.addAll(staticContextObjects);
+		list.addAll(invocationContextObjects);
+
+		inject(obj, list);
+		
 	}
 	
 	private void injectStaticContext(Object obj) {

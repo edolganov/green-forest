@@ -6,6 +6,7 @@ import java.util.List;
 import com.gf.Action;
 import com.gf.core.action.filter.FiltersBlock;
 import com.gf.core.action.interceptor.InterceptorsBlock;
+import com.gf.core.context.ContextRepository;
 import com.gf.exception.invoke.InvokeDepthMaxSizeException;
 import com.gf.key.core.InvokeDepthMaxSize;
 import com.gf.key.core.TraceHandlers;
@@ -75,6 +76,7 @@ public class InvocationBlock {
 		
 		//prepare context
 		c.staticContextObjects = c.actions.staticContext.getStaticContextObjects();
+		c.invocationContext = parent == null? new ContextRepository() : parent.invocationContext;
 		
 		//prepare handlers
 		if(initFilters){
