@@ -3,8 +3,9 @@ package com.gf.core.context;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.CopyOnWriteArrayList;
-import com.gf.ConfigService;
-import com.gf.ContextService;
+
+import com.gf.service.ConfigService;
+import com.gf.service.ContextService;
 
 public class ContextServiceImpl implements ContextService, StaticContext {
 	

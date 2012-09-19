@@ -1,4 +1,4 @@
-package com.gf;
+package com.gf.service;
 
 import com.gf.config.ConfigKey;
 

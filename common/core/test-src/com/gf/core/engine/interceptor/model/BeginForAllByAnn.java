@@ -2,9 +2,9 @@ package com.gf.core.engine.interceptor.model;
 
 import com.gf.Action;
 import com.gf.Interceptor;
-import com.gf.InterceptorChain;
 import com.gf.annotation.Mapping;
 import com.gf.annotation.Order;
+import com.gf.service.InterceptorChain;
 
 @Order(Integer.MIN_VALUE)
 @Mapping(Action.class)

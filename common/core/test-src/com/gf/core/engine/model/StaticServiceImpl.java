@@ -1,4 +1,4 @@
-package com.gf.core.engine.handler.model;
+package com.gf.core.engine.model;
 
 public class StaticServiceImpl implements StaticService {
 

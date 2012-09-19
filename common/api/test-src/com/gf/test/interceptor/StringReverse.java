@@ -1,8 +1,8 @@
 package com.gf.test.interceptor;
 
 import com.gf.Interceptor;
-import com.gf.InterceptorChain;
 import com.gf.annotation.Mapping;
+import com.gf.service.InterceptorChain;
 import com.gf.test.action.StringAction;
 import com.gf.util.Util;
 

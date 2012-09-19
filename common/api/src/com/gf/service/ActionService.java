@@ -1,7 +1,8 @@
-package com.gf;
+package com.gf.service;
 
 import java.io.Serializable;
 
+import com.gf.Action;
 import com.gf.exception.BaseException;
 
 

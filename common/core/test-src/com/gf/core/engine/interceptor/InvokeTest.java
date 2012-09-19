@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gf.core.Engine;
-import com.gf.core.engine.EngineTest;
+import com.gf.core.engine.AbstractEngineTest;
 import com.gf.core.engine.filter.model.BeginFilter;
 import com.gf.core.engine.handler.model.RecursionAction;
 import com.gf.core.engine.handler.model.RecursionHandler;
@@ -29,7 +29,7 @@ import com.gf.test.interceptor.StringReverse;
 import com.gf.util.Util;
 
 @SuppressWarnings("unchecked")
-public class InvokeTest extends EngineTest {
+public class InvokeTest extends AbstractEngineTest {
 	
 	
 	@Test(expected=InvokeDepthMaxSizeException.class)

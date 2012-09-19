@@ -3,10 +3,10 @@ package com.gf.core.engine.interceptor.model;
 import junit.framework.Assert;
 
 import com.gf.Interceptor;
-import com.gf.InterceptorChain;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
-import com.gf.core.engine.handler.model.StaticService;
+import com.gf.core.engine.model.StaticService;
+import com.gf.service.InterceptorChain;
 import com.gf.test.action.EmptyAction;
 
 @Mapping(EmptyAction.class)

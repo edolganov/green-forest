@@ -10,7 +10,7 @@ import com.gf.extra.invocation.TraceItem;
 import com.gf.extra.invocation.TraceTree;
 import com.gf.key.core.TraceHandlers;
 
-public class EngineTest extends Assert {
+public abstract class AbstractEngineTest extends Assert {
 	
 	public static void enableTracing(Engine engine){
 		engine.addValue(TraceHandlers.class, true);

@@ -7,8 +7,6 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import com.gf.Action;
-import com.gf.ConfigService;
-import com.gf.DeployService;
 import com.gf.Filter;
 import com.gf.Handler;
 import com.gf.Interceptor;
@@ -18,6 +16,8 @@ import com.gf.exception.ExternalException;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.NotOneHandlerException;
 import com.gf.key.core.actionservice.TypesRepoClass;
+import com.gf.service.ConfigService;
+import com.gf.service.DeployService;
 import com.gf.util.Util;
 
 public class DeployServiceImpl implements DeployService, ResourseService {

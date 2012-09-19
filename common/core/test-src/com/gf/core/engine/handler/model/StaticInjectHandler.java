@@ -5,6 +5,7 @@ import junit.framework.Assert;
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
+import com.gf.core.engine.model.StaticService;
 import com.gf.test.action.EmptyAction;
 
 @Mapping(EmptyAction.class)

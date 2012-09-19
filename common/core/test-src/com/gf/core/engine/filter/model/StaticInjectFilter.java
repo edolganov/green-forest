@@ -4,9 +4,9 @@ import junit.framework.Assert;
 
 import com.gf.Action;
 import com.gf.Filter;
-import com.gf.FilterChain;
 import com.gf.annotation.Inject;
-import com.gf.core.engine.handler.model.StaticService;
+import com.gf.core.engine.model.StaticService;
+import com.gf.service.FilterChain;
 
 public class StaticInjectFilter extends Filter {
 	
