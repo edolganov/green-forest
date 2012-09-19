@@ -5,7 +5,7 @@ import junit.framework.Assert;
 import com.gf.Interceptor;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
-import com.gf.core.engine.model.OtherService;
+import com.gf.core.engine.model.InvocationService;
 import com.gf.core.engine.model.StaticService;
 import com.gf.service.InterceptorChain;
 import com.gf.test.action.EmptyAction;
@@ -17,7 +17,7 @@ public class InjectAllInterceptor extends Interceptor<EmptyAction> {
 	private StaticService staticService;
 	
 	@Inject
-	private OtherService otherService;
+	private InvocationService otherService;
 
 	@Override
 	public void invoke(EmptyAction action, InterceptorChain chain)
