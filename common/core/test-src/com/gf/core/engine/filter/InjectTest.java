@@ -4,8 +4,10 @@ import org.junit.Test;
 
 import com.gf.core.Engine;
 import com.gf.core.engine.AbstractEngineTest;
+import com.gf.core.engine.filter.model.InjectAllFilter;
 import com.gf.core.engine.filter.model.InjectUnknownFilter;
 import com.gf.core.engine.filter.model.InjectStaticFilter;
+import com.gf.core.engine.filter.model.InvocationContextSetterFilter;
 import com.gf.core.engine.model.StaticServiceImpl;
 import com.gf.core.engine.model.StaticServiceImpl2;
 import com.gf.exception.invoke.ObjectToInjectNotFoundException;
@@ -18,7 +20,14 @@ public class InjectTest extends AbstractEngineTest {
 	
 	@Test
 	public void test_inject_invocation_context_after_setter_filter(){
-		fail("todo");
+		
+		Engine engine = new Engine();
+		engine.addToContext(new StaticServiceImpl());
+		engine.putFilter(InvocationContextSetterFilter.class);
+		engine.putFilter(InjectAllFilter.class);
+		engine.putHandler(EmptyHandler.class);
+		
+		engine.invoke(new EmptyAction());		
 	}
 	
 	

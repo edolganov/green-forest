@@ -47,7 +47,7 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 
 	public void initFilter(Filter obj){
 		
-		injectStaticContext(obj);
+		injectAllContexts(obj);
 		addToTrace(obj);
 		obj.setInvocationContext(this);
 		
@@ -64,10 +64,6 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 
 		inject(obj, list);
 		
-	}
-	
-	private void injectStaticContext(Object obj) {
-		inject(obj, staticContextObjects);
 	}
 	
 	

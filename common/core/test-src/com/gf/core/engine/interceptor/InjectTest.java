@@ -26,7 +26,8 @@ public class InjectTest extends AbstractEngineTest {
 		engine.putInterceptor(InjectAllInterceptor.class);
 		engine.putHandler(EmptyHandler.class);
 		
-		engine.invoke(new EmptyAction());	}
+		engine.invoke(new EmptyAction());	
+	}
 	
 	
 	@Test
