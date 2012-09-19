@@ -9,7 +9,7 @@ public class ContextRepository {
 	private CopyOnWriteArrayList<Object> list = new CopyOnWriteArrayList<Object>();
 	
 	public void add(Object ob) {
-		list.add(ob);
+		list.add(0, ob);
 	}
 	
 	public Collection<Object> getAll() {
