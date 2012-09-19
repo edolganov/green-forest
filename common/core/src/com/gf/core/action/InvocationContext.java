@@ -13,7 +13,6 @@ import com.gf.InvocationControll;
 import com.gf.MappingObject;
 import com.gf.annotation.Inject;
 import com.gf.core.util.ReflectionUtil;
-import com.gf.exception.invoke.InjectException;
 import com.gf.extra.invocation.TraceTree;
 import com.gf.key.core.TraceHandlers;
 
@@ -67,11 +66,7 @@ public class InvocationContext implements InvocationControll {
 
 	
 	private void inject(Object obj, Collection<Object> collection){
-		try {
-			ReflectionUtil.injectDataFromContext(obj, collection, Inject.class);
-		}catch (Exception e) {
-			throw new InjectException(obj, e);
-		}
+		ReflectionUtil.injectDataFromContext(obj, collection, Inject.class);
 	}
 	
 

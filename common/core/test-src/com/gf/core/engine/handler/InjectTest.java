@@ -4,11 +4,13 @@ import org.junit.Test;
 
 import com.gf.core.Engine;
 import com.gf.core.engine.EngineTest;
+import com.gf.core.engine.handler.model.InjectUnknownHandler;
 import com.gf.core.engine.handler.model.StaticInjectHandler;
 import com.gf.core.engine.handler.model.StaticServiceImpl;
+import com.gf.exception.invoke.ObjectToInjectNotFoundException;
 import com.gf.test.action.EmptyAction;
 
-@SuppressWarnings("unchecked")
+
 public class InjectTest extends EngineTest {
 	
 	@Test
@@ -22,9 +24,14 @@ public class InjectTest extends EngineTest {
 		fail("todo");
 	}
 	
-	@Test
+	@Test(expected=ObjectToInjectNotFoundException.class)
 	public void test_inject_unknown(){
-		fail("todo");
+		
+		Engine engine = new Engine();
+		engine.putHandler(InjectUnknownHandler.class);
+		
+		engine.invoke(new EmptyAction());
+		
 	}
 	
 	@Test
