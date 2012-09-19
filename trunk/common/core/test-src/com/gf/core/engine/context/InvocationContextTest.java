@@ -13,6 +13,12 @@ import com.gf.test.handler.EmptyHandler;
 
 public class InvocationContextTest extends AbstractEngineTest {
 	
+	
+	@Test
+	public void test_rewrite_static_context(){
+		fail("todo");
+	}
+	
 	@Test
 	public void test_for_duplicates(){
 		fail("todo");

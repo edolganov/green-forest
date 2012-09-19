@@ -8,10 +8,21 @@ public class ContextRepository {
 	
 	private CopyOnWriteArrayList<Object> list = new CopyOnWriteArrayList<Object>();
 	
-	public void add(Object ob) {
-		list.add(0, ob);
+	public synchronized void add(Object ob) {
+		if( ! exists(ob)){
+			list.add(0, ob);
+		}
 	}
 	
+	private boolean exists(Object ob) {
+		for(Object candidat : list){
+			if(candidat == ob){
+				return true; 
+			}
+		}
+		return false;
+	}
+
 	public Collection<Object> getAll() {
 		ArrayList<Object> out = new ArrayList<Object>(list);
 		return out;
