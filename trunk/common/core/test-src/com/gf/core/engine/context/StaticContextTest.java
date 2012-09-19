@@ -28,7 +28,7 @@ public class StaticContextTest extends AbstractEngineTest {
 		
 		ContextServiceImpl context = ReflectionsUtil.getField(engine, "context");
 		Collection<Object> all = context.getStaticContextObjects();
-		assertEquals(1, all.size());
+		assertEquals(2, all.size());
 		
 	}
 	
