@@ -1,4 +1,4 @@
-package com.gf.logging;
+package com.gf.components.log.apache;
 
 import junit.framework.Assert;
 

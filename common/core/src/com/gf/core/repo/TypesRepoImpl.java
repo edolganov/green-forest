@@ -9,13 +9,12 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.gf.annotation.Mapping;
 import com.gf.exception.deploy.DeployException;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
+import com.gf.log.Log;
+import com.gf.log.LogFactory;
 import com.gf.util.Util;
 
 public class TypesRepoImpl implements TypesRepo {

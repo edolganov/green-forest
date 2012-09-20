@@ -2,9 +2,8 @@ package com.gf;
 
 import java.io.Serializable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import com.gf.log.Log;
+import com.gf.log.LogFactory;
 import com.gf.service.InvocationService;
 
 public abstract class MappingObject {
