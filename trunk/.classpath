@@ -8,9 +8,9 @@
 	<classpathentry kind="src" path="common/core/test-src"/>
 	<classpathentry kind="src" path="components/logging-apache-commons/src"/>
 	<classpathentry kind="src" path="components/logging-apache-commons/test-src"/>
-	<classpathentry kind="src" path="examples/petstore-standalone-war/src"/>
-	<classpathentry kind="src" path="examples/petstore-standalone-war/test-src"/>
-	<classpathentry kind="src" path="examples/petstore-standalone-war/web"/>
+	<classpathentry kind="src" path="examples/servlet-and-jdbc/src"/>
+	<classpathentry kind="src" path="examples/servlet-and-jdbc/test-src"/>
+	<classpathentry kind="src" path="examples/servlet-and-jdbc/web"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="thirdparty/junit-4.8.1.jar" sourcepath="thirdparty-sources/junit-4.8.1-sources.jar"/>
 	<classpathentry kind="lib" path="thirdparty/commons-logging-1.1.1.jar" sourcepath="thirdparty-sources/commons-logging-1.1.1-sources.jar"/>
