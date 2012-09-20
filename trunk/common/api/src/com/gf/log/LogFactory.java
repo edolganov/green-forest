@@ -1,5 +1,10 @@
 package com.gf.log;
 
+import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import com.gf.exception.ExternalException;
 
 public class LogFactory {
@@ -8,6 +13,11 @@ public class LogFactory {
 	private static final String APACHE_LOG_PROVIDER = "com.gf.components.log.apache.ApacheLogProvider";
 	
 	private static final LogProvider provider = findProvider();
+	
+	private static HashMap<Class<?>, Log> cache = new HashMap<Class<?>, Log>();
+	private static ReadWriteLock rw = new ReentrantReadWriteLock();
+	private static Lock readLock = rw.readLock();
+	private static Lock writeLock = rw.writeLock();
 	
 	private static LogProvider findProvider() {
 		
@@ -48,7 +58,32 @@ public class LogFactory {
 	
 
 	public static final Log getLog(Class<?> clazz) {
-		return provider.getLog(clazz);
+		
+		Log log = getFromCache(clazz);
+		if(log == null){
+			log = provider.getLog(clazz);
+			putToCache(clazz, log);
+		}
+		
+		return log;
+	}
+
+	private static void putToCache(Class<?> clazz, Log log) {
+		writeLock.lock();
+		try {
+			cache.put(clazz, log);
+		} finally {
+			writeLock.unlock();
+		}
+	}
+
+	private static Log getFromCache(Class<?> clazz) {
+		readLock.lock();
+		try {
+			return cache.get(clazz);
+		}finally {
+			readLock.unlock();
+		}
 	}
 
 
