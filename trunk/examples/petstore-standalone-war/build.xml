@@ -1,0 +1,105 @@
+<project name="Module build" default="deploy" basedir=".">
+
+	<property file="build.properties"/>
+	<property name="jslint.build.dir" value="jslint"/>
+
+    <target name="init" description="Build initialization">
+        <path id="libs">
+            <fileset dir="${module.third-party.dir}" includes="${module.third-party.lib}"/>
+			<fileset dir="${project.path.util}/build" includes="*.jar"/>
+			<fileset dir="${project.path.api}/build" includes="*.jar"/>
+			<fileset dir="${project.path.core}/build" includes="*.jar"/>
+        </path>
+    </target>
+
+
+    <target name="clean" depends="init">
+        <delete dir="${build.dir}"/>
+        <delete dir="${module.web.dir}/WEB-INF/classes"/>
+        <delete dir="${module.web.dir}/WEB-INF/lib"/>
+    </target>
+	
+	<target name="create-war-dir" depends="clean">
+		
+		<copy todir="${build.dir}/war">
+			<fileset dir="${module.web.dir}"/>
+		</copy>
+		
+    </target>
+	
+	<target name="copy-libs-to-war-dir" depends="create-war-dir">
+		
+		<copy todir="${build.dir}/war/WEB-INF/lib">
+		
+			<fileset file="${module.third-party.dir}/commons-logging-1.1.1.jar"/>
+			
+			<fileset dir="${project.path.util}/build" includes="*.jar"/>
+			<fileset dir="${project.path.api}/build" includes="*.jar"/>
+			<fileset dir="${project.path.core}/build" includes="*.jar"/>
+        </copy>
+		
+    </target>
+
+
+    <target name="deploy" depends="copy-libs-to-war-dir">
+        
+		<mkdir dir="${module.build.dir}"/>
+		
+        <javac srcdir="${module.src.dir}"
+               destdir="${module.build.dir}"
+               debug="${compiler.debug}"
+               optimize="${compiler.optimize}"
+               deprecation="${compiler.deprecation}"
+               encoding="${compiler.encoding}">
+            <classpath refid="libs"/>
+        </javac>
+
+        <copy todir="${module.build.dir}">
+            <fileset dir="${module.src.dir}">
+                <include name="**/*"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+
+		<copy todir="${build.dir}/war">
+			<fileset dir="${module.web.dir}"/>
+		</copy>
+        <mkdir dir="${build.dir}/war/WEB-INF/classes"/>
+        <copy todir="${build.dir}/war/WEB-INF/classes">
+            <fileset dir="${module.build.dir}"/>
+        </copy>
+
+        <jar jarfile="${module.dist.dir}/${module.name}">
+            <fileset dir="${build.dir}/war"/>
+        </jar>
+		
+		<delete dir="${build.dir}/war"/>
+    </target>
+
+    <target name="all" depends="deploy"/>
+	
+	
+	<!--
+	<taskdef name="jslint"
+	   classname="com.googlecode.jslint4java.ant.JSLintTask"
+	   classpath="${module.third-party.dir}/compile/jslint4java-1.4.4.jar" />
+	-->
+	<!--
+	<target name="lint" depends="init">
+        <delete dir="${jslint.build.dir}"/>
+        <mkdir dir="${jslint.build.dir}"/>
+        <jslint haltOnFailure="true" options="laxbreak, forin, indent, newcap, nomen">
+            <predef>jQuery,$$</predef>
+            <formatter type="plain" destfile="${jslint.build.dir}/jslint.out" />
+            <_!- <formatter type="junit" destfile="${reports.xml.dir}" /> -_>
+			
+			<fileset dir="${module.web.dir}/js">
+                <include name="**/*.js"/>
+				<exclude name="lib/*.js"/>
+				<exclude name="common/init.js"/>
+            </fileset>
+        </jslint>
+    </target>
+	-->
+</project>
+
