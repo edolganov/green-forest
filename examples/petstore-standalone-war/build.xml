@@ -31,7 +31,7 @@
 		
 		<copy todir="${build.dir}/war/WEB-INF/lib">
 		
-			<!--fileset file="${module.third-party.dir}/commons-logging-1.1.1.jar"/-->
+			<fileset file="${module.third-party.dir}/jstl-1.2.jar"/>
 			
 			<fileset dir="${project.path.util}/build" includes="*.jar"/>
 			<fileset dir="${project.path.api}/build" includes="*.jar"/>

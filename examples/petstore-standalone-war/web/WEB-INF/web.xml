@@ -4,22 +4,23 @@
            xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
            version="2.5">
-<!--
+
+
+
     <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>ru.dz.icar.test.TestServlet</servlet-class>
+        <servlet-name>List</servlet-name>
+        <servlet-class>example.petstore.standalone.view.ListServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <servlet-name>List</servlet-name>
+        <url-pattern>/list</url-pattern>
     </servlet-mapping>
--->
 
-<!--
-    <servlet>
-        <servlet-name>TestBoardMotionGeneratorServlet</servlet-name>
-        <servlet-class>ru.dz.icar.test.TestBoardMotionGeneratorServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
--->
+	
+	
+	<welcome-file-list>
+		<welcome-file>/list</welcome-file>
+	</welcome-file-list>
+	
+	
 </web-app>
