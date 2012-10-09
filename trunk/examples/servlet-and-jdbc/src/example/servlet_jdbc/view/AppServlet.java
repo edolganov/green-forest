@@ -1,4 +1,4 @@
-package example.petstore.standalone.view;
+package example.servlet_jdbc.view;
 
 import java.io.IOException;
 
