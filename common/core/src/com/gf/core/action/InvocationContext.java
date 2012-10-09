@@ -1,6 +1,5 @@
 package com.gf.core.action;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -81,8 +80,7 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	
 
 	@Override
-	public <I extends Serializable, O extends Serializable> O subInvoke(
-			Action<I, O> subAction) throws Exception {
+	public <I, O> O subInvoke(Action<I, O> subAction) throws Exception {
 		
 		if(isTraceHandlers){
 			TraceTree trace = TraceHandlers.getOrCreateTrace(action);

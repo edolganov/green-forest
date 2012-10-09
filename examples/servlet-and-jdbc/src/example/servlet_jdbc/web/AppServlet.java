@@ -1,6 +1,7 @@
 package example.servlet_jdbc.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import example.servlet_jdbc.app.App;
+import example.servlet_jdbc.app.doc.GetDocsPage;
+import example.servlet_jdbc.model.Doc;
 
 public class AppServlet extends HttpServlet {
 	
@@ -24,6 +27,8 @@ public class AppServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		List<Doc> docs = app.invoke(new GetDocsPage());
+		req.setAttribute("docs", docs);
 		
 		showView(req, resp);
 		

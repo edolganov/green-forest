@@ -1,12 +1,9 @@
 package com.gf;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Action<I extends Serializable, O extends Serializable> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public abstract class Action<I, O> {
 	
 	private I input;
 	private O output;

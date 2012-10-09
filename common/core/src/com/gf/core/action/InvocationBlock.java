@@ -1,6 +1,5 @@
 package com.gf.core.action;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.gf.Action;
@@ -39,9 +38,7 @@ public class InvocationBlock {
 	}
 	
 	
-	<I extends Serializable, O extends Serializable> O subInvoke(
-			InvocationContext parent,
-			Action<I, O> action) throws Exception {
+	<I, O> O subInvoke(InvocationContext parent, Action<I, O> action) throws Exception {
 		
 		InvocationContext c = createContext(action, parent, false);
 		
