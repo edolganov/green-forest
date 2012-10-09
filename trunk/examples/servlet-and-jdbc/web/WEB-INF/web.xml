@@ -8,18 +8,18 @@
 
 
     <servlet>
-        <servlet-name>List</servlet-name>
-        <servlet-class>example.petstore.standalone.view.ListServlet</servlet-class>
+        <servlet-name>App</servlet-name>
+        <servlet-class>example.petstore.standalone.view.AppServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>List</servlet-name>
-        <url-pattern>/list</url-pattern>
+        <servlet-name>App</servlet-name>
+        <url-pattern>/app</url-pattern>
     </servlet-mapping>
 
 	
 	
 	<welcome-file-list>
-		<welcome-file>list</welcome-file>
+		<welcome-file>app</welcome-file>
 	</welcome-file-list>
 	
 	
