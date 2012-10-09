@@ -1,7 +1,5 @@
 package com.gf.core.action;
 
-import java.io.Serializable;
-
 import com.gf.Action;
 import com.gf.core.context.StaticContext;
 import com.gf.core.deploy.ResourseService;
@@ -26,7 +24,7 @@ public class ActionServiceImpl implements ActionService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <I extends Serializable, O extends Serializable> O invoke(Action<I, O> action) {
+	public <I, O> O invoke(Action<I, O> action) {
 		
 		try {
 			

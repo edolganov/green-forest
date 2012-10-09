@@ -1,7 +1,5 @@
 package com.gf.core;
 
-import java.io.Serializable;
-
 import com.gf.Action;
 import com.gf.Filter;
 import com.gf.Handler;
@@ -42,8 +40,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	
 
 	@Override
-	public <I extends Serializable, O extends Serializable> O invoke(
-			Action<I, O> action) throws BaseException {
+	public <I, O> O invoke(Action<I, O> action) throws BaseException {
 		return (O)actions.invoke(action);
 	}
 
