@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ListServlet extends HttpServlet {
+public class AppServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		getServletContext().getRequestDispatcher("/WEB-INF/jsp/list.jsp").forward(req, resp);
+		getServletContext().getRequestDispatcher("/WEB-INF/jsp/app.jsp").forward(req, resp);
 		
 	}
 
