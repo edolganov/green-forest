@@ -6,10 +6,15 @@
            version="2.5">
 
 
+	<servlet>
+		<servlet-name>Init</servlet-name>
+        <servlet-class>example.servlet_jdbc.view.InitServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+	</servlet>
 
     <servlet>
         <servlet-name>App</servlet-name>
-        <servlet-class>example.petstore.standalone.view.AppServlet</servlet-class>
+        <servlet-class>example.servlet_jdbc.view.AppServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>App</servlet-name>
