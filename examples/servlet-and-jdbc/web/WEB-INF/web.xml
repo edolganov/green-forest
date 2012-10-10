@@ -7,7 +7,7 @@
 	
 	<servlet>
 		<servlet-name>Init</servlet-name>
-        <servlet-class>example.servlet_jdbc.web.InitServlet</servlet-class>
+        <servlet-class>servlet_jdbc.web.InitServlet</servlet-class>
         <init-param>
         	<param-name>123</param-name>
         	<param-value>123</param-value>
@@ -17,7 +17,7 @@
 
     <servlet>
         <servlet-name>App</servlet-name>
-        <servlet-class>example.servlet_jdbc.web.AppServlet</servlet-class>
+        <servlet-class>servlet_jdbc.web.AppServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>App</servlet-name>

@@ -1,4 +1,4 @@
-package example.servlet_jdbc.web;
+package servlet_jdbc.web;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import example.servlet_jdbc.app.App;
-import example.servlet_jdbc.app.doc.GetDocsPage;
-import example.servlet_jdbc.model.Doc;
+import servlet_jdbc.app.App;
+import servlet_jdbc.common.app.GetDocsPage;
+import servlet_jdbc.common.model.Doc;
+
 
 public class AppServlet extends HttpServlet {
 	
