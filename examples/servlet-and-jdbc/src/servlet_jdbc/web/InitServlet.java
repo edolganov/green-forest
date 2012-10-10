@@ -51,7 +51,7 @@ public class InitServlet extends HttpServlet {
 		Engine engine = new Engine();
 		
 		//init context
-		
+		engine.scanForAnnotations("servlet_jdbc.storage");
 		//init storage
 		engine.invoke(new InitStorage());
 		
