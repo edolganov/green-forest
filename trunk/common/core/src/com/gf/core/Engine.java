@@ -63,6 +63,11 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	public void putFilter(Class<? extends Filter> clazz) {
 		deploy.putFilter(clazz);
 	}
+	
+	@Override
+	public void scanForAnnotations(String packageName) {
+		deploy.scanForAnnotations(packageName);
+	}
 
 
 	@Override
@@ -87,6 +92,9 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	public void addToContext(Object object) {
 		context.addToContext(object);
 	}
+
+
+
 	
 
 }

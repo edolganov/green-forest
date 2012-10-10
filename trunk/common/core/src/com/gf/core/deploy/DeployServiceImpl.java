@@ -53,6 +53,12 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	public void putFilter(Class<? extends Filter> clazz) {
 		filterTypes.add(clazz);
 	}
+	
+	@Override
+	public void scanForAnnotations(String packageName) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 	@Override
@@ -131,6 +137,8 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		
 		return out;
 	}
+
+
 	
 
 }

@@ -41,9 +41,8 @@ public class InitServlet extends HttpServlet {
 		Storage storage = createStorage(config);
 		engine.addToContext(storage);
 		
-		//create app
-		App app = new App(engine);	
-		return app;
+		//return application
+		return new App(engine);
 	}
 	
 	private Storage createStorage(ServletConfig config) {
@@ -51,13 +50,13 @@ public class InitServlet extends HttpServlet {
 		//create storage's engine
 		Engine engine = new Engine();
 		
-		//create storage
-		Storage storage = new Storage(engine);
+		//init context
 		
 		//init storage
-		storage.invoke(new InitStorage());
+		engine.invoke(new InitStorage());
 		
-		return storage;
+		//return storage
+		return new Storage(engine);
 	}
 
 }
