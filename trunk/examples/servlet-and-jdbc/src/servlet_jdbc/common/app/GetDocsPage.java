@@ -1,10 +1,11 @@
-package example.servlet_jdbc.app.doc;
+package servlet_jdbc.common.app;
 
 import java.util.List;
 
+import servlet_jdbc.common.model.Doc;
+
 import com.gf.Action;
 
-import example.servlet_jdbc.model.Doc;
 
 public class GetDocsPage extends Action<Integer, List<Doc>>{
 
