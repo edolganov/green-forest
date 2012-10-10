@@ -10,17 +10,23 @@ import com.gf.Action;
 import com.gf.Filter;
 import com.gf.Handler;
 import com.gf.Interceptor;
+import com.gf.annotation.Mapping;
 import com.gf.core.repo.TypesRepo;
 import com.gf.core.util.CoreUtil;
+import com.gf.core.util.ScanUtil;
 import com.gf.exception.ExternalException;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.NotOneHandlerException;
 import com.gf.key.core.actionservice.TypesRepoClass;
+import com.gf.log.Log;
+import com.gf.log.LogFactory;
 import com.gf.service.ConfigService;
 import com.gf.service.DeployService;
 import com.gf.util.Util;
 
 public class DeployServiceImpl implements DeployService, ResourseService {
+	
+	Log log = LogFactory.getLog(getClass()); 
 	
 	TypesRepo handlerTypes;
 	TypesRepo interceptorTypes;
@@ -54,10 +60,43 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		filterTypes.add(clazz);
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void scanForAnnotations(String packageName) {
-		// TODO Auto-generated method stub
 		
+		log.info("Scanning and registering classes with @Mapping annotation...");
+		
+		ScanUtil<Class> scanUtil = new ScanUtil<Class>();
+	    scanUtil.find(new ScanUtil.IsA(Object.class), packageName);
+	    Set<Class<? extends Class>> mapperSet = scanUtil.getClasses();
+	    
+	    int totalFilters = 0;
+	    int totalInterceptors = 0;
+	    int totalHandlers = 0;
+	    for (Class candidatClass : mapperSet) {
+	    	
+	    	if(Filter.class.isAssignableFrom(candidatClass)){
+    			putFilter(candidatClass);
+    			totalFilters++;
+    			continue;
+    		}
+	    	
+	    	Mapping mapping = (Mapping)candidatClass.getAnnotation(Mapping.class);
+	    	if(mapping != null){
+	    		if(Handler.class.isAssignableFrom(candidatClass)){
+		    		putHandler(candidatClass);
+		    		totalHandlers++;
+	    		}
+	    		else if(Interceptor.class.isAssignableFrom(candidatClass)){
+	    			putInterceptor(candidatClass);
+	    			totalInterceptors++;
+	    		}
+	    	}
+	    }
+	    
+	    log.info("Done. [filters:"+totalFilters
+	    		+", interceptors:"+totalInterceptors
+	    		+", handlers:"+totalHandlers+"]");
 	}
 
 	
