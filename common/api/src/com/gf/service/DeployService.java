@@ -16,6 +16,8 @@ public interface DeployService {
 	
 	void putFilter(Class<? extends Filter> clazz);
 	
+	void scanForAnnotations(String packageName);
+	
 	
 	//in future...
 	
