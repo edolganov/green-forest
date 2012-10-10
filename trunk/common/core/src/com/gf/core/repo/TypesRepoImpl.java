@@ -204,6 +204,7 @@ public class TypesRepoImpl implements TypesRepo {
 		if(set.contains(handler)){
 			log.warn("mapping already contains "+handler+" for "+target);
 		} else {
+    		log.info("["+handler.getName()+"] -> ["+target.getName()+"]");
 			set.add(handler);
 		}
 	}
