@@ -8,10 +8,28 @@
 	<servlet>
 		<servlet-name>Init</servlet-name>
         <servlet-class>servlet_jdbc.web.InitServlet</servlet-class>
+        
         <init-param>
-        	<param-name>123</param-name>
-        	<param-value>123</param-value>
+        	<param-name>db-user</param-name>
+        	<param-value>sa</param-value>
         </init-param>
+        <init-param>
+        	<param-name>db-password</param-name>
+        	<param-value></param-value>
+        </init-param>
+        <init-param>
+        	<param-name>db-driver</param-name>
+        	<param-value>org.h2.Driver</param-value>
+        </init-param>
+        <init-param>
+        	<param-name>db-url</param-name>
+        	<param-value>jdbc:h2:../data/gf-exmple-db</param-value>
+        </init-param>
+        <init-param>
+        	<param-name>db-pool-size</param-name>
+        	<param-value>5</param-value>
+        </init-param>
+        
         <load-on-startup>1</load-on-startup>
 	</servlet>
 
