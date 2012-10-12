@@ -6,6 +6,8 @@
 	<classpathentry kind="src" path="common/api/test-src"/>
 	<classpathentry kind="src" path="common/core/src"/>
 	<classpathentry kind="src" path="common/core/test-src"/>
+	<classpathentry kind="src" path="components/jdbc/src"/>
+	<classpathentry kind="src" path="components/jdbc/test-src"/>
 	<classpathentry kind="src" path="components/transactions/src"/>
 	<classpathentry kind="src" path="components/transactions/test-src"/>
 	<classpathentry kind="src" path="components/logging-apache-commons/src"/>
