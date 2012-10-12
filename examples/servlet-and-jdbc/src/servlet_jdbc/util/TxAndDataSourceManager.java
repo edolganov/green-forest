@@ -7,6 +7,7 @@ import javax.transaction.UserTransaction;
 import com.atomikos.icatch.jta.UserTransactionImp;
 import com.atomikos.icatch.jta.UserTransactionManager;
 import com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean;
+import com.gf.components.jdbc.DataSourceManager;
 import com.gf.components.tx.TxManager;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
@@ -14,20 +15,19 @@ import com.gf.log.LogFactory;
 /**
  * Manager of connections to a database and transactions
  */
-public class AtomikosTxManager implements TxManager {
+public class TxAndDataSourceManager implements TxManager, DataSourceManager {
 
-	private static Log log = LogFactory.getLog(AtomikosTxManager.class);
+	private static Log log = LogFactory.getLog(TxAndDataSourceManager.class);
 
 	private UserTransactionManager utm;
 	private AtomikosNonXADataSourceBean ds;
 
-	public AtomikosTxManager(ServletConfig config) {
+	public TxAndDataSourceManager(ServletConfig config) {
 
 		try {
 			init(config);
 		} catch (Exception ex) {
-			utm = null;
-			throw new RuntimeException("cannot initialize TxManager", ex);
+			throw new RuntimeException("cannot init AtomikosTxAndSataSourceManager", ex);
 		}
 
 	}
@@ -50,26 +50,13 @@ public class AtomikosTxManager implements TxManager {
 	}
 
 	@Override
-	public void init() throws Exception {
-	}
-
-	@Override
 	public UserTransaction getUserTransaction() {
-		UserTransaction utx = new UserTransactionImp();
-		return utx;
+		return new UserTransactionImp();
 	}
 
 	@Override
 	public DataSource getDataSource() {
 		return ds;
-	}
-
-	@Override
-	public void destroy() {
-		if (utm != null) {
-			utm.close();
-			log.info("shut down transaction manager");
-		}
 	}
 
 }
