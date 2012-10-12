@@ -6,7 +6,7 @@ import java.util.HashMap;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
-public class ServletConfigStub implements ServletConfig {
+public class ServletConfigMock implements ServletConfig {
 	
 	public HashMap<String, String> initPatams = new HashMap<String, String>();
 
