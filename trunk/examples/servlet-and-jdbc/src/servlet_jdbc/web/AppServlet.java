@@ -17,6 +17,8 @@ import servlet_jdbc.common.model.Doc;
 
 public class AppServlet extends HttpServlet {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private App app;
 	
 	@Override
