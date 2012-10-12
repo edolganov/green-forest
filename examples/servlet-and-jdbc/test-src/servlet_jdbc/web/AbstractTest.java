@@ -4,6 +4,8 @@ import javax.servlet.ServletConfig;
 
 import org.junit.After;
 
+import com.gf.util.file.FileUtil;
+
 import junit.framework.Assert;
 
 public abstract class AbstractTest extends Assert {
@@ -24,7 +26,7 @@ public abstract class AbstractTest extends Assert {
 	
 	@After
 	public void after(){
-		//new File(tmpDirPath);
+		FileUtil.deleteDirRecursive(tmpDirPath);
 	}
 	
 	
