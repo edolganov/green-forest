@@ -65,6 +65,11 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	}
 	
 	@Override
+	public void scanForAnnotations(Package pckg) {
+		deploy.scanForAnnotations(pckg);
+	}
+	
+	@Override
 	public void scanForAnnotations(String packageName) {
 		deploy.scanForAnnotations(packageName);
 	}
@@ -92,8 +97,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	public void addToContext(Object object) {
 		context.addToContext(object);
 	}
-
-
 
 	
 

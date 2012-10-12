@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServlet;
 import servlet_jdbc.app.App;
 import servlet_jdbc.common.storage.InitStorage;
 import servlet_jdbc.storage.Storage;
-import servlet_jdbc.util.TxManager;
+import servlet_jdbc.util.AtomikosTxManager;
 
+import com.gf.components.tx.UserTransactionFilter;
 import com.gf.core.Engine;
 
 
@@ -38,11 +39,11 @@ public class InitServlet extends HttpServlet {
 		//create app's engine
 		Engine engine = new Engine();
 		
-		//init context
+		//init
 		Storage storage = createStorage(config);
 		engine.addToContext(storage);
 		
-		//return application
+		//return Application
 		return new App(engine);
 	}
 	
@@ -51,17 +52,15 @@ public class InitServlet extends HttpServlet {
 		//create storage's engine
 		Engine engine = new Engine();
 		
+		//init
+		engine.addToContext(new AtomikosTxManager(config));
+		engine.putFilter(UserTransactionFilter.class);
+		engine.scanForAnnotations(Storage.class.getPackage());
 		
-		//init context
-		engine.scanForAnnotations("servlet_jdbc.storage");
-		
-		TxManager txManager = new TxManager(config);
-		engine.addToContext(txManager);
-		
-		//init storage
+		//invoke actions
 		engine.invoke(new InitStorage());
 		
-		//return storage
+		//return Storage
 		return new Storage(engine);
 	}
 

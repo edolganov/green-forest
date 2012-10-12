@@ -60,6 +60,11 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		filterTypes.add(clazz);
 	}
 	
+	@Override
+	public void scanForAnnotations(Package pckg) {
+		scanForAnnotations(pckg.getName());
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void scanForAnnotations(String packageName) {
@@ -176,7 +181,6 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		
 		return out;
 	}
-
 
 	
 
