@@ -8,8 +8,8 @@ import com.gf.annotation.Inject;
 import com.gf.annotation.Order;
 import com.gf.service.FilterChain;
 
-@Order(UserTransactionFilter.ORDER)
-public class UserTransactionFilter extends Filter {
+@Order(UserTransactionOnInvoke.ORDER)
+public class UserTransactionOnInvoke extends Filter {
 	
 	public static final int ORDER = -100;
 	

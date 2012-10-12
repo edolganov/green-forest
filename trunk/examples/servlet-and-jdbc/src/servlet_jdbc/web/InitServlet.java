@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServlet;
 import servlet_jdbc.app.App;
 import servlet_jdbc.common.storage.InitStorage;
 import servlet_jdbc.storage.Storage;
-import servlet_jdbc.util.AtomikosTxManager;
+import servlet_jdbc.util.TxAndDataSourceManager;
 
-import com.gf.components.tx.UserTransactionFilter;
+import com.gf.components.jdbc.DataSourceInContext;
+import com.gf.components.tx.UserTransactionOnInvoke;
 import com.gf.core.Engine;
 
 
@@ -53,8 +54,9 @@ public class InitServlet extends HttpServlet {
 		Engine engine = new Engine();
 		
 		//init
-		engine.addToContext(new AtomikosTxManager(config));
-		engine.putFilter(UserTransactionFilter.class);
+		engine.addToContext(new TxAndDataSourceManager(config));
+		engine.putFilter(UserTransactionOnInvoke.class);
+		engine.putFilter(DataSourceInContext.class);
 		engine.scanForAnnotations(Storage.class.getPackage());
 		
 		//invoke actions
