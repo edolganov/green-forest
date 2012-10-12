@@ -16,5 +16,12 @@
 	<classpathentry kind="lib" path="thirdparty/commons-logging-1.1.1.jar" sourcepath="thirdparty-sources/commons-logging-1.1.1-sources.jar"/>
 	<classpathentry kind="lib" path="thirdparty/servlet-api-2.5.jar" sourcepath="thirdparty-sources/servlet-api-2.5-sources.jar"/>
 	<classpathentry kind="lib" path="thirdparty/jstl-1.2.jar" sourcepath="thirdparty-sources/jstl-1.2-sources.jar"/>
+	<classpathentry kind="lib" path="thirdparty/atomikos-util.jar"/>
+	<classpathentry kind="lib" path="thirdparty/transactions-api.jar"/>
+	<classpathentry kind="lib" path="thirdparty/transactions-jdbc.jar"/>
+	<classpathentry kind="lib" path="thirdparty/transactions-jta.jar"/>
+	<classpathentry kind="lib" path="thirdparty/transactions.jar"/>
+	<classpathentry kind="lib" path="thirdparty/compile/geronimo-j2ee-connector_1.5_spec.jar"/>
+	<classpathentry kind="lib" path="thirdparty/compile/geronimo-jta_1.0.1B_spec.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
