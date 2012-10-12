@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import servlet_jdbc.app.App;
 import servlet_jdbc.common.storage.InitStorage;
 import servlet_jdbc.storage.Storage;
+import servlet_jdbc.util.TxManager;
 
 import com.gf.core.Engine;
 
@@ -50,8 +51,13 @@ public class InitServlet extends HttpServlet {
 		//create storage's engine
 		Engine engine = new Engine();
 		
+		
 		//init context
 		engine.scanForAnnotations("servlet_jdbc.storage");
+		
+		TxManager txManager = new TxManager(config);
+		engine.addToContext(txManager);
+		
 		//init storage
 		engine.invoke(new InitStorage());
 		
