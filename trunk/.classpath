@@ -10,6 +10,8 @@
 	<classpathentry kind="src" path="components/jdbc/test-src"/>
 	<classpathentry kind="src" path="components/transactions/src"/>
 	<classpathentry kind="src" path="components/transactions/test-src"/>
+	<classpathentry kind="src" path="components/atomikos/src"/>
+	<classpathentry kind="src" path="components/atomikos/test-src"/>
 	<classpathentry kind="src" path="components/logging-apache-commons/src"/>
 	<classpathentry kind="src" path="components/logging-apache-commons/test-src"/>
 	<classpathentry kind="src" path="examples/servlet-and-jdbc/src"/>
