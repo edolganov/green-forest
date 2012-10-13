@@ -8,10 +8,8 @@ import com.gf.annotation.Inject;
 import com.gf.annotation.Order;
 import com.gf.service.FilterChain;
 
-@Order(UserTransactionOnInvoke.ORDER)
-public class UserTransactionOnInvoke extends Filter {
-	
-	public static final int ORDER = -100;
+@Order(Order.SYSTEM_ORDER)
+public class UserTransactionInInvoke extends Filter {
 	
 	@Inject
 	TxManager txManager;
@@ -23,6 +21,7 @@ public class UserTransactionOnInvoke extends Filter {
 		userTx.begin();
 		try {
 			
+			invocationContext.addToInvocationContext(userTx);
 			chain.doNext();
 			userTx.commit();
 			

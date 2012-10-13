@@ -8,8 +8,8 @@ public class OrderComparator implements Comparator<Object>{
 
 	@Override
 	public int compare(Object a, Object b) {
-		int aOrder = Order.DEFAULT_VAL;
-		int bOrder = Order.DEFAULT_VAL;
+		int aOrder = Order.DEFAULT_ORDER;
+		int bOrder = Order.DEFAULT_ORDER;
 		
 		//by annotation
 		Order aOrderAnn = a.getClass().getAnnotation(Order.class);

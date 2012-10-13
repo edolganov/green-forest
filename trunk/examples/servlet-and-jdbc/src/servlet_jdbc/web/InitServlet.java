@@ -5,13 +5,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 import servlet_jdbc.app.App;
-import servlet_jdbc.common.storage.InitStorage;
+import servlet_jdbc.common.storage.CreateOrUpdateDataBase;
 import servlet_jdbc.storage.Storage;
-import servlet_jdbc.util.TxAndDataSourceManager;
 
-import com.gf.components.jdbc.DataSourceInContext;
-import com.gf.components.tx.UserTransactionOnInvoke;
+import com.gf.components.atomikos.jdbc.DataSourceManagerImpl;
+import com.gf.components.atomikos.tx.TxManagerImpl;
+import com.gf.components.jdbc.ConnectionInInvoke;
+import com.gf.components.jdbc.DataSourceManager;
+import com.gf.components.tx.TxManager;
+import com.gf.components.tx.UserTransactionInInvoke;
 import com.gf.core.Engine;
+import com.gf.log.Log;
+import com.gf.log.LogFactory;
 
 
 public class InitServlet extends HttpServlet {
@@ -20,12 +25,16 @@ public class InitServlet extends HttpServlet {
 	
 	private static App app;
 	
+	
 	public static App getApp(){
 		if(app == null){
 			throw new IllegalStateException("app is not inited");
 		}
 		return app;
 	}
+	
+	Log log = LogFactory.getLog(getClass());
+	DataSourceManager dataSourceManager;
 	
 	/**
 	 * Init the applicaton
@@ -35,7 +44,7 @@ public class InitServlet extends HttpServlet {
 		app = createApp(config);
 	}
 
-	private App createApp(ServletConfig config) {
+	private App createApp(ServletConfig config) throws ServletException {
 		
 		//create app's engine
 		Engine engine = new Engine();
@@ -48,22 +57,58 @@ public class InitServlet extends HttpServlet {
 		return new App(engine);
 	}
 	
-	private Storage createStorage(ServletConfig config) {
+	private Storage createStorage(ServletConfig config) throws ServletException {
 		
 		//create storage's engine
 		Engine engine = new Engine();
 		
 		//init
-		engine.addToContext(new TxAndDataSourceManager(config));
-		engine.putFilter(UserTransactionOnInvoke.class);
-		engine.putFilter(DataSourceInContext.class);
+		engine.addToContext(createTxManager(config));
+		engine.addToContext(createDataSourceManager(config));
+		
+		engine.putFilter(UserTransactionInInvoke.class);
+		engine.putFilter(ConnectionInInvoke.class);
+		
 		engine.scanForAnnotations(Storage.class.getPackage());
 		
 		//invoke actions
-		engine.invoke(new InitStorage());
+		engine.invoke(new CreateOrUpdateDataBase());
 		
 		//return Storage
 		return new Storage(engine);
+	}
+	
+	
+
+	private DataSourceManager createDataSourceManager(ServletConfig config) throws ServletException {
+		try {
+			DataSourceManagerImpl manager = new DataSourceManagerImpl();
+			manager.setUser(config.getInitParameter("db-user"));
+			manager.setPassword(config.getInitParameter("db-password"));
+			manager.setDriverClass(config.getInitParameter("db-driver"));
+			manager.setUrl(config.getInitParameter("db-url"));
+			manager.setPoolSize(Integer.parseInt(config.getInitParameter("db-pool-size")));
+			manager.init();
+			
+			this.dataSourceManager = manager;
+			
+			return manager;
+		}catch (Exception e) {
+			throw new ServletException("can't init datasource manager", e);
+		}
+
+	}
+
+	private TxManager createTxManager(ServletConfig config) throws ServletException {
+
+		try {
+			TxManagerImpl manager = new TxManagerImpl();
+			manager.init();
+			return manager;
+		} catch (Exception e) {
+			throw new ServletException("can't init tx manager", e);
+		}
+		
 	}
 
 }

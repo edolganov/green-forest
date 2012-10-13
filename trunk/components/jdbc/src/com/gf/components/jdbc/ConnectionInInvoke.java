@@ -1,5 +1,7 @@
 package com.gf.components.jdbc;
 
+import java.sql.Connection;
+
 import javax.sql.DataSource;
 
 import com.gf.Action;
@@ -8,10 +10,8 @@ import com.gf.annotation.Inject;
 import com.gf.annotation.Order;
 import com.gf.service.FilterChain;
 
-@Order(DataSourceInContext.ORDER)
-public class DataSourceInContext extends Filter {
-	
-	public static final int ORDER = -100;
+@Order(Order.SYSTEM_ORDER)
+public class ConnectionInInvoke extends Filter {
 	
 	@Inject
 	DataSourceManager sourceManager;
@@ -22,7 +22,24 @@ public class DataSourceInContext extends Filter {
 		DataSource dataSource = sourceManager.getDataSource();
 		invocationContext.addToInvocationContext(dataSource);
 		
-		chain.doNext();
+		Connection connection = dataSource.getConnection();
+		try {
+			
+			invocationContext.addToInvocationContext(connection);
+			chain.doNext();
+			
+		}catch (Exception e) {
+			throw e;
+		} finally {
+			
+			if( ! connection.isClosed()){
+				try {
+					connection.close();
+				}catch (Exception e) {
+					log.error("can't close connection", e);
+				}
+			}
+		}
 		
 	}
 
