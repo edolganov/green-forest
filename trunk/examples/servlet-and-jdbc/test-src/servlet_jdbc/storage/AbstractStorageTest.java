@@ -1,11 +1,11 @@
 package servlet_jdbc.storage;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
 import servlet_jdbc.AbstractTest;
+import servlet_jdbc.common.storage.CreateOrUpdateDataBase;
 
 import com.gf.components.atomikos.jdbc.DataSourceManagerImpl;
 import com.gf.components.jdbc.DataSourceManager;
@@ -30,11 +30,17 @@ public abstract class AbstractStorageTest extends AbstractTest {
 		return manager;
 	}
 	
-	public Connection getConnection() throws Exception, SQLException {
+	public Connection getConnection() throws Exception {
 		DataSourceManager manager = createDataSourceManager();
 		DataSource ds = manager.getDataSource();
 		Connection c = ds.getConnection();
 		return c;
+	}
+	
+	public void createTable(Connection c) throws Exception {
+		CreateDataBaseHandler createTables = new CreateDataBaseHandler();
+		createTables.c = c;
+		createTables.invoke(new CreateOrUpdateDataBase());
 	}
 
 }

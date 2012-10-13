@@ -18,6 +18,10 @@ public abstract class Action<I, O> {
 		this.input = input;
 	}
 	
+	public I input(){
+		return getInput();
+	}
+	
 
 	public I getInput() {
 		return input;
