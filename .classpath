@@ -24,7 +24,7 @@
 	<classpathentry kind="lib" path="thirdparty/jstl-1.2.jar" sourcepath="thirdparty-sources/jstl-1.2-sources.jar"/>
 	<classpathentry kind="lib" path="thirdparty/atomikos-util.jar"/>
 	<classpathentry kind="lib" path="thirdparty/transactions-api.jar"/>
-	<classpathentry kind="lib" path="thirdparty/transactions-jdbc.jar"/>
+	<classpathentry kind="lib" path="thirdparty/transactions-jdbc.jar" sourcepath="thirdparty-sources/atomikos-3.7.0.jar"/>
 	<classpathentry kind="lib" path="thirdparty/transactions-jta.jar"/>
 	<classpathentry kind="lib" path="thirdparty/transactions.jar"/>
 	<classpathentry kind="lib" path="thirdparty/compile/geronimo-j2ee-connector_1.5_spec.jar"/>

@@ -1,17 +1,14 @@
 package servlet_jdbc.web;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javax.servlet.ServletConfig;
 
-import org.junit.After;
+import servlet_jdbc.AbstractTest;
 
-import com.gf.util.file.FileUtil;
-
-import junit.framework.Assert;
-
-public abstract class AbstractTest extends Assert {
-	
-	public final String sessionId = String.valueOf(System.currentTimeMillis());
-	public final String tmpDirPath = "./tmp";
+public abstract class AbstractWebTest extends AbstractTest {
+		
 	
 	public ServletConfig getConfig() {
 		
@@ -24,10 +21,14 @@ public abstract class AbstractTest extends Assert {
 		return config;
 	}
 	
-	@After
-	public void after(){
-		FileUtil.deleteDirRecursive(tmpDirPath);
+
+	public Connection getConnection(InitServlet servlet) throws SQLException {
+		return servlet.dataSourceManager.getDataSource().getConnection();
 	}
+
+
+	
+	
 	
 	
 

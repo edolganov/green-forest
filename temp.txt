@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS mind_data_users (
+  id INT NOT NULL ,
+  email VARCHAR(${emailSize}) NOT NULL UNIQUE,
+  password VARCHAR(${passwordSize}) NOT NULL,
+  name VARCHAR(${nameSize}) NOT NULL,
+  
+  PRIMARY KEY (id)
+);
+
+CREATE INDEX mind_data_users_email_index ON mind_data_users(email);
+
+
+CREATE SEQUENCE IF NOT EXISTS mind_data_users_seq START WITH 1 INCREMENT BY 1;
+
+		
+ds.setUser(config.getInitParameter("db-user"));
+ds.setPassword(config.getInitParameter("db-password"));
+ds.setDriverClassName(config.getInitParameter("db-driver"));
+ds.setUrl(config.getInitParameter("db-url"));
+ds.setPoolSize(Integer.parseInt(config.getInitParameter("db-pool-size")));
