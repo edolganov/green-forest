@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import servlet_jdbc.common.app.GetDocsPage;
 import servlet_jdbc.common.app.GetDocsPage.Input;
 import servlet_jdbc.common.model.Doc;
+import servlet_jdbc.common.model.Page;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
@@ -25,18 +26,19 @@ public class GetDocsPageHandler extends Handler<GetDocsPage>{
 		Input input = action.input();
 		
 		int limit = input.limit;
-		int page = input.page;
-		int offset = page*limit;
+		int pageIndex = input.pageIndex;
+		int offset = pageIndex*limit;
 		
 		Statement st = c.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM doc LIMIT "+limit+" OFFSET "+offset);
 		
-		ArrayList<Doc> out = new ArrayList<Doc>();
+		ArrayList<Doc> list = new ArrayList<Doc>();
 		while(rs.next()){
-			out.add(convert(rs));
+			list.add(convert(rs));
 		}
 		st.close();
 		
+		Page<Doc> out = new Page<Doc>(list, pageIndex, limit);
 		action.setOutput(out);
 		
 	}

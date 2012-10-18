@@ -1,7 +1,6 @@
 package servlet_jdbc.web;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import servlet_jdbc.app.App;
 import servlet_jdbc.common.app.GetDocsPage;
 import servlet_jdbc.common.model.Doc;
+import servlet_jdbc.common.model.Page;
+
+import com.gf.util.Util;
 
 
 public class AppServlet extends HttpServlet {
@@ -30,8 +32,13 @@ public class AppServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		List<Doc> docs = app.invoke(new GetDocsPage());
-		req.setAttribute("docs", docs);
+		int pageIndex = Util.tryParse(req.getParameter("pageIndex"), 0);
+		int limit = Util.tryParse(req.getParameter("limit"), 10);
+		
+		
+		
+		Page<Doc> page = app.invoke(new GetDocsPage(pageIndex, limit));
+		req.setAttribute("page", page);
 		
 		showView(req, resp);
 		

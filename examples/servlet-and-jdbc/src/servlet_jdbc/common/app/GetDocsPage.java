@@ -1,37 +1,28 @@
 package servlet_jdbc.common.app;
 
-import java.util.List;
-
 import servlet_jdbc.common.model.Doc;
+import servlet_jdbc.common.model.Page;
 
 import com.gf.Action;
 
 
-public class GetDocsPage extends Action<GetDocsPage.Input, List<Doc>>{
+public class GetDocsPage extends Action<GetDocsPage.Input, Page<Doc>>{
 	
 	public static class Input {
 		
-		public int page;
+		public int pageIndex;
 		public int limit;
 
-		public Input(int page, int limit) {
+		public Input(int pageIndex, int limit) {
 			super();
-			this.page = page;
+			this.pageIndex = pageIndex;
 			this.limit = limit;
 		}
 
 	}
 	
-	public GetDocsPage() {
-		this(0);
-	}
-
-	public GetDocsPage(int page) {
-		this(page, 50);
-	}
-	
-	public GetDocsPage(int page, int limit) {
-		super(new Input(page, limit));
+	public GetDocsPage(int pageIndex, int limit) {
+		super(new Input(pageIndex, limit));
 	}
 	
 	
