@@ -5,6 +5,12 @@
         <ant antfile="./common/utils/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./common/api/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./common/core/build.xml" inheritAll="false" target="clean"/>
+		
+		<ant antfile="./components/jdbc/build.xml" inheritAll="false" target="clean"/>
+		<ant antfile="./components/transactions/build.xml" inheritAll="false" target="clean"/>
+		<ant antfile="./components/atomikos/build.xml" inheritAll="false" target="clean"/>
+		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false" target="clean"/>
+		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="clean"/>
 
     </target>
 
@@ -12,6 +18,12 @@
         <ant antfile="./common/utils/build.xml" inheritAll="false"/>
 		<ant antfile="./common/api/build.xml" inheritAll="false"/>
 		<ant antfile="./common/core/build.xml" inheritAll="false"/>
+		
+		<ant antfile="./components/jdbc/build.xml" inheritAll="false"/>
+		<ant antfile="./components/transactions/build.xml" inheritAll="false"/>
+		<ant antfile="./components/atomikos/build.xml" inheritAll="false"/>
+		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false"/>
+		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false"/>
 		
     </target>
 
@@ -24,6 +36,12 @@
 			<fileset dir="./common/utils/build" includes="*.jar"/>
 			<fileset dir="./common/api/build" includes="*.jar"/>
 			<fileset dir="./common/core/build" includes="*.jar"/>
+			
+			<fileset dir="./components/jdbc/build" includes="*.jar"/>
+			<fileset dir="./components/transactions/build" includes="*.jar"/>
+			<fileset dir="./components/atomikos/build" includes="*.jar"/>
+			<fileset dir="./components/logging-apache-commons/build" includes="*.jar"/>
+			<fileset dir="./components/logging-slf4j/build" includes="*.jar"/>
 		</copy>
 
     </target>
