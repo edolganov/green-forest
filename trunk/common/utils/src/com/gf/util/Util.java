@@ -76,5 +76,17 @@ public class Util {
 		}
 		return out;
 	}
+	
+	public static int tryParse(String str, int defaultVal){
+		if(isEmpty(str)){
+			return defaultVal;
+		}
+		
+		try {
+			return (int) Integer.parseInt(str);
+		}catch (Exception e) {
+			return defaultVal;
+		}
+	}
 
 }

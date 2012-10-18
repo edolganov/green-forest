@@ -14,20 +14,20 @@ public class GetDocsPageTest extends AbstractStorageTest {
 	public void test_invoke() throws Exception{
 		
 		Connection c = getConnection();
-		createTable(c);
+		initDatabase(c);
 		
 		GetDocsPage action = new GetDocsPage(0, 100);
 		GetDocsPageHandler handler = new GetDocsPageHandler();
 		handler.c = c;
 		handler.invoke(action);
 		
-		List<Doc> list = action.getOutput();
+		List<Doc> list = action.getOutput().list;
 		assertEquals(100, list.size());
 		assertEquals(100, list.get(99).id);
 		
 		GetDocsPage nextPage = new GetDocsPage(1, 100);
 		handler.invoke(nextPage);
-		List<Doc> nextList = nextPage.getOutput();
+		List<Doc> nextList = nextPage.getOutput().list;
 		assertEquals(100, nextList.size());
 		assertEquals(200, nextList.get(99).id);
 	}

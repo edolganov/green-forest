@@ -37,7 +37,7 @@ public abstract class AbstractStorageTest extends AbstractTest {
 		return c;
 	}
 	
-	public void createTable(Connection c) throws Exception {
+	public void initDatabase(Connection c) throws Exception {
 		CreateDataBaseHandler createTables = new CreateDataBaseHandler();
 		createTables.c = c;
 		createTables.invoke(new CreateOrUpdateDataBase());
