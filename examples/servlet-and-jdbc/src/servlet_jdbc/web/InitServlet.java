@@ -46,12 +46,14 @@ public class InitServlet extends HttpServlet {
 
 	private App createApp(ServletConfig config) throws ServletException {
 		
+		Storage storage = createStorage(config);
+		
 		//create app's engine
 		Engine engine = new Engine();
 		
 		//init
-		Storage storage = createStorage(config);
 		engine.addToContext(storage);
+		engine.scanForAnnotations(App.class.getPackage());
 		
 		//return Application
 		return new App(engine);

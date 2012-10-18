@@ -52,6 +52,9 @@
 			<fileset file="${module.third-party.dir}/transactions-api.jar"/>
 			<fileset file="${module.third-party.dir}/transactions-jdbc.jar"/>
 			<fileset file="${module.third-party.dir}/transactions-jta.jar"/>
+			<fileset file="${module.third-party.dir}/compile/geronimo-j2ee-connector_1.5_spec.jar"/>
+			<fileset file="${module.third-party.dir}/compile/geronimo-jta_1.0.1B_spec.jar"/>
+
         </copy>
 		
     </target>
