@@ -9,6 +9,10 @@
 			<fileset dir="${project.path.util}/build" includes="*.jar"/>
 			<fileset dir="${project.path.api}/build" includes="*.jar"/>
 			<fileset dir="${project.path.core}/build" includes="*.jar"/>
+			<fileset dir="${project.path.atomikos}/build" includes="*.jar"/>
+			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
+			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
+			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
         </path>
     </target>
 
@@ -31,11 +35,23 @@
 		
 		<copy todir="${build.dir}/war/WEB-INF/lib">
 		
-			<fileset file="${module.third-party.dir}/jstl-1.2.jar"/>
-			
 			<fileset dir="${project.path.util}/build" includes="*.jar"/>
 			<fileset dir="${project.path.api}/build" includes="*.jar"/>
 			<fileset dir="${project.path.core}/build" includes="*.jar"/>
+			<fileset dir="${project.path.atomikos}/build" includes="*.jar"/>
+			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
+			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
+			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
+			
+			<fileset file="${module.third-party.dir}/jstl-1.2.jar"/>
+			<fileset file="${module.third-party.dir}/atomikos-util.jar"/>
+			<fileset file="${module.third-party.dir}/commons-logging-1.1.1.jar"/>
+			<fileset file="${module.third-party.dir}/h2-1.3.158.jar"/>
+			<fileset file="${module.third-party.dir}/slf4j-nop.jar"/>
+			<fileset file="${module.third-party.dir}/transactions.jar"/>
+			<fileset file="${module.third-party.dir}/transactions-api.jar"/>
+			<fileset file="${module.third-party.dir}/transactions-jdbc.jar"/>
+			<fileset file="${module.third-party.dir}/transactions-jta.jar"/>
         </copy>
 		
     </target>

@@ -11,6 +11,8 @@
 			<fileset dir="${project.path.utils}/build" includes="*.jar"/>
 			<fileset dir="${project.path.api}/build" includes="*.jar"/>
 			<fileset dir="${project.path.core}/build" includes="*.jar"/>
+			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
+			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
         </path>
     </target>
 

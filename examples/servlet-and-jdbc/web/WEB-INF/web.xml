@@ -6,9 +6,8 @@
            version="2.5">
 	
 	<servlet>
-		<servlet-name>Init</servlet-name>
+		<servlet-name>InitServlet</servlet-name>
         <servlet-class>servlet_jdbc.web.InitServlet</servlet-class>
-        
         <init-param>
         	<param-name>db-user</param-name>
         	<param-value>sa</param-value>
@@ -29,16 +28,15 @@
         	<param-name>db-pool-size</param-name>
         	<param-value>5</param-value>
         </init-param>
-        
         <load-on-startup>1</load-on-startup>
 	</servlet>
 
     <servlet>
-        <servlet-name>App</servlet-name>
+        <servlet-name>AppServlet</servlet-name>
         <servlet-class>servlet_jdbc.web.AppServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>App</servlet-name>
+        <servlet-name>AppServlet</servlet-name>
         <url-pattern>/app</url-pattern>
     </servlet-mapping>
 
