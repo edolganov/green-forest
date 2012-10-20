@@ -1,5 +1,5 @@
 set INIT_DIR=%CD%
-set WEB_DIR=%CD%\web
+set WEB_DIR=%INIT_DIR%\web
 set SERVER_HOME=c:\chapaj\projects\green-forest\app\apache-tomcat
 set SERVER_DEPLOY=%SERVER_HOME%\webapps
 set DEST_DIR=%SERVER_DEPLOY%\gf-servlet-jdbc
@@ -13,6 +13,7 @@ taskkill /fi "WINDOWTITLE eq Tomcat"
 for /d %%i in (%SERVER_DEPLOY%\*) do rd /s /q %%i
 del /s /q %SERVER_DEPLOY%\*.*
 rd /s /q "%SERVER_DEPLOY%\..\work"
+rd /s /q "%SERVER_DEPLOY%\..\data"
 xcopy ".\build\*.war" 		"%SERVER_DEPLOY%\" /y /f
 mkdir "%SERVER_DEPLOY%\..\temp"
 
