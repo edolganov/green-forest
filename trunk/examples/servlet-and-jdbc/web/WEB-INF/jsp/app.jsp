@@ -23,20 +23,49 @@
 		</div>
 		
 		<div id="content">
-		
-		     <c:if test="${fn:length(page.list)>0}">
-		     
-		     
-		     	<c:forEach var="item" items="${page.list}">
-		     		<div>${item.name}</div>
-		     	</c:forEach>
-		     	
-				<ul class="pager">
-				  <li class="disabled"><a href="#">Previous</a></li>
-				  <li><a href="#">Next</a></li>
-				</ul>
+			<c:choose>
+				<c:when test="${fn:length(page.list)>0}">
 				
-		     </c:if>
+					<c:forEach var="item" items="${page.list}">
+			     		<div>${item.name}</div>
+			     	</c:forEach>
+	
+			     	<c:set var="firstPage" value="${page.index == 0}"/>
+			     	<c:set var="lastPage" value="${ ((page.index*page.limit)+page.limit) >= page.count}"/>
+			     	
+					<ul class="pager">
+					  <li class="<c:if test='${firstPage}'>disabled</c:if>">
+					  	<c:choose>
+					  		<c:when test="${!firstPage}">
+							  	<a href="?pageIndex=${page.index-1}&limit=${page.limit}">
+							  		Previous
+							  	</a>
+					  		</c:when>
+					  		<c:otherwise>
+					  			<span>Previous</span>
+					  		</c:otherwise>
+					  	</c:choose>
+	
+					  </li>
+					  <li class="<c:if test='${lastPage}'>disabled</c:if>">
+					  	<c:choose>
+					  		<c:when test="${!lastPage}">
+							  	<a href="?pageIndex=${page.index+1}&limit=${page.limit}">
+							  		Next
+							  	</a>
+					  		</c:when>
+					  		<c:otherwise>
+					  			<span>Next</span>
+					  		</c:otherwise>
+					  	</c:choose>
+	
+					  </li>
+					</ul>
+				</c:when>
+				<c:otherwise>
+					<h2 class="center">Nothing was found <b>:(</b></h2>
+				</c:otherwise>
+			</c:choose>
 	     
 		</div>
 
