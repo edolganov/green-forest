@@ -9,6 +9,7 @@ import servlet_jdbc.common.app.GetDocsPage;
 import servlet_jdbc.common.app.GetDocsPage.Input;
 import servlet_jdbc.common.model.Doc;
 import servlet_jdbc.common.model.Page;
+import servlet_jdbc.common.storage.GetDocsCount;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
@@ -38,7 +39,10 @@ public class GetDocsPageHandler extends Handler<GetDocsPage>{
 		}
 		st.close();
 		
-		Page<Doc> out = new Page<Doc>(list, pageIndex, limit);
+		Integer count = subInvoke(new GetDocsCount());
+		
+		
+		Page<Doc> out = new Page<Doc>(list, pageIndex, limit, count);
 		action.setOutput(out);
 		
 	}

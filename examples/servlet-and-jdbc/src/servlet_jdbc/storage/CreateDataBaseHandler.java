@@ -15,6 +15,8 @@ import com.gf.annotation.Mapping;
 @Mapping(CreateOrUpdateDataBase.class)
 public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
 	
+	public static final int INIT_DOCS_COUNT = 30;
+	
 	@Inject
 	Connection c;
 
@@ -49,7 +51,7 @@ public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
 		
 		log.info("insert data...");
 		st = c.createStatement();
-		for(int i=0; i < 1000; i++){
+		for(int i=0; i < INIT_DOCS_COUNT; i++){
 			int num = i+1;
 			String name = "name-"+num;
 			String text = "text-text-text\ntext-text-text";
