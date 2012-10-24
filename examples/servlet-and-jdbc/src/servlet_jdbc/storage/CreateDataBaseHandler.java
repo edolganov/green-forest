@@ -44,7 +44,6 @@ public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
 		st.execute("CREATE TABLE IF NOT EXISTS doc (" +
 				"id INT NOT NULL," +
 				"name VARCHAR(40) NOT NULL UNIQUE," +
-				"text VARCHAR(2000) NOT NULL," +
 				"PRIMARY KEY (id))");
 		st.close();
 		
@@ -54,8 +53,7 @@ public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
 		for(int i=0; i < INIT_DOCS_COUNT; i++){
 			int num = i+1;
 			String name = "name-"+num;
-			String text = "text-text-text\ntext-text-text";
-			st.addBatch("INSERT INTO doc VALUES ("+num+", '"+name+"', '"+text+"');");
+			st.addBatch("INSERT INTO doc VALUES ("+num+", '"+name+"');");
 		}
 		st.executeBatch();
 		st.close();

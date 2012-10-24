@@ -51,7 +51,6 @@ public class GetDocsPageHandler extends Handler<GetDocsPage>{
 		Doc doc = new Doc();
 		doc.id = rs.getInt(1);
 		doc.name = rs.getString(2);
-		doc.text = rs.getString(3);
 		return doc;
 	}
 

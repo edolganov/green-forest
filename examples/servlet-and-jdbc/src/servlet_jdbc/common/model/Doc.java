@@ -5,7 +5,6 @@ public class Doc {
 	
 	public int id;
 	public String name;
-	public String text;
 	
 	
 	public Doc() {
@@ -13,11 +12,10 @@ public class Doc {
 	}
 
 
-	public Doc(int id, String name, String text) {
+	public Doc(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.text = text;
 	}
 
 
@@ -35,14 +33,6 @@ public class Doc {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
 	}
 
 }
