@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import org.junit.Test;
 
 import servlet_jdbc.app.App;
+import servlet_jdbc.storage.CreateDataBaseHandler;
 
 public class InitServletTest extends AbstractWebTest {
 	
@@ -20,7 +21,7 @@ public class InitServletTest extends AbstractWebTest {
 		ResultSet rs = c.createStatement().executeQuery("select count(id) from doc");
 		
 		rs.next();
-		assertEquals(1000, rs.getInt(1));
+		assertEquals(CreateDataBaseHandler.INIT_DOCS_COUNT, rs.getInt(1));
 		
 		c.close();
 	}
