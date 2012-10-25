@@ -34,8 +34,10 @@
 				     		<div class="item">
 				     			<div class="item-text">${item.name}</div>
 				     			<div class="item-form" style="display: none;">
-				     				<form action="">
-				     					<input class="item-input" type="text"/>
+				     				<form action="" method="post">
+				     					<input type="text" class="item-input" />
+				     					<input type="hidden" name="pageIndex" value="${page.index}"/>
+				     					<input type="hidden" name="limit" value="${page.limit}"/>
 				     					<input type="submit" style="display: none;"/>
 				     				</form>
 				     			</div>
