@@ -15,7 +15,7 @@ import com.gf.annotation.Mapping;
 @Mapping(CreateOrUpdateDataBase.class)
 public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
 	
-	public static final int INIT_DOCS_COUNT = 30;
+	public static final int INIT_DOCS_COUNT = 28;
 	
 	@Inject
 	Connection c;

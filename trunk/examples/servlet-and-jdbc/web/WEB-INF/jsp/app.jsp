@@ -12,23 +12,35 @@
     <link href="css/app.css" rel="stylesheet">
     <link href="css/ext.css" rel="stylesheet">
     
-    <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
 
 	<div id="wrapper">
 		<div id="header">
-			<h1>Green-Forest & Servlet/JSP & JDBC</h1>
+			<h1 class="center">Green-Forest & Servlet/JSP & JDBC</h1>
 		</div>
 		
 		<div id="content">
+			<h2 class="center">Items from database</h2>
 			<c:choose>
 				<c:when test="${fn:length(page.list)>0}">
 				
-					<c:forEach var="item" items="${page.list}">
-			     		<div>${item.name}</div>
-			     	</c:forEach>
+					<div class="items">
+						<c:forEach var="item" items="${page.list}">
+				     		<div class="item">
+				     			<div class="item-text">${item.name}</div>
+				     			<div class="item-form" style="display: none;">
+				     				
+				     			</div>
+				     			<div class="item-actions">
+				     				<a href="javascript:" class="btn btn-success btn-mini" title="Edit"><i class="icon-white icon-pencil"></i></a>
+				     			</div>
+				     			<div class="clear"></div>
+				     		</div>
+				     	</c:forEach>
+			     	</div>
 	
 			     	<c:set var="firstPage" value="${page.index == 0}"/>
 			     	<c:set var="lastPage" value="${ ((page.index*page.limit)+page.limit) >= page.count}"/>
@@ -63,7 +75,7 @@
 					</ul>
 				</c:when>
 				<c:otherwise>
-					<h2 class="center">Nothing was found <b>:(</b></h2>
+					<p class="center">Nothing was found <b>:(</b></p>
 				</c:otherwise>
 			</c:choose>
 	     

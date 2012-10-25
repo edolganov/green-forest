@@ -1,3 +1,7 @@
+border: 1px solid #DDDDDD;
+    border-radius: 15px 15px 15px 15px;
+
+
 servlet_jdbc.storage
 
 CREATE TABLE IF NOT EXISTS mind_data_users (

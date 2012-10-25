@@ -7,9 +7,36 @@
 #header h1 {
 	padding-top: 20px;
 	padding-bottom: 20px;
-	text-align: center;
 }
 
 .center {
 	text-align: center;
+}
+
+.clear {
+	clear: both !important;
+}
+
+.items {
+	min-height: 315px;
+}
+
+.item {
+	background-color: #f5f5f5;
+	border: 1px solid #DDDDDD;
+    border-radius: 8px;
+    margin: 5px auto;
+    padding: 5px 10px;
+    width: 300px;
+}
+
+.item-text, .item-form{
+	float: left;
+	width: 79%;
+}
+
+.item-actions {
+	float: right;
+	width: 19%;
+	text-align: right;
 }
