@@ -28,15 +28,32 @@
     margin: 5px auto;
     padding: 5px 10px;
     width: 300px;
+    height: 24px;
 }
+
 
 .item-text, .item-form{
 	float: left;
-	width: 79%;
+	width: 59%;
+}
+
+
+.item-text {
+	padding: 2px 8px;
 }
 
 .item-actions {
 	float: right;
-	width: 19%;
+	width: 29%;
 	text-align: right;
+}
+
+.item-form form {
+	margin: 0px;
+}
+
+.item-form input[type="text"]{
+	width: 200px;
+	margin: 0px;
+	height: 14px;
 }

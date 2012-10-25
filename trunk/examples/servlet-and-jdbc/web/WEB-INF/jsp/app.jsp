@@ -14,6 +14,7 @@
     
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
 
@@ -30,12 +31,19 @@
 					<div class="items">
 						<c:forEach var="item" items="${page.list}">
 				     		<div class="item">
-				     			<div class="item-text">${item.name}</div>
+				     			<div class="item-text">
+				     				${item.name}
+				     			</div>
 				     			<div class="item-form" style="display: none;">
-				     				
+				     				<form action="">
+				     					<input class="item-input" type="text" value="${item.name}"/>
+				     					<input type="submit" style="display: none;"/>
+				     				</form>
 				     			</div>
 				     			<div class="item-actions">
-				     				<a href="javascript:" class="btn btn-success btn-mini" title="Edit"><i class="icon-white icon-pencil"></i></a>
+				     				<a href="javascript:" class="button-edit btn btn-info btn-mini" title="Edit"><i class="icon-white icon-pencil"></i></a>
+				     				<a href="javascript:" class="button-confirm btn btn-success btn-mini" title="Confirm" style="display: none;"><i class="icon-white icon-ok"></i></a>
+				     				<a href="javascript:" class="button-cancel btn btn-warning btn-mini" title="Cancel" style="display: none;"><i class="icon-white icon-remove"></i></a>
 				     			</div>
 				     			<div class="clear"></div>
 				     		</div>
