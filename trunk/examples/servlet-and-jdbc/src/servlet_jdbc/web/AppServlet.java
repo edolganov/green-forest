@@ -44,6 +44,11 @@ public class AppServlet extends HttpServlet {
 		
 	}
 	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		this.doGet(req, resp);
+	}
+	
 
 	private void showView(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String viewPath = "/WEB-INF/jsp/app.jsp";

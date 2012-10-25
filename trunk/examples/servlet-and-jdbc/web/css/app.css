@@ -39,7 +39,7 @@
 
 
 .item-text {
-	padding: 2px 8px;
+	padding: 3px 8px;
 }
 
 .item-actions {
@@ -55,5 +55,5 @@
 .item-form input[type="text"]{
 	width: 200px;
 	margin: 0px;
-	height: 14px;
+	height: 16px;
 }
