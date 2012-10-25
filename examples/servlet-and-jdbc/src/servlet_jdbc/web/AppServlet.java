@@ -33,7 +33,7 @@ public class AppServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		int pageIndex = Util.tryParse(req.getParameter("pageIndex"), 0);
-		int limit = Util.tryParse(req.getParameter("limit"), 10);
+		int limit = Util.tryParse(req.getParameter("limit"), 8);
 		
 		
 		
