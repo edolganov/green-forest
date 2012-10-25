@@ -17,31 +17,47 @@ AppController = function(){
 	};
 	
 	function initItem(item){
+		
 		var label = $(".item-text", item);
 		var form = $(".item-form", item);
+		var input = $(".item-input", form);
+		
 		var edit = $(".button-edit", item);
 		var confirm = $(".button-confirm", item);
 		var cancel = $(".button-cancel", item);
 		
-		edit.click(function(){
-			
+		var editFunc = function(){
 			edit.hide();
 			confirm.show();
 			cancel.show();
 			
 			label.hide();
-			form.show();
-		});
-		
-		cancel.click(function(){
 			
+			input.val(label.text());
+			
+			form.show();
+			input.focus();
+			input.caretToEnd();
+		};
+		
+		var cancelFunc = function(){
 			confirm.hide();
 			cancel.hide();
 			edit.show();
 			
 			form.hide();
 			label.show();
+		};
+		
+		edit.click(editFunc);
+		cancel.click(cancelFunc);
+		
+		input.keydown(function(e) {
+			if (e.keyCode == 27) { 
+				cancelFunc();
+			}
 		});
+		
 	}
 	
 };

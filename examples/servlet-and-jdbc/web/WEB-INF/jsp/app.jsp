@@ -14,6 +14,7 @@
     
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.caret.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
@@ -31,12 +32,10 @@
 					<div class="items">
 						<c:forEach var="item" items="${page.list}">
 				     		<div class="item">
-				     			<div class="item-text">
-				     				${item.name}
-				     			</div>
+				     			<div class="item-text">${item.name}</div>
 				     			<div class="item-form" style="display: none;">
 				     				<form action="">
-				     					<input class="item-input" type="text" value="${item.name}"/>
+				     					<input class="item-input" type="text"/>
 				     					<input type="submit" style="display: none;"/>
 				     				</form>
 				     			</div>
