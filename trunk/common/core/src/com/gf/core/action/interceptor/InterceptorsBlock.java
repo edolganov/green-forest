@@ -10,7 +10,7 @@ public class InterceptorsBlock {
 		this.c = context;
 	}
 
-	public void invoke() {
+	public void invoke() throws Exception {
 		
 		InterceptorChainImpl chain = new InterceptorChainImpl(c);
 		chain.invoke();

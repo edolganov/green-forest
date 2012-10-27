@@ -11,7 +11,7 @@ public class FiltersBlock {
 		this.c = context;
 	}
 	
-	public void invoke() {
+	public void invoke() throws Exception {
 		
 		FilterChainImpl chain = new FilterChainImpl(c);
 		chain.invoke();

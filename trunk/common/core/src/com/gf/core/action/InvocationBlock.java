@@ -28,7 +28,7 @@ public class InvocationBlock {
 		depthMaxSize = actionService.config.getValue(new InvokeDepthMaxSize());
 	}
 	
-	public void invoke() {
+	public void invoke() throws Exception {
 		
 		InvocationContext c = createContext(action, null, true);
 		

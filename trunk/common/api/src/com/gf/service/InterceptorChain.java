@@ -2,6 +2,6 @@ package com.gf.service;
 
 public interface InterceptorChain {
 	
-	void doNext();
+	void doNext() throws Exception;
 
 }

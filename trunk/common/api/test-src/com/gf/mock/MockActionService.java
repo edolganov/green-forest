@@ -11,4 +11,10 @@ public class MockActionService implements ActionService {
 		return null;
 	}
 
+	@Override
+	public <I, O> O invokeUnwrap(Action<I, O> action) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -11,9 +11,10 @@ import com.gf.core.context.ContextServiceImpl;
 import com.gf.core.context.StaticContext;
 import com.gf.core.deploy.DeployServiceImpl;
 import com.gf.core.deploy.ResourseService;
-import com.gf.exception.BaseException;
+import com.gf.exception.ExceptionWrapper;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
+import com.gf.exception.invoke.InvocationException;
 import com.gf.service.ActionService;
 import com.gf.service.ConfigService;
 import com.gf.service.ContextService;
@@ -40,8 +41,13 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	
 
 	@Override
-	public <I, O> O invoke(Action<I, O> action) throws BaseException {
+	public <I, O> O invoke(Action<I, O> action) throws InvocationException, ExceptionWrapper, RuntimeException {
 		return (O)actions.invoke(action);
+	}
+	
+	@Override
+	public <I, O> O invokeUnwrap(Action<I, O> action) throws InvocationException, Exception {
+		return (O)actions.invokeUnwrap(action);
 	}
 
 

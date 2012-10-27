@@ -14,7 +14,7 @@ import com.gf.annotation.Mapping;
 import com.gf.core.repo.TypesRepo;
 import com.gf.core.util.CoreUtil;
 import com.gf.core.util.ScanUtil;
-import com.gf.exception.ExternalException;
+import com.gf.exception.ExceptionWrapper;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.NotOneHandlerException;
 import com.gf.key.core.actionservice.TypesRepoClass;
@@ -115,7 +115,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 			Object newInstance = handlerType.newInstance();
 			out = (Handler<?>) newInstance;
 		}catch (Exception e) {
-			throw new ExternalException("can't create handler by "+handlerType, e);
+			throw new ExceptionWrapper("can't create handler by "+handlerType, e);
 		}
 		
 		return out;
@@ -149,7 +149,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 				Filter filter = (Filter) newInstance;
 				out.add(filter);
 			}catch (Exception e) {
-				throw new ExternalException("can't create filter by "+filterType, e);
+				throw new ExceptionWrapper("can't create filter by "+filterType, e);
 			}
 		}
 		
@@ -172,7 +172,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 				Interceptor<?> interceptor = (Interceptor<?>) newInstance;
 				out.add(interceptor);
 			}catch (Exception e) {
-				throw new ExternalException("can't create interceptor by "+interceptorType, e);
+				throw new ExceptionWrapper("can't create interceptor by "+interceptorType, e);
 			}
 		}
 		
