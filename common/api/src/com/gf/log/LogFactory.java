@@ -5,7 +5,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import com.gf.exception.ExternalException;
+import com.gf.exception.ExceptionWrapper;
 
 public class LogFactory {
 	
@@ -25,7 +25,7 @@ public class LogFactory {
 		try {
 			return (LogProvider)providerClass.newInstance();
 		}catch (Exception e) {
-			throw new ExternalException("can't create log provider", e);
+			throw new ExceptionWrapper("can't create log provider", e);
 		}
 	}
 

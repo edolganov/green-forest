@@ -14,7 +14,7 @@ public class FilterChainImpl {
 		this.c = context;
 	}
 
-	public void invoke() {
+	public void invoke() throws Exception {
 		int firstIndex = 0;
 		if(hasItem(firstIndex)){
 			FilterChainItem first = new FilterChainItem(this, firstIndex);
@@ -32,7 +32,7 @@ public class FilterChainImpl {
 		return c.filters.get(index);
 	}
 	
-	void doInterceptorsBlock() {
+	void doInterceptorsBlock() throws Exception {
 		InterceptorsBlock block = new InterceptorsBlock(c);
 		block.invoke();
 	}
@@ -64,7 +64,7 @@ class FilterChainItem implements FilterChain {
 	}
 
 	@Override
-	public void doNext() {
+	public void doNext() throws Exception {
 		int nextIndex = index + 1;
 		if( owner.hasItem(nextIndex)){
 			FilterChainItem next = new FilterChainItem(owner, nextIndex);

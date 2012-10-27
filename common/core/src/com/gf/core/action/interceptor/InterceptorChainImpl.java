@@ -3,7 +3,6 @@ package com.gf.core.action.interceptor;
 import com.gf.Interceptor;
 import com.gf.core.action.InvocationContext;
 import com.gf.core.action.handler.HandlerBlock;
-import com.gf.core.util.CoreUtil;
 import com.gf.service.InterceptorChain;
 
 public class InterceptorChainImpl {
@@ -14,7 +13,7 @@ public class InterceptorChainImpl {
 		this.c = context;
 	}
 
-	public void invoke() {
+	public void invoke() throws Exception {
 		int firstIndex = 0;
 		if(hasItem(firstIndex)){
 			InterceptorChainItem first = new InterceptorChainItem(this, firstIndex);
@@ -33,7 +32,7 @@ public class InterceptorChainImpl {
 		return c.interceptors.get(index);
 	}
 	
-	void doHandlerBlock(){
+	void doHandlerBlock() throws Exception {
 		HandlerBlock block = new HandlerBlock(c);
 		block.invoke();
 	}
@@ -52,21 +51,16 @@ class InterceptorChainItem implements InterceptorChain {
 		this.index = index;
 	}
 	
-	void invoke(){
+	void invoke() throws Exception {
 		
 		Interceptor interceptor = owner.getItem(index);
 		
 		owner.c.initMappingObject(interceptor);
-		
-		try {
-			interceptor.invoke(owner.c.action, this);
-		}catch (Exception e) {
-			throw CoreUtil.convertException(e, "can't invoke "+owner.c.action+" by "+interceptor);
-		}
+		interceptor.invoke(owner.c.action, this);
 	}
 
 	@Override
-	public void doNext() {
+	public void doNext() throws Exception {
 		int nextIndex = index + 1;
 		if( owner.hasItem(nextIndex)){
 			InterceptorChainItem next = new InterceptorChainItem(owner, nextIndex);

@@ -31,11 +31,18 @@
 				
 					<div class="items">
 						<c:forEach var="item" items="${page.list}">
+						
+							<c:set var="renamedKey" value="doc.renamed.${item.id}"/>
+							<c:set var="errorKey" value="doc.error.${item.id}"/>
+							<c:set var="isRenamed" value="${!empty requestScope[renamedKey]}"/>
+							<c:set var="hasError" value="${!empty requestScope[errorKey]}"/>
+							
 				     		<div class="item">
 				     			<div class="item-text">${item.name}</div>
 				     			<div class="item-form" style="display: none;">
 				     				<form action="" method="post">
-				     					<input type="text" class="item-input" />
+				     					<input type="text" name="name" class="item-input" />
+				     					<input type="hidden" name="id" value="${item.id}"/>
 				     					<input type="hidden" name="pageIndex" value="${page.index}"/>
 				     					<input type="hidden" name="limit" value="${page.limit}"/>
 				     					<input type="submit" style="display: none;"/>
