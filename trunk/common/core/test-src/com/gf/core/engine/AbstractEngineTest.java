@@ -13,11 +13,11 @@ import com.gf.key.core.TraceHandlers;
 public abstract class AbstractEngineTest extends Assert {
 	
 	public static void enableTracing(Engine engine){
-		engine.addValue(TraceHandlers.class, true);
+		engine.setConfig(TraceHandlers.class, true);
 	}
 	
 	public static void disableTracing(Engine engine){
-		engine.addValue(TraceHandlers.class, false);
+		engine.setConfig(TraceHandlers.class, false);
 	}
 	
 	public static void checkTrace(Action<?,?> action, Object... traceTree){

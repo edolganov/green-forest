@@ -82,20 +82,20 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 
 
 	@Override
-	public <T> T getValue(ConfigKey<T> key) {
-		return (T) config.getValue(key);
+	public <T> T getConfig(ConfigKey<T> key) {
+		return (T) config.getConfig(key);
 	}
 
 
 	@Override
-	public boolean isTrue(ConfigKey<Boolean> key) {
-		return config.isTrue(key);
+	public boolean isTrueConfig(ConfigKey<Boolean> key) {
+		return config.isTrueConfig(key);
 	}
 
 
 	@Override
-	public <T> void addValue(Class<? extends ConfigKey<T>> keyType, T value) {
-		config.addValue(keyType, value);
+	public <T> void setConfig(Class<? extends ConfigKey<T>> keyType, T value) {
+		config.setConfig(keyType, value);
 	}
 	
 

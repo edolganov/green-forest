@@ -89,7 +89,7 @@ public class InvokeTest extends AbstractEngineTest {
 		enableTracing(engine);
 		
 		int depthMaxSize = 42;
-		engine.addValue(InvokeDepthMaxSize.class, depthMaxSize);
+		engine.setConfig(InvokeDepthMaxSize.class, depthMaxSize);
 		engine.putHandler(RecursionHandler.class);
 		engine.putHandler(SubInvokeHandler.class);
 		engine.putHandler(StringEcho.class);

@@ -53,7 +53,7 @@ public class InvokeTest extends AbstractEngineTest {
 		enableTracing(engine);
 		
 		int depthMaxSize = 42;
-		engine.addValue(InvokeDepthMaxSize.class, depthMaxSize);
+		engine.setConfig(InvokeDepthMaxSize.class, depthMaxSize);
 		
 		engine.putInterceptor(RecursionInterveptor.class);
 		engine.putHandler(RecursionHandler.class);

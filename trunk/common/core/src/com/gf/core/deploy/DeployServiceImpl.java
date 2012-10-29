@@ -35,7 +35,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	
 	public DeployServiceImpl(ConfigService config) {
 		
-		Class<?> typeRepoClass = config.getValue(new TypesRepoClass());
+		Class<?> typeRepoClass = config.getConfig(new TypesRepoClass());
 		
 		interceptorTypes = CoreUtil.createInstance(typeRepoClass);
 		interceptorTypes.setOneHandlerOnly(false);
