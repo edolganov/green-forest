@@ -1,4 +1,4 @@
-package servlet_jdbc.common.exception;
+package example.common.exception;
 
 public class ValidationException extends RuntimeException {
 

@@ -5,11 +5,12 @@ import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
-import servlet_jdbc.AbstractTest;
-import servlet_jdbc.common.storage.CreateOrUpdateDataBase;
 
 import com.gf.components.atomikos.jdbc.DataSourceManagerImpl;
 import com.gf.components.jdbc.DataSourceManager;
+
+import example.AbstractTest;
+import example.common.storage.CreateOrUpdateDataBase;
 
 public abstract class AbstractStorageTest extends AbstractTest {
 	

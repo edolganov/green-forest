@@ -7,7 +7,7 @@
 	
 	<servlet>
 		<servlet-name>InitServlet</servlet-name>
-        <servlet-class>servlet_jdbc.web.InitServlet</servlet-class>
+        <servlet-class>example.web.InitServlet</servlet-class>
         <init-param>
         	<param-name>db-user</param-name>
         	<param-value>sa</param-value>
@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>AppServlet</servlet-name>
-        <servlet-class>servlet_jdbc.web.AppServlet</servlet-class>
+        <servlet-class>example.web.AppServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AppServlet</servlet-name>

@@ -1,4 +1,4 @@
-package servlet_jdbc.common.model;
+package example.common.model;
 
 
 public class Doc {

@@ -1,8 +1,9 @@
-package servlet_jdbc.common.app;
+package example.common.app;
 
-import servlet_jdbc.common.model.Doc;
 
 import com.gf.Action;
+
+import example.common.model.Doc;
 
 public class RenameDoc extends Action<Doc, Doc>{
 	

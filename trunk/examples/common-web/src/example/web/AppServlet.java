@@ -1,4 +1,4 @@
-package servlet_jdbc.web;
+package example.web;
 
 import java.io.IOException;
 
@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import servlet_jdbc.app.App;
-import servlet_jdbc.common.app.GetDocsPage;
-import servlet_jdbc.common.app.RenameDoc;
-import servlet_jdbc.common.exception.ValidationException;
-import servlet_jdbc.common.model.Doc;
-import servlet_jdbc.common.model.Page;
 
 import com.gf.util.Util;
+
+import example.app.App;
+import example.common.app.GetDocsPage;
+import example.common.app.RenameDoc;
+import example.common.exception.ValidationException;
+import example.common.model.Doc;
+import example.common.model.Page;
 
 
 public class AppServlet extends HttpServlet {

@@ -1,11 +1,13 @@
-package servlet_jdbc.web;
+package example.web;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 
 import org.junit.Test;
 
-import servlet_jdbc.app.App;
+import example.app.App;
+import example.web.InitServlet;
+
 import servlet_jdbc.storage.CreateDataBaseHandler;
 
 public class InitServletTest extends AbstractWebTest {

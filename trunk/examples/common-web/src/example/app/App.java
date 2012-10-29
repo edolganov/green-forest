@@ -1,4 +1,4 @@
-package servlet_jdbc.app;
+package example.app;
 
 import com.gf.core.ActionServiceWrapper;
 import com.gf.service.ActionService;

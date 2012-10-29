@@ -1,6 +1,6 @@
-package servlet_jdbc.common.exception.doc;
+package example.common.exception.doc;
 
-import servlet_jdbc.common.exception.ValidationException;
+import example.common.exception.ValidationException;
 
 public class DocEmptyNameException extends ValidationException {
 	

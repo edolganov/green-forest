@@ -3,10 +3,11 @@ package servlet_jdbc.storage;
 import java.sql.Connection;
 import org.junit.Test;
 
-import servlet_jdbc.common.app.RenameDoc;
-import servlet_jdbc.common.model.Doc;
 
 import com.gf.core.Engine;
+
+import example.common.app.RenameDoc;
+import example.common.model.Doc;
 
 public class RenameDocTest extends AbstractStorageTest {
 	

@@ -1,4 +1,4 @@
-package servlet_jdbc.common.storage;
+package example.common.storage;
 
 import com.gf.Action;
 
