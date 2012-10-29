@@ -8,7 +8,7 @@ import org.junit.Test;
 import servlet_jdbc.common.app.GetDocsPage;
 import servlet_jdbc.common.model.Doc;
 
-import com.gf.mock.MockInvocationService;
+import com.gf.core.Engine;
 
 public class GetDocsPageTest extends AbstractStorageTest {
 	
@@ -18,21 +18,16 @@ public class GetDocsPageTest extends AbstractStorageTest {
 		Connection c = getConnection();
 		initDatabase(c);
 		
-		GetDocsPage action = new GetDocsPage(0, 10);
-		GetDocsPageHandler handler = new GetDocsPageHandler();
-		MockInvocationService subInvokeMock = new MockInvocationService();
-		subInvokeMock.setSingleReturnValue(30);
-		handler.setInvocation(subInvokeMock);
-		handler.c = c;
-		handler.invoke(action);
+		Engine engine = new Engine();
+		engine.putHandler(GetDocsPageHandler.class);
+		engine.putHandler(GetDocsCountHandler.class);
+		engine.addToContext(c);
 		
-		List<Doc> list = action.getOutput().list;
+		List<Doc> list = engine.invoke(new GetDocsPage(0, 10)).list;
 		assertEquals(10, list.size());
 		assertEquals(10, list.get(9).id);
 		
-		GetDocsPage nextPage = new GetDocsPage(1, 10);
-		handler.invoke(nextPage);
-		List<Doc> nextList = nextPage.getOutput().list;
+		List<Doc> nextList = engine.invoke(new GetDocsPage(1, 10)).list;
 		assertEquals(10, nextList.size());
 		assertEquals(20, nextList.get(9).id);
 	}

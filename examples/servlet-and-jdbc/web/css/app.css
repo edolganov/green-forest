@@ -75,6 +75,11 @@
     background-color: #FFECC8;
 }
 
+.updated-wrap {
+	border-color: #468847;
+	background-color: #D5FFC9;
+}
+
 .msg-label {
 	padding: 3px 20px;
 	font-size: 14px;

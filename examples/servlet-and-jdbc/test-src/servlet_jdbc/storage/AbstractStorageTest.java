@@ -1,6 +1,7 @@
 package servlet_jdbc.storage;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
@@ -41,6 +42,14 @@ public abstract class AbstractStorageTest extends AbstractTest {
 		CreateDataBaseHandler createTables = new CreateDataBaseHandler();
 		createTables.c = c;
 		createTables.invoke(new CreateOrUpdateDataBase());
+	}
+	
+	public String getDocName(Connection c, int id) throws Exception {
+		ResultSet rs = c.createStatement().executeQuery("select name from doc where id="+id);
+		rs.next();
+		String out = rs.getString(1);
+		rs.close();
+		return out;
 	}
 
 }

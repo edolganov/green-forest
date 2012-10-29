@@ -4,6 +4,8 @@ import java.sql.Connection;
 
 import org.junit.Test;
 
+import com.gf.core.Engine;
+
 import servlet_jdbc.common.storage.GetDocsCount;
 
 public class GetDocsCountTest extends AbstractStorageTest {
@@ -14,12 +16,12 @@ public class GetDocsCountTest extends AbstractStorageTest {
 		Connection c = getConnection();
 		initDatabase(c);
 		
-		GetDocsCount action = new GetDocsCount();
-		GetDocsCountHandler handler = new GetDocsCountHandler();
-		handler.c = c;
-		handler.invoke(action);
+		Engine engine = new Engine();
+		engine.putHandler(GetDocsCountHandler.class);
+		engine.addToContext(c);
 		
-		assertEquals(CreateDataBaseHandler.INIT_DOCS_COUNT, action.getOutput()+0);
+		Integer result = engine.invoke(new GetDocsCount());
+		assertEquals(CreateDataBaseHandler.INIT_DOCS_COUNT, result+0);
 		
 	}
 

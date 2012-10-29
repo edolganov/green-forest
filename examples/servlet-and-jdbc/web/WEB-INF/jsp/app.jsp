@@ -39,7 +39,7 @@
 							
 							<c:set var="isRenamed" value="${!empty requestScope[renamedKey]}"/>
 							<c:set var="hasError" value="${!empty requestScope[errorKey]}"/>
-							<c:set var="error" value="${!empty requestScope[errorObjKey]}"/>
+							<c:set var="exception" value="${requestScope[errorObjKey]}"/>
 							
 							<div class="msg-wrap <c:if test='${hasError}'>error-wrap</c:if> <c:if test='${isRenamed}'>updated-wrap</c:if>">
 					     		<div class="item">
@@ -70,13 +70,16 @@
 					     						must not be empty
 					     					</c:when>
 					     					<c:when test="${requestScope[errorKey] eq 'DocToLongNameException'}">
-					     						max lenght is ${error.maxSize}
+					     						max lenght is ${exception.maxSize}
 					     					</c:when>
 					     					<c:otherwise>
-					     						
+					     						unknown error
 					     					</c:otherwise>
 					     				</c:choose>
 					     			</div>
+					     		</c:if>
+					     		<c:if test="${isRenamed}">
+					     			<div class="msg-label">edited</div>
 					     		</c:if>
 				     		</div>
 				     	</c:forEach>
