@@ -13,6 +13,7 @@
 			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
 			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
 			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
+			<fileset dir="${project.path.common-web}/build" includes="*.jar"/>
         </path>
     </target>
 
@@ -42,6 +43,7 @@
 			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
 			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
 			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
+			<fileset dir="${project.path.common-web}/build" includes="*.jar"/>
 			
 			<fileset file="${module.third-party.dir}/jstl-1.2.jar"/>
 			<fileset file="${module.third-party.dir}/atomikos-util.jar"/>
