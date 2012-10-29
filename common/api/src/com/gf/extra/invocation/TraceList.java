@@ -7,17 +7,17 @@ import java.util.List;
 
 import com.gf.util.Util;
 
-public class TraceTree {
+public class TraceList {
 	
 	static final ThreadLocal<Integer> toStringLevelIndex = new ThreadLocal<Integer>();
 	
-	private List<TraceItem> level = new ArrayList<TraceItem>();
+	private List<TraceItem> list = new ArrayList<TraceItem>();
 	
-	public TraceTree() {
+	public TraceList() {
 		super();
 	}
 
-	public TraceTree(Object... traceTree) {
+	public TraceList(Object... traceTree) {
 		this();
 		buildTree(traceTree);
 	}
@@ -31,7 +31,7 @@ public class TraceTree {
 		}
 	}
 	
-	private void addItem(TraceTree trace, Object ob){
+	private void addItem(TraceList trace, Object ob){
 		//item
 		if(ob instanceof Class){
 			trace.createAndAddItem(ob);
@@ -39,8 +39,8 @@ public class TraceTree {
 		//item's sub trace
 		else if(ob instanceof List<?>){
 			
-			TraceTree subTrace = new TraceTree();
-			trace.addSubTraceToLastItem(subTrace);
+			TraceList subTrace = new TraceList();
+			trace.addSubListToLastItem(subTrace);
 			
 			List<?> subItems = (List<?>)ob;
 			for(int i=0; i < subItems.size(); ++i){
@@ -62,41 +62,41 @@ public class TraceTree {
 			clazz = ob.getClass();
 		}
 		TraceItem item = new TraceItem(clazz);
-		level.add(item);
+		list.add(item);
 	}
 
-	public void addSubTraceToLastItem(TraceTree subTrace) {
-		if(level.isEmpty()){
+	public void addSubListToLastItem(TraceList subTrace) {
+		if(list.isEmpty()){
 			throw new IllegalStateException("can't add sub tree for empty tree");
 		}
-		TraceItem last = level.get(level.size()-1);
-		last.addSubTrace(subTrace);
+		TraceItem last = list.get(list.size()-1);
+		last.addSubList(subTrace);
 	}
 	
 	public TraceItem getItem(int index){
-		return level.get(index);
+		return list.get(index);
 	}
 	
 	public TraceItem getLastItem(){
-		if(level.size() == 0){
+		if(list.size() == 0){
 			return null;
 		}
-		return level.get(level.size()-1);
+		return list.get(list.size()-1);
 	}
 	
 	public int getSize(){
-		return level.size();
+		return list.size();
 	}
 	
 	public List<TraceItem> getItems(){
-		return new ArrayList<TraceItem>(level);
+		return new ArrayList<TraceItem>(list);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((level == null) ? 0 : level.hashCode());
+		result = prime * result + ((list == null) ? 0 : list.hashCode());
 		return result;
 	}
 
@@ -108,11 +108,11 @@ public class TraceTree {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TraceTree other = (TraceTree) obj;
-		if (level == null) {
-			if (other.level != null)
+		TraceList other = (TraceList) obj;
+		if (list == null) {
+			if (other.list != null)
 				return false;
-		} else if (!level.equals(other.level))
+		} else if (!list.equals(other.list))
 			return false;
 		return true;
 	}
@@ -129,11 +129,11 @@ public class TraceTree {
 		
 		StringBuilder sb = new StringBuilder();
 		appendTabs(sb, levelIndex);
-		sb.append("[TraceStack:");
+		sb.append("[TraceList:");
 		
 		List<TraceItem> items = Collections.emptyList();
-		if(level != null){
-			items = level;
+		if(list != null){
+			items = list;
 		}
 		
         Iterator<TraceItem> i = items.iterator();

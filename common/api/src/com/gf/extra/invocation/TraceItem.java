@@ -1,7 +1,7 @@
 package com.gf.extra.invocation;
 
-import static com.gf.extra.invocation.TraceTree.appendTabs;
-import static com.gf.extra.invocation.TraceTree.toStringLevelIndex;
+import static com.gf.extra.invocation.TraceList.appendTabs;
+import static com.gf.extra.invocation.TraceList.toStringLevelIndex;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +12,7 @@ public class TraceItem {
 	
 	public final Class<?> type;
 	
-	private List<TraceTree> subTraces;
+	private List<TraceList> subLists;
 
 	public TraceItem(Class<?> type) {
 		super();
@@ -21,18 +21,18 @@ public class TraceItem {
 
 
 
-	public List<TraceTree> getSubTraces(){
-		if(subTraces == null){
-			return new ArrayList<TraceTree>();
+	public List<TraceList> getSubLists(){
+		if(subLists == null){
+			return new ArrayList<TraceList>();
 		}
-		return new ArrayList<TraceTree>(subTraces);
+		return new ArrayList<TraceList>(subLists);
 	}
 
-	public void addSubTrace(TraceTree subTrace) {
-		if(subTraces == null){
-			subTraces = new ArrayList<TraceTree>();
+	public void addSubList(TraceList subTrace) {
+		if(subLists == null){
+			subLists = new ArrayList<TraceList>();
 		}
-		subTraces.add(subTrace);
+		subLists.add(subTrace);
 	}
 
 
@@ -42,7 +42,7 @@ public class TraceItem {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((subTraces == null) ? 0 : subTraces.hashCode());
+				+ ((subLists == null) ? 0 : subLists.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -58,10 +58,10 @@ public class TraceItem {
 		if (getClass() != obj.getClass())
 			return false;
 		TraceItem other = (TraceItem) obj;
-		if (subTraces == null) {
-			if (other.subTraces != null)
+		if (subLists == null) {
+			if (other.subLists != null)
 				return false;
-		} else if (!subTraces.equals(other.subTraces))
+		} else if (!subLists.equals(other.subLists))
 			return false;
 		if (type == null) {
 			if (other.type != null)
@@ -90,12 +90,12 @@ public class TraceItem {
 		sb.append(type == null? "null" : type.getName());
 
 		
-		List<TraceTree> items = Collections.emptyList();
-		if(subTraces != null){
-			items = subTraces;
+		List<TraceList> items = Collections.emptyList();
+		if(subLists != null){
+			items = subLists;
 		}
 		
-		Iterator<TraceTree> i = items.iterator();
+		Iterator<TraceList> i = items.iterator();
 		if ( i.hasNext()){
 			
 			sb.append('\n');
@@ -103,7 +103,7 @@ public class TraceItem {
 			while(i.hasNext()) {
 				
 				toStringLevelIndex.set(levelIndex+1);
-				TraceTree e = i.next();
+				TraceList e = i.next();
 			    sb.append(e);
 			    toStringLevelIndex.set(levelIndex);
 			    

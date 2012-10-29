@@ -20,7 +20,7 @@ import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.InvokeDepthMaxSizeException;
 import com.gf.extra.invocation.TraceItem;
-import com.gf.extra.invocation.TraceTree;
+import com.gf.extra.invocation.TraceList;
 import com.gf.key.core.InvokeDepthMaxSize;
 import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.StringAction;
@@ -104,11 +104,11 @@ public class InvokeTest extends AbstractEngineTest {
 		
 		int depth = 1;
 		
-		TraceTree trace = TraceHandlers.getOrCreateTrace(action);
+		TraceList trace = TraceHandlers.getOrCreateTrace(action);
 		while(trace != null){
 			depth++;
 			List<TraceItem> items = trace.getItems();
-			List<TraceTree> subTraces = items.get(0).getSubTraces();
+			List<TraceList> subTraces = items.get(0).getSubLists();
 			if( subTraces.size() == 2){
 				trace = subTraces.get(1);
 			} else {

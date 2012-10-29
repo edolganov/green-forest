@@ -2,7 +2,7 @@ package com.gf.key.core;
 
 import com.gf.Action;
 import com.gf.config.ConfigKey;
-import com.gf.extra.invocation.TraceTree;
+import com.gf.extra.invocation.TraceList;
 
 public class TraceHandlers extends ConfigKey<Boolean> {
 	
@@ -18,20 +18,20 @@ public class TraceHandlers extends ConfigKey<Boolean> {
 		return Boolean.FALSE;
 	}
 	
-	public static TraceTree getOrCreateTrace(Action<?, ?> action){
-		TraceTree trace = getTrace(action);
+	public static TraceList getOrCreateTrace(Action<?, ?> action){
+		TraceList trace = getTrace(action);
 		if(trace == null){
-			trace = new TraceTree();
+			trace = new TraceList();
 			setTrace(action, trace);
 		}
 		return trace;
 	}
 	
-	public static TraceTree getTrace(Action<?, ?> action){
-		return (TraceTree) action.getAttr(ATTR_KEY);
+	public static TraceList getTrace(Action<?, ?> action){
+		return (TraceList) action.getAttr(ATTR_KEY);
 	}
 	
-	private static void setTrace(Action<?, ?> action, TraceTree trace) {
+	private static void setTrace(Action<?, ?> action, TraceList trace) {
 		action.putAttr(ATTR_KEY, trace);
 	}
 
