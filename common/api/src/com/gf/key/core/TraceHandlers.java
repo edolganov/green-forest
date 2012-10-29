@@ -6,7 +6,7 @@ import com.gf.extra.invocation.TraceTree;
 
 public class TraceHandlers extends ConfigKey<Boolean> {
 	
-	public static final String ATTR_KEY = "gf.core.action.TraceTree";
+	public static final String ATTR_KEY = TraceHandlers.class.getName()+".TraceTree";
 
 	@Override
 	public boolean hasDefaultValue() {
@@ -19,12 +19,20 @@ public class TraceHandlers extends ConfigKey<Boolean> {
 	}
 	
 	public static TraceTree getOrCreateTrace(Action<?, ?> action){
-		TraceTree trace = (TraceTree) action.getAttr(ATTR_KEY);
+		TraceTree trace = getTrace(action);
 		if(trace == null){
 			trace = new TraceTree();
-			action.putAttr(ATTR_KEY, trace);
+			setTrace(action, trace);
 		}
 		return trace;
+	}
+	
+	public static TraceTree getTrace(Action<?, ?> action){
+		return (TraceTree) action.getAttr(ATTR_KEY);
+	}
+	
+	private static void setTrace(Action<?, ?> action, TraceTree trace) {
+		action.putAttr(ATTR_KEY, trace);
 	}
 
 }

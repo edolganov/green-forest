@@ -4,11 +4,10 @@ import com.gf.config.ConfigKey;
 
 public interface ConfigService {
 	
-	<T> T getValue(ConfigKey<T> key);
+	<T> T getConfig(ConfigKey<T> key);
 	
-	<T> void addValue(Class<? extends ConfigKey<T>> keyType, T value);
+	<T> void setConfig(Class<? extends ConfigKey<T>> keyType, T value);
 	
-	
-	boolean isTrue(ConfigKey<Boolean> key);
+	boolean isTrueConfig(ConfigKey<Boolean> key);
 
 }

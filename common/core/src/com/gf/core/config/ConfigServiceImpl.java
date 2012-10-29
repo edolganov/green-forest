@@ -45,7 +45,7 @@ public class ConfigServiceImpl implements ConfigService {
 	
 	
 	@Override
-	public <T> void addValue(Class<? extends ConfigKey<T>> keyType, T value){
+	public <T> void setConfig(Class<? extends ConfigKey<T>> keyType, T value){
 		Util.checkArgumentForEmpty(keyType, "type is null");
 		
 		writeLock.lock();
@@ -99,7 +99,7 @@ public class ConfigServiceImpl implements ConfigService {
 
 
 	@Override
-	public <T> T getValue(ConfigKey<T> key) {
+	public <T> T getConfig(ConfigKey<T> key) {
 		Util.checkArgumentForEmpty(key, "key is null");
 		
 		readLock.lock();
@@ -111,8 +111,8 @@ public class ConfigServiceImpl implements ConfigService {
 	}
 	
 	@Override
-	public boolean isTrue(ConfigKey<Boolean> key) {
-		Boolean val = getValue(key);
+	public boolean isTrueConfig(ConfigKey<Boolean> key) {
+		Boolean val = getConfig(key);
 		return Boolean.TRUE.equals(val);
 	}
 

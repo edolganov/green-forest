@@ -24,8 +24,8 @@ public class InvocationBlock {
 		this.actionService = actionService;
 		this.action = action;
 		
-		isTraceHandlers = actionService.config.isTrue(new TraceHandlers());
-		depthMaxSize = actionService.config.getValue(new InvokeDepthMaxSize());
+		isTraceHandlers = actionService.config.isTrueConfig(new TraceHandlers());
+		depthMaxSize = actionService.config.getConfig(new InvokeDepthMaxSize());
 	}
 	
 	public void invoke() throws Exception {
