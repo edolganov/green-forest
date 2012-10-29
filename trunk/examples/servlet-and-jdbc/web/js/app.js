@@ -64,6 +64,7 @@ AppController = function(){
 			
 			errorText.hide();
 			item.parent().removeClass("error-wrap");
+			item.parent().removeClass("updated-wrap");
 		};
 		
 		edit.click(editFunc);
@@ -80,6 +81,7 @@ AppController = function(){
 		}
 		
 		allItems.push({cancel:cancelFunc});
+		
 		
 		edit.addClass("inactive");
 		

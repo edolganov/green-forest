@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 
 import org.junit.Test;
 
+import com.gf.core.Engine;
+
 import servlet_jdbc.common.storage.CreateOrUpdateDataBase;
 
 public class CreateOrUpdateDataBaseTest extends AbstractStorageTest {
@@ -14,9 +16,11 @@ public class CreateOrUpdateDataBaseTest extends AbstractStorageTest {
 		
 		Connection c = getConnection();
 		
-		CreateDataBaseHandler handler = new CreateDataBaseHandler();
-		handler.c = c;
-		handler.invoke(new CreateOrUpdateDataBase());
+		Engine engine = new Engine();
+		engine.putHandler(CreateDataBaseHandler.class);
+		engine.addToContext(c);
+		
+		engine.invoke(new CreateOrUpdateDataBase());
 		
 		//check
 		ResultSet rs = c.createStatement().executeQuery("select count(id) from doc");

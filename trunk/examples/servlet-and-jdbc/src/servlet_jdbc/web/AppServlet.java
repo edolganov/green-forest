@@ -57,7 +57,7 @@ public class AppServlet extends HttpServlet {
 			req.setAttribute("doc.renamed."+id, Boolean.TRUE);
 		}catch (ValidationException e) {
 			req.setAttribute("doc.error-key."+id, e.getClass().getSimpleName());
-			req.setAttribute("doc.error-obj", e);
+			req.setAttribute("doc.error-obj."+id, e);
 		}
 		req.setAttribute("doc.newName."+id, newName);
 		
