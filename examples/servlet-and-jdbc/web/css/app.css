@@ -18,17 +18,22 @@
 }
 
 .items {
-	min-height: 325px;
+	min-height: 355px;
+}
+
+.msg-wrap {
+	width: 322px;
+	margin: 5px auto;
+	padding: 0px 2px;
 }
 
 .item {
 	background-color: #f5f5f5;
 	border: 1px solid #DDDDDD;
-    border-radius: 8px;
-    margin: 5px auto;
-    padding: 5px 10px;
+    border-radius: 4px;
     width: 300px;
     height: 24px;
+    padding: 5px 10px;
 }
 
 
@@ -56,4 +61,16 @@
 	width: 200px;
 	margin: 0px;
 	height: 16px;
+}
+
+.error-wrap, .updated-wrap {
+	height: 62px;
+	border: 1px solid #FFF;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.error-wrap {
+	border-color: #C09853;
+    background-color: #FFECC8;
 }
