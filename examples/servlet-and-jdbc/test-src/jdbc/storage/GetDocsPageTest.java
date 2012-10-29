@@ -1,7 +1,10 @@
-package servlet_jdbc.storage;
+package jdbc.storage;
 
 import java.sql.Connection;
 import java.util.List;
+
+import jdbc.storage.GetDocsCountHandler;
+import jdbc.storage.GetDocsPageHandler;
 
 import org.junit.Test;
 

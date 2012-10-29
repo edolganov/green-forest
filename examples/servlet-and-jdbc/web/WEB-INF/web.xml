@@ -7,7 +7,7 @@
 	
 	<servlet>
 		<servlet-name>InitServlet</servlet-name>
-        <servlet-class>example.web.InitServlet</servlet-class>
+        <servlet-class>jdbc.web.InitServlet</servlet-class>
         <init-param>
         	<param-name>db-user</param-name>
         	<param-value>sa</param-value>
