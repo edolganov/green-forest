@@ -35,6 +35,7 @@
 							<c:set var="renamedKey" value="doc.renamed.${item.id}"/>
 							<c:set var="errorKey" value="doc.error-key.${item.id}"/>
 							<c:set var="errorObjKey" value="doc.error-obj.${item.id}"/>
+							<c:set var="newNameKey" value="doc.newName.${item.id}"/>
 							
 							<c:set var="isRenamed" value="${!empty requestScope[renamedKey]}"/>
 							<c:set var="hasError" value="${!empty requestScope[errorKey]}"/>
@@ -42,10 +43,10 @@
 							
 							<div class="msg-wrap <c:if test='${hasError}'>error-wrap</c:if> <c:if test='${isRenamed}'>updated-wrap</c:if>">
 					     		<div class="item">
-					     			<div class="item-text">${item.name}</div>
-					     			<div class="item-form" style="display: none;">
+					     			<div class="item-text" <c:if test='${hasError}'>style="display: none;"</c:if>>${item.name}</div>
+					     			<div class="item-form" <c:if test='${!hasError}'>style="display: none;"</c:if>>
 					     				<form action="" method="post">
-					     					<input type="text" name="name" class="item-input" />
+					     					<input type="text" name="name" class="item-input" <c:if test='${hasError}'>value="${requestScope[newNameKey]}"</c:if> />
 					     					<input type="hidden" name="id" value="${item.id}"/>
 					     					<input type="hidden" name="pageIndex" value="${page.index}"/>
 					     					<input type="hidden" name="limit" value="${page.limit}"/>
@@ -53,9 +54,12 @@
 					     				</form>
 					     			</div>
 					     			<div class="item-actions">
-					     				<a href="javascript:" class="button-edit btn btn-info btn-mini" title="Edit"><i class="icon-white icon-pencil"></i></a>
-					     				<a href="javascript:" class="button-confirm btn btn-success btn-mini" title="Confirm" style="display: none;"><i class="icon-white icon-ok"></i></a>
-					     				<a href="javascript:" class="button-cancel btn btn-warning btn-mini" title="Cancel" style="display: none;"><i class="icon-white icon-remove"></i></a>
+					     				<a href="javascript:" class="button-edit btn btn-info btn-mini" title="Edit" 
+					     					<c:if test='${hasError}'>style="display: none;"</c:if>><i class="icon-white icon-pencil"></i></a>
+					     				<a href="javascript:" class="button-confirm btn btn-success btn-mini" title="Confirm" 
+					     					<c:if test='${!hasError}'>style="display: none;"</c:if>><i class="icon-white icon-ok"></i></a>
+					     				<a href="javascript:" class="button-cancel btn btn-warning btn-mini" title="Cancel" 
+					     					<c:if test='${!hasError}'>style="display: none;"</c:if>><i class="icon-white icon-remove"></i></a>
 					     			</div>
 					     			<div class="clear"></div>
 					     		</div>
@@ -63,7 +67,7 @@
 					     			<div class="msg-label">
 					     				<c:choose>
 					     					<c:when test="${requestScope[errorKey] eq 'DocEmptyNameException'}">
-					     						must be not empty
+					     						must not be empty
 					     					</c:when>
 					     					<c:when test="${requestScope[errorKey] eq 'DocToLongNameException'}">
 					     						max lenght is ${error.maxSize}

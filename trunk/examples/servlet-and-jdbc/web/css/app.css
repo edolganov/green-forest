@@ -18,7 +18,7 @@
 }
 
 .items {
-	min-height: 355px;
+	min-height: 340px;
 }
 
 .msg-wrap {
@@ -73,4 +73,15 @@
 .error-wrap {
 	border-color: #C09853;
     background-color: #FFECC8;
+}
+
+.msg-label {
+	padding: 3px 20px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #555;
+}
+
+.inactive {
+	opacity: 0.5;
 }

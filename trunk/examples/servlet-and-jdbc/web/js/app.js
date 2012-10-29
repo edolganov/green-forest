@@ -7,6 +7,8 @@ $(document).ready(function(){
 
 AppController = function(){
 	
+	var allItems = [];
+	
 	this.init = function(){
 		
 		$(".item").each(function(i, item){
@@ -18,6 +20,10 @@ AppController = function(){
 	
 	function initItem(item){
 		
+		item.hasError = function(){
+			return this.parent().hasClass("error-wrap");
+		}
+		
 		var label = $(".item-text", item);
 		var form = $(".item-form", item);
 		var input = $(".item-input", form);
@@ -25,15 +31,23 @@ AppController = function(){
 		var edit = $(".button-edit", item);
 		var confirm = $(".button-confirm", item);
 		var cancel = $(".button-cancel", item);
+		var errorText = $(".msg-label", item.parent());
 		
 		var editFunc = function(){
+			
+			$.each(allItems, function(i, otherItem){
+				otherItem.cancel();
+			});
+			
 			edit.hide();
 			confirm.show();
 			cancel.show();
 			
 			label.hide();
 			
-			input.val(label.text());
+			if( ! item.hasError()){
+				input.val(label.text());
+			}
 			
 			form.show();
 			input.focus();
@@ -47,6 +61,9 @@ AppController = function(){
 			
 			form.hide();
 			label.show();
+			
+			errorText.hide();
+			item.parent().removeClass("error-wrap");
 		};
 		
 		edit.click(editFunc);
@@ -56,6 +73,22 @@ AppController = function(){
 			if (e.keyCode == 27) { 
 				cancelFunc();
 			}
+		});
+		
+		if(item.hasError()){
+			editFunc();
+		}
+		
+		allItems.push({cancel:cancelFunc});
+		
+		edit.addClass("inactive");
+		
+		edit.mouseover(function(){
+			edit.removeClass("inactive");
+		});
+		
+		edit.mouseleave(function(){
+			edit.addClass("inactive");
 		});
 		
 	}
