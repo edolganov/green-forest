@@ -7,7 +7,8 @@ import org.junit.Test;
 
 import com.gf.core.Engine;
 
-import servlet_jdbc.common.storage.CreateOrUpdateDataBase;
+import example.common.storage.CreateOrUpdateDataBase;
+
 
 public class CreateOrUpdateDataBaseTest extends AbstractStorageTest {
 	

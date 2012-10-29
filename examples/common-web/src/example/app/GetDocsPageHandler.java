@@ -1,12 +1,13 @@
-package servlet_jdbc.app;
+package example.app;
 
-import servlet_jdbc.common.app.GetDocsPage;
-import servlet_jdbc.common.app.GetDocsPage.Input;
-import servlet_jdbc.storage.Storage;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
+
+import example.common.app.GetDocsPage;
+import example.common.app.GetDocsPage.Input;
+import example.storage.Storage;
 
 @Mapping(GetDocsPage.class)
 public class GetDocsPageHandler extends Handler<GetDocsPage>{

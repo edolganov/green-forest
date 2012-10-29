@@ -1,9 +1,10 @@
-package servlet_jdbc.common.app;
+package example.common.app;
 
-import servlet_jdbc.common.model.Doc;
-import servlet_jdbc.common.model.Page;
 
 import com.gf.Action;
+
+import example.common.model.Doc;
+import example.common.model.Page;
 
 
 public class GetDocsPage extends Action<GetDocsPage.Input, Page<Doc>>{

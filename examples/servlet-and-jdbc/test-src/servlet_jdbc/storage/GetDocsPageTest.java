@@ -5,10 +5,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-import servlet_jdbc.common.app.GetDocsPage;
-import servlet_jdbc.common.model.Doc;
 
 import com.gf.core.Engine;
+
+import example.common.app.GetDocsPage;
+import example.common.model.Doc;
 
 public class GetDocsPageTest extends AbstractStorageTest {
 	

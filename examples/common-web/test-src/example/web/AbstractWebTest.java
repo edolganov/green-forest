@@ -1,11 +1,13 @@
-package servlet_jdbc.web;
+package example.web;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.ServletConfig;
 
-import servlet_jdbc.AbstractTest;
+import example.AbstractTest;
+import example.web.InitServlet;
+
 
 public abstract class AbstractWebTest extends AbstractTest {
 		

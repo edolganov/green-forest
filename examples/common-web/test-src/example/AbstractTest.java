@@ -1,4 +1,4 @@
-package servlet_jdbc;
+package example;
 
 import junit.framework.Assert;
 

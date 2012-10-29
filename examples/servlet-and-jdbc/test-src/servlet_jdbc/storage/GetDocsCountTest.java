@@ -6,7 +6,8 @@ import org.junit.Test;
 
 import com.gf.core.Engine;
 
-import servlet_jdbc.common.storage.GetDocsCount;
+import example.common.storage.GetDocsCount;
+
 
 public class GetDocsCountTest extends AbstractStorageTest {
 	

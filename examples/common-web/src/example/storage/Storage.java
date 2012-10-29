@@ -1,4 +1,4 @@
-package servlet_jdbc.storage;
+package example.storage;
 
 import com.gf.core.ActionServiceWrapper;
 import com.gf.service.ActionService;

@@ -3,12 +3,13 @@ package servlet_jdbc.storage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import servlet_jdbc.common.app.RenameDoc;
-import servlet_jdbc.common.model.Doc;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
+
+import example.common.app.RenameDoc;
+import example.common.model.Doc;
 
 @Mapping(RenameDoc.class)
 public class RenameDocHandler extends Handler<RenameDoc>{

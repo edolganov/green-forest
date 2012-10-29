@@ -5,11 +5,12 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import servlet_jdbc.common.storage.CreateOrUpdateDataBase;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
+
+import example.common.storage.CreateOrUpdateDataBase;
 
 
 @Mapping(CreateOrUpdateDataBase.class)

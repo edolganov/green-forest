@@ -1,15 +1,16 @@
-package servlet_jdbc.app;
+package example.app;
 
-import servlet_jdbc.common.app.RenameDoc;
-import servlet_jdbc.common.exception.doc.DocEmptyNameException;
-import servlet_jdbc.common.exception.doc.DocToLongNameException;
-import servlet_jdbc.common.model.Doc;
-import servlet_jdbc.storage.Storage;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 import com.gf.util.Util;
+
+import example.common.app.RenameDoc;
+import example.common.exception.doc.DocEmptyNameException;
+import example.common.exception.doc.DocToLongNameException;
+import example.common.model.Doc;
+import example.storage.Storage;
 
 @Mapping(RenameDoc.class)
 public class RenameDocHandler extends Handler<RenameDoc>{

@@ -1,4 +1,4 @@
-package servlet_jdbc.web;
+package example.web;
 
 import java.util.Enumeration;
 import java.util.HashMap;

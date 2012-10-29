@@ -1,12 +1,9 @@
-package servlet_jdbc.web;
+package example.web;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-import servlet_jdbc.app.App;
-import servlet_jdbc.common.storage.CreateOrUpdateDataBase;
-import servlet_jdbc.storage.Storage;
 
 import com.gf.components.atomikos.jdbc.DataSourceManagerImpl;
 import com.gf.components.atomikos.tx.TxManagerImpl;
@@ -17,6 +14,10 @@ import com.gf.components.tx.UserTransactionInInvoke;
 import com.gf.core.Engine;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
+
+import example.app.App;
+import example.common.storage.CreateOrUpdateDataBase;
+import example.storage.Storage;
 
 
 public class InitServlet extends HttpServlet {
