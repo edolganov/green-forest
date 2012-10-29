@@ -16,6 +16,7 @@
 	<classpathentry kind="src" path="components/logging-apache-commons/test-src"/>
 	<classpathentry kind="src" path="examples/common-web/src"/>
 	<classpathentry kind="src" path="examples/common-web/test-src"/>
+	<classpathentry kind="src" path="examples/common-web/web"/>
 	<classpathentry kind="src" path="examples/servlet-and-jdbc/src"/>
 	<classpathentry kind="src" path="examples/servlet-and-jdbc/test-src"/>
 	<classpathentry kind="src" path="examples/servlet-and-jdbc/web"/>
