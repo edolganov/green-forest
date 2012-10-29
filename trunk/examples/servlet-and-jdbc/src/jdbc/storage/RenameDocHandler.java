@@ -1,4 +1,4 @@
-package servlet_jdbc.storage;
+package jdbc.storage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

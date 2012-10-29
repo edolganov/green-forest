@@ -1,6 +1,9 @@
-package servlet_jdbc.storage;
+package jdbc.storage;
 
 import java.sql.Connection;
+
+import jdbc.storage.CreateDataBaseHandler;
+import jdbc.storage.GetDocsCountHandler;
 
 import org.junit.Test;
 

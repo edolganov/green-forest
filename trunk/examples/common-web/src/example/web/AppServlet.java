@@ -29,7 +29,7 @@ public class AppServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		app = InitServlet.getApp();
+		app = AbstractInitServlet.getApp();
 	}
 	
 	@Override

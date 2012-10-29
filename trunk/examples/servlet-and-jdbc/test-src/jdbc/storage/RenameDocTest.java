@@ -1,6 +1,9 @@
-package servlet_jdbc.storage;
+package jdbc.storage;
 
 import java.sql.Connection;
+
+import jdbc.storage.RenameDocHandler;
+
 import org.junit.Test;
 
 
