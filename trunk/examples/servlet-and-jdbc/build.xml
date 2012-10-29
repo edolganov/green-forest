@@ -13,7 +13,6 @@
 			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
 			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
 			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
-			<fileset dir="${project.path.common-web}/build" includes="*.jar"/>
         </path>
     </target>
 
@@ -43,7 +42,6 @@
 			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
 			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
 			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
-			<fileset dir="${project.path.common-web}/build" includes="*.jar"/>
 			
 			<fileset file="${module.third-party.dir}/jstl-1.2.jar"/>
 			<fileset file="${module.third-party.dir}/atomikos-util.jar"/>
@@ -66,7 +64,14 @@
         
 		<mkdir dir="${module.build.dir}"/>
 		
-        <javac srcdir="${module.src.dir}"
+		<property name="src-all" value="${build.dir}/src-all"/>
+		<mkdir dir="${src-all}"/>
+		<copy todir="${src-all}">
+			<fileset dir="${module.src.dir}"/>
+			<fileset dir="${project.path.common-web}/src"/>
+		</copy>
+		
+        <javac srcdir="${src-all}"
                destdir="${module.build.dir}"
                debug="${compiler.debug}"
                optimize="${compiler.optimize}"
@@ -76,14 +81,12 @@
         </javac>
 
         <copy todir="${module.build.dir}">
-            <fileset dir="${module.src.dir}">
-                <include name="**/*"/>
-                <exclude name="**/*.java"/>
-            </fileset>
+            <fileset dir="${src-all}"/>
         </copy>
 
 		<copy todir="${build.dir}/war">
 			<fileset dir="${module.web.dir}"/>
+			<fileset dir="${project.path.common-web}/web"/>
 		</copy>
         <mkdir dir="${build.dir}/war/WEB-INF/classes"/>
         <copy todir="${build.dir}/war/WEB-INF/classes">
