@@ -59,6 +59,7 @@ public class AppServlet extends HttpServlet {
 			req.setAttribute("doc.error-key."+id, e.getClass().getSimpleName());
 			req.setAttribute("doc.error-obj", e);
 		}
+		req.setAttribute("doc.newName."+id, newName);
 		
 		//show a page
 		this.doGet(req, resp);
