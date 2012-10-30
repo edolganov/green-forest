@@ -3,7 +3,7 @@ package com.gf.core.action.filter;
 import com.gf.Filter;
 import com.gf.core.action.InvocationContext;
 import com.gf.core.action.interceptor.InterceptorsBlock;
-import com.gf.core.util.CoreUtil;
+import com.gf.core.action.trace.Body;
 import com.gf.service.FilterChain;
 
 public class FilterChainImpl {
@@ -50,17 +50,19 @@ class FilterChainItem implements FilterChain {
 		this.index = index;
 	}
 
-	void invoke(){
+	void invoke() throws Exception {
 		
-		Filter filter = owner.getItem(index);
+		final Filter filter = owner.getItem(index);
 		
-		owner.c.initFilter(filter);
-		
-		try {
-			filter.invoke(owner.c.action, this);
-		}catch (Exception e) {
-			throw CoreUtil.convertException(e, "can't invoke "+owner.c.action+" by "+filter);
-		}
+		owner.c.traceWrapper.wrapHandler(new Body() {
+			
+			@Override
+			public void invocation() throws Throwable {
+				owner.c.initFilter(filter);
+				filter.invoke(owner.c.action, FilterChainItem.this);
+			}
+		});
+
 	}
 
 	@Override
