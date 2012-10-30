@@ -49,10 +49,17 @@ public class InvocationBlock {
 	
 	<I, O> O subInvoke(InvocationContext parent, Action<I, O> action) throws Exception {
 		
-		InvocationContext c = createContext(action, parent, false);
+		final InvocationContext c = createContext(action, parent, false);
 		
-		InterceptorsBlock block = new InterceptorsBlock(c);
-		block.invoke();
+		c.traceWrapper.wrapSubHandlers(new Body() {
+			
+			@Override
+			public void invocation() throws Throwable {
+				InterceptorsBlock block = new InterceptorsBlock(c);
+				block.invoke();
+			}
+		});
+
 		
 		return (O) action.getOutput();
 	}
@@ -60,7 +67,7 @@ public class InvocationBlock {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private InvocationContext createContext(Action<?,?> action, InvocationContext parent, boolean initFilters){
 		
-		//check depth
+		//check depth size
 		int depth = parent == null? 1 : parent.depth+1;
 		if(depth > depthMaxSize){
 			throw new InvokeDepthMaxSizeException(depthMaxSize);
@@ -74,18 +81,10 @@ public class InvocationBlock {
 		c.actions = actionService;
 		c.action = action;
 		c.traceWrapper = new TraceWrapper(actionService.owner, isTraceHandlers);
-		
-		//prepare services
 		c.config = c.actions.config;
-		
-		//prepare flags
-		c.isTraceHandlers = isTraceHandlers;
-		
-		//prepare context
 		c.staticContextObjects = c.actions.staticContext.getStaticContextObjects();
 		c.invocationContext = parent == null? new ContextRepository() : parent.invocationContext;
 		
-		//prepare handlers
 		if(initFilters){
 			c.filters = c.actions.resourse.getFilters();
 		}
