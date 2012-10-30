@@ -10,6 +10,7 @@ import com.gf.Handler;
 import com.gf.Interceptor;
 import com.gf.MappingObject;
 import com.gf.annotation.Inject;
+import com.gf.core.action.trace.TraceWrapper;
 import com.gf.core.context.ContextRepository;
 import com.gf.core.util.ReflectionsUtil;
 import com.gf.extra.invocation.TraceList;
@@ -35,6 +36,7 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	public List<Interceptor> interceptors;
 	public Handler handler;
 	public Collection<Object> staticContextObjects;
+	public TraceWrapper traceWrapper;
 	
 	
 	public void initMappingObject(MappingObject obj){

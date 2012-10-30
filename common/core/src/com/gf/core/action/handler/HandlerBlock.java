@@ -1,6 +1,7 @@
 package com.gf.core.action.handler;
 
 import com.gf.core.action.InvocationContext;
+import com.gf.core.action.trace.Body;
 
 @SuppressWarnings({ "unchecked"})
 public class HandlerBlock {
@@ -13,8 +14,15 @@ public class HandlerBlock {
 	
 	public void invoke() throws Exception {
 		
-		c.initMappingObject(c.handler);
-		c.handler.invoke(c.action);
+		c.traceWrapper.wrapHandler(new Body() {
+			
+			@Override
+			public void invocation() throws Throwable {
+				c.initMappingObject(c.handler);
+				c.handler.invoke(c.action);
+			}
+		});
+
 	}
 
 

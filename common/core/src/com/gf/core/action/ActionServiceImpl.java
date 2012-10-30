@@ -17,8 +17,10 @@ public class ActionServiceImpl implements ActionService {
 	public ResourseService resourse;
 	public ConfigService config;
 	public StaticContext staticContext;
+	public Object owner;
 	
-	public ActionServiceImpl(ConfigService config, ResourseService resourseService, StaticContext staticContext) {
+	public ActionServiceImpl(Object owner, ConfigService config, ResourseService resourseService, StaticContext staticContext) {
+		this.owner = owner;
 		this.resourse = resourseService;
 		this.config = config;
 		this.staticContext = staticContext;

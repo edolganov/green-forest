@@ -3,6 +3,7 @@ package com.gf.core.action.interceptor;
 import com.gf.Interceptor;
 import com.gf.core.action.InvocationContext;
 import com.gf.core.action.handler.HandlerBlock;
+import com.gf.core.action.trace.Body;
 import com.gf.service.InterceptorChain;
 
 public class InterceptorChainImpl {
@@ -53,10 +54,17 @@ class InterceptorChainItem implements InterceptorChain {
 	
 	void invoke() throws Exception {
 		
-		Interceptor interceptor = owner.getItem(index);
+		final Interceptor interceptor = owner.getItem(index);
 		
-		owner.c.initMappingObject(interceptor);
-		interceptor.invoke(owner.c.action, this);
+		owner.c.traceWrapper.wrapHandler(new Body() {
+			
+			@Override
+			public void invocation() throws Throwable {
+				owner.c.initMappingObject(interceptor);
+				interceptor.invoke(owner.c.action, InterceptorChainItem.this);
+			}
+		});
+
 	}
 
 	@Override

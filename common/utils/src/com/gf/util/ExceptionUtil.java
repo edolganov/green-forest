@@ -9,7 +9,7 @@ public class ExceptionUtil {
 		if (t instanceof Error) {
 			throw (Error) t;
 		} else {
-			throw new IllegalStateException("Unknow type of exception", t);
+			throw new IllegalStateException("Unknow type of Throwable", t);
 		}
 	}
 

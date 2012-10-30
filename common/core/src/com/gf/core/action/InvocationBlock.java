@@ -5,6 +5,8 @@ import java.util.List;
 import com.gf.Action;
 import com.gf.core.action.filter.FiltersBlock;
 import com.gf.core.action.interceptor.InterceptorsBlock;
+import com.gf.core.action.trace.Body;
+import com.gf.core.action.trace.TraceWrapper;
 import com.gf.core.context.ContextRepository;
 import com.gf.exception.invoke.InvokeDepthMaxSizeException;
 import com.gf.key.core.InvokeDepthMaxSize;
@@ -30,10 +32,17 @@ public class InvocationBlock {
 	
 	public void invoke() throws Exception {
 		
-		InvocationContext c = createContext(action, null, true);
+		final InvocationContext c = createContext(action, null, true);
 		
-		FiltersBlock block = new FiltersBlock(c);
-		block.invoke();
+		c.traceWrapper.wrapInvocationBlock(new Body() {
+			
+			@Override
+			public void invocation() throws Throwable {
+				FiltersBlock block = new FiltersBlock(c);
+				block.invoke();
+			}
+		});
+
 		
 	}
 	
@@ -64,6 +73,7 @@ public class InvocationBlock {
 		c.depth = depth;
 		c.actions = actionService;
 		c.action = action;
+		c.traceWrapper = new TraceWrapper(actionService.owner, isTraceHandlers);
 		
 		//prepare services
 		c.config = c.actions.config;
