@@ -47,6 +47,19 @@ public class TraceWrapper {
 		}
 	}
 	
+	public void wrapSubHandlers(Body body) throws Exception {
+		try {
+			startSubHandlerTrace();
+			body.invocation();
+			successStopSubHandlerTrace();
+		}catch (Throwable t) {
+			failStopSubHandlerTrace(t);
+			throw ExceptionUtil.getExceptionOrThrowError(t);
+		}
+	}
+	
+	
+	
 
 	private void startInvocaitonTrace() {
 		if( ! data.isTracing) {
@@ -71,6 +84,7 @@ public class TraceWrapper {
 		if( ! data.isTracing) {
 			return;
 		}
+		
 	}
 
 	private void successStopHandlerTrace() {
@@ -80,6 +94,26 @@ public class TraceWrapper {
 	}
 
 	private void failStopHandlerTrace(Throwable t) {
+		if( ! data.isTracing) {
+			return;
+		}
+	}
+	
+	
+	private void startSubHandlerTrace() {
+		if( ! data.isTracing) {
+			return;
+		}
+		
+	}
+
+	private void successStopSubHandlerTrace() {
+		if( ! data.isTracing) {
+			return;
+		}
+	}
+
+	private void failStopSubHandlerTrace(Throwable t) {
 		if( ! data.isTracing) {
 			return;
 		}

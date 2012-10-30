@@ -24,7 +24,6 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	
 	InvocationBlock owner;
 	InvocationContext parent;
-	boolean isTraceHandlers = false;
 	int depth;
 	ContextRepository invocationContext;
 	
@@ -42,14 +41,12 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	public void initMappingObject(MappingObject obj){
 		
 		injectAllContexts(obj);
-		addToTrace(obj);
 		obj.setInvocation(this);
 	}
 
 	public void initFilter(Filter obj){
 		
 		injectAllContexts(obj);
-		addToTrace(obj);
 		obj.setInvocationContext(this);
 		
 	}
@@ -68,11 +65,9 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	}
 	
 	
-	private void addToTrace(Object ob) {
-		if(isTraceHandlers){
+	private void addToTrace_(Object ob) {
 			TraceList trace = TraceHandlers.getOrCreateTrace(action);
 			trace.createAndAddItem(ob);
-		}
 	}
 
 	
@@ -84,11 +79,9 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	@Override
 	public <I, O> O subInvoke(Action<I, O> subAction) throws Exception {
 		
-		if(isTraceHandlers){
 			TraceList trace = TraceHandlers.getOrCreateTrace(action);
 			TraceList subTrace = TraceHandlers.getOrCreateTrace(subAction);
 			trace.addSubListToLastItem(subTrace);
-		}
 		
 		return (O)owner.subInvoke(this, subAction);
 	}
