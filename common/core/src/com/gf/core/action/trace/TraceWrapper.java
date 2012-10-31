@@ -17,14 +17,22 @@ public class TraceWrapper {
 	
 	private static final ThreadLocal<Data> THREAD_LOCAL_DATA = new ThreadLocal<Data>();
 	
+	static boolean isEmptyThreadLocal(){
+		return THREAD_LOCAL_DATA.get() == null;
+	}
+	
 	private Data d;
+	private final boolean isRoot;
 	
 	public TraceWrapper(boolean isTracing){
 		
 		d = THREAD_LOCAL_DATA.get();
 		if(d == null){
+			isRoot = true;
 			d = new Data(isTracing);
 			THREAD_LOCAL_DATA.set(d);
+		} else {
+			isRoot = false;
 		}
 		
 	}
@@ -39,7 +47,7 @@ public class TraceWrapper {
 		Trace trace = new Trace(owner);
 		trace.start();
 		
-		if( ! d.parentsQueue.isEmpty()){
+		if( ! isRoot){
 			TraceElement parent = d.parentsQueue.getLast();
 			parent.addChild(trace);
 		}
@@ -55,11 +63,10 @@ public class TraceWrapper {
 		} finally {
 			
 			trace.stop();
-			
 			TraceHandlers.setTrace(action, trace);
 			
 			d.parentsQueue.removeLast();
-			if(d.parentsQueue.isEmpty()){
+			if(isRoot){
 				THREAD_LOCAL_DATA.remove();
 			}
 		}

@@ -39,7 +39,7 @@ public abstract class AbstractEngineTest extends Assert {
 	}
 
 	public static void checkTreeItem(TraceLevelItem expected, TraceLevelItem actual) {
-		assertEquals("items owners", expected.owner, actual.owner);
+		assertEquals("items owners", expected.owner, actual.owner.getClass());
 		List<TraceElement> subTracesA = expected.getChildren();
 		List<TraceElement> subTracesB = actual.getChildren();
 		assertEquals("subtraces size", subTracesA.size(), subTracesB.size());
