@@ -7,7 +7,7 @@ import com.gf.util.Util;
 
 public class TraceLevel extends TraceElement {
 	
-	private List<TraceLevelItem> items = new ArrayList<TraceLevelItem>();
+	private List<TraceLevelItem> children = new ArrayList<TraceLevelItem>();
 	
 	public TraceLevel() {
 		super();
@@ -27,21 +27,22 @@ public class TraceLevel extends TraceElement {
 		}
 	}
 	
-	private void addItem(TraceLevel trace, Object ob){
+	private void addItem(TraceLevel level, Object ob){
 		//item
 		if(ob instanceof Class){
-			trace.createAndAddItem(ob);
+			TraceLevelItem item = new TraceLevelItem(ob);
+			addChild(item);
 		}
 		//item's sub trace
 		else if(ob instanceof List<?>){
 			
-			TraceLevel subTrace = new TraceLevel();
-			trace.addSubListToLastItem(subTrace);
+			TraceLevel subLevel = new TraceLevel();
+			level.addSubChildToLastChild(subLevel);
 			
 			List<?> subItems = (List<?>)ob;
 			for(int i=0; i < subItems.size(); ++i){
 				Object subItem = subItems.get(i);
-				addItem(subTrace, subItem);
+				addItem(subLevel, subItem);
 			}
 		}
 		//unknown
@@ -50,65 +51,41 @@ public class TraceLevel extends TraceElement {
 		}
 	}
 
-	public TraceLevelItem createAndAddItem(Object ob) {
-		Class<?> clazz = null;
-		if(ob instanceof Class){
-			clazz = (Class<?>)ob;
-		}else {
-			clazz = ob.getClass();
-		}
-		TraceLevelItem item = new TraceLevelItem(clazz);
-		items.add(item);
-		
-		return item;
-	}
-
-	public void addSubListToLastItem(TraceElement subElement) {
-		if(items.isEmpty()){
+	private void addSubChildToLastChild(TraceElement child) {
+		if(children.isEmpty()){
 			throw new IllegalStateException("can't add sub tree for empty tree");
 		}
-		TraceLevelItem last = items.get(items.size()-1);
-		last.addSubElement(subElement);
-	}
-	
-	public TraceLevelItem getItem(int index){
-		return items.get(index);
-	}
-	
-	public TraceLevelItem getLastItem(){
-		if(items.size() == 0){
-			return null;
-		}
-		return items.get(items.size()-1);
-	}
-	
-	public int getSize(){
-		return items.size();
-	}
-	
-	public List<TraceLevelItem> getItems(){
-		return new ArrayList<TraceLevelItem>(items);
+		TraceLevelItem last = children.get(children.size()-1);
+		last.addChild(child);
 	}
 	
 	@Override
 	public List<TraceElement> getChildren() {
 		ArrayList<TraceElement> out = new ArrayList<TraceElement>();
-		for (TraceLevelItem item : items) {
+		for (TraceLevelItem item : children) {
 			out.add(item);
 		}
 		return out;
 	}
 	
 	@Override
+	public void addChild(TraceElement child) {
+		if( child instanceof TraceLevelItem){
+			children.add((TraceLevelItem)child);
+		}
+		throw new IllegalStateException("Expected child of type ["+TraceLevelItem.class.getName()+"] but was: "+child);
+	}
+	
+	@Override
 	public String toStringCurObject() {
-		return getClass().getSimpleName()+" [childrenCount="+items.size()+"]";
+		return getClass().getSimpleName()+" [childrenCount="+children.size()+"]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((items == null) ? 0 : items.hashCode());
+		result = prime * result + ((children == null) ? 0 : children.hashCode());
 		return result;
 	}
 
@@ -121,10 +98,10 @@ public class TraceLevel extends TraceElement {
 		if (getClass() != obj.getClass())
 			return false;
 		TraceLevel other = (TraceLevel) obj;
-		if (items == null) {
-			if (other.items != null)
+		if (children == null) {
+			if (other.children != null)
 				return false;
-		} else if (!items.equals(other.items))
+		} else if (!children.equals(other.children))
 			return false;
 		return true;
 	}

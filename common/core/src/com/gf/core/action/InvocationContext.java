@@ -63,12 +63,6 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 		inject(obj, list);
 		
 	}
-	
-	
-	private void addToTrace_(Object ob) {
-			TraceLevel trace = TraceHandlers.getOrCreateTrace(action);
-			trace.createAndAddItem(ob);
-	}
 
 	
 	private void inject(Object obj, Collection<Object> collection){
@@ -77,12 +71,7 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	
 
 	@Override
-	public <I, O> O subInvoke(Action<I, O> subAction) throws Exception {
-		
-			TraceLevel trace = TraceHandlers.getOrCreateTrace(action);
-			TraceLevel subTrace = TraceHandlers.getOrCreateTrace(subAction);
-			trace.addSubListToLastItem(subTrace);
-		
+	public <I, O> O subInvoke(Action<I, O> subAction) throws Exception {		
 		return (O)owner.subInvoke(this, subAction);
 	}
 
