@@ -1,6 +1,5 @@
 package com.gf.core.engine.tracing;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.gf.core.Engine;
@@ -13,19 +12,16 @@ import com.gf.test.handler.StringEcho;
 public class TracingTest extends AbstractEngineTest {
 	
 	
-	@Ignore
 	@Test
 	public void test_trace_sub_engine_with_disable_root_tracing(){
 		fail("todo");
 	}
 	
-	@Ignore
 	@Test
 	public void test_trace_sub_engine_with_different_action(){
 		fail("todo");
 	}
 	
-	@Ignore
 	@Test
 	public void test_trace_sub_engine_with_same_action(){
 		fail("todo");
