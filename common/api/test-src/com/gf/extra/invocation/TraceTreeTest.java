@@ -178,33 +178,33 @@ public class TraceTreeTest extends Assert {
 		
 		//0
 		assertEquals(String.class, items.get(0).type);
-		assertEquals(0, items.get(0).getSubLists().size());
+		assertEquals(0, items.get(0).getChildren().size());
 		//1
 		assertEquals(Byte.class, items.get(1).type);
 		{
-			List<TraceLevel> subTraces = items.get(1).getSubLists();
+			List<TraceElement> subTraces = items.get(1).getChildren();
 			assertEquals(2, subTraces.size());
 			//0
 			{
-				List<TraceLevelItem> subItems = subTraces.get(0).getItems();
+				List<TraceElement> subItems = subTraces.get(0).getChildren();
 				assertEquals(1, subItems.size());
-				assertEquals(Object.class, subItems.get(0).type);
-				assertEquals(0, subItems.get(0).getSubLists().size());
+				assertEquals(Object.class, ((TraceLevelItem)subItems.get(0)).type);
+				assertEquals(0, subItems.get(0).getChildren().size());
 			}
 			//1
 			{
-				List<TraceLevelItem> subItems = subTraces.get(1).getItems();
+				List<TraceElement> subItems = subTraces.get(1).getChildren();
 				assertEquals(1, subItems.size());
-				assertEquals(Long.class, subItems.get(0).type);
+				assertEquals(Long.class, ((TraceLevelItem)subItems.get(0)).type);
 				{
-					List<TraceLevel> subSubTraces = subItems.get(0).getSubLists();
+					List<TraceElement> subSubTraces = subItems.get(0).getChildren();
 					assertEquals(1, subSubTraces.size());
 					//0
 					{
-						List<TraceLevelItem> subSubItems = subSubTraces.get(0).getItems();
+						List<TraceElement> subSubItems = subSubTraces.get(0).getChildren();
 						assertEquals(1, subSubItems.size());
-						assertEquals(Character.class, subSubItems.get(0).type);
-						assertEquals(0, subSubItems.get(0).getSubLists().size());
+						assertEquals(Character.class, ((TraceLevelItem)subSubItems.get(0)).type);
+						assertEquals(0, subSubItems.get(0).getChildren().size());
 					}
 				}
 
@@ -212,7 +212,7 @@ public class TraceTreeTest extends Assert {
 		}
 		//2
 		assertEquals(Integer.class, items.get(2).type);
-		assertEquals(0, items.get(2).getSubLists().size());
+		assertEquals(0, items.get(2).getChildren().size());
 	}
 
 }
