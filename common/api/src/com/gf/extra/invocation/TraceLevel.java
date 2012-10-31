@@ -50,7 +50,7 @@ public class TraceLevel extends TraceElement {
 		}
 	}
 
-	public void createAndAddItem(Object ob) {
+	public TraceLevelItem createAndAddItem(Object ob) {
 		Class<?> clazz = null;
 		if(ob instanceof Class){
 			clazz = (Class<?>)ob;
@@ -59,6 +59,8 @@ public class TraceLevel extends TraceElement {
 		}
 		TraceLevelItem item = new TraceLevelItem(clazz);
 		items.add(item);
+		
+		return item;
 	}
 
 	public void addSubListToLastItem(TraceElement subElement) {
