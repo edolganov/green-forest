@@ -18,6 +18,12 @@ public class Trace extends TraceElement {
 		this.owner = owner;
 		this.level = new TraceLevel(traceTree);
 	}
+	
+	@Override
+	public void addChild(TraceElement child) {
+		level.addChild(child);
+	}
+	
 
 	@Override
 	public List<TraceElement> getChildren() {
@@ -67,7 +73,6 @@ public class Trace extends TraceElement {
 			return false;
 		return true;
 	}
-	
 	
 
 }

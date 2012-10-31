@@ -7,7 +7,7 @@ public class TraceLevelItem extends TraceElement {
 	
 	public final Object owner;
 	
-	private List<TraceElement> subElements;
+	private List<TraceElement> children;
 
 	public TraceLevelItem(Object owner) {
 		super();
@@ -18,23 +18,24 @@ public class TraceLevelItem extends TraceElement {
 
 	@Override
 	public List<TraceElement> getChildren(){
-		if(subElements == null){
+		if(children == null){
 			return new ArrayList<TraceElement>();
 		}
-		return new ArrayList<TraceElement>(subElements);
+		return new ArrayList<TraceElement>(children);
 	}
 
-	public void addSubElement(TraceElement subElement) {
-		if(subElements == null){
-			subElements = new ArrayList<TraceElement>();
+	@Override
+	public void addChild(TraceElement child) {
+		if(children == null){
+			children = new ArrayList<TraceElement>();
 		}
-		subElements.add(subElement);
+		children.add(child);
 	}
 
 
 	@Override
 	public String toStringCurObject() {
-		return getClass().getSimpleName()+" [owner="+owner+", childrenCount="+(subElements == null? 0 : subElements.size())+"]";
+		return getClass().getSimpleName()+" [owner="+owner+", childrenCount="+(children == null? 0 : children.size())+"]";
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class TraceLevelItem extends TraceElement {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((subElements == null) ? 0 : subElements.hashCode());
+				+ ((children == null) ? 0 : children.hashCode());
 		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
 		return result;
 	}
@@ -56,10 +57,10 @@ public class TraceLevelItem extends TraceElement {
 		if (getClass() != obj.getClass())
 			return false;
 		TraceLevelItem other = (TraceLevelItem) obj;
-		if (subElements == null) {
-			if (other.subElements != null)
+		if (children == null) {
+			if (other.children != null)
 				return false;
-		} else if (!subElements.equals(other.subElements))
+		} else if (!children.equals(other.children))
 			return false;
 		if (owner == null) {
 			if (other.owner != null)

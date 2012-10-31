@@ -1,7 +1,11 @@
 package com.gf.core.action.trace;
 
+import java.util.LinkedList;
+
 import com.gf.extra.invocation.InvocaitonEndStatus;
 import com.gf.extra.invocation.Trace;
+import com.gf.extra.invocation.TraceElement;
+import com.gf.extra.invocation.TraceLevel;
 import com.gf.extra.invocation.TraceLevelItem;
 import com.gf.util.ExceptionUtil;
 
@@ -9,169 +13,121 @@ public class TraceWrapper {
 	
 	private static final ThreadLocal<Data> THREAD_LOCAL_DATA = new ThreadLocal<Data>();
 	
-	private boolean isRoot;
-	private Data data;
-	private Object owner;
-	private Trace curTrace;
+	private Data d;
 	
-	public TraceWrapper(Object owner, boolean isTracing){
+	public TraceWrapper(boolean isTracing){
 		
-		this.owner = owner;
-		
-		data = THREAD_LOCAL_DATA.get();
-		if(data == null){
-			isRoot = true;
-			data = new Data(isTracing);
-			THREAD_LOCAL_DATA.set(data);
-		} else {
-			isRoot = false;
+		d = THREAD_LOCAL_DATA.get();
+		if(d == null){
+			d = new Data(isTracing);
+			THREAD_LOCAL_DATA.set(d);
 		}
 		
 	}
 	
-	public void wrapInvocationBlock(Body body) throws Exception {
+	public void wrapInvocationBlock(Object owner, Body body) throws Exception {
+		
+		if( ! d.isTracing) {
+			simpleInvocation(body);
+			return;
+		}
+		
+		Trace trace = new Trace(owner);
+		trace.start();
+		
+		if( ! d.parentsQueue.isEmpty()){
+			TraceElement parent = d.parentsQueue.getLast();
+			parent.addChild(trace);
+		}
+		d.parentsQueue.addLast(trace);
+		
 		try {
-			startInvocaitonTrace();
 			body.invocation();
-			successStopInvocaitonTrace();
+			trace.setEndStatus(InvocaitonEndStatus.SUCCESSED);
 		}catch (Throwable t) {
-			failStopInvocaitonTrace(t);
+			trace.setEndStatus(InvocaitonEndStatus.WITH_EXCEPTION);
+			trace.setThrowable(t);
 			throw ExceptionUtil.getExceptionOrThrowError(t);
 		} finally {
-			finallyInvocaitonTrace();
-		}
-	}
-
-	private void startInvocaitonTrace() {
-		if( ! data.isTracing) {
-			return;
-		}
-		
-		curTrace = new Trace();
-		curTrace.start();
-		if(isRoot){
-			data.rootTrace = curTrace;
-		} else {
-			data.rootTrace.getLevel().addSubListToLastItem(curTrace);
-		}
-	}
-		
-	
-	private void successStopInvocaitonTrace() {
-		if( ! data.isTracing) {
-			return;
-		}
-		curTrace.setEndStatus(InvocaitonEndStatus.SUCCESSED);
-	}
-	
-	private void failStopInvocaitonTrace(Throwable t) {
-		if( ! data.isTracing) {
-			return;
-		}
-		curTrace.setEndStatus(InvocaitonEndStatus.WITH_EXCEPTION);
-		curTrace.setThrowable(t);
-	}
-	
-	private void finallyInvocaitonTrace() {
-		if( ! data.isTracing) {
-			return;
-		}
-		curTrace.stop();
-		if(isRoot){
-			THREAD_LOCAL_DATA.remove();
+			trace.stop();
+			d.parentsQueue.removeLast();
+			if(d.parentsQueue.isEmpty()){
+				THREAD_LOCAL_DATA.remove();
+			}
 		}
 	}
 
 
-	
-	
-	
 	public void wrapHandler(Object handler, Body body) throws Exception {
 		
-		TraceLevelItem item = startHandlerTrace(handler);
+		if( ! d.isTracing) {
+			simpleInvocation(body);
+			return;
+		}
+		
+		TraceLevelItem item = new TraceLevelItem(handler);
+		item.start();
+		
+		TraceElement parent = d.parentsQueue.getLast();
+		parent.addChild(item);
+		d.parentsQueue.addLast(item);
+
 		try {
 			body.invocation();
-			successStopHandlerTrace(item);
+			item.setEndStatus(InvocaitonEndStatus.SUCCESSED);
 		}catch (Throwable t) {
-			failStopHandlerTrace(item, t);
+			item.setEndStatus(InvocaitonEndStatus.WITH_EXCEPTION);
+			item.setThrowable(t);
 			throw ExceptionUtil.getExceptionOrThrowError(t);
 		}finally {
-			finallyHandlerTrace(item);
+			item.stop();
+			d.parentsQueue.removeLast();
 		}
 	}
-
-	private TraceLevelItem startHandlerTrace(Object handler) {
-		if( ! data.isTracing) {
-			return null;
-		}
-		
-		TraceLevelItem item = curTrace.getLevel().createAndAddItem(handler);
-		item.start();
-		return item;
-	}
-
-	private void successStopHandlerTrace(TraceLevelItem item) {
-		if( ! data.isTracing) {
-			return;
-		}
-		item.setEndStatus(InvocaitonEndStatus.SUCCESSED);
-	}
-	
-	private void failStopHandlerTrace(TraceLevelItem item, Throwable t) {
-		if( ! data.isTracing) {
-			return;
-		}
-		item.setEndStatus(InvocaitonEndStatus.WITH_EXCEPTION);
-		item.setThrowable(t);
-	}
-	
-	private void finallyHandlerTrace(TraceLevelItem item) {
-		item.stop();
-	}
-	
-	
 	
 	public void wrapSubHandlers(Body body) throws Exception {
+		
+		if( ! d.isTracing) {
+			simpleInvocation(body);
+			return;
+		}
+		
+		TraceLevel level = new TraceLevel();
+		level.start();
+		
+		TraceElement parent = d.parentsQueue.getLast();
+		parent.addChild(level);
+		d.parentsQueue.addLast(level);
+		
 		try {
-			startSubHandlerTrace();
 			body.invocation();
-			successStopSubHandlerTrace();
+			level.setEndStatus(InvocaitonEndStatus.SUCCESSED);
 		}catch (Throwable t) {
-			failStopSubHandlerTrace(t);
+			level.setEndStatus(InvocaitonEndStatus.WITH_EXCEPTION);
+			level.setThrowable(t);
+			throw ExceptionUtil.getExceptionOrThrowError(t);
+		}finally{
+			level.stop();
+			d.parentsQueue.removeLast();
+		}
+	}
+	
+
+	private void simpleInvocation(Body body)throws Exception {
+		try {
+			body.invocation();
+		}catch (Throwable t) {
 			throw ExceptionUtil.getExceptionOrThrowError(t);
 		}
 	}
-	
-
-	
-	
-	private void startSubHandlerTrace() {
-		if( ! data.isTracing) {
-			return;
-		}
-		
-	}
-
-	private void successStopSubHandlerTrace() {
-		if( ! data.isTracing) {
-			return;
-		}
-	}
-
-	private void failStopSubHandlerTrace(Throwable t) {
-		if( ! data.isTracing) {
-			return;
-		}
-	}
-
 
 
 
 
 	private static class Data {
 		
-		public boolean isTracing;
-		public Trace rootTrace;
+		public final boolean isTracing;
+		public final LinkedList<TraceElement> parentsQueue = new LinkedList<TraceElement>();
 
 		public Data(boolean isTracing) {
 			super();

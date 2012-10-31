@@ -42,6 +42,9 @@ public abstract class TraceElement {
 
 	public abstract List<TraceElement> getChildren();
 	
+	public abstract void addChild(TraceElement child);
+	
+	
 	abstract String toStringCurObject();
 	
 	@Override
