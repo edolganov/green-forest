@@ -61,12 +61,12 @@ public class TraceLevel extends TraceElement {
 		items.add(item);
 	}
 
-	public void addSubListToLastItem(TraceLevel subTrace) {
+	public void addSubListToLastItem(TraceElement subElement) {
 		if(items.isEmpty()){
 			throw new IllegalStateException("can't add sub tree for empty tree");
 		}
 		TraceLevelItem last = items.get(items.size()-1);
-		last.addSubElement(subTrace);
+		last.addSubElement(subElement);
 	}
 	
 	public TraceLevelItem getItem(int index){

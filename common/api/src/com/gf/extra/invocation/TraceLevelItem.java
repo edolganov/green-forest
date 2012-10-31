@@ -24,11 +24,11 @@ public class TraceLevelItem extends TraceElement {
 		return new ArrayList<TraceElement>(subElements);
 	}
 
-	public void addSubElement(TraceLevel subTrace) {
+	public void addSubElement(TraceElement subElement) {
 		if(subElements == null){
 			subElements = new ArrayList<TraceElement>();
 		}
-		subElements.add(subTrace);
+		subElements.add(subElement);
 	}
 
 

@@ -2,11 +2,11 @@ package com.gf.key.core;
 
 import com.gf.Action;
 import com.gf.config.ConfigKey;
-import com.gf.extra.invocation.TraceLevel;
+import com.gf.extra.invocation.Trace;
 
 public class TraceHandlers extends ConfigKey<Boolean> {
 	
-	public static final String ATTR_KEY = TraceHandlers.class.getName()+".TraceTree";
+	public static final String ATTR_KEY = TraceHandlers.class.getName()+".Trace";
 
 	@Override
 	public boolean hasDefaultValue() {
@@ -18,20 +18,20 @@ public class TraceHandlers extends ConfigKey<Boolean> {
 		return Boolean.FALSE;
 	}
 	
-	public static TraceLevel getOrCreateTrace(Action<?, ?> action){
-		TraceLevel trace = getTrace(action);
+	public static Trace getOrCreateTrace(Action<?, ?> action){
+		Trace trace = getTrace(action);
 		if(trace == null){
-			trace = new TraceLevel();
+			trace = new Trace();
 			setTrace(action, trace);
 		}
 		return trace;
 	}
 	
-	public static TraceLevel getTrace(Action<?, ?> action){
-		return (TraceLevel) action.getAttr(ATTR_KEY);
+	public static Trace getTrace(Action<?, ?> action){
+		return (Trace) action.getAttr(ATTR_KEY);
 	}
 	
-	private static void setTrace(Action<?, ?> action, TraceLevel trace) {
+	private static void setTrace(Action<?, ?> action, Trace trace) {
 		action.putAttr(ATTR_KEY, trace);
 	}
 
