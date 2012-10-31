@@ -88,5 +88,9 @@ public class Util {
 			return defaultVal;
 		}
 	}
+	
+    public static String toObjectString(Object ob) {
+        return ob.getClass().getName() + "@" + Integer.toHexString(ob.hashCode());
+    }
 
 }
