@@ -15,7 +15,7 @@ import com.gf.core.engine.handler.model.SubSubInvokeAction;
 import com.gf.core.engine.handler.model.SubSubInvokeHandler;
 import com.gf.core.engine.interceptor.model.BeginForAllByAnn;
 import com.gf.core.engine.interceptor.model.FirstByAnn;
-import com.gf.core.engine.interceptor.model.RecursionInterveptor;
+import com.gf.core.engine.interceptor.model.RecursionInterceptor;
 import com.gf.core.engine.interceptor.model.SubInvokeInterceptor;
 import com.gf.core.engine.interceptor.model.SubSubInvokeInterceptor;
 import com.gf.exception.invoke.InvokeDepthMaxSizeException;
@@ -38,7 +38,7 @@ public class InvokeTest extends AbstractEngineTest {
 		Engine engine = new Engine();
 		disableTracing(engine);
 		
-		engine.putInterceptor(RecursionInterveptor.class);
+		engine.putInterceptor(RecursionInterceptor.class);
 		engine.putHandler(RecursionHandler.class);
 		engine.putHandler(SubInvokeHandler.class);
 		engine.putHandler(StringEcho.class);
@@ -56,7 +56,7 @@ public class InvokeTest extends AbstractEngineTest {
 		int depthMaxSize = 42;
 		engine.setConfig(InvokeDepthMaxSize.class, depthMaxSize);
 		
-		engine.putInterceptor(RecursionInterveptor.class);
+		engine.putInterceptor(RecursionInterceptor.class);
 		engine.putHandler(RecursionHandler.class);
 		engine.putHandler(SubInvokeHandler.class);
 		engine.putHandler(StringEcho.class);
