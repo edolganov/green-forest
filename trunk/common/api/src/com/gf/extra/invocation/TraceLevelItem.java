@@ -5,13 +5,13 @@ import java.util.List;
 
 public class TraceLevelItem extends TraceElement {
 	
-	public final Class<?> type;
+	public final Object owner;
 	
 	private List<TraceElement> subElements;
 
-	public TraceLevelItem(Class<?> type) {
+	public TraceLevelItem(Object owner) {
 		super();
-		this.type = type;
+		this.owner = owner;
 	}
 
 
@@ -34,7 +34,7 @@ public class TraceLevelItem extends TraceElement {
 
 	@Override
 	public String toStringCurObject() {
-		return getClass().getSimpleName()+" [owner="+type+", childrenCount="+(subElements == null? 0 : subElements.size())+"]";
+		return getClass().getSimpleName()+" [owner="+owner+", childrenCount="+(subElements == null? 0 : subElements.size())+"]";
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class TraceLevelItem extends TraceElement {
 		int result = 1;
 		result = prime * result
 				+ ((subElements == null) ? 0 : subElements.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
 		return result;
 	}
 
@@ -61,10 +61,10 @@ public class TraceLevelItem extends TraceElement {
 				return false;
 		} else if (!subElements.equals(other.subElements))
 			return false;
-		if (type == null) {
-			if (other.type != null)
+		if (owner == null) {
+			if (other.owner != null)
 				return false;
-		} else if (!type.equals(other.type))
+		} else if (!owner.equals(other.owner))
 			return false;
 		return true;
 	}
