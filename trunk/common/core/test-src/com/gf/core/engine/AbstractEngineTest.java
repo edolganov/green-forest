@@ -6,6 +6,7 @@ import junit.framework.Assert;
 
 import com.gf.Action;
 import com.gf.core.Engine;
+import com.gf.extra.invocation.TraceElement;
 import com.gf.extra.invocation.TraceLevelItem;
 import com.gf.extra.invocation.TraceLevel;
 import com.gf.key.core.TraceHandlers;
@@ -39,13 +40,19 @@ public abstract class AbstractEngineTest extends Assert {
 
 	public static void checkTreeItem(TraceLevelItem expected, TraceLevelItem actual) {
 		assertEquals("items types", expected.type, actual.type);
-		List<TraceLevel> subTracesA = expected.getSubLists();
-		List<TraceLevel> subTracesB = actual.getSubLists();
+		List<TraceElement> subTracesA = expected.getChildren();
+		List<TraceElement> subTracesB = actual.getChildren();
 		assertEquals("subtraces size", subTracesA.size(), subTracesB.size());
 		for (int i = 0; i < subTracesA.size(); i++) {
-			TraceLevel itemA = subTracesA.get(i);
-			TraceLevel itemB = subTracesB.get(i);
-			checkTrace(itemA, itemB);
+			
+			TraceElement elemA = subTracesA.get(i);
+			TraceElement elemB = subTracesB.get(i);
+			assertEquals(elemA.getClass(), elemB.getClass());
+			
+			if(elemA instanceof TraceLevel){
+				checkTrace((TraceLevel)elemA, (TraceLevel)elemB);
+			}
+
 		}
 	}
 

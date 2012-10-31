@@ -8,11 +8,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class TraceLevelItem {
+public class TraceLevelItem implements TraceElement {
 	
 	public final Class<?> type;
 	
-	private List<TraceLevel> subLists;
+	private List<TraceElement> subElements;
 
 	public TraceLevelItem(Class<?> type) {
 		super();
@@ -21,18 +21,19 @@ public class TraceLevelItem {
 
 
 
-	public List<TraceLevel> getSubLists(){
-		if(subLists == null){
-			return new ArrayList<TraceLevel>();
+	@Override
+	public List<TraceElement> getChildren(){
+		if(subElements == null){
+			return new ArrayList<TraceElement>();
 		}
-		return new ArrayList<TraceLevel>(subLists);
+		return new ArrayList<TraceElement>(subElements);
 	}
 
-	public void addSubList(TraceLevel subTrace) {
-		if(subLists == null){
-			subLists = new ArrayList<TraceLevel>();
+	public void addSubElement(TraceLevel subTrace) {
+		if(subElements == null){
+			subElements = new ArrayList<TraceElement>();
 		}
-		subLists.add(subTrace);
+		subElements.add(subTrace);
 	}
 
 
@@ -42,7 +43,7 @@ public class TraceLevelItem {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((subLists == null) ? 0 : subLists.hashCode());
+				+ ((subElements == null) ? 0 : subElements.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -58,10 +59,10 @@ public class TraceLevelItem {
 		if (getClass() != obj.getClass())
 			return false;
 		TraceLevelItem other = (TraceLevelItem) obj;
-		if (subLists == null) {
-			if (other.subLists != null)
+		if (subElements == null) {
+			if (other.subElements != null)
 				return false;
-		} else if (!subLists.equals(other.subLists))
+		} else if (!subElements.equals(other.subElements))
 			return false;
 		if (type == null) {
 			if (other.type != null)
@@ -90,12 +91,12 @@ public class TraceLevelItem {
 		sb.append(type == null? "null" : type.getName());
 
 		
-		List<TraceLevel> items = Collections.emptyList();
-		if(subLists != null){
-			items = subLists;
+		List<TraceElement> items = Collections.emptyList();
+		if(subElements != null){
+			items = subElements;
 		}
 		
-		Iterator<TraceLevel> i = items.iterator();
+		Iterator<TraceElement> i = items.iterator();
 		if ( i.hasNext()){
 			
 			sb.append('\n');
@@ -103,7 +104,7 @@ public class TraceLevelItem {
 			while(i.hasNext()) {
 				
 				toStringLevelIndex.set(levelIndex+1);
-				TraceLevel e = i.next();
+				TraceElement e = i.next();
 			    sb.append(e);
 			    toStringLevelIndex.set(levelIndex);
 			    
@@ -121,6 +122,10 @@ public class TraceLevelItem {
 		
 		return sb.toString();
 	}
+
+
+
+
 	
 	
 
