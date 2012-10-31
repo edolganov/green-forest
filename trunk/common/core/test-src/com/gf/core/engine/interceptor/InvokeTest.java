@@ -20,8 +20,8 @@ import com.gf.core.engine.interceptor.model.SubInvokeInterceptor;
 import com.gf.core.engine.interceptor.model.SubSubInvokeInterceptor;
 import com.gf.exception.invoke.InvokeDepthMaxSizeException;
 import com.gf.extra.invocation.TraceElement;
-import com.gf.extra.invocation.TraceLevelItem;
 import com.gf.extra.invocation.TraceLevel;
+import com.gf.extra.invocation.TraceLevelItem;
 import com.gf.key.core.InvokeDepthMaxSize;
 import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.StringAction;
@@ -71,15 +71,15 @@ public class InvokeTest extends AbstractEngineTest {
 		
 		int depth = 1;
 		
-		TraceLevel trace = TraceHandlers.getOrCreateTrace(action);
-		while(trace != null){
+		TraceLevel level = TraceHandlers.getOrCreateTrace(action).getLevel();
+		while(level != null){
 			depth++;
-			List<TraceLevelItem> items = trace.getItems();
+			List<TraceLevelItem> items = level.getChildrenItems();
 			List<TraceElement> subTraces = items.get(0).getChildren();
 			if( subTraces.size() == 2){
-				trace = (TraceLevel)subTraces.get(1);
+				level = (TraceLevel)subTraces.get(1);
 			} else {
-				trace = null;
+				level = null;
 			}
 		}
 		

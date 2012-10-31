@@ -56,7 +56,7 @@ class InterceptorChainItem implements InterceptorChain {
 		
 		final Interceptor interceptor = owner.getItem(index);
 		
-		owner.c.traceWrapper.wrapHandler(new Body() {
+		owner.c.traceWrapper.wrapHandler(interceptor, new Body() {
 			
 			@Override
 			public void invocation() throws Throwable {

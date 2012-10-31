@@ -54,7 +54,7 @@ class FilterChainItem implements FilterChain {
 		
 		final Filter filter = owner.getItem(index);
 		
-		owner.c.traceWrapper.wrapHandler(new Body() {
+		owner.c.traceWrapper.wrapHandler(filter, new Body() {
 			
 			@Override
 			public void invocation() throws Throwable {
