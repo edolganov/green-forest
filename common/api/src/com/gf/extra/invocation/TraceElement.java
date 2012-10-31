@@ -8,6 +8,7 @@ public abstract class TraceElement {
 	private long startTime;
 	private long endTime;
 	private InvocaitonEndStatus endStatus;
+	private Throwable throwable;
 	
 	public void start(){
 		startTime = System.currentTimeMillis();
@@ -27,6 +28,14 @@ public abstract class TraceElement {
 	
 	public InvocaitonEndStatus getEndStatus() {
 		return endStatus;
+	}
+
+	public Throwable getThrowable() {
+		return throwable;
+	}
+
+	public void setThrowable(Throwable throwable) {
+		this.throwable = throwable;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.gf.core.action.trace;
 
+import com.gf.extra.invocation.InvocaitonEndStatus;
 import com.gf.extra.invocation.Trace;
 import com.gf.util.ExceptionUtil;
 
@@ -35,19 +36,20 @@ public class TraceWrapper {
 		}catch (Throwable t) {
 			failStopInvocaitonTrace(t);
 			throw ExceptionUtil.getExceptionOrThrowError(t);
+		} finally {
+			finallyInvocaitonTrace();
 		}
 	}
-	
+
 	private void startInvocaitonTrace() {
 		if( ! data.isTracing) {
 			return;
 		}
 		
 		curTrace = new Trace();
+		curTrace.start();
 		if(isRoot){
-			data.trace = curTrace;
-		} else {
-			data.trace.getLevel().addSubListToLastItem(curTrace);
+			data.rootTrace = curTrace;
 		}
 	}
 		
@@ -56,17 +58,29 @@ public class TraceWrapper {
 		if( ! data.isTracing) {
 			return;
 		}
-		
-		if(isRoot){
-			THREAD_LOCAL_DATA.remove();
-		}
+		curTrace.setEndStatus(InvocaitonEndStatus.SUCCESSED);
 	}
-
+	
 	private void failStopInvocaitonTrace(Throwable t) {
 		if( ! data.isTracing) {
 			return;
 		}
 	}
+	
+	private void finallyInvocaitonTrace() {
+		if( ! data.isTracing) {
+			return;
+		}
+		
+		curTrace.stop();
+		if(isRoot){
+			THREAD_LOCAL_DATA.remove();
+		} else {
+			data.rootTrace.getLevel().addSubListToLastItem(curTrace);
+		}
+	}
+
+
 	
 	
 	
@@ -81,18 +95,6 @@ public class TraceWrapper {
 		}
 	}
 	
-	public void wrapSubHandlers(Body body) throws Exception {
-		try {
-			startSubHandlerTrace();
-			body.invocation();
-			successStopSubHandlerTrace();
-		}catch (Throwable t) {
-			failStopSubHandlerTrace(t);
-			throw ExceptionUtil.getExceptionOrThrowError(t);
-		}
-	}
-	
-	
 	private void startHandlerTrace() {
 		if( ! data.isTracing) {
 			return;
@@ -105,6 +107,22 @@ public class TraceWrapper {
 			return;
 		}
 	}
+	
+	
+	
+	public void wrapSubHandlers(Body body) throws Exception {
+		try {
+			startSubHandlerTrace();
+			body.invocation();
+			successStopSubHandlerTrace();
+		}catch (Throwable t) {
+			failStopSubHandlerTrace(t);
+			throw ExceptionUtil.getExceptionOrThrowError(t);
+		}
+	}
+	
+	
+
 
 	private void failStopHandlerTrace(Throwable t) {
 		if( ! data.isTracing) {
@@ -139,7 +157,7 @@ public class TraceWrapper {
 	private static class Data {
 		
 		public boolean isTracing;
-		public Trace trace;
+		public Trace rootTrace;
 
 		public Data(boolean isTracing) {
 			super();
