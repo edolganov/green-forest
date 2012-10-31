@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import com.gf.core.Engine;
 import com.gf.core.engine.AbstractEngineTest;
-import com.gf.extra.invocation.TraceList;
+import com.gf.extra.invocation.TraceLevel;
 import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.StringAction;
 import com.gf.test.handler.StringEcho;
@@ -37,7 +37,7 @@ public class TracingTest extends AbstractEngineTest {
 		StringAction action = new StringAction();
 		engine.invoke(action);
 		
-		TraceList trace = TraceHandlers.getTrace(action);
+		TraceLevel trace = TraceHandlers.getTrace(action);
 		assertNotNull(trace);
 	}
 	
@@ -51,7 +51,7 @@ public class TracingTest extends AbstractEngineTest {
 		StringAction action = new StringAction();
 		engine.invoke(action);
 		
-		TraceList trace = TraceHandlers.getTrace(action);
+		TraceLevel trace = TraceHandlers.getTrace(action);
 		assertNull(trace);
 
 	}
