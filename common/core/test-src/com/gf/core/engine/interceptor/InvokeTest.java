@@ -71,7 +71,7 @@ public class InvokeTest extends AbstractEngineTest {
 		
 		int depth = 1;
 		
-		TraceLevel level = TraceHandlers.getOrCreateTrace(action).getLevel();
+		TraceLevel level = TraceHandlers.getOrCreateTrace(action);
 		while(level != null){
 			depth++;
 			List<TraceLevelItem> items = level.getChildrenItems();

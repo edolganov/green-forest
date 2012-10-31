@@ -23,7 +23,7 @@ public abstract class AbstractEngineTest extends Assert {
 	
 	public static void checkTrace(Action<?,?> action, Object... traceTree){
 		TraceLevel expected = new TraceLevel(traceTree);
-		TraceLevel actual = TraceHandlers.getOrCreateTrace(action).getLevel();
+		TraceLevel actual = TraceHandlers.getOrCreateTrace(action);
 		checkTrace(expected, actual);
 	}
 

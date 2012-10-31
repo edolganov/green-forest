@@ -7,7 +7,7 @@ import com.gf.util.Util;
 
 public class TraceLevel extends TraceElement {
 	
-	private List<TraceLevelItem> children = new ArrayList<TraceLevelItem>();
+	protected List<TraceLevelItem> children = new ArrayList<TraceLevelItem>();
 	
 	public TraceLevel() {
 		super();
