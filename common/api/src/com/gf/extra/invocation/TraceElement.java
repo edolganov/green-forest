@@ -2,8 +2,15 @@ package com.gf.extra.invocation;
 
 import java.util.List;
 
-public interface TraceElement {
+public abstract class TraceElement {
 	
-	List<TraceElement> getChildren();
+	public abstract List<TraceElement> getChildren();
+	
+	abstract String toStringCurObject();
+	
+	@Override
+	public String toString() {
+		return TraceUtil.toString(this);
+	}
 
 }

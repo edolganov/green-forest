@@ -1,14 +1,9 @@
 package com.gf.extra.invocation;
 
-import static com.gf.extra.invocation.TraceLevel.appendTabs;
-import static com.gf.extra.invocation.TraceLevel.toStringLevelIndex;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
-public class TraceLevelItem implements TraceElement {
+public class TraceLevelItem extends TraceElement {
 	
 	public final Class<?> type;
 	
@@ -37,6 +32,10 @@ public class TraceLevelItem implements TraceElement {
 	}
 
 
+	@Override
+	public String toStringCurObject() {
+		return getClass().getSimpleName()+" [owner="+type+", childrenCount="+(subElements == null? 0 : subElements.size())+"]";
+	}
 
 	@Override
 	public int hashCode() {
@@ -47,8 +46,6 @@ public class TraceLevelItem implements TraceElement {
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -71,62 +68,5 @@ public class TraceLevelItem implements TraceElement {
 			return false;
 		return true;
 	}
-
-
-
-	@Override
-	public String toString() {
-		
-		boolean rootCall = false;
-		Integer levelIndex = toStringLevelIndex.get();
-		if(levelIndex == null){
-			rootCall = true;
-			levelIndex = 0;
-			toStringLevelIndex.set(levelIndex);
-		}
-		
-		StringBuilder sb = new StringBuilder();
-		appendTabs(sb, levelIndex);
-		sb.append("[TraceLevelItem: ");
-		sb.append(type == null? "null" : type.getName());
-
-		
-		List<TraceElement> items = Collections.emptyList();
-		if(subElements != null){
-			items = subElements;
-		}
-		
-		Iterator<TraceElement> i = items.iterator();
-		if ( i.hasNext()){
-			
-			sb.append('\n');
-			
-			while(i.hasNext()) {
-				
-				toStringLevelIndex.set(levelIndex+1);
-				TraceElement e = i.next();
-			    sb.append(e);
-			    toStringLevelIndex.set(levelIndex);
-			    
-			    if (i.hasNext()){
-			    	sb.append('\n');
-			    }
-			}
-		}
-		
-    	sb.append(']');
-		
-		if(rootCall){
-			toStringLevelIndex.remove();
-		}
-		
-		return sb.toString();
-	}
-
-
-
-
-	
-	
 
 }

@@ -1,15 +1,11 @@
 package com.gf.extra.invocation;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import com.gf.util.Util;
 
-public class TraceLevel implements TraceElement {
-	
-	static final ThreadLocal<Integer> toStringLevelIndex = new ThreadLocal<Integer>();
+public class TraceLevel extends TraceElement {
 	
 	private List<TraceLevelItem> items = new ArrayList<TraceLevelItem>();
 	
@@ -101,7 +97,10 @@ public class TraceLevel implements TraceElement {
 		return out;
 	}
 	
-	
+	@Override
+	public String toStringCurObject() {
+		return getClass().getSimpleName()+" [childrenCount="+items.size()+"]";
+	}
 
 	@Override
 	public int hashCode() {
@@ -126,59 +125,6 @@ public class TraceLevel implements TraceElement {
 		} else if (!items.equals(other.items))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		boolean rootCall = false;
-		Integer levelIndex = toStringLevelIndex.get();
-		if(levelIndex == null){
-			rootCall = true;
-			levelIndex = 0;
-			toStringLevelIndex.set(levelIndex);
-		}
-		
-		StringBuilder sb = new StringBuilder();
-		appendTabs(sb, levelIndex);
-		sb.append("[TraceLevel:");
-		
-		List<TraceLevelItem> items = Collections.emptyList();
-		if(this.items != null){
-			items = this.items;
-		}
-		
-        Iterator<TraceLevelItem> i = items.iterator();
-		if (! i.hasNext()){
-		    sb.append(" empty");
-		} else {
-			
-			sb.append('\n');
-			
-			while(i.hasNext()) {
-				
-				toStringLevelIndex.set(levelIndex+1);
-				TraceLevelItem e = i.next();
-			    sb.append(e);
-			    toStringLevelIndex.set(levelIndex);
-			    
-			    if ( i.hasNext()){
-			    	sb.append('\n');
-			    }
-			}
-		}
-		
-    	sb.append(']');
-		
-		if(rootCall){
-			toStringLevelIndex.remove();
-		}
-		return sb.toString();
-	}
-	
-	static void appendTabs(StringBuilder sb, int levelIndex){
-		for(int i=0; i < levelIndex; ++i){
-			sb.append('\t');
-		}
 	}
 	
 
