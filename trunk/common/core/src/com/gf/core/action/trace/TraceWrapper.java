@@ -1,5 +1,6 @@
 package com.gf.core.action.trace;
 
+import com.gf.extra.invocation.Trace;
 import com.gf.util.ExceptionUtil;
 
 public class TraceWrapper {
@@ -9,6 +10,7 @@ public class TraceWrapper {
 	private boolean isRoot;
 	private Data data;
 	private Object owner;
+	private Trace curTrace;
 	
 	public TraceWrapper(Object owner, boolean isTracing){
 		
@@ -36,6 +38,38 @@ public class TraceWrapper {
 		}
 	}
 	
+	private void startInvocaitonTrace() {
+		if( ! data.isTracing) {
+			return;
+		}
+		
+		curTrace = new Trace();
+		if(isRoot){
+			data.trace = curTrace;
+		} else {
+			data.trace.getLevel().addSubListToLastItem(curTrace);
+		}
+	}
+		
+	
+	private void successStopInvocaitonTrace() {
+		if( ! data.isTracing) {
+			return;
+		}
+		
+		if(isRoot){
+			THREAD_LOCAL_DATA.remove();
+		}
+	}
+
+	private void failStopInvocaitonTrace(Throwable t) {
+		if( ! data.isTracing) {
+			return;
+		}
+	}
+	
+	
+	
 	public void wrapHandler(Body body) throws Exception {
 		try {
 			startHandlerTrace();
@@ -58,27 +92,6 @@ public class TraceWrapper {
 		}
 	}
 	
-	
-	
-
-	private void startInvocaitonTrace() {
-		if( ! data.isTracing) {
-			return;
-		}
-	}
-		
-	
-	private void successStopInvocaitonTrace() {
-		if( ! data.isTracing) {
-			return;
-		}
-	}
-
-	private void failStopInvocaitonTrace(Throwable t) {
-		if( ! data.isTracing) {
-			return;
-		}
-	}
 	
 	private void startHandlerTrace() {
 		if( ! data.isTracing) {
@@ -126,6 +139,7 @@ public class TraceWrapper {
 	private static class Data {
 		
 		public boolean isTracing;
+		public Trace trace;
 
 		public Data(boolean isTracing) {
 			super();
