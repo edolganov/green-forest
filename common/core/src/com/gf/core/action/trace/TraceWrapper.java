@@ -1,6 +1,7 @@
 package com.gf.core.action.trace;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import com.gf.Action;
 import com.gf.extra.invocation.InvocaitonEndStatus;
@@ -77,7 +78,6 @@ public class TraceWrapper {
 		
 		TraceElement parent = d.parentsQueue.getLast();
 		parent.addChild(item);
-		d.parentsQueue.addLast(item);
 
 		try {
 			body.invocation();
@@ -88,7 +88,6 @@ public class TraceWrapper {
 			throw ExceptionUtil.getExceptionOrThrowError(t);
 		}finally {
 			item.stop();
-			d.parentsQueue.removeLast();
 		}
 	}
 	
@@ -103,7 +102,12 @@ public class TraceWrapper {
 		level.start();
 		
 		TraceElement parent = d.parentsQueue.getLast();
-		parent.addChild(level);
+		List<TraceElement> children = parent.getChildren();
+		if(children.size()==0){
+			throw new IllegalStateException("can't invoke wrapSubHandlers without wrapInvocationBlock");
+		}
+		TraceElement lastChild = children.get(children.size()-1);
+		lastChild.addChild(level);
 		d.parentsQueue.addLast(level);
 		
 		try {
