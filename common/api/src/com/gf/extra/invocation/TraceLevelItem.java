@@ -7,7 +7,7 @@ public class TraceLevelItem extends TraceElement {
 	
 	public final Object owner;
 	
-	private List<TraceElement> children;
+	private List<TraceLevel> children;
 
 	public TraceLevelItem(Object owner) {
 		super();
@@ -26,10 +26,15 @@ public class TraceLevelItem extends TraceElement {
 
 	@Override
 	public void addChild(TraceElement child) {
-		if(children == null){
-			children = new ArrayList<TraceElement>();
+		if(child instanceof TraceLevel){
+			if(children == null){
+				children = new ArrayList<TraceLevel>();
+			}
+			children.add((TraceLevel)child);
+		} else {
+			throw new IllegalStateException("expected type: "+TraceElement.class);
 		}
-		children.add(child);
+
 	}
 
 
