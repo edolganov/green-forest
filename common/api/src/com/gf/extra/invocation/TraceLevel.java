@@ -76,8 +76,10 @@ public class TraceLevel extends TraceElement {
 	public void addChild(TraceElement child) {
 		if( child instanceof TraceLevelItem){
 			children.add((TraceLevelItem)child);
+		} else {
+			throw new IllegalStateException("Expected child of type ["+TraceLevelItem.class.getName()+"] but was: "+child);
 		}
-		throw new IllegalStateException("Expected child of type ["+TraceLevelItem.class.getName()+"] but was: "+child);
+		
 	}
 	
 	@Override

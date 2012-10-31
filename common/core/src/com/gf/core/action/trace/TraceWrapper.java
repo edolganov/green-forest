@@ -2,13 +2,16 @@ package com.gf.core.action.trace;
 
 import java.util.LinkedList;
 
+import com.gf.Action;
 import com.gf.extra.invocation.InvocaitonEndStatus;
 import com.gf.extra.invocation.Trace;
 import com.gf.extra.invocation.TraceElement;
 import com.gf.extra.invocation.TraceLevel;
 import com.gf.extra.invocation.TraceLevelItem;
+import com.gf.key.core.TraceHandlers;
 import com.gf.util.ExceptionUtil;
 
+@SuppressWarnings("rawtypes")
 public class TraceWrapper {
 	
 	private static final ThreadLocal<Data> THREAD_LOCAL_DATA = new ThreadLocal<Data>();
@@ -25,7 +28,7 @@ public class TraceWrapper {
 		
 	}
 	
-	public void wrapInvocationBlock(Object owner, Body body) throws Exception {
+	public void wrapInvocationBlock(Object owner, Action action, Body body) throws Exception {
 		
 		if( ! d.isTracing) {
 			simpleInvocation(body);
@@ -49,7 +52,11 @@ public class TraceWrapper {
 			trace.setThrowable(t);
 			throw ExceptionUtil.getExceptionOrThrowError(t);
 		} finally {
+			
 			trace.stop();
+			
+			TraceHandlers.setTrace(action, trace);
+			
 			d.parentsQueue.removeLast();
 			if(d.parentsQueue.isEmpty()){
 				THREAD_LOCAL_DATA.remove();

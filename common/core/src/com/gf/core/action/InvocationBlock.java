@@ -34,7 +34,7 @@ public class InvocationBlock {
 		
 		final InvocationContext c = createContext(action, null, true);
 		
-		c.traceWrapper.wrapInvocationBlock(actionService.owner, new Body() {
+		c.traceWrapper.wrapInvocationBlock(actionService.owner, action, new Body() {
 			
 			@Override
 			public void invocation() throws Throwable {

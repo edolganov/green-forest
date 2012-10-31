@@ -31,7 +31,7 @@ public class TraceHandlers extends ConfigKey<Boolean> {
 		return (Trace) action.getAttr(ATTR_KEY);
 	}
 	
-	private static void setTrace(Action<?, ?> action, Trace trace) {
+	public static void setTrace(Action<?, ?> action, Trace trace) {
 		action.putAttr(ATTR_KEY, trace);
 	}
 
