@@ -177,10 +177,10 @@ public class TraceTreeTest extends Assert {
 		assertEquals(3, items.size());
 		
 		//0
-		assertEquals(String.class, items.get(0).type);
+		assertEquals(String.class, items.get(0).owner);
 		assertEquals(0, items.get(0).getChildren().size());
 		//1
-		assertEquals(Byte.class, items.get(1).type);
+		assertEquals(Byte.class, items.get(1).owner);
 		{
 			List<TraceElement> subTraces = items.get(1).getChildren();
 			assertEquals(2, subTraces.size());
@@ -188,14 +188,14 @@ public class TraceTreeTest extends Assert {
 			{
 				List<TraceElement> subItems = subTraces.get(0).getChildren();
 				assertEquals(1, subItems.size());
-				assertEquals(Object.class, ((TraceLevelItem)subItems.get(0)).type);
+				assertEquals(Object.class, ((TraceLevelItem)subItems.get(0)).owner);
 				assertEquals(0, subItems.get(0).getChildren().size());
 			}
 			//1
 			{
 				List<TraceElement> subItems = subTraces.get(1).getChildren();
 				assertEquals(1, subItems.size());
-				assertEquals(Long.class, ((TraceLevelItem)subItems.get(0)).type);
+				assertEquals(Long.class, ((TraceLevelItem)subItems.get(0)).owner);
 				{
 					List<TraceElement> subSubTraces = subItems.get(0).getChildren();
 					assertEquals(1, subSubTraces.size());
@@ -203,7 +203,7 @@ public class TraceTreeTest extends Assert {
 					{
 						List<TraceElement> subSubItems = subSubTraces.get(0).getChildren();
 						assertEquals(1, subSubItems.size());
-						assertEquals(Character.class, ((TraceLevelItem)subSubItems.get(0)).type);
+						assertEquals(Character.class, ((TraceLevelItem)subSubItems.get(0)).owner);
 						assertEquals(0, subSubItems.get(0).getChildren().size());
 					}
 				}
@@ -211,7 +211,7 @@ public class TraceTreeTest extends Assert {
 			}
 		}
 		//2
-		assertEquals(Integer.class, items.get(2).type);
+		assertEquals(Integer.class, items.get(2).owner);
 		assertEquals(0, items.get(2).getChildren().size());
 	}
 

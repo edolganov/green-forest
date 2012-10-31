@@ -2,6 +2,7 @@ package com.gf.core.action.trace;
 
 import com.gf.extra.invocation.InvocaitonEndStatus;
 import com.gf.extra.invocation.Trace;
+import com.gf.extra.invocation.TraceLevelItem;
 import com.gf.util.ExceptionUtil;
 
 public class TraceWrapper {
@@ -50,6 +51,8 @@ public class TraceWrapper {
 		curTrace.start();
 		if(isRoot){
 			data.rootTrace = curTrace;
+		} else {
+			data.rootTrace.getLevel().addSubListToLastItem(curTrace);
 		}
 	}
 		
@@ -65,18 +68,17 @@ public class TraceWrapper {
 		if( ! data.isTracing) {
 			return;
 		}
+		curTrace.setEndStatus(InvocaitonEndStatus.WITH_EXCEPTION);
+		curTrace.setThrowable(t);
 	}
 	
 	private void finallyInvocaitonTrace() {
 		if( ! data.isTracing) {
 			return;
 		}
-		
 		curTrace.stop();
 		if(isRoot){
 			THREAD_LOCAL_DATA.remove();
-		} else {
-			data.rootTrace.getLevel().addSubListToLastItem(curTrace);
 		}
 	}
 
@@ -84,28 +86,47 @@ public class TraceWrapper {
 	
 	
 	
-	public void wrapHandler(Body body) throws Exception {
+	public void wrapHandler(Object handler, Body body) throws Exception {
+		
+		TraceLevelItem item = startHandlerTrace(handler);
 		try {
-			startHandlerTrace();
 			body.invocation();
-			successStopHandlerTrace();
+			successStopHandlerTrace(item);
 		}catch (Throwable t) {
-			failStopHandlerTrace(t);
+			failStopHandlerTrace(item, t);
 			throw ExceptionUtil.getExceptionOrThrowError(t);
+		}finally {
+			finallyHandlerTrace(item);
 		}
 	}
-	
-	private void startHandlerTrace() {
+
+	private TraceLevelItem startHandlerTrace(Object handler) {
 		if( ! data.isTracing) {
-			return;
+			return null;
 		}
 		
+		TraceLevelItem item = curTrace.getLevel().createAndAddItem(handler);
+		item.start();
+		return item;
 	}
 
-	private void successStopHandlerTrace() {
+	private void successStopHandlerTrace(TraceLevelItem item) {
 		if( ! data.isTracing) {
 			return;
 		}
+		item.setEndStatus(InvocaitonEndStatus.SUCCESSED);
+	}
+	
+	private void failStopHandlerTrace(TraceLevelItem item, Throwable t) {
+		if( ! data.isTracing) {
+			return;
+		}
+		item.setEndStatus(InvocaitonEndStatus.WITH_EXCEPTION);
+		item.setThrowable(t);
+	}
+	
+	private void finallyHandlerTrace(TraceLevelItem item) {
+		item.stop();
 	}
 	
 	
@@ -121,14 +142,7 @@ public class TraceWrapper {
 		}
 	}
 	
-	
 
-
-	private void failStopHandlerTrace(Throwable t) {
-		if( ! data.isTracing) {
-			return;
-		}
-	}
 	
 	
 	private void startSubHandlerTrace() {
