@@ -59,6 +59,10 @@ public class TraceLevel extends TraceElement {
 		last.addChild(child);
 	}
 	
+	public List<TraceLevelItem> getChildrenItems(){
+		return new ArrayList<TraceLevelItem>(children);
+	}
+	
 	@Override
 	public List<TraceElement> getChildren() {
 		ArrayList<TraceElement> out = new ArrayList<TraceElement>();

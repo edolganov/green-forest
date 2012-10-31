@@ -7,8 +7,8 @@ import junit.framework.Assert;
 import com.gf.Action;
 import com.gf.core.Engine;
 import com.gf.extra.invocation.TraceElement;
-import com.gf.extra.invocation.TraceLevelItem;
 import com.gf.extra.invocation.TraceLevel;
+import com.gf.extra.invocation.TraceLevelItem;
 import com.gf.key.core.TraceHandlers;
 
 public abstract class AbstractEngineTest extends Assert {
@@ -23,13 +23,13 @@ public abstract class AbstractEngineTest extends Assert {
 	
 	public static void checkTrace(Action<?,?> action, Object... traceTree){
 		TraceLevel expected = new TraceLevel(traceTree);
-		TraceLevel actual = TraceHandlers.getOrCreateTrace(action);
+		TraceLevel actual = TraceHandlers.getOrCreateTrace(action).getLevel();
 		checkTrace(expected, actual);
 	}
 
 	public static void checkTrace(TraceLevel expected, TraceLevel actual) {
-		List<TraceLevelItem> itemsA = expected.getItems();
-		List<TraceLevelItem> itemsB = actual.getItems();
+		List<TraceLevelItem> itemsA = expected.getChildrenItems();
+		List<TraceLevelItem> itemsB = actual.getChildrenItems();
 		assertEquals("traces size", itemsA.size(), itemsB.size());
 		for (int i = 0; i < itemsA.size(); i++) {
 			TraceLevelItem itemA = itemsA.get(i);
@@ -39,7 +39,7 @@ public abstract class AbstractEngineTest extends Assert {
 	}
 
 	public static void checkTreeItem(TraceLevelItem expected, TraceLevelItem actual) {
-		assertEquals("items types", expected.type, actual.type);
+		assertEquals("items owners", expected.owner, actual.owner);
 		List<TraceElement> subTracesA = expected.getChildren();
 		List<TraceElement> subTracesB = actual.getChildren();
 		assertEquals("subtraces size", subTracesA.size(), subTracesB.size());

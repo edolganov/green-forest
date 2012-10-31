@@ -14,7 +14,7 @@ public class HandlerBlock {
 	
 	public void invoke() throws Exception {
 		
-		c.traceWrapper.wrapHandler(new Body() {
+		c.traceWrapper.wrapHandler(c.handler, new Body() {
 			
 			@Override
 			public void invocation() throws Throwable {

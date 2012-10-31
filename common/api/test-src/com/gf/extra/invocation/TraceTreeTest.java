@@ -7,8 +7,6 @@ import junit.framework.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.gf.extra.invocation.TraceLevelItem;
-import com.gf.extra.invocation.TraceLevel;
 import com.gf.util.Util;
 
 @SuppressWarnings("unchecked")
@@ -45,10 +43,10 @@ public class TraceTreeTest extends Assert {
 		System.out.println(new TraceLevelItem(null));
 		System.out.println();
 		
-		System.out.println(trace.getItems().get(0));
+		System.out.println(trace.getChildrenItems().get(0));
 		System.out.println();
 		
-		System.out.println(trace.getItems().get(1));
+		System.out.println(trace.getChildrenItems().get(1));
 		System.out.println();
 	}
 	
@@ -173,7 +171,7 @@ public class TraceTreeTest extends Assert {
 				Integer.class
 				);
 		
-		List<TraceLevelItem> items = trace.getItems();
+		List<TraceLevelItem> items = trace.getChildrenItems();
 		assertEquals(3, items.size());
 		
 		//0

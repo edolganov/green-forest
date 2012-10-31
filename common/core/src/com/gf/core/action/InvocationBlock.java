@@ -34,7 +34,7 @@ public class InvocationBlock {
 		
 		final InvocationContext c = createContext(action, null, true);
 		
-		c.traceWrapper.wrapInvocationBlock(new Body() {
+		c.traceWrapper.wrapInvocationBlock(actionService.owner, new Body() {
 			
 			@Override
 			public void invocation() throws Throwable {
@@ -80,7 +80,7 @@ public class InvocationBlock {
 		c.depth = depth;
 		c.actions = actionService;
 		c.action = action;
-		c.traceWrapper = new TraceWrapper(actionService.owner, isTraceHandlers);
+		c.traceWrapper = new TraceWrapper(isTraceHandlers);
 		c.config = c.actions.config;
 		c.staticContextObjects = c.actions.staticContext.getStaticContextObjects();
 		c.invocationContext = parent == null? new ContextRepository() : parent.invocationContext;

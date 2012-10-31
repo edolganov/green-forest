@@ -10,23 +10,23 @@ import com.gf.core.engine.AbstractEngineTest;
 import com.gf.core.engine.filter.model.BeginFilter;
 import com.gf.core.engine.handler.model.RecursionAction;
 import com.gf.core.engine.handler.model.RecursionHandler;
-import com.gf.core.engine.handler.model.SubInvokeHandler;
 import com.gf.core.engine.handler.model.SubInvokeAction;
-import com.gf.core.engine.handler.model.SubSubInvokeHandler;
+import com.gf.core.engine.handler.model.SubInvokeHandler;
 import com.gf.core.engine.handler.model.SubSubInvokeAction;
+import com.gf.core.engine.handler.model.SubSubInvokeHandler;
 import com.gf.core.engine.interceptor.model.BeginForAllByAnn;
 import com.gf.core.engine.interceptor.model.FirstByAnn;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.InvokeDepthMaxSizeException;
 import com.gf.extra.invocation.TraceElement;
-import com.gf.extra.invocation.TraceLevelItem;
 import com.gf.extra.invocation.TraceLevel;
+import com.gf.extra.invocation.TraceLevelItem;
 import com.gf.key.core.InvokeDepthMaxSize;
 import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.StringAction;
-import com.gf.test.handler.WithoutMappingHandler;
 import com.gf.test.handler.StringEcho;
+import com.gf.test.handler.WithoutMappingHandler;
 import com.gf.util.Util;
 import com.gf.util.test.concurrent.ThreadRacer;
 import com.gf.util.test.concurrent.ThreadsRace;
@@ -105,15 +105,15 @@ public class InvokeTest extends AbstractEngineTest {
 		
 		int depth = 1;
 		
-		TraceLevel trace = TraceHandlers.getOrCreateTrace(action);
-		while(trace != null){
+		TraceLevel level = TraceHandlers.getOrCreateTrace(action).getLevel();
+		while(level != null){
 			depth++;
-			List<TraceLevelItem> items = trace.getItems();
+			List<TraceLevelItem> items = level.getChildrenItems();
 			List<TraceElement> subTraces = items.get(0).getChildren();
 			if( subTraces.size() == 2){
-				trace = (TraceLevel)subTraces.get(1);
+				level = (TraceLevel)subTraces.get(1);
 			} else {
-				trace = null;
+				level = null;
 			}
 		}
 		
