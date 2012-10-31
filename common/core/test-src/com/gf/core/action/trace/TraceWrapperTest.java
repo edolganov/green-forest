@@ -17,7 +17,13 @@ public class TraceWrapperTest extends Assert {
 	};
 	
 	@Test
-	public void test_thread_local_clean() throws Exception{
+	public void test_multi_create_clean() throws Exception{
+		new TraceWrapper(false);
+		assertTrue(TraceWrapper.isEmptyThreadLocal());
+	}
+	
+	@Test
+	public void test_one_level_clean() throws Exception{
 		
 		final TraceWrapper wrapper = new TraceWrapper(true);
 		StringAction action = new StringAction();

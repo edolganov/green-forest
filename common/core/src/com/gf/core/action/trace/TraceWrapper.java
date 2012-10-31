@@ -30,7 +30,9 @@ public class TraceWrapper {
 		if(d == null){
 			isRoot = true;
 			d = new Data(isTracing);
-			THREAD_LOCAL_DATA.set(d);
+			if(isTracing){
+				THREAD_LOCAL_DATA.set(d);
+			}
 		} else {
 			isRoot = false;
 		}
@@ -145,11 +147,17 @@ public class TraceWrapper {
 	private static class Data {
 		
 		public final boolean isTracing;
-		public final LinkedList<TraceElement> parentsQueue = new LinkedList<TraceElement>();
+		public final LinkedList<TraceElement> parentsQueue;
 
 		public Data(boolean isTracing) {
-			super();
+
 			this.isTracing = isTracing;
+			
+			if(isTracing){
+				parentsQueue = new LinkedList<TraceElement>();
+			} else {
+				parentsQueue = null;
+			}
 		}
 		
 		
