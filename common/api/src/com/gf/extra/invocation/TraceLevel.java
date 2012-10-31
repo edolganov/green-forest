@@ -31,7 +31,7 @@ public class TraceLevel extends TraceElement {
 		//item
 		if(ob instanceof Class){
 			TraceLevelItem item = new TraceLevelItem(ob);
-			addChild(item);
+			level.addChild(item);
 		}
 		//item's sub trace
 		else if(ob instanceof List<?>){
