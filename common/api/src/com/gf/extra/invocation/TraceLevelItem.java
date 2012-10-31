@@ -1,36 +1,36 @@
 package com.gf.extra.invocation;
 
-import static com.gf.extra.invocation.TraceList.appendTabs;
-import static com.gf.extra.invocation.TraceList.toStringLevelIndex;
+import static com.gf.extra.invocation.TraceLevel.appendTabs;
+import static com.gf.extra.invocation.TraceLevel.toStringLevelIndex;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class TraceItem {
+public class TraceLevelItem {
 	
 	public final Class<?> type;
 	
-	private List<TraceList> subLists;
+	private List<TraceLevel> subLists;
 
-	public TraceItem(Class<?> type) {
+	public TraceLevelItem(Class<?> type) {
 		super();
 		this.type = type;
 	}
 
 
 
-	public List<TraceList> getSubLists(){
+	public List<TraceLevel> getSubLists(){
 		if(subLists == null){
-			return new ArrayList<TraceList>();
+			return new ArrayList<TraceLevel>();
 		}
-		return new ArrayList<TraceList>(subLists);
+		return new ArrayList<TraceLevel>(subLists);
 	}
 
-	public void addSubList(TraceList subTrace) {
+	public void addSubList(TraceLevel subTrace) {
 		if(subLists == null){
-			subLists = new ArrayList<TraceList>();
+			subLists = new ArrayList<TraceLevel>();
 		}
 		subLists.add(subTrace);
 	}
@@ -57,7 +57,7 @@ public class TraceItem {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TraceItem other = (TraceItem) obj;
+		TraceLevelItem other = (TraceLevelItem) obj;
 		if (subLists == null) {
 			if (other.subLists != null)
 				return false;
@@ -86,16 +86,16 @@ public class TraceItem {
 		
 		StringBuilder sb = new StringBuilder();
 		appendTabs(sb, levelIndex);
-		sb.append("[TraceItem: ");
+		sb.append("[TraceLevelItem: ");
 		sb.append(type == null? "null" : type.getName());
 
 		
-		List<TraceList> items = Collections.emptyList();
+		List<TraceLevel> items = Collections.emptyList();
 		if(subLists != null){
 			items = subLists;
 		}
 		
-		Iterator<TraceList> i = items.iterator();
+		Iterator<TraceLevel> i = items.iterator();
 		if ( i.hasNext()){
 			
 			sb.append('\n');
@@ -103,7 +103,7 @@ public class TraceItem {
 			while(i.hasNext()) {
 				
 				toStringLevelIndex.set(levelIndex+1);
-				TraceList e = i.next();
+				TraceLevel e = i.next();
 			    sb.append(e);
 			    toStringLevelIndex.set(levelIndex);
 			    

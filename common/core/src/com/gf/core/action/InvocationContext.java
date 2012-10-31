@@ -13,7 +13,7 @@ import com.gf.annotation.Inject;
 import com.gf.core.action.trace.TraceWrapper;
 import com.gf.core.context.ContextRepository;
 import com.gf.core.util.ReflectionsUtil;
-import com.gf.extra.invocation.TraceList;
+import com.gf.extra.invocation.TraceLevel;
 import com.gf.key.core.TraceHandlers;
 import com.gf.service.ConfigService;
 import com.gf.service.InvocationContextService;
@@ -66,7 +66,7 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	
 	
 	private void addToTrace_(Object ob) {
-			TraceList trace = TraceHandlers.getOrCreateTrace(action);
+			TraceLevel trace = TraceHandlers.getOrCreateTrace(action);
 			trace.createAndAddItem(ob);
 	}
 
@@ -79,8 +79,8 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	@Override
 	public <I, O> O subInvoke(Action<I, O> subAction) throws Exception {
 		
-			TraceList trace = TraceHandlers.getOrCreateTrace(action);
-			TraceList subTrace = TraceHandlers.getOrCreateTrace(subAction);
+			TraceLevel trace = TraceHandlers.getOrCreateTrace(action);
+			TraceLevel subTrace = TraceHandlers.getOrCreateTrace(subAction);
 			trace.addSubListToLastItem(subTrace);
 		
 		return (O)owner.subInvoke(this, subAction);

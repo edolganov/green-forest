@@ -6,8 +6,8 @@ import junit.framework.Assert;
 
 import com.gf.Action;
 import com.gf.core.Engine;
-import com.gf.extra.invocation.TraceItem;
-import com.gf.extra.invocation.TraceList;
+import com.gf.extra.invocation.TraceLevelItem;
+import com.gf.extra.invocation.TraceLevel;
 import com.gf.key.core.TraceHandlers;
 
 public abstract class AbstractEngineTest extends Assert {
@@ -21,30 +21,30 @@ public abstract class AbstractEngineTest extends Assert {
 	}
 	
 	public static void checkTrace(Action<?,?> action, Object... traceTree){
-		TraceList expected = new TraceList(traceTree);
-		TraceList actual = TraceHandlers.getOrCreateTrace(action);
+		TraceLevel expected = new TraceLevel(traceTree);
+		TraceLevel actual = TraceHandlers.getOrCreateTrace(action);
 		checkTrace(expected, actual);
 	}
 
-	public static void checkTrace(TraceList expected, TraceList actual) {
-		List<TraceItem> itemsA = expected.getItems();
-		List<TraceItem> itemsB = actual.getItems();
+	public static void checkTrace(TraceLevel expected, TraceLevel actual) {
+		List<TraceLevelItem> itemsA = expected.getItems();
+		List<TraceLevelItem> itemsB = actual.getItems();
 		assertEquals("traces size", itemsA.size(), itemsB.size());
 		for (int i = 0; i < itemsA.size(); i++) {
-			TraceItem itemA = itemsA.get(i);
-			TraceItem itemB = itemsB.get(i);
+			TraceLevelItem itemA = itemsA.get(i);
+			TraceLevelItem itemB = itemsB.get(i);
 			checkTreeItem(itemA, itemB);
 		}
 	}
 
-	public static void checkTreeItem(TraceItem expected, TraceItem actual) {
+	public static void checkTreeItem(TraceLevelItem expected, TraceLevelItem actual) {
 		assertEquals("items types", expected.type, actual.type);
-		List<TraceList> subTracesA = expected.getSubLists();
-		List<TraceList> subTracesB = actual.getSubLists();
+		List<TraceLevel> subTracesA = expected.getSubLists();
+		List<TraceLevel> subTracesB = actual.getSubLists();
 		assertEquals("subtraces size", subTracesA.size(), subTracesB.size());
 		for (int i = 0; i < subTracesA.size(); i++) {
-			TraceList itemA = subTracesA.get(i);
-			TraceList itemB = subTracesB.get(i);
+			TraceLevel itemA = subTracesA.get(i);
+			TraceLevel itemB = subTracesB.get(i);
 			checkTrace(itemA, itemB);
 		}
 	}
