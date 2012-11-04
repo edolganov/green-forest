@@ -12,16 +12,17 @@ public class TraceUtil {
 		StringBuilder sb = new StringBuilder();
 		appendElem(sb, root);
 		
-		LinkedList<QueueItem> queue = new LinkedList<QueueItem>();
+		LinkedList<StackItem> stack = new LinkedList<StackItem>();
 		List<TraceElement> rootChildren = root.getChildren();
 		if( ! Util.isEmpty(rootChildren)){
-			for (TraceElement child : rootChildren) {
-				queue.addLast(new QueueItem(child, 1));
+			for(int i=rootChildren.size()-1; i>-1; i--){
+				TraceElement child = rootChildren.get(i);
+				stack.addFirst(new StackItem(child, 1));
 			}
 		}
 		
-		while( ! queue.isEmpty()){
-			QueueItem item = queue.removeFirst();
+		while( ! stack.isEmpty()){
+			StackItem item = stack.removeFirst();
 			TraceElement elem = item.elem;
 			int level = item.level;
 			appendLine(sb);
@@ -31,8 +32,9 @@ public class TraceUtil {
 			List<TraceElement> children = elem.getChildren();
 			if( ! Util.isEmpty(children)){
 				int nextLevel = level+1;
-				for (TraceElement child : children) {
-					queue.addLast(new QueueItem(child, nextLevel));
+				for(int i=children.size()-1; i>-1; i--){
+					TraceElement child = children.get(i);
+					stack.addFirst(new StackItem(child, nextLevel));
 				}
 			}
 		}
@@ -57,12 +59,12 @@ public class TraceUtil {
 
 
 
-	private static class QueueItem {
+	private static class StackItem {
 		
 		TraceElement elem;
 		int level;
 		
-		public QueueItem(TraceElement elem, int level) {
+		public StackItem(TraceElement elem, int level) {
 			super();
 			this.elem = elem;
 			this.level = level;

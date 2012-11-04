@@ -47,7 +47,7 @@ public abstract class AbstractEngineTest extends Assert {
 			
 			TraceElement elemA = subTracesA.get(i);
 			TraceElement elemB = subTracesB.get(i);
-			assertEquals(elemA.getClass(), elemB.getClass());
+			assertTrue(elemA.getClass().isAssignableFrom(elemB.getClass()));
 			
 			if(elemA instanceof TraceLevel){
 				checkTrace((TraceLevel)elemA, (TraceLevel)elemB);

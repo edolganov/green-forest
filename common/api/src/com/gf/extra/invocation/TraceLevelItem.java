@@ -32,7 +32,7 @@ public class TraceLevelItem extends TraceElement {
 			}
 			children.add((TraceLevel)child);
 		} else {
-			throw new IllegalStateException("expected type: "+TraceElement.class);
+			throw new IllegalStateException("expected type: "+TraceElement.class+" but was: "+child);
 		}
 
 	}

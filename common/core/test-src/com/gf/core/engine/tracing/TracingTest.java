@@ -4,11 +4,18 @@ import org.junit.Test;
 
 import com.gf.core.Engine;
 import com.gf.core.engine.AbstractEngineTest;
+import com.gf.core.engine.tracing.model.CallSubEngineWithSameActionFilter;
+import com.gf.core.engine.tracing.model.CallSubEngineWithSameActionHandler;
+import com.gf.core.engine.tracing.model.CallSubEngineWithSameActionInterceptor;
 import com.gf.extra.invocation.Trace;
 import com.gf.key.core.TraceHandlers;
+import com.gf.test.action.EmptyAction;
 import com.gf.test.action.StringAction;
+import com.gf.test.handler.EmptyHandler;
 import com.gf.test.handler.StringEcho;
+import com.gf.util.Util;
 
+@SuppressWarnings("unchecked")
 public class TracingTest extends AbstractEngineTest {
 	
 	
@@ -24,7 +31,30 @@ public class TracingTest extends AbstractEngineTest {
 	
 	@Test
 	public void test_trace_sub_engine_with_same_action(){
-		fail("todo");
+
+		Engine engine = new Engine();
+		engine.setConfig(TraceHandlers.class, true);
+		engine.putFilter(CallSubEngineWithSameActionFilter.class);
+		engine.putInterceptor(CallSubEngineWithSameActionInterceptor.class);
+		engine.putHandler(CallSubEngineWithSameActionHandler.class);
+		
+		Engine subEngine = new Engine();
+		subEngine.putHandler(EmptyHandler.class);
+		
+		engine.addToContext(subEngine);
+		
+		EmptyAction action = new EmptyAction();
+		engine.invoke(action);
+		
+		checkTrace(action, 
+				CallSubEngineWithSameActionFilter.class,
+					Util.list(EmptyHandler.class),
+				CallSubEngineWithSameActionInterceptor.class,
+					Util.list(EmptyHandler.class),
+				CallSubEngineWithSameActionHandler.class,
+					Util.list(EmptyHandler.class)
+				);
+		
 	}
 	
 	@Test

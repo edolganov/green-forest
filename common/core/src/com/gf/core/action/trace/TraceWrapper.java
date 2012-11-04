@@ -11,6 +11,7 @@ import com.gf.extra.invocation.TraceLevel;
 import com.gf.extra.invocation.TraceLevelItem;
 import com.gf.key.core.TraceHandlers;
 import com.gf.util.ExceptionUtil;
+import com.gf.util.Util;
 
 @SuppressWarnings("rawtypes")
 public class TraceWrapper {
@@ -51,7 +52,7 @@ public class TraceWrapper {
 		
 		if( ! isRoot){
 			TraceElement parent = d.parentsQueue.getLast();
-			parent.addChild(trace);
+			addSubLevelToItem(parent, trace);
 		}
 		d.parentsQueue.addLast(trace);
 		
@@ -111,12 +112,7 @@ public class TraceWrapper {
 		level.start();
 		
 		TraceElement parent = d.parentsQueue.getLast();
-		List<TraceElement> children = parent.getChildren();
-		if(children.size()==0){
-			throw new IllegalStateException("can't invoke wrapSubHandlers without wrapInvocationBlock");
-		}
-		TraceElement lastChild = children.get(children.size()-1);
-		lastChild.addChild(level);
+		addSubLevelToItem(parent, level);
 		d.parentsQueue.addLast(level);
 		
 		try {
@@ -130,6 +126,19 @@ public class TraceWrapper {
 			level.stop();
 			d.parentsQueue.removeLast();
 		}
+	}
+
+	private void addSubLevelToItem(TraceElement parent, TraceLevel level) {
+		
+		Util.checkState(parent instanceof TraceLevel, "expected type: "+TraceLevel.class);
+		
+		List<TraceElement> children = parent.getChildren();
+		if(children.size()==0){
+			throw new IllegalStateException("can't invoke wrapSubHandlers without wrapInvocationBlock");
+		}
+		TraceElement lastChild = children.get(children.size()-1);
+		lastChild.addChild(level);
+		
 	}
 	
 
