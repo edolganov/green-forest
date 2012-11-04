@@ -10,13 +10,15 @@
 	<c:set var="traceType" value="${trace.simpleName}"/>
 	<c:choose>
 		<c:when test="${traceType eq 'Trace'}">
-			<div class="trace-elem trace">
-				${trace.owner.name}
+			<div class="trace-elem">
+				<span class="trace">${trace.owner.name}</span>
+				(total time: <span class="work-time">${trace.duration}ms</span>)
 			</div>
 		</c:when>
 		<c:when test="${traceType eq 'TraceLevel'}">
-			<div class="trace-elem trace-level">
-				sub invoke
+			<div class="trace-elem">
+				<span class="trace-level">sub invoke</span>
+				(total time: <span class="work-time">${trace.duration}ms</span>)
 			</div>
 		</c:when>
 		<c:otherwise>

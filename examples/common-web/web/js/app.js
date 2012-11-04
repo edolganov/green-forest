@@ -27,6 +27,7 @@ AppController = function(){
 		var label = $(".item-text", item);
 		var form = $(".item-form", item);
 		var input = $(".item-input", form);
+		var submit = $(".submit", form);
 		
 		var edit = $(".button-edit", item);
 		var confirm = $(".button-confirm", item);
@@ -67,8 +68,13 @@ AppController = function(){
 			item.parent().removeClass("updated-wrap");
 		};
 		
+		var confirmFunc = function(){
+			submit.click();
+		};
+		
 		edit.click(editFunc);
 		cancel.click(cancelFunc);
+		confirm.click(confirmFunc);
 		
 		input.keydown(function(e) {
 			if (e.keyCode == 27) { 

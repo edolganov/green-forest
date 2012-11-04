@@ -1,12 +1,17 @@
 
 #wrapper {
 	margin: 0 auto;
-	width: 800px;
+	width: 1200px;
 }
 
-#header h1 {
-	padding-top: 20px;
-	padding-bottom: 20px;
+h1 {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+h2 {
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 .center {
@@ -95,6 +100,44 @@
 	margin-left: 30px;
 }
 
+.trace-elem {
+	padding-left: 10px;
+}
+
 .trace, .trace-level {
 	font-weight: bold;
 }
+
+.trace-title {
+	background-color: #9AB9C2;
+	color: #FFF;
+	margin-top: 10px;
+	font-weight: bold;
+	padding-left: 5px;
+	border-radius: 4px;
+}
+
+.trace-level-item {
+	font-size: small;
+}
+
+#content {
+	float: left;
+	width: 49%;
+}
+
+#debug-block {
+	float: right;
+	width: 500px;
+	margin-right: 100px;
+}
+
+.clear {
+	clear: both;
+}
+
+.work-time{
+	background-color:  #EDEDED;
+}
+
+

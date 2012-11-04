@@ -51,7 +51,7 @@
 					     					<input type="hidden" name="id" value="${item.id}"/>
 					     					<input type="hidden" name="pageIndex" value="${page.index}"/>
 					     					<input type="hidden" name="limit" value="${page.limit}"/>
-					     					<input type="submit" style="display: none;"/>
+					     					<input type="submit" class="submit" style="display: none;"/>
 					     				</form>
 					     			</div>
 					     			<div class="item-actions">
@@ -126,9 +126,18 @@
 		</div>
 		
 		<div id="debug-block">
-			<util:formatTrace trace="${updateTrace}"/>
-			<util:formatTrace trace="${selectTrace}"/>
+			<h2 class="center">Debug information</h2>
+			<c:if test="${!empty updateTrace}">
+				<div class="trace-title">Update item trace</div>
+				<util:formatTrace trace="${updateTrace}"/>
+			</c:if>
+			<c:if test="${!empty selectTrace}">
+				<div class="trace-title">Select items trace</div>
+				<util:formatTrace trace="${selectTrace}"/>
+			</c:if>
 		</div>
+		
+		<div class="clear"></div>
 		
 
 	</div>
