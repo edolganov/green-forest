@@ -58,19 +58,18 @@ public class AppServlet extends HttpServlet {
 		int id = Util.tryParse(req.getParameter("id"), -1);
 		String newName = req.getParameter("name");
 		
+		RenameDoc action = new RenameDoc(id, newName);
 		try {
-			
-			RenameDoc action = new RenameDoc(id, newName);
 			app.invoke(action);
-			Trace updateTrace = TraceHandlers.getTrace(action);
-			
 			req.setAttribute("doc.renamed."+id, Boolean.TRUE);
-			req.setAttribute("updateTrace", updateTrace);
 		}catch (ValidationException e) {
 			req.setAttribute("doc.error-key."+id, e.getClass().getSimpleName());
 			req.setAttribute("doc.error-obj."+id, e);
 		}
 		req.setAttribute("doc.newName."+id, newName);
+		
+		Trace updateTrace = TraceHandlers.getTrace(action);
+		req.setAttribute("updateTrace", updateTrace);
 		
 		//show a page
 		this.doGet(req, resp);
