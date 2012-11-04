@@ -38,7 +38,9 @@ public abstract class TraceElement {
 		this.throwable = throwable;
 	}
 	
-	
+	public String getSimpleName(){
+		return getClass().getSimpleName();
+	}
 
 	public abstract List<TraceElement> getChildren();
 	

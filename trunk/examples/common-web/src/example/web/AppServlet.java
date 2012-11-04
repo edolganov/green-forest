@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import com.gf.extra.invocation.Trace;
+import com.gf.key.core.TraceHandlers;
 import com.gf.util.Util;
 
 import example.app.App;
@@ -39,8 +40,12 @@ public class AppServlet extends HttpServlet {
 		int limit = Util.tryParse(req.getParameter("limit"), 8);
 
 		//get page to view
-		Page<Doc> page = app.invoke(new GetDocsPage(pageIndex, limit));
+		GetDocsPage action = new GetDocsPage(pageIndex, limit);
+		Page<Doc> page = app.invoke(action);
+		Trace trace = TraceHandlers.getTrace(action);
+		
 		req.setAttribute("page", page);
+		req.setAttribute("selectTrace", trace);
 		
 		showView(req, resp);
 		
@@ -54,8 +59,13 @@ public class AppServlet extends HttpServlet {
 		String newName = req.getParameter("name");
 		
 		try {
-			app.invoke(new RenameDoc(id, newName));
+			
+			RenameDoc action = new RenameDoc(id, newName);
+			app.invoke(action);
+			Trace updateTrace = TraceHandlers.getTrace(action);
+			
 			req.setAttribute("doc.renamed."+id, Boolean.TRUE);
+			req.setAttribute("updateTrace", updateTrace);
 		}catch (ValidationException e) {
 			req.setAttribute("doc.error-key."+id, e.getClass().getSimpleName());
 			req.setAttribute("doc.error-obj."+id, e);

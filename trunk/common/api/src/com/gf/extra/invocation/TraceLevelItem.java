@@ -13,8 +13,10 @@ public class TraceLevelItem extends TraceElement {
 		super();
 		this.owner = owner;
 	}
-
-
+	
+	public Object getOwner() {
+		return owner;
+	}
 
 	@Override
 	public List<TraceElement> getChildren(){

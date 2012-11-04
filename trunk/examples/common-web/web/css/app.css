@@ -90,3 +90,11 @@
 .inactive {
 	opacity: 0.5;
 }
+
+.trace-children{
+	margin-left: 30px;
+}
+
+.trace, .trace-level {
+	font-weight: bold;
+}

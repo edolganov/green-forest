@@ -3,7 +3,7 @@ package com.gf.extra.invocation;
 
 public class Trace extends TraceLevel {
 	
-	private Object owner;
+	public final Object owner;
 	
 	public Trace() {
 		super();

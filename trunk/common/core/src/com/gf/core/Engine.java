@@ -22,6 +22,7 @@ import com.gf.service.DeployService;
 
 public class Engine implements ActionService, DeployService, ConfigService, ContextService {
 	
+	private String name;
 	private ConfigService config;
 	private DeployService deploy;
 	private ActionService actions;
@@ -30,6 +31,13 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	
 	public Engine() {
 		
+		this(null);
+		
+	}
+	
+	public Engine(String name) {
+		
+		this.name = name;
 		config = new ConfigServiceImpl();
 		deploy = new DeployServiceImpl(config);
 		context = new ContextServiceImpl();
@@ -40,7 +48,14 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 				(StaticContext)context);
 		
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	@Override
 	public <I, O> O invoke(Action<I, O> action) throws InvocationException, ExceptionWrapper, RuntimeException {
