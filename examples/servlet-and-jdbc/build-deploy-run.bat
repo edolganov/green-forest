@@ -35,6 +35,9 @@ MKLINK /D %DEST_DIR%\js %WEB_DIR%\js
 rd /s /q %DEST_DIR%\WEB-INF\jsp
 MKLINK /D %DEST_DIR%\WEB-INF\jsp %WEB_DIR%\WEB-INF\jsp
 
+rd /s /q %DEST_DIR%\WEB-INF\tags
+MKLINK /D %DEST_DIR%\WEB-INF\tags %WEB_DIR%\WEB-INF\tags
+
 
 goto ALL_DONE
 

@@ -4,8 +4,8 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-
 import com.gf.core.Engine;
+import com.gf.key.core.TraceHandlers;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
 
@@ -40,11 +40,12 @@ public abstract class AbstractInitServlet extends HttpServlet {
 		Storage storage = createStorage(config);
 		
 		//create app's engine
-		Engine engine = new Engine();
+		Engine engine = new Engine("App Engine");
 		
 		//init
 		engine.addToContext(storage);
 		engine.scanForAnnotations(App.class.getPackage());
+		engine.setConfig(TraceHandlers.class, true);
 		
 		//return Application
 		return new App(engine);

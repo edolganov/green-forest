@@ -1,7 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" session="false"%>
+<%@ page contentType="text/html;charset=UTF-8" session="false"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="util" tagdir="/WEB-INF/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -123,6 +124,12 @@
 			</c:choose>
 	     
 		</div>
+		
+		<div id="debug-block">
+			<util:formatTrace trace="${updateTrace}"/>
+			<util:formatTrace trace="${selectTrace}"/>
+		</div>
+		
 
 	</div>
 	

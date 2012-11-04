@@ -24,7 +24,7 @@ public class InitServlet extends AbstractInitServlet {
 	protected Storage createStorage(ServletConfig config) throws ServletException {
 		
 		//create storage's engine
-		Engine engine = new Engine();
+		Engine engine = new Engine("Storage Engine");
 		
 		//init
 		engine.addToContext(createTxManager(config));
