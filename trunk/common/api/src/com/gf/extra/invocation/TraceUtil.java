@@ -54,6 +54,8 @@ public class TraceUtil {
 	
 	private static void appendElem(StringBuilder sb, TraceElement elem) {
 		sb.append(elem.toStringCurObject());
+		sb.append(" (duration=").append(elem.getDuration()).append("ms");
+		sb.append(", endStatus=").append(elem.getEndStatus()).append(")");
 	}
 
 
