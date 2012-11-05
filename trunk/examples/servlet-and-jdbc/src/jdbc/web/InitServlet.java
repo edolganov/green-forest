@@ -27,7 +27,7 @@ public class InitServlet extends AbstractInitServlet {
 		Engine engine = new Engine("Storage Engine");
 		
 		//init
-		engine.addToContext(createTxManager(config));
+		engine.addToContext(createTxManager());
 		engine.addToContext(createDataSourceManager(config));
 		
 		engine.putFilter(UserTransactionInInvoke.class);
@@ -63,7 +63,7 @@ public class InitServlet extends AbstractInitServlet {
 
 	}
 
-	private TxManager createTxManager(ServletConfig config) throws ServletException {
+	private TxManager createTxManager() throws ServletException {
 
 		try {
 			TxManagerImpl manager = new TxManagerImpl();

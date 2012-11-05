@@ -5,20 +5,20 @@ import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
-import jdbc.storage.CreateDataBaseHandler;
-
-
 import com.gf.components.atomikos.jdbc.DataSourceManagerImpl;
 import com.gf.components.jdbc.DataSourceManager;
+import com.gf.log.Log;
+import com.gf.log.LogFactory;
 
 import example.AbstractTest;
 import example.common.storage.CreateOrUpdateDataBase;
 
 public abstract class AbstractStorageTest extends AbstractTest {
 	
+	Log log = LogFactory.getLog(getClass());
 	DataSourceManagerImpl manager;
 	
-	public DataSourceManager createDataSourceManager() throws Exception {
+	public DataSourceManager getDataSourceManager() throws Exception {
 		
 		if(manager != null){
 			return manager;
@@ -29,13 +29,13 @@ public abstract class AbstractStorageTest extends AbstractTest {
 		manager.setPassword("");
 		manager.setDriverClass("org.h2.Driver");
 		manager.setUrl("jdbc:h2:"+tmpDirPath+"/db-"+sessionId);
-		manager.setPoolSize(1);
+		manager.setPoolSize(10);
 		manager.init();
 		return manager;
 	}
 	
 	public Connection getConnection() throws Exception {
-		DataSourceManager manager = createDataSourceManager();
+		DataSourceManager manager = getDataSourceManager();
 		DataSource ds = manager.getDataSource();
 		Connection c = ds.getConnection();
 		return c;
