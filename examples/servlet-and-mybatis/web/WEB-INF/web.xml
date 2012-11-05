@@ -7,7 +7,7 @@
 	
 	<servlet>
 		<servlet-name>InitServlet</servlet-name>
-        <servlet-class>jdbc.web.InitServlet</servlet-class>
+        <servlet-class>mybatis.web.InitServlet</servlet-class>
         <init-param>
         	<param-name>db-user</param-name>
         	<param-value>sa</param-value>
@@ -22,7 +22,7 @@
         </init-param>
         <init-param>
         	<param-name>db-url</param-name>
-        	<param-value>jdbc:h2:../data/gf-servlet-jdbc-db</param-value>
+        	<param-value>jdbc:h2:../data/gf-servlet-mybatis-db</param-value>
         </init-param>
         <init-param>
         	<param-name>db-pool-size</param-name>
