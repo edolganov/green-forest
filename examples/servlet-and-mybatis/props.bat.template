@@ -1,4 +1,4 @@
 set WEB_DIR=%CD%\..\common-web\web
 set SERVER_HOME=c:\chapaj\projects\green-forest\app\apache-tomcat
 set SERVER_DEPLOY=%SERVER_HOME%\webapps
-set DEST_DIR=%SERVER_DEPLOY%\gf-servlet-jdbc
+set DEST_DIR=%SERVER_DEPLOY%\gf-servlet-mybatis
