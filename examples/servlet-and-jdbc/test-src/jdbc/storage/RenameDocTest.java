@@ -2,13 +2,11 @@ package jdbc.storage;
 
 import java.sql.Connection;
 
-import jdbc.storage.RenameDocHandler;
-
 import org.junit.Test;
-
 
 import com.gf.core.Engine;
 
+import example.common.app.GetDocsPage;
 import example.common.app.RenameDoc;
 import example.common.model.Doc;
 
@@ -40,6 +38,8 @@ public class RenameDocTest extends AbstractStorageTest {
 		
 		Engine engine = new Engine();
 		engine.putHandler(RenameDocHandler.class);
+		engine.putHandler(GetDocsPageHandler.class);
+		engine.putHandler(GetDocsCountHandler.class);
 		engine.addToContext(c);
 		
 		int id = 1;
@@ -47,6 +47,9 @@ public class RenameDocTest extends AbstractStorageTest {
 		Doc result = engine.invoke(new RenameDoc(id, newName));
 		assertEquals(newName, result.name);
 		assertEquals(newName, getDocName(c, id));
+		
+		Doc resultFromDB = engine.invoke(new GetDocsPage(0, 1)).list.get(0);
+		assertEquals(newName, resultFromDB.name);
 
 	}
 
