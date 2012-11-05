@@ -1,0 +1,130 @@
+<project name="Module build" default="deploy" basedir=".">
+
+	<property file="build.properties"/>
+	<property name="jslint.build.dir" value="jslint"/>
+
+    <target name="init" description="Build initialization">
+        <path id="libs">
+            <fileset dir="${module.third-party.dir}" includes="${module.third-party.lib}"/>
+			<fileset dir="${project.path.util}/build" includes="*.jar"/>
+			<fileset dir="${project.path.api}/build" includes="*.jar"/>
+			<fileset dir="${project.path.core}/build" includes="*.jar"/>
+			<fileset dir="${project.path.atomikos}/build" includes="*.jar"/>
+			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
+			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
+			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
+        </path>
+    </target>
+
+
+    <target name="clean" depends="init">
+        <delete dir="${build.dir}"/>
+        <delete dir="${module.web.dir}/WEB-INF/classes"/>
+        <delete dir="${module.web.dir}/WEB-INF/lib"/>
+    </target>
+	
+	<target name="create-war-dir" depends="clean">
+		
+		<copy todir="${build.dir}/war">
+			<fileset dir="${module.web.dir}"/>
+		</copy>
+		
+    </target>
+	
+	<target name="copy-libs-to-war-dir" depends="create-war-dir">
+		
+		<copy todir="${build.dir}/war/WEB-INF/lib">
+		
+			<fileset dir="${project.path.util}/build" includes="*.jar"/>
+			<fileset dir="${project.path.api}/build" includes="*.jar"/>
+			<fileset dir="${project.path.core}/build" includes="*.jar"/>
+			<fileset dir="${project.path.atomikos}/build" includes="*.jar"/>
+			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
+			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
+			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
+			
+			<fileset file="${module.third-party.dir}/jstl-1.2.jar"/>
+			<fileset file="${module.third-party.dir}/atomikos-util.jar"/>
+			<fileset file="${module.third-party.dir}/commons-logging-1.1.1.jar"/>
+			<fileset file="${module.third-party.dir}/h2-1.3.158.jar"/>
+			<fileset file="${module.third-party.dir}/slf4j-nop.jar"/>
+			<fileset file="${module.third-party.dir}/transactions.jar"/>
+			<fileset file="${module.third-party.dir}/transactions-api.jar"/>
+			<fileset file="${module.third-party.dir}/transactions-jdbc.jar"/>
+			<fileset file="${module.third-party.dir}/transactions-jta.jar"/>
+			<fileset file="${module.third-party.dir}/compile/geronimo-j2ee-connector_1.5_spec.jar"/>
+			<fileset file="${module.third-party.dir}/compile/geronimo-jta_1.0.1B_spec.jar"/>
+
+        </copy>
+		
+    </target>
+
+
+    <target name="deploy" depends="copy-libs-to-war-dir">
+        
+		<mkdir dir="${module.build.dir}"/>
+		
+		<property name="src-all" value="${build.dir}/src-all"/>
+		<mkdir dir="${src-all}"/>
+		<copy todir="${src-all}">
+			<fileset dir="${module.src.dir}"/>
+			<fileset dir="${project.path.common-web}/src"/>
+			<fileset dir="${project.path.common-mybatis}/src"/>
+		</copy>
+		
+        <javac srcdir="${src-all}"
+               destdir="${module.build.dir}"
+               debug="${compiler.debug}"
+               optimize="${compiler.optimize}"
+               deprecation="${compiler.deprecation}"
+               encoding="${compiler.encoding}">
+            <classpath refid="libs"/>
+        </javac>
+
+        <copy todir="${module.build.dir}">
+            <fileset dir="${src-all}"/>
+        </copy>
+
+		<copy todir="${build.dir}/war">
+			<fileset dir="${module.web.dir}"/>
+			<fileset dir="${project.path.common-web}/web"/>
+		</copy>
+        <mkdir dir="${build.dir}/war/WEB-INF/classes"/>
+        <copy todir="${build.dir}/war/WEB-INF/classes">
+            <fileset dir="${module.build.dir}"/>
+        </copy>
+
+        <jar jarfile="${module.dist.dir}/${module.name}">
+            <fileset dir="${build.dir}/war"/>
+        </jar>
+		
+		<delete dir="${build.dir}/war"/>
+    </target>
+
+    <target name="all" depends="deploy"/>
+	
+	
+	<!--
+	<taskdef name="jslint"
+	   classname="com.googlecode.jslint4java.ant.JSLintTask"
+	   classpath="${module.third-party.dir}/compile/jslint4java-1.4.4.jar" />
+	-->
+	<!--
+	<target name="lint" depends="init">
+        <delete dir="${jslint.build.dir}"/>
+        <mkdir dir="${jslint.build.dir}"/>
+        <jslint haltOnFailure="true" options="laxbreak, forin, indent, newcap, nomen">
+            <predef>jQuery,$$</predef>
+            <formatter type="plain" destfile="${jslint.build.dir}/jslint.out" />
+            <_!- <formatter type="junit" destfile="${reports.xml.dir}" /> -_>
+			
+			<fileset dir="${module.web.dir}/js">
+                <include name="**/*.js"/>
+				<exclude name="lib/*.js"/>
+				<exclude name="common/init.js"/>
+            </fileset>
+        </jslint>
+    </target>
+	-->
+</project>
+
