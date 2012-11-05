@@ -17,14 +17,12 @@
 	<classpathentry kind="src" path="examples/common-web/src"/>
 	<classpathentry kind="src" path="examples/common-web/test-src"/>
 	<classpathentry kind="src" path="examples/common-web/web"/>
-	<classpathentry kind="src" path="examples/common-mybatis/src"/>
-	<classpathentry kind="src" path="examples/common-mybatis/test-src"/>
 	<classpathentry kind="src" path="examples/servlet-and-jdbc/src"/>
 	<classpathentry kind="src" path="examples/servlet-and-jdbc/test-src"/>
 	<classpathentry kind="src" path="examples/servlet-and-jdbc/web"/>
-	<classpathentry kind="src" path="examples/servlet-and-mybatis/src"/>
-	<classpathentry kind="src" path="examples/servlet-and-mybatis/test-src"/>
-	<classpathentry kind="src" path="examples/servlet-and-mybatis/web"/>
+	<classpathentry kind="src" path="examples/spring-and-mybatis/src"/>
+	<classpathentry kind="src" path="examples/spring-and-mybatis/test-src"/>
+	<classpathentry kind="src" path="examples/spring-and-mybatis/web"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="thirdparty/junit-4.8.1.jar" sourcepath="thirdparty-sources/junit-4.8.1-sources.jar"/>
 	<classpathentry kind="lib" path="thirdparty/commons-logging-1.1.1.jar" sourcepath="thirdparty-sources/commons-logging-1.1.1-sources.jar"/>
