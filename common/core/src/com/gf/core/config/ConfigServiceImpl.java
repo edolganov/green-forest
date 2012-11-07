@@ -16,8 +16,6 @@ import com.gf.util.Util;
 
 public class ConfigServiceImpl implements ConfigService {
 	
-	private static final String PROPS_CONFIG_PREFFIX = "config.";
-	
 	private HashMap<Class<?>, AbstractConverter<?>> converters = new ConfigKeyConverters().map;
 	private HashMap<Class<?>, Object> values = new HashMap<Class<?>, Object>();
 	private ReadWriteLock rw = new ReentrantReadWriteLock();
@@ -31,8 +29,9 @@ public class ConfigServiceImpl implements ConfigService {
 	
 	
 	
-	public void addValues(Properties props){
-		Util.checkArgumentForEmpty(props, "props is null");
+	@Override
+	public void setConfigValues(Properties props){
+		if(props == null) return;
 		
 		writeLock.lock();
 		try {
@@ -61,27 +60,25 @@ public class ConfigServiceImpl implements ConfigService {
 	private void tryAddValues(Properties props) {
 		
 		for(Object key : props.keySet()){
-			if(((String)key).startsWith(PROPS_CONFIG_PREFFIX)){
-				addValue((String)key, (String)props.get(key));
-			}
+			addValue((String)key, (String)props.get(key));
 		}
-		
 	}
 
 
 	private void addValue(String typeInfo, String rawValue) {
-		String keyTypeStr = typeInfo.substring(PROPS_CONFIG_PREFFIX.length());
 		
 		Class<?> keyType = null;
 		try {
-			keyType = Class.forName("com.mindstorage.api.config."+keyTypeStr);
-		}catch (ClassNotFoundException e) {
-			try {
-				keyType = Class.forName(keyTypeStr);
-			}catch (ClassNotFoundException ex) {}
+			keyType = Class.forName(typeInfo);
+		}catch (ClassNotFoundException ex) {
+			//no class by this typeInfo
+			return;
 		}
 		
-		Util.checkArgumentForEmpty(keyType, "can't find type by key: "+typeInfo);
+		if( ! ConfigKey.class.isAssignableFrom(keyType)){
+			//it's not a ConfigKey sub type
+			return;
+		}
 		
 		Class<?> valueType = null;
 		try {

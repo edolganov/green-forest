@@ -23,10 +23,12 @@
 		<property name="url" value="jdbc:h2:../data/gf-spring-mybatis-db"/>
 		<property name="poolSize" value="5"/>
 	</bean>
-	
+
 	<bean id="dataSourse" 
 		factory-bean="dataSourceManager"
 		factory-method="getDataSource"/> 
+		
+		
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	  <property name="dataSource" ref="dataSource" />
@@ -35,6 +37,50 @@
 	  </property>  
 	</bean>
 	
+	
+	
+	<bean id="storageEngine" class="com.gf.core.Engine">
+		<property name="name" value="Storage Engine"/>
+		<property name="scanForAnnotationsPackages">
+			<list>
+				<value>mybatis.storage</value>
+			</list>
+		</property>
+		<property name="contextObjects">
+			<list>
+				<ref bean="sqlSessionFactory"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="storage" class="example.storage.Storage">
+		<constructor-arg ref="storageEngine"/>
+	</bean>
+	
+	
+	
+	<bean id="appEngine" class="com.gf.core.Engine">
+		<property name="name" value="App Engine"/>
+		<property name="scanForAnnotationsPackages">
+			<list>
+				<value>example.app</value>
+			</list>
+		</property>
+		<property name="contextObjects">
+			<list>
+				<ref bean="storage"/>
+			</list>
+		</property>
+		<property name="configValues">
+			<props>
+				<prop key="com.gf.key.core.TraceHandlers">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="app" class="example.app.App">
+		<constructor-arg ref="appEngine"/>
+	</bean>
 
 
 </beans>

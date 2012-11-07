@@ -1,4 +1,4 @@
-package example.common.storage;
+package example.common.app;
 
 import com.gf.Action;
 

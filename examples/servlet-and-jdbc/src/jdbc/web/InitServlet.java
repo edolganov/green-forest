@@ -11,7 +11,6 @@ import com.gf.components.tx.TxManager;
 import com.gf.components.tx.UserTransactionInInvoke;
 import com.gf.core.Engine;
 
-import example.common.storage.CreateOrUpdateDataBase;
 import example.storage.Storage;
 import example.web.AbstractInitServlet;
 
@@ -34,9 +33,6 @@ public class InitServlet extends AbstractInitServlet {
 		engine.putFilter(ConnectionInInvoke.class);
 		
 		engine.scanForAnnotations("jdbc.storage");
-		
-		//invoke actions
-		engine.invoke(new CreateOrUpdateDataBase());
 		
 		//return Storage
 		return new Storage(engine);

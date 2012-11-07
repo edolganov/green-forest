@@ -10,6 +10,7 @@ import com.gf.log.Log;
 import com.gf.log.LogFactory;
 
 import example.app.App;
+import example.common.app.CreateOrUpdateDataBase;
 import example.storage.Storage;
 
 
@@ -46,6 +47,9 @@ public abstract class AbstractInitServlet extends HttpServlet {
 		engine.addToContext(storage);
 		engine.scanForAnnotations(App.class.getPackage());
 		engine.setConfig(TraceHandlers.class, true);
+		
+		//invoke actions
+		engine.invoke(new CreateOrUpdateDataBase());
 		
 		//return Application
 		return new App(engine);
