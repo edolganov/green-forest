@@ -33,8 +33,13 @@ public class AppServlet extends HttpServlet {
 		app = AbstractInitServlet.getApp();
 	}
 	
+	/** for manually init */
+	public void setApp(App app){
+		this.app = app;
+	}
+	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		int pageIndex = Util.tryParse(req.getParameter("pageIndex"), 0);
 		int limit = Util.tryParse(req.getParameter("limit"), 8);
@@ -52,7 +57,7 @@ public class AppServlet extends HttpServlet {
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//update doc
 		int id = Util.tryParse(req.getParameter("id"), -1);

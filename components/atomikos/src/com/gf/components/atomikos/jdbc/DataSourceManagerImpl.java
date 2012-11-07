@@ -6,7 +6,7 @@ import com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean;
 import com.gf.components.jdbc.DataSourceManager;
 
 /**
- * Manager of connections to a database and transactions
+ * Manager of connections to database
  */
 public class DataSourceManagerImpl implements DataSourceManager {
 
@@ -31,6 +31,10 @@ public class DataSourceManagerImpl implements DataSourceManager {
 		ds.setUrl(url);
 		ds.setPoolSize(poolSize);
 		// ds.setTestQuery("Select 1");
+	}
+	
+	public void close(){
+		ds.close();
 	}
 
 	@Override
