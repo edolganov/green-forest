@@ -7,7 +7,7 @@ import com.atomikos.icatch.jta.UserTransactionManager;
 import com.gf.components.tx.TxManager;
 
 /**
- * Manager of connections to a database and transactions
+ * Manager of transactions
  */
 public class TxManagerImpl implements TxManager {
 
@@ -16,6 +16,10 @@ public class TxManagerImpl implements TxManager {
 	public void init() throws Exception {
 		utm = new UserTransactionManager();
 		utm.init();
+	}
+	
+	public void close(){
+		utm.close();
 	}
 
 	@Override
