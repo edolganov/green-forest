@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.gf.core.Engine;
 
-import example.common.storage.CreateOrUpdateDataBase;
+import example.common.app.CreateOrUpdateDataBase;
 
 
 public class CreateOrUpdateDataBaseTest extends AbstractStorageTest {

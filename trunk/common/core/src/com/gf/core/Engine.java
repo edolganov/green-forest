@@ -1,5 +1,8 @@
 package com.gf.core;
 
+import java.util.Collection;
+import java.util.Properties;
+
 import com.gf.Action;
 import com.gf.Filter;
 import com.gf.Handler;
@@ -58,12 +61,14 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	}
 
 	@Override
-	public <I, O> O invoke(Action<I, O> action) throws InvocationException, ExceptionWrapper, RuntimeException {
+	public <I, O> O invoke(Action<I, O> action) 
+			throws InvocationException, ExceptionWrapper, RuntimeException {
 		return (O)actions.invoke(action);
 	}
 	
 	@Override
-	public <I, O> O invokeUnwrap(Action<I, O> action) throws InvocationException, Exception {
+	public <I, O> O invokeUnwrap(Action<I, O> action) 
+			throws InvocationException, Exception {
 		return (O)actions.invokeUnwrap(action);
 	}
 
@@ -88,12 +93,14 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	}
 	
 	@Override
-	public void scanForAnnotations(Package pckg) {
+	public void scanForAnnotations(Package pckg)
+			throws NoMappingAnnotationException, NotOneHandlerException{
 		deploy.scanForAnnotations(pckg);
 	}
 	
 	@Override
-	public void scanForAnnotations(String packageName) {
+	public void scanForAnnotations(String packageName)
+			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.scanForAnnotations(packageName);
 	}
 
@@ -115,10 +122,43 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 		config.setConfig(keyType, value);
 	}
 	
+	@Override
+	public void setConfigValues(Properties props) {
+		config.setConfigValues(props);
+	}
+	
 
 	@Override
 	public void addToContext(Object object) {
 		context.addToContext(object);
+	}
+	
+	@Override
+	public void setContextObjects(Collection<Object> objects) {
+		context.setContextObjects(objects);
+	}
+
+	@Override
+	public void setHandlerTypes(Collection<Class<? extends Handler<?>>> handlerTypes)
+			throws NoMappingAnnotationException, NotOneHandlerException {
+		deploy.setHandlerTypes(handlerTypes);
+	}
+
+	@Override
+	public void setInterceptorTypes(Collection<Class<? extends Interceptor<?>>> interceptorTypes)
+			throws NoMappingAnnotationException{
+		deploy.setInterceptorTypes(interceptorTypes);
+	}
+
+	@Override
+	public void setFilterTypes(Collection<Class<? extends Filter>> filterTypes) {
+		deploy.setFilterTypes(filterTypes);
+	}
+
+	@Override
+	public void setScanForAnnotationsPackages(Collection<String> packageNames)
+			throws NoMappingAnnotationException, NotOneHandlerException {
+		deploy.setScanForAnnotationsPackages(packageNames);
 	}
 
 	

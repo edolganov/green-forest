@@ -1,6 +1,7 @@
 package com.gf.core.deploy;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,7 @@ import com.gf.core.repo.TypesRepo;
 import com.gf.core.util.CoreUtil;
 import com.gf.core.util.ScanUtil;
 import com.gf.exception.ExceptionWrapper;
+import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.NotOneHandlerException;
 import com.gf.key.core.actionservice.TypesRepoClass;
@@ -180,6 +182,43 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		Collections.sort(out, orderComparator);
 		
 		return out;
+	}
+
+	@Override
+	public void setHandlerTypes(
+			Collection<Class<? extends Handler<?>>> handlerTypes)
+			throws NoMappingAnnotationException, NotOneHandlerException {
+		if(handlerTypes == null) return;
+		for (Class<? extends Handler<?>> clazz : handlerTypes) {
+			putHandler(clazz);
+		}
+	}
+
+	@Override
+	public void setInterceptorTypes(
+			Collection<Class<? extends Interceptor<?>>> interceptorTypes)
+			throws NoMappingAnnotationException {
+		if(interceptorTypes == null) return;
+		for (Class<? extends Interceptor<?>> clazz : interceptorTypes) {
+			putInterceptor(clazz);
+		}
+	}
+
+	@Override
+	public void setFilterTypes(Collection<Class<? extends Filter>> filterTypes) {
+		if(filterTypes == null) return;
+		for (Class<? extends Filter> clazz : filterTypes) {
+			putFilter(clazz);
+		}
+	}
+
+	@Override
+	public void setScanForAnnotationsPackages(Collection<String> packageNames)
+			throws NoMappingAnnotationException, NotOneHandlerException {
+		if(packageNames == null) return;
+		for (String packageName : packageNames) {
+			scanForAnnotations(packageName);
+		}
 	}
 
 	

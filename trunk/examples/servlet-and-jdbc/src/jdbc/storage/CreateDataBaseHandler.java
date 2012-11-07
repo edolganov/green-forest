@@ -10,7 +10,7 @@ import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.storage.CreateOrUpdateDataBase;
+import example.common.app.CreateOrUpdateDataBase;
 
 
 @Mapping(CreateOrUpdateDataBase.class)

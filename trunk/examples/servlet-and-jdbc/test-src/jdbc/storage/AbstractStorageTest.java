@@ -11,7 +11,7 @@ import com.gf.log.Log;
 import com.gf.log.LogFactory;
 
 import example.AbstractTest;
-import example.common.storage.CreateOrUpdateDataBase;
+import example.common.app.CreateOrUpdateDataBase;
 
 public abstract class AbstractStorageTest extends AbstractTest {
 	
