@@ -2,7 +2,7 @@ package com.gf.key.core;
 
 import com.gf.Action;
 import com.gf.config.ConfigKey;
-import com.gf.extra.invocation.Trace;
+import com.gf.extra.trace.Trace;
 
 public class TraceHandlers extends ConfigKey<Boolean> {
 	

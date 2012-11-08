@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gf.extra.invocation.Trace;
+import com.gf.extra.trace.Trace;
 import com.gf.key.core.TraceHandlers;
 import com.gf.util.Util;
 

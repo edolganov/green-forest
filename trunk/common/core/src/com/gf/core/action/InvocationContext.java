@@ -13,7 +13,7 @@ import com.gf.annotation.Inject;
 import com.gf.core.action.trace.TraceWrapper;
 import com.gf.core.context.ContextRepository;
 import com.gf.core.util.ReflectionsUtil;
-import com.gf.extra.invocation.TraceLevel;
+import com.gf.extra.trace.TraceLevel;
 import com.gf.key.core.TraceHandlers;
 import com.gf.service.ConfigService;
 import com.gf.service.InvocationContextService;

@@ -10,7 +10,7 @@ import com.gf.core.engine.tracing.model.CallSubEngineWithDiffActionInterceptor;
 import com.gf.core.engine.tracing.model.CallSubEngineWithSameActionFilter;
 import com.gf.core.engine.tracing.model.CallSubEngineWithSameActionHandler;
 import com.gf.core.engine.tracing.model.CallSubEngineWithSameActionInterceptor;
-import com.gf.extra.invocation.Trace;
+import com.gf.extra.trace.Trace;
 import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.EmptyAction;
 import com.gf.test.action.StringAction;
