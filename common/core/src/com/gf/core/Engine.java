@@ -33,13 +33,11 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	
 	
 	public Engine() {
-		
 		this(null);
-		
 	}
 	
 	public Engine(String name) {
-		
+
 		this.name = name;
 		config = new ConfigServiceImpl();
 		deploy = new DeployServiceImpl(config);
