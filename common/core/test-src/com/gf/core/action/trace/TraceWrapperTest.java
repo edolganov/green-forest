@@ -6,8 +6,8 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.gf.extra.invocation.Trace;
-import com.gf.extra.invocation.TraceElement;
+import com.gf.extra.trace.Trace;
+import com.gf.extra.trace.TraceElement;
 import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.StringAction;
 

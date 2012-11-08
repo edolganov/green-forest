@@ -1,4 +1,4 @@
-package jdbc.storage.model;
+package test.model;
 
 import com.gf.Action;
 import com.gf.Interceptor;

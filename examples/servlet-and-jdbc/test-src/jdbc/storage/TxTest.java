@@ -2,9 +2,10 @@ package jdbc.storage;
 
 import java.sql.Connection;
 
-import jdbc.storage.model.ThrowExceptionAfterHandler;
 
 import org.junit.Test;
+
+import test.model.ThrowExceptionAfterHandler;
 
 import com.gf.components.atomikos.tx.TxManagerImpl;
 import com.gf.components.jdbc.ConnectionInInvoke;

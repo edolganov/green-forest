@@ -7,6 +7,9 @@ import junit.framework.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.gf.extra.trace.TraceElement;
+import com.gf.extra.trace.TraceLevel;
+import com.gf.extra.trace.TraceLevelItem;
 import com.gf.util.Util;
 
 @SuppressWarnings("unchecked")
