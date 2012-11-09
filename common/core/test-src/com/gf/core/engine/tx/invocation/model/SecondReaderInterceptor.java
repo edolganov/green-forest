@@ -14,9 +14,9 @@ import com.gf.annotation.Order;
 import com.gf.extra.invocation.reader.InvocationReaderInterceptor;
 import com.gf.service.InterceptorChain;
 
-@Order(1)
+@Order(2)
 @Mapping(Action.class)
-public class FirstReaderInterceptor extends InvocationReaderInterceptor<Action<?,?>>{
+public class SecondReaderInterceptor extends InvocationReaderInterceptor<Action<?,?>>{
 
 	@Override
 	public void invoke(Action<?, ?> action, InterceptorChain chain)
@@ -25,24 +25,24 @@ public class FirstReaderInterceptor extends InvocationReaderInterceptor<Action<?
 		List<Object> beforePrev = invocationReader.getPrevHandlers();
 		List<Object> beforeNext = invocationReader.getNextHandlers();
 		
-		assertEquals(2, beforePrev.size());
+		assertEquals(3, beforePrev.size());
 		assertTrue(Filter.class.isAssignableFrom(beforePrev.get(0).getClass()));
 		assertTrue(Filter.class.isAssignableFrom(beforePrev.get(1).getClass()));
-		assertEquals(2, beforeNext.size());
-		assertTrue(Interceptor.class.isAssignableFrom(beforeNext.get(0).getClass()));
-		assertTrue(Handler.class.isAssignableFrom(beforeNext.get(1).getClass()));
+		assertTrue(Interceptor.class.isAssignableFrom(beforePrev.get(2).getClass()));
+		assertEquals(1, beforeNext.size());
+		assertTrue(Handler.class.isAssignableFrom(beforeNext.get(0).getClass()));
 		
 		chain.doNext();
 		
 		List<Object> afterPrev = invocationReader.getPrevHandlers();
 		List<Object> afterNext = invocationReader.getNextHandlers();
 		
-		assertEquals(2, afterPrev.size());
+		assertEquals(3, afterPrev.size());
 		assertTrue(Filter.class.isAssignableFrom(afterPrev.get(0).getClass()));
 		assertTrue(Filter.class.isAssignableFrom(afterPrev.get(1).getClass()));
-		assertEquals(2, afterNext.size());
-		assertTrue(Interceptor.class.isAssignableFrom(afterNext.get(0).getClass()));
-		assertTrue(Handler.class.isAssignableFrom(afterNext.get(1).getClass()));
+		assertTrue(Interceptor.class.isAssignableFrom(afterPrev.get(2).getClass()));
+		assertEquals(1, afterNext.size());
+		assertTrue(Handler.class.isAssignableFrom(afterNext.get(0).getClass()));
 		
 	}
 
