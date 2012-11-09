@@ -2,16 +2,15 @@ package com.gf.core.engine;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
 import com.gf.Action;
 import com.gf.core.Engine;
 import com.gf.extra.trace.TraceElement;
 import com.gf.extra.trace.TraceLevel;
 import com.gf.extra.trace.TraceLevelItem;
 import com.gf.key.core.TraceHandlers;
+import com.gf.util.junit.AssertExt;
 
-public abstract class AbstractEngineTest extends Assert {
+public abstract class AbstractEngineTest extends AssertExt {
 	
 	public static void enableTracing(Engine engine){
 		engine.setConfig(TraceHandlers.class, true);

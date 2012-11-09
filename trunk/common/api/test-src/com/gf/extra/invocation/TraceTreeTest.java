@@ -2,8 +2,6 @@ package com.gf.extra.invocation;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -11,14 +9,15 @@ import com.gf.extra.trace.TraceElement;
 import com.gf.extra.trace.TraceLevel;
 import com.gf.extra.trace.TraceLevelItem;
 import com.gf.util.Util;
+import com.gf.util.junit.AssertExt;
 
 @SuppressWarnings("unchecked")
-public class TraceTreeTest extends Assert {
+public class TraceTreeTest extends AssertExt {
 	
 	@Ignore
 	@Test
 	public void test_timework_of_every_trace_elem(){
-		fail("todo");
+		fail_TODO();
 	}
 	
 	@Ignore

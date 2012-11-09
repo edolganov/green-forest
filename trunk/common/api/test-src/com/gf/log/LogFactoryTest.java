@@ -1,10 +1,10 @@
 package com.gf.log;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
-public class LogFactoryTest extends Assert {
+import com.gf.util.junit.AssertExt;
+
+public class LogFactoryTest extends AssertExt {
 	
 	@Test
 	public void test_same_of_instances(){
