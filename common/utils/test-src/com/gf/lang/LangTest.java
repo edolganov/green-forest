@@ -2,9 +2,9 @@ package com.gf.lang;
 
 import org.junit.Test;
 
-import junit.framework.Assert;
+import com.gf.util.junit.AssertExt;
 
-public class LangTest extends Assert {
+public class LangTest extends AssertExt {
 	
 	
 	@Test

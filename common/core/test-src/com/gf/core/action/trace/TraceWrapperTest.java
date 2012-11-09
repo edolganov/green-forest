@@ -2,16 +2,15 @@ package com.gf.core.action.trace;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import com.gf.extra.trace.Trace;
 import com.gf.extra.trace.TraceElement;
 import com.gf.key.core.TraceHandlers;
 import com.gf.test.action.StringAction;
+import com.gf.util.junit.AssertExt;
 
-public class TraceWrapperTest extends Assert {
+public class TraceWrapperTest extends AssertExt {
 	
 	Body emptyBody = new Body() {
 		

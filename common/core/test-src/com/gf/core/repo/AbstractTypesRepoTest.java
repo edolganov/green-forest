@@ -2,20 +2,18 @@ package com.gf.core.repo;
 
 import java.util.Set;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import com.gf.annotation.Mapping;
-import com.gf.core.repo.TypesRepo;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
 import com.gf.test.action.StringAction;
-import com.gf.test.handler.WithoutMappingHandler;
 import com.gf.test.handler.StringEcho;
+import com.gf.test.handler.WithoutMappingHandler;
 import com.gf.util.Util;
+import com.gf.util.junit.AssertExt;
 
-public abstract class AbstractTypesRepoTest extends Assert {
+public abstract class AbstractTypesRepoTest extends AssertExt {
 	
 	protected abstract TypesRepo getRepo();
 	
