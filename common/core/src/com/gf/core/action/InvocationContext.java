@@ -10,11 +10,12 @@ import com.gf.Handler;
 import com.gf.Interceptor;
 import com.gf.MappingObject;
 import com.gf.annotation.Inject;
+import com.gf.core.action.reader.InvocationReaderImpl;
 import com.gf.core.action.trace.TraceWrapper;
 import com.gf.core.context.ContextRepository;
 import com.gf.core.util.ReflectionsUtil;
-import com.gf.extra.trace.TraceLevel;
-import com.gf.key.core.TraceHandlers;
+import com.gf.extra.invocation.reader.HasInvocationReader;
+import com.gf.extra.invocation.reader.InvocationReader;
 import com.gf.service.ConfigService;
 import com.gf.service.InvocationContextService;
 import com.gf.service.InvocationService;
@@ -38,20 +39,33 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	public TraceWrapper traceWrapper;
 	
 	
-	public void initMappingObject(MappingObject obj){
+	public void initMappingObject(MappingObject ob){
 		
-		injectAllContexts(obj);
-		obj.setInvocation(this);
+		injectAllContexts(ob);
+		ob.setInvocation(this);
+		setInvocationReader(ob);
 	}
 
-	public void initFilter(Filter obj){
+	public void initFilter(Filter ob){
 		
-		injectAllContexts(obj);
-		obj.setInvocationContext(this);
+		injectAllContexts(ob);
+		setInvocationContext(ob);
+		setInvocationReader(ob);
 		
+	}
+
+	private void setInvocationContext(Filter ob) {
+		ob.setInvocationContext(this);
 	}
 	
 	
+	private void setInvocationReader(Object ob) {
+		if(ob instanceof HasInvocationReader){
+			InvocationReader reader = new InvocationReaderImpl(this, ob);
+			((HasInvocationReader)ob).setInvocationReader(reader);
+		}
+	}
+
 	private void injectAllContexts(Object obj) {
 		
 		Collection<Object> invocationContextObjects = invocationContext.getAll();
