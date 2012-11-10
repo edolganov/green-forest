@@ -1,6 +1,9 @@
 package com.gf.components.mybatis;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -12,6 +15,7 @@ import com.gf.InvocationObject;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Order;
 import com.gf.extra.invocation.reader.InvocationReaderFilter;
+import com.gf.extra.util.ReflectionsUtil;
 import com.gf.service.FilterChain;
 import com.gf.util.Util;
 
@@ -26,11 +30,12 @@ public class SqlSessionInInvoke extends InvocationReaderFilter {
 		
 		Handler<?> handler = invocationReader.getHandler();
 		SqlSession session = createSession(handler);
+		Map<Class<?>, Object> mappersCache = new HashMap<Class<?>, Object>();
 		try {
 			
 			List<InvocationObject> nextObjects = invocationReader.getLocalNextObjects();
 			for (InvocationObject ob : nextObjects) {
-				injectTo(ob, session);
+				injectTo(ob, session, mappersCache);
 			}
 			
 			invocationContext.addToInvocationContext(session);
@@ -49,8 +54,29 @@ public class SqlSessionInInvoke extends InvocationReaderFilter {
 		
 	}
 
-	private void injectTo(InvocationObject ob, SqlSession session) {
+	private void injectTo(InvocationObject ob, SqlSession session, 
+			Map<Class<?>, Object> mappersCache) throws Exception {
 		
+		List<Field> fields = ReflectionsUtil.getRequiredFields(ob, Inject.class);
+		for (Field field : fields) {
+			
+			Class<?> injectType = field.getType();
+			
+			if( ! AbstractMapper.class.isAssignableFrom(injectType)){
+				continue;
+			}
+			
+			Object mapper = mappersCache.get(injectType);
+			if(mapper == null){
+				mapper = session.getMapper(injectType);
+				if(mapper == null) {
+					throw new IllegalStateException("unknown inject type: "+field.getType()+" for "+ob);
+				}
+				mappersCache.put(injectType, mapper);
+			}
+			
+			ReflectionsUtil.inject(field, ob, mapper);
+		}
 	}
 
 	private SqlSession createSession(Object handler){
@@ -65,7 +91,6 @@ public class SqlSessionInInvoke extends InvocationReaderFilter {
 				return sessionFactory.openSession(execType);
 			}
 		}
-		
 	}
 
 }

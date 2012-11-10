@@ -23,18 +23,27 @@ public class ReflectionsUtil {
 		
 		List<Field> requiredField = getRequiredFields(ob, annotationClass);
 		for (Field field : requiredField) {
-			Object objectToInject = findObjectToInject(field, collection);
-			if(objectToInject == null){
-				if(exceptionIfNotFound){
-					throw new ObjectToInjectNotFoundException(ob, field);
+			
+			try {
+				
+				field.setAccessible(true);
+				
+				Object oldValue = field.get(ob);
+				if(oldValue != null){
+					continue;
 				}
-			} else {
-				try {
-					inject(field, ob, objectToInject);
-				}catch (Exception e) {
-					throw new InjectException("can't set value for ["+field+"] of "+ob, e);
+				
+				Object objectToInject = findObjectToInject(field, collection);
+				if(objectToInject == null){
+					if(exceptionIfNotFound){
+						throw new ObjectToInjectNotFoundException(ob, field);
+					}
+				} else {
+					field.set(ob, objectToInject);
 				}
-
+			
+			}catch (Exception e) {
+				throw new InjectException("can't set value for ["+field+"] of "+ob, e);
 			}
 		}
 	}
@@ -65,8 +74,7 @@ public class ReflectionsUtil {
 		}
 		return null;
 	}
-
-
+	
 	public static void inject(Field field, Object ob, Object objectToInject) throws Exception {
 		field.setAccessible(true);
 		field.set(ob, objectToInject);
