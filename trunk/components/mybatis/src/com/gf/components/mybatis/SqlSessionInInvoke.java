@@ -1,10 +1,14 @@
 package com.gf.components.mybatis;
 
+import java.util.List;
+
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.gf.Action;
+import com.gf.Handler;
+import com.gf.InvocationObject;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Order;
 import com.gf.extra.invocation.reader.InvocationReaderFilter;
@@ -20,10 +24,35 @@ public class SqlSessionInInvoke extends InvocationReaderFilter {
 	@Override
 	public void invoke(Action<?, ?> action, FilterChain chain) throws Exception {
 		
-		
+		Handler<?> handler = invocationReader.getHandler();
+		SqlSession session = createSession(handler);
+		try {
+			
+			List<InvocationObject> nextObjects = invocationReader.getLocalNextObjects();
+			for (InvocationObject ob : nextObjects) {
+				injectTo(ob, session);
+			}
+			
+			invocationContext.addToInvocationContext(session);
+			
+			chain.doNext();
+			
+		}catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				session.close();
+			}catch (Exception ex) {
+				log.error("can't close session", ex);
+			}
+		}
 		
 	}
-	
+
+	private void injectTo(InvocationObject ob, SqlSession session) {
+		
+	}
+
 	private SqlSession createSession(Object handler){
 		SqlSessionSettings settings = handler.getClass().getAnnotation(SqlSessionSettings.class);
 		if(Util.isEmpty(settings)){

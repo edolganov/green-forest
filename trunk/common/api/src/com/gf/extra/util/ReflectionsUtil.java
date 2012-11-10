@@ -1,4 +1,4 @@
-package com.gf.core.util;
+package com.gf.extra.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
