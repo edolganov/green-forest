@@ -6,6 +6,7 @@ import static junit.framework.Assert.assertTrue;
 import java.util.List;
 
 import com.gf.Handler;
+import com.gf.InvocationObject;
 import com.gf.annotation.Mapping;
 import com.gf.extra.invocation.reader.InvocationReaderInterceptor;
 import com.gf.service.InterceptorChain;
@@ -18,8 +19,8 @@ public class SubReaderInterceptor extends InvocationReaderInterceptor<StringActi
 	public void invoke(StringAction action, InterceptorChain chain)
 			throws Exception {
 		
-		List<Object> beforePrev = invocationReader.getLocalPrevHandlers();
-		List<Object> beforeNext = invocationReader.getLocalNextHandlers();
+		List<InvocationObject> beforePrev = invocationReader.getLocalPrevObjects();
+		List<InvocationObject> beforeNext = invocationReader.getLocalNextObjects();
 		
 		assertEquals(0, beforePrev.size());
 		assertEquals(1, beforeNext.size());
@@ -27,8 +28,8 @@ public class SubReaderInterceptor extends InvocationReaderInterceptor<StringActi
 		
 		chain.doNext();
 		
-		List<Object> afterPrev = invocationReader.getLocalPrevHandlers();
-		List<Object> afterNext = invocationReader.getLocalNextHandlers();
+		List<InvocationObject> afterPrev = invocationReader.getLocalPrevObjects();
+		List<InvocationObject> afterNext = invocationReader.getLocalNextObjects();
 		
 		assertEquals(0, afterPrev.size());
 		assertEquals(1, afterNext.size());

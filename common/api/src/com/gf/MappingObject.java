@@ -1,12 +1,8 @@
 package com.gf;
 
-import com.gf.log.Log;
-import com.gf.log.LogFactory;
 import com.gf.service.InvocationService;
 
-public abstract class MappingObject {
-	
-	protected Log log = LogFactory.getLog(getClass());
+public abstract class MappingObject extends InvocationObject {
 	
 	private InvocationService invocation;
 	

@@ -8,6 +8,7 @@ import java.util.List;
 import com.gf.Filter;
 import com.gf.Handler;
 import com.gf.Interceptor;
+import com.gf.InvocationObject;
 import com.gf.annotation.Mapping;
 import com.gf.annotation.Order;
 import com.gf.extra.invocation.reader.InvocationReaderInterceptor;
@@ -22,8 +23,8 @@ public class FirstReaderInterceptor extends InvocationReaderInterceptor<EmptyAct
 	public void invoke(EmptyAction action, InterceptorChain chain)
 			throws Exception {
 
-		List<Object> beforePrev = invocationReader.getLocalPrevHandlers();
-		List<Object> beforeNext = invocationReader.getLocalNextHandlers();
+		List<InvocationObject> beforePrev = invocationReader.getLocalPrevObjects();
+		List<InvocationObject> beforeNext = invocationReader.getLocalNextObjects();
 		
 		assertEquals(2, beforePrev.size());
 		assertTrue(Filter.class.isAssignableFrom(beforePrev.get(0).getClass()));
@@ -34,8 +35,8 @@ public class FirstReaderInterceptor extends InvocationReaderInterceptor<EmptyAct
 		
 		chain.doNext();
 		
-		List<Object> afterPrev = invocationReader.getLocalPrevHandlers();
-		List<Object> afterNext = invocationReader.getLocalNextHandlers();
+		List<InvocationObject> afterPrev = invocationReader.getLocalPrevObjects();
+		List<InvocationObject> afterNext = invocationReader.getLocalNextObjects();
 		
 		assertEquals(2, afterPrev.size());
 		assertTrue(Filter.class.isAssignableFrom(afterPrev.get(0).getClass()));

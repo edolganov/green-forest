@@ -3,6 +3,8 @@ package com.gf.core.action.reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gf.Handler;
+import com.gf.InvocationObject;
 import com.gf.core.action.InvocationContext;
 import com.gf.extra.invocation.reader.InvocationReader;
 
@@ -18,11 +20,11 @@ public class InvocationReaderImpl implements InvocationReader {
 	}
 
 	@Override
-	public List<Object> getLocalPrevHandlers() {
+	public List<InvocationObject> getLocalPrevObjects() {
 		
-		ArrayList<Object> out = new ArrayList<Object>();
+		ArrayList<InvocationObject> out = new ArrayList<InvocationObject>();
 		
-		for(Object filter : c.filters){
+		for(InvocationObject filter : c.filters){
 			if(filter != curHandler){
 				out.add(filter);
 			} else {
@@ -30,7 +32,7 @@ public class InvocationReaderImpl implements InvocationReader {
 			}
 		}
 		
-		for(Object interceptor : c.interceptors){
+		for(InvocationObject interceptor : c.interceptors){
 			if(interceptor != curHandler){
 				out.add(interceptor);
 			} else {
@@ -42,12 +44,12 @@ public class InvocationReaderImpl implements InvocationReader {
 	}
 
 	@Override
-	public List<Object> getLocalNextHandlers() {
+	public List<InvocationObject> getLocalNextObjects() {
 		
-		ArrayList<Object> out = new ArrayList<Object>();
+		ArrayList<InvocationObject> out = new ArrayList<InvocationObject>();
 		boolean isAfter = false;
 		
-		for(Object filter : c.filters){
+		for(InvocationObject filter : c.filters){
 			if(filter == curHandler){
 				isAfter = true;
 			}else if(isAfter){
@@ -58,7 +60,7 @@ public class InvocationReaderImpl implements InvocationReader {
 		if(isAfter){
 			out.addAll(c.interceptors);
 		} else {
-			for(Object interceptor : c.interceptors){
+			for(InvocationObject interceptor : c.interceptors){
 				if(interceptor == curHandler){
 					isAfter = true;
 				}else if(isAfter){
@@ -72,6 +74,11 @@ public class InvocationReaderImpl implements InvocationReader {
 		}
 		
 		return out;
+	}
+
+	@Override
+	public Handler<?> getHandler() {
+		return c.handler;
 	}
 
 }
