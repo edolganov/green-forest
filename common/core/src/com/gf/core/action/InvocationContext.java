@@ -2,6 +2,7 @@ package com.gf.core.action;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.gf.Action;
@@ -32,8 +33,8 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	public ActionServiceImpl actions; 
 	public ConfigService config;
 	public Action<?,?> action;
-	public List<Filter> filters;
-	public List<Interceptor> interceptors;
+	public List<Filter> filters = Collections.emptyList();
+	public List<Interceptor> interceptors = Collections.emptyList();
 	public Handler handler;
 	public Collection<Object> staticContextObjects;
 	public TraceWrapper traceWrapper;

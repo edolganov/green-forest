@@ -18,7 +18,7 @@ public class InvocationReaderImpl implements InvocationReader {
 	}
 
 	@Override
-	public List<Object> getPrevHandlers() {
+	public List<Object> getLocalPrevHandlers() {
 		
 		ArrayList<Object> out = new ArrayList<Object>();
 		
@@ -42,7 +42,7 @@ public class InvocationReaderImpl implements InvocationReader {
 	}
 
 	@Override
-	public List<Object> getNextHandlers() {
+	public List<Object> getLocalNextHandlers() {
 		
 		ArrayList<Object> out = new ArrayList<Object>();
 		boolean isAfter = false;

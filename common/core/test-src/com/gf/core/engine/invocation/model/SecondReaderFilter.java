@@ -19,8 +19,8 @@ public class SecondReaderFilter extends InvocationReaderFilter {
 	@Override
 	public void invoke(Action<?, ?> action, FilterChain chain) throws Exception {
 		
-		List<Object> beforePrev = invocationReader.getPrevHandlers();
-		List<Object> beforeNext = invocationReader.getNextHandlers();
+		List<Object> beforePrev = invocationReader.getLocalPrevHandlers();
+		List<Object> beforeNext = invocationReader.getLocalNextHandlers();
 		
 		assertEquals(1, beforePrev.size());
 		assertTrue(Filter.class.isAssignableFrom(beforePrev.get(0).getClass()));
@@ -31,8 +31,8 @@ public class SecondReaderFilter extends InvocationReaderFilter {
 		
 		chain.doNext();
 		
-		List<Object> afterPrev = invocationReader.getPrevHandlers();
-		List<Object> afterNext = invocationReader.getNextHandlers();
+		List<Object> afterPrev = invocationReader.getLocalPrevHandlers();
+		List<Object> afterNext = invocationReader.getLocalNextHandlers();
 		
 		assertEquals(1, afterPrev.size());
 		assertTrue(Filter.class.isAssignableFrom(afterPrev.get(0).getClass()));

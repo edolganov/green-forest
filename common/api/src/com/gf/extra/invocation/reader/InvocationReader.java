@@ -4,8 +4,11 @@ import java.util.List;
 
 public interface InvocationReader {
 
-	List<Object> getPrevHandlers();
+	List<Object> getLocalPrevHandlers();
 	
-	List<Object> getNextHandlers();
+	List<Object> getLocalNextHandlers();
+	
+	//TODO
+	//List<Object> getTotalPrevHandlers();
 
 }

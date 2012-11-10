@@ -5,7 +5,6 @@ import static junit.framework.Assert.assertTrue;
 
 import java.util.List;
 
-import com.gf.Action;
 import com.gf.Filter;
 import com.gf.Handler;
 import com.gf.Interceptor;
@@ -13,17 +12,18 @@ import com.gf.annotation.Mapping;
 import com.gf.annotation.Order;
 import com.gf.extra.invocation.reader.InvocationReaderInterceptor;
 import com.gf.service.InterceptorChain;
+import com.gf.test.action.EmptyAction;
 
 @Order(1)
-@Mapping(Action.class)
-public class FirstReaderInterceptor extends InvocationReaderInterceptor<Action<?,?>>{
+@Mapping(EmptyAction.class)
+public class FirstReaderInterceptor extends InvocationReaderInterceptor<EmptyAction>{
 
 	@Override
-	public void invoke(Action<?, ?> action, InterceptorChain chain)
+	public void invoke(EmptyAction action, InterceptorChain chain)
 			throws Exception {
 
-		List<Object> beforePrev = invocationReader.getPrevHandlers();
-		List<Object> beforeNext = invocationReader.getNextHandlers();
+		List<Object> beforePrev = invocationReader.getLocalPrevHandlers();
+		List<Object> beforeNext = invocationReader.getLocalNextHandlers();
 		
 		assertEquals(2, beforePrev.size());
 		assertTrue(Filter.class.isAssignableFrom(beforePrev.get(0).getClass()));
@@ -34,8 +34,8 @@ public class FirstReaderInterceptor extends InvocationReaderInterceptor<Action<?
 		
 		chain.doNext();
 		
-		List<Object> afterPrev = invocationReader.getPrevHandlers();
-		List<Object> afterNext = invocationReader.getNextHandlers();
+		List<Object> afterPrev = invocationReader.getLocalPrevHandlers();
+		List<Object> afterNext = invocationReader.getLocalNextHandlers();
 		
 		assertEquals(2, afterPrev.size());
 		assertTrue(Filter.class.isAssignableFrom(afterPrev.get(0).getClass()));
