@@ -12,6 +12,8 @@
 	<classpathentry kind="src" path="components/transactions/test-src"/>
 	<classpathentry kind="src" path="components/atomikos/src"/>
 	<classpathentry kind="src" path="components/atomikos/test-src"/>
+	<classpathentry kind="src" path="components/mybatis/src"/>
+	<classpathentry kind="src" path="components/mybatis/test-src"/>
 	<classpathentry kind="src" path="components/logging-apache-commons/src"/>
 	<classpathentry kind="src" path="components/logging-apache-commons/test-src"/>
 	<classpathentry kind="src" path="examples/common-web/src"/>

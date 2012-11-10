@@ -11,6 +11,7 @@
 		<ant antfile="./components/atomikos/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="clean"/>
+		<ant antfile="./components/mybatis/build.xml" inheritAll="false" target="clean"/>
 
     </target>
 
@@ -24,6 +25,7 @@
 		<ant antfile="./components/atomikos/build.xml" inheritAll="false"/>
 		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false"/>
 		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false"/>
+		<ant antfile="./components/mybatis/build.xml" inheritAll="false"/>
 		
     </target>
 
@@ -42,6 +44,7 @@
 			<fileset dir="./components/atomikos/build" includes="*.jar"/>
 			<fileset dir="./components/logging-apache-commons/build" includes="*.jar"/>
 			<fileset dir="./components/logging-slf4j/build" includes="*.jar"/>
+			<fileset dir="./components/mybatis/build" includes="*.jar"/>
 		</copy>
 
     </target>
