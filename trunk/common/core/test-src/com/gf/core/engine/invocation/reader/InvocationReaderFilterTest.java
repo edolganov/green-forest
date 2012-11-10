@@ -1,12 +1,12 @@
-package com.gf.core.engine.tx.invocation.reader;
+package com.gf.core.engine.invocation.reader;
 
 import org.junit.Test;
 
 import com.gf.core.Engine;
-import com.gf.core.engine.tx.invocation.model.FirstReaderFilter;
-import com.gf.core.engine.tx.invocation.model.FirstReaderInterceptor;
-import com.gf.core.engine.tx.invocation.model.SecondReaderFilter;
-import com.gf.core.engine.tx.invocation.model.SecondReaderInterceptor;
+import com.gf.core.engine.invocation.model.FirstReaderFilter;
+import com.gf.core.engine.invocation.model.FirstReaderInterceptor;
+import com.gf.core.engine.invocation.model.SecondReaderFilter;
+import com.gf.core.engine.invocation.model.SecondReaderInterceptor;
 import com.gf.test.action.EmptyAction;
 import com.gf.test.handler.EmptyHandler;
 import com.gf.util.junit.AssertExt;

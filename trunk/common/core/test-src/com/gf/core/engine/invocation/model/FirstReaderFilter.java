@@ -1,4 +1,4 @@
-package com.gf.core.engine.tx.invocation.model;
+package com.gf.core.engine.invocation.model;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
