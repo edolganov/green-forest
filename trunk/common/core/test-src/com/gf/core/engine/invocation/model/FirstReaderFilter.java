@@ -19,8 +19,8 @@ public class FirstReaderFilter extends InvocationReaderFilter {
 	@Override
 	public void invoke(Action<?, ?> action, FilterChain chain) throws Exception {
 		
-		List<Object> beforePrev = invocationReader.getPrevHandlers();
-		List<Object> beforeNext = invocationReader.getNextHandlers();
+		List<Object> beforePrev = invocationReader.getLocalPrevHandlers();
+		List<Object> beforeNext = invocationReader.getLocalNextHandlers();
 		
 		assertEquals(0, beforePrev.size());
 		assertEquals(4, beforeNext.size());
@@ -31,8 +31,8 @@ public class FirstReaderFilter extends InvocationReaderFilter {
 		
 		chain.doNext();
 		
-		List<Object> afterPrev = invocationReader.getPrevHandlers();
-		List<Object> afterNext = invocationReader.getNextHandlers();
+		List<Object> afterPrev = invocationReader.getLocalPrevHandlers();
+		List<Object> afterNext = invocationReader.getLocalNextHandlers();
 		
 		assertEquals(0, afterPrev.size());
 		assertEquals(4, afterNext.size());
