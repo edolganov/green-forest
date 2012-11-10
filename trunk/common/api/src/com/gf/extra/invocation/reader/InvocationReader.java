@@ -2,13 +2,18 @@ package com.gf.extra.invocation.reader;
 
 import java.util.List;
 
+import com.gf.Handler;
+import com.gf.InvocationObject;
+
 public interface InvocationReader {
 
-	List<Object> getLocalPrevHandlers();
+	List<InvocationObject> getLocalPrevObjects();
 	
-	List<Object> getLocalNextHandlers();
+	List<InvocationObject> getLocalNextObjects();
+	
+	Handler<?> getHandler();
 	
 	//TODO
-	//List<Object> getTotalPrevHandlers();
+	//List<Object> getTotalPrevObjects();
 
 }

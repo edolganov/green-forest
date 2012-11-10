@@ -9,6 +9,7 @@ import com.gf.Action;
 import com.gf.Filter;
 import com.gf.Handler;
 import com.gf.Interceptor;
+import com.gf.InvocationObject;
 import com.gf.annotation.Order;
 import com.gf.extra.invocation.reader.InvocationReaderFilter;
 import com.gf.service.FilterChain;
@@ -19,8 +20,8 @@ public class SecondReaderFilter extends InvocationReaderFilter {
 	@Override
 	public void invoke(Action<?, ?> action, FilterChain chain) throws Exception {
 		
-		List<Object> beforePrev = invocationReader.getLocalPrevHandlers();
-		List<Object> beforeNext = invocationReader.getLocalNextHandlers();
+		List<InvocationObject> beforePrev = invocationReader.getLocalPrevObjects();
+		List<InvocationObject> beforeNext = invocationReader.getLocalNextObjects();
 		
 		assertEquals(1, beforePrev.size());
 		assertTrue(Filter.class.isAssignableFrom(beforePrev.get(0).getClass()));
@@ -31,8 +32,8 @@ public class SecondReaderFilter extends InvocationReaderFilter {
 		
 		chain.doNext();
 		
-		List<Object> afterPrev = invocationReader.getLocalPrevHandlers();
-		List<Object> afterNext = invocationReader.getLocalNextHandlers();
+		List<InvocationObject> afterPrev = invocationReader.getLocalPrevObjects();
+		List<InvocationObject> afterNext = invocationReader.getLocalNextObjects();
 		
 		assertEquals(1, afterPrev.size());
 		assertTrue(Filter.class.isAssignableFrom(afterPrev.get(0).getClass()));
