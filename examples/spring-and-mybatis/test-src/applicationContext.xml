@@ -12,6 +12,7 @@
         http://www.springframework.org/schema/util 
         http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+	<bean id="uid" class="com.gf.util.Util" factory-method="randomUUID"/>
 	
 	<bean id="dataSourceManager" 
 		class="com.gf.components.atomikos.jdbc.DataSourceManagerImpl"
@@ -20,7 +21,7 @@
 		<property name="user" value="sa"/>
 		<property name="password" value=""/>
 		<property name="driverClass" value="org.h2.Driver"/>
-		<property name="url" value="jdbc:h2:../data/gf-spring-mybatis-db"/>
+		<property name="url" value="#{'jdbc:h2:./tmp/db-'+uid}"/>
 		<property name="poolSize" value="5"/>
 	</bean>
 
