@@ -3,7 +3,7 @@ package example.common.model;
 
 public class Doc {
 	
-	public int id;
+	public long id;
 	public String name;
 	
 	
@@ -19,11 +19,11 @@ public class Doc {
 	}
 
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

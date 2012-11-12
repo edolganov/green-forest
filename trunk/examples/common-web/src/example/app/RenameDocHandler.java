@@ -22,7 +22,7 @@ public class RenameDocHandler extends Handler<RenameDoc>{
 	public void invoke(RenameDoc action) throws Exception {
 		
 		Doc input = action.input();
-		int id = input.id;
+		long id = input.id;
 		String newName = input.name;
 		
 		//business validation

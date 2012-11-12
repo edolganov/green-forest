@@ -6,7 +6,7 @@
 	
 	<select id="createDocSchema" parameterType="map">
 		CREATE TABLE IF NOT EXISTS doc 
-			(id INT NOT NULL,
+			(id INT NOT NULL auto_increment,
 			name VARCHAR(${nameSize}) NOT NULL UNIQUE,
 			PRIMARY KEY (id));
 	</select>

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.gf.core.Engine;
 
-import example.common.app.CreateOrUpdateDataBase;
+import example.common.app.CreateDataBase;
 import example.storage.StorageUtil;
 
 
@@ -24,7 +24,7 @@ public class CreateOrUpdateDataBaseTest extends AbstractStorageTest {
 		engine.putHandler(CreateDataBaseHandler.class);
 		engine.addToContext(c);
 		
-		engine.invoke(new CreateOrUpdateDataBase());
+		engine.invoke(new CreateDataBase());
 		
 		//check
 		ResultSet rs = c.createStatement().executeQuery("select count(id) from doc");

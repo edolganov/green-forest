@@ -8,11 +8,11 @@ import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.app.CreateOrUpdateDataBase;
+import example.common.app.CreateDataBase;
 import example.storage.StorageUtil;
 
-@Mapping(CreateOrUpdateDataBase.class)
-public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
+@Mapping(CreateDataBase.class)
+public class CreateDataBaseHandler extends Handler<CreateDataBase>{
 	
 	@Inject
 	Connection connection;
@@ -21,7 +21,7 @@ public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
 	DocMapper docMapper;
 
 	@Override
-	public void invoke(CreateOrUpdateDataBase action) throws Exception {
+	public void invoke(CreateDataBase action) throws Exception {
 		
 		log.info("Create or update DB structure...");
 		
