@@ -51,6 +51,16 @@
 				<ref bean="sqlSessionFactory"/>
 			</list>
 		</property>
+		<property name="filterTypes">
+			<list>
+				<value>com.gf.components.mybatis.SqlSessionInInvoke</value>
+			</list>
+		</property>
+		<property name="interceptorTypes">
+			<list>
+				<value>com.gf.components.mybatis.InjectMappers</value>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="storage" class="example.storage.Storage">

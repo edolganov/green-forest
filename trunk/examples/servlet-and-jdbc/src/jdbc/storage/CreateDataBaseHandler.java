@@ -1,8 +1,6 @@
 package jdbc.storage;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 
@@ -11,12 +9,11 @@ import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
 import example.common.app.CreateOrUpdateDataBase;
+import example.storage.StorageUtil;
 
 
 @Mapping(CreateOrUpdateDataBase.class)
 public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
-	
-	public static final int INIT_DOCS_COUNT = 28;
 	
 	@Inject
 	Connection c;
@@ -34,8 +31,7 @@ public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
 	}
 
 	private boolean tablesExists() throws Exception {
-		DatabaseMetaData dbm = c.getMetaData();
-	    return tableExists("doc", dbm);
+	    return StorageUtil.tableExists("doc", c);
 	}
 
 	private void createTables() throws Exception {
@@ -51,7 +47,7 @@ public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
 		
 		log.info("insert data...");
 		st = c.createStatement();
-		for(int i=0; i < INIT_DOCS_COUNT; i++){
+		for(int i=0; i < StorageUtil.INIT_DOCS_COUNT; i++){
 			int num = i+1;
 			String name = "name-"+num;
 			st.addBatch("INSERT INTO doc VALUES ("+num+", '"+name+"');");
@@ -60,9 +56,6 @@ public class CreateDataBaseHandler extends Handler<CreateOrUpdateDataBase>{
 		st.close();
 	}
 	
-	private boolean tableExists(String tableName, DatabaseMetaData dbm) throws Exception {
-	    ResultSet rs = dbm.getTables(null, null, tableName.toUpperCase(), null);
-	    return rs.next();
-	}
+
 
 }

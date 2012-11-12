@@ -6,11 +6,11 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletConfig;
 
-import jdbc.storage.CreateDataBaseHandler;
 import org.junit.Test;
 
 import example.AbstractTest;
 import example.app.App;
+import example.storage.StorageUtil;
 import example.web.AbstractInitServlet;
 import example.web.ServletConfigMock;
 
@@ -28,7 +28,7 @@ public class InitServletTest extends AbstractTest {
 		ResultSet rs = c.createStatement().executeQuery("select count(id) from doc");
 		
 		rs.next();
-		assertEquals(CreateDataBaseHandler.INIT_DOCS_COUNT, rs.getInt(1));
+		assertEquals(StorageUtil.INIT_DOCS_COUNT, rs.getInt(1));
 		
 		c.close();
 	}

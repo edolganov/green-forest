@@ -1,5 +1,6 @@
 package com.gf.components.mybatis;
 
+import java.sql.Connection;
 import java.util.List;
 
 import org.apache.ibatis.session.ExecutorType;
@@ -27,7 +28,10 @@ public class SqlSessionInInvoke extends InvocationReaderFilter {
 		SqlSession session = createSession(settings);
 		try {
 			
+			Connection connection = session.getConnection();
+			
 			invocationContext.addToInvocationContext(session);
+			invocationContext.addToInvocationContext(connection);
 			chain.doNext();
 			
 		}catch (Exception e) {

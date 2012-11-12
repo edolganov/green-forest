@@ -2,7 +2,6 @@ package jdbc.storage;
 
 import java.sql.Connection;
 
-import jdbc.storage.CreateDataBaseHandler;
 import jdbc.storage.GetDocsCountHandler;
 
 import org.junit.Test;
@@ -10,6 +9,7 @@ import org.junit.Test;
 import com.gf.core.Engine;
 
 import example.common.storage.GetDocsCount;
+import example.storage.StorageUtil;
 
 
 public class GetDocsCountTest extends AbstractStorageTest {
@@ -25,7 +25,7 @@ public class GetDocsCountTest extends AbstractStorageTest {
 		engine.addToContext(c);
 		
 		Integer result = engine.invoke(new GetDocsCount());
-		assertEquals(CreateDataBaseHandler.INIT_DOCS_COUNT, result+0);
+		assertEquals(StorageUtil.INIT_DOCS_COUNT, result+0);
 		
 	}
 

@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.gf.core.Engine;
 
 import example.common.app.CreateOrUpdateDataBase;
+import example.storage.StorageUtil;
 
 
 public class CreateOrUpdateDataBaseTest extends AbstractStorageTest {
@@ -28,7 +29,7 @@ public class CreateOrUpdateDataBaseTest extends AbstractStorageTest {
 		//check
 		ResultSet rs = c.createStatement().executeQuery("select count(id) from doc");
 		rs.next();
-		assertEquals(CreateDataBaseHandler.INIT_DOCS_COUNT, rs.getInt(1));
+		assertEquals(StorageUtil.INIT_DOCS_COUNT, rs.getInt(1));
 		
 		c.close();
 		
