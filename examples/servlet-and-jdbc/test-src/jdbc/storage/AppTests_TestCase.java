@@ -19,7 +19,6 @@ import example.app.CreateDataBaseTest;
 import example.app.GetDocsCountTest;
 import example.app.GetDocsPageTest;
 import example.app.RenameDocTest;
-import example.web.AbstractInitServlet;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -43,7 +42,7 @@ public class AppTests_TestCase {
 				InitServlet servlet = new InitServlet();
 				servlet.init(TestUtil.getConfig(tmpDirPath, sessionId));
 				
-				App app = AbstractInitServlet.getApp();
+				App app = InitServlet.getApp();
 				DataSource ds = InitServletAccessor.getDataSource(servlet);
 				
 				return new AppContext(app, ds);

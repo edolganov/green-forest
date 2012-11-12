@@ -9,7 +9,7 @@ import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.storage.GetDocsCount;
+import example.common.app.GetDocsCount;
 
 @Mapping(GetDocsCount.class)
 public class GetDocsCountHandler extends Handler<GetDocsCount>{

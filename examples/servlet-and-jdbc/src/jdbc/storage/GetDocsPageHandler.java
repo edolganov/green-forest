@@ -10,11 +10,11 @@ import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
+import example.common.app.GetDocsCount;
 import example.common.app.GetDocsPage;
 import example.common.app.GetDocsPage.Input;
 import example.common.model.Doc;
 import example.common.model.Page;
-import example.common.storage.GetDocsCount;
 
 @Mapping(GetDocsPage.class)
 public class GetDocsPageHandler extends Handler<GetDocsPage>{
