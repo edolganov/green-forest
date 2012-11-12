@@ -23,22 +23,18 @@ public class CreateDataBaseHandler extends Handler<CreateDataBase>{
 	@Override
 	public void invoke(CreateDataBase action) throws Exception {
 		
-		log.info("Create or update DB structure...");
-		
 		if( ! tablesExists()) {
 			createTables();
+			action.setOutput(true);
+		} else {
+			action.setOutput(false);
 		}
-		
-		log.info("Done");
 		
 	}
 	
 	private void createTables() {
-		
 		log.info("create table 'DOC'");
-		
 		docMapper.createDocSchema(StorageUtil.DOC_NAME_SIZE);
-		
 	}
 
 	private boolean tablesExists() throws Exception {

@@ -4,11 +4,11 @@
 
 <mapper namespace="mybatis.mapper.DocMapper">
 	
-	<select id="createDocSchema" parameterType="map">
+	<insert id="createDocSchema" parameterType="map">
 		CREATE TABLE IF NOT EXISTS doc 
-			(id INT NOT NULL auto_increment,
-			name VARCHAR(${nameSize}) NOT NULL UNIQUE,
+			(id INT NOT NULL,
+			name VARCHAR(${nameSize}) NOT NULL,
 			PRIMARY KEY (id));
-	</select>
+	</insert>
 
 </mapper>

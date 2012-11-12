@@ -26,8 +26,6 @@ public class CreateDataBaseHandler extends Handler<CreateDataBase>{
 		} else {
 			action.setOutput(false);
 		}
-		
-
 	}
 
 	private void createTables() throws Exception {
@@ -36,7 +34,7 @@ public class CreateDataBaseHandler extends Handler<CreateDataBase>{
 		Statement st = c.createStatement();
 		st.execute("CREATE TABLE IF NOT EXISTS doc (" +
 				"id IDENTITY NOT NULL," +
-				"name VARCHAR(40) NOT NULL UNIQUE," +
+				"name VARCHAR(40) NOT NULL," +
 				"PRIMARY KEY (id))");
 		st.close();
 		
