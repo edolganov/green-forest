@@ -8,7 +8,7 @@ import org.junit.Test;
 import example.common.app.CreateDataBase;
 import example.storage.StorageUtil;
 
-public class CreateOrUpdateDataBaseTest extends AbstractSpringTest {
+public class CreateDataBaseTest extends AbstractSpringTest {
 	
 	
 	@Test

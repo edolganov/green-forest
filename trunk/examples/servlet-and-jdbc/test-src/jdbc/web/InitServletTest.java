@@ -2,9 +2,8 @@ package jdbc.web;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
-import javax.servlet.ServletConfig;
+import jdbc.TestUtil;
 
 import org.junit.Test;
 
@@ -12,7 +11,6 @@ import example.AbstractTest;
 import example.app.App;
 import example.storage.StorageUtil;
 import example.web.AbstractInitServlet;
-import example.web.ServletConfigMock;
 
 
 public class InitServletTest extends AbstractTest {
@@ -22,9 +20,9 @@ public class InitServletTest extends AbstractTest {
 	public void test_init_db() throws Exception {
 		
 		InitServlet servlet = new InitServlet();
-		servlet.init(getConfig());
+		servlet.init(TestUtil.getConfig(tmpDirPath, sessionId));
 		
-		Connection c = getConnection(servlet);
+		Connection c = InitServletAccessor.getConnection(servlet);
 		ResultSet rs = c.createStatement().executeQuery("select count(id) from doc");
 		
 		rs.next();
@@ -38,28 +36,11 @@ public class InitServletTest extends AbstractTest {
 	public void test_init_app() throws Exception{
 		
 		InitServlet servlet = new InitServlet();
-		servlet.init(getConfig());
+		servlet.init(TestUtil.getConfig(tmpDirPath, sessionId));
 		App app = AbstractInitServlet.getApp();
 		
 		assertNotNull(app);
 		
-	}
-	
-	
-	public ServletConfig getConfig() {
-		
-		ServletConfigMock config = new ServletConfigMock();
-		config.initPatams.put("db-user", "sa");
-		config.initPatams.put("db-password", "");
-		config.initPatams.put("db-driver", "org.h2.Driver");
-		config.initPatams.put("db-url", "jdbc:h2:"+tmpDirPath+"/db-"+sessionId);
-		config.initPatams.put("db-pool-size", "5");
-		return config;
-	}
-	
-
-	public Connection getConnection(InitServlet servlet) throws SQLException {
-		return servlet.dataSourceManager.getDataSource().getConnection();
 	}
 
 
