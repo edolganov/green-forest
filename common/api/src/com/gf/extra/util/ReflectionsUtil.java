@@ -42,7 +42,11 @@ public class ReflectionsUtil {
 					field.set(ob, objectToInject);
 				}
 			
-			}catch (Exception e) {
+			}
+			catch (InjectException e) {
+				throw e;
+			}
+			catch (Exception e) {
 				throw new InjectException("can't set value for ["+field+"] of "+ob, e);
 			}
 		}
