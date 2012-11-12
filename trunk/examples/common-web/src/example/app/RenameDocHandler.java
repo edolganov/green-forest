@@ -4,11 +4,9 @@ package example.app;
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
-import com.gf.util.Util;
 
+import example.common.app.CheckDocName;
 import example.common.app.RenameDoc;
-import example.common.exception.doc.DocEmptyNameException;
-import example.common.exception.doc.DocToLongNameException;
 import example.common.model.Doc;
 import example.storage.Storage;
 
@@ -22,18 +20,9 @@ public class RenameDocHandler extends Handler<RenameDoc>{
 	public void invoke(RenameDoc action) throws Exception {
 		
 		Doc input = action.input();
-		long id = input.id;
-		String newName = input.name;
 		
-		//business validation
-		if(Util.isEmpty(newName)){
-			throw new DocEmptyNameException(id);
-		}
-		
-		int maxNameSize = 20;
-		if(newName.length() > maxNameSize){
-			throw new DocToLongNameException(id, newName, maxNameSize);
-		}
+		//validation
+		subInvoke(new CheckDocName(input));
 		
 		//update db
 		storage.invoke(action);
