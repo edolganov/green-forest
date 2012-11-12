@@ -12,7 +12,7 @@ public class Doc {
 	}
 
 
-	public Doc(int id, String name) {
+	public Doc(long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;

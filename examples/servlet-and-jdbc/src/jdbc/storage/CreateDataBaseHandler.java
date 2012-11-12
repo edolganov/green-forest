@@ -19,14 +19,10 @@ public class CreateDataBaseHandler extends Handler<CreateDataBase>{
 
 	@Override
 	public void invoke(CreateDataBase action) throws Exception {
-		
-		log.info("Create or update DB structure...");
-		
+				
 		if( ! tablesExists()) {
 			createTables();
 		}
-		
-		log.info("Done");
 	}
 
 	private boolean tablesExists() throws Exception {
@@ -43,16 +39,6 @@ public class CreateDataBaseHandler extends Handler<CreateDataBase>{
 				"PRIMARY KEY (id))");
 		st.close();
 		
-		
-		log.info("insert data...");
-		st = c.createStatement();
-		for(int i=0; i < StorageUtil.INIT_DOCS_COUNT; i++){
-			int num = i+1;
-			String name = "name-"+num;
-			st.addBatch("INSERT INTO doc (name) VALUES ('"+name+"');");
-		}
-		st.executeBatch();
-		st.close();
 	}
 	
 
