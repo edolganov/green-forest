@@ -3,7 +3,6 @@ package jdbc.storage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
@@ -21,11 +20,11 @@ public class RenameDocHandler extends Handler<RenameDoc>{
 	public void invoke(RenameDoc action) throws Exception {
 		
 		Doc input = action.input();
-		int id = input.id;
+		long id = input.id;
 		String newName = input.name;
 		
 		PreparedStatement ps = c.prepareStatement("UPDATE doc SET name=? WHERE id=?");
-		ps.setInt(2, id);
+		ps.setLong(2, id);
 		ps.setString(1, newName);
 		ps.executeUpdate();
 		

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import example.app.App;
-import example.common.app.CreateOrUpdateDataBase;
+import example.common.app.CreateDataBase;
 import example.web.AppServlet;
 
 @Controller
@@ -24,7 +24,7 @@ public class AppController {
 	@PostConstruct
 	public void init(){
 		
-		app.invoke(new CreateOrUpdateDataBase());
+		app.invoke(new CreateDataBase());
 		
 		delegate = new AppServlet();
 		delegate.setApp(app);

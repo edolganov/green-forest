@@ -11,7 +11,7 @@ import com.gf.log.Log;
 import com.gf.log.LogFactory;
 
 import example.AbstractTest;
-import example.common.app.CreateOrUpdateDataBase;
+import example.common.app.CreateDataBase;
 
 public abstract class AbstractStorageTest extends AbstractTest {
 	
@@ -44,7 +44,7 @@ public abstract class AbstractStorageTest extends AbstractTest {
 	public void initDatabase(Connection c) throws Exception {
 		CreateDataBaseHandler createTables = new CreateDataBaseHandler();
 		createTables.c = c;
-		createTables.invoke(new CreateOrUpdateDataBase());
+		createTables.invoke(new CreateDataBase());
 	}
 	
 	public String getDocName(Connection c, int id) throws Exception {

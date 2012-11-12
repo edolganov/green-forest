@@ -4,14 +4,14 @@ import example.common.exception.ValidationException;
 
 public class DocEmptyNameException extends ValidationException {
 	
-	final public int id;
+	final public long id;
 
-	public DocEmptyNameException(int id) {
+	public DocEmptyNameException(long id) {
 		super("empty name of doc with id "+id);
 		this.id = id;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	
