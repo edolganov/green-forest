@@ -30,7 +30,7 @@ public class CreateDocsHandler extends Handler<CreateDocs>{
 			subInvoke(new CheckDocName(name));
 		}
 		
-		storage.equals(action);
+		storage.invoke(action);
 		
 	}
 

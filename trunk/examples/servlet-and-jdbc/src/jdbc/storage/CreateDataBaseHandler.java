@@ -22,11 +22,12 @@ public class CreateDataBaseHandler extends Handler<CreateDataBase>{
 				
 		if( ! tablesExists()) {
 			createTables();
+			action.setOutput(true);
+		} else {
+			action.setOutput(false);
 		}
-	}
+		
 
-	private boolean tablesExists() throws Exception {
-	    return StorageUtil.tableExists("doc", c);
 	}
 
 	private void createTables() throws Exception {
@@ -39,6 +40,10 @@ public class CreateDataBaseHandler extends Handler<CreateDataBase>{
 				"PRIMARY KEY (id))");
 		st.close();
 		
+	}
+	
+	private boolean tablesExists() throws Exception {
+	    return StorageUtil.tableExists("doc", c);
 	}
 	
 

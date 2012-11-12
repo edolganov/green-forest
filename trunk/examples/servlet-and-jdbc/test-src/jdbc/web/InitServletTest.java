@@ -10,7 +10,6 @@ import org.junit.Test;
 import example.AbstractTest;
 import example.app.App;
 import example.storage.StorageUtil;
-import example.web.AbstractInitServlet;
 
 
 public class InitServletTest extends AbstractTest {
@@ -37,7 +36,7 @@ public class InitServletTest extends AbstractTest {
 		
 		InitServlet servlet = new InitServlet();
 		servlet.init(TestUtil.getConfig(tmpDirPath, sessionId));
-		App app = AbstractInitServlet.getApp();
+		App app = InitServlet.getApp();
 		
 		assertNotNull(app);
 		

@@ -2,7 +2,7 @@ package example.app;
 
 import org.junit.Test;
 
-import example.common.storage.GetDocsCount;
+import example.common.app.GetDocsCount;
 import example.storage.StorageUtil;
 
 
