@@ -10,8 +10,9 @@
 	- html дока
 	- тестовый запуск
 	- тесты на Tx - коммит, роллбек
-*	- создание дока с использованием сиквенса
-*		-не проходит последний батч из списка создаваемых доков при @SqlSessionSettings(execType=ExecutorType.BATCH)
+*	- GetDocsCountHandler
+	- GetDocsPageHandler
+	- RenameDocHandler
 
 
 
@@ -48,6 +49,8 @@ _____________________
 
 	
 === spring-and-mybatis ===
+	- создание дока с использованием сиквенса
+		-не проходит последний батч из списка создаваемых доков при @SqlSessionSettings(execType=ExecutorType.BATCH)
 	- рефакторинг jdbc приложения под новое заполнение бд
 	- заполнение бд данными через аппс
 	- создание бд
