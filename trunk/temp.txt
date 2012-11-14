@@ -2,7 +2,7 @@ sqlSession.flushStatements();
  sqlSession.commit();
 
 +CreateDataBaseHandler.java
--CreateDocsHandler.java
++CreateDocsHandler.java
 GetDocsCountHandler.java
 GetDocsPageHandler.java
 RenameDocHandler.java
