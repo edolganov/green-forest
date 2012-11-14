@@ -45,6 +45,22 @@ public abstract class AbstractAppTest extends AssertExt {
 		this.ds = context.ds;
 	}
 	
+	public void printDocTable() throws Exception {
+		
+		Connection connection = ds.getConnection();
+		ResultSet rs = connection.createStatement().executeQuery("select * from doc");
+		System.out.println("id \t name");
+		while(rs.next()){
+			String id = rs.getString(1);
+			String name = rs.getString(2);
+			System.out.println(id+"\t"+name);
+		}
+		rs.next();
+		
+		rs.close();
+		connection.close();
+	}
+	
 	
 	public String getDocName(int id) throws Exception {
 		

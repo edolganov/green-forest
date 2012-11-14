@@ -8,5 +8,11 @@ public interface DocMapper extends AbstractMapper {
 	
 	void createDocSchema(
             @Param("nameSize")int nameSize);
+	
+	int nextDocId();
+	
+	void createDoc(
+            @Param("id")int id,
+            @Param("name")String name);
 
 }
