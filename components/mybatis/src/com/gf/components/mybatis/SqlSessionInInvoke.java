@@ -34,6 +34,9 @@ public class SqlSessionInInvoke extends InvocationReaderFilter {
 			invocationContext.addToInvocationContext(connection);
 			chain.doNext();
 			
+			session.flushStatements();
+			session.commit();
+			
 		}catch (Exception e) {
 			throw e;
 		} finally {

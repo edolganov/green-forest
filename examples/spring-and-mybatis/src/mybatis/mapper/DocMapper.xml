@@ -9,6 +9,19 @@
 			(id INT NOT NULL,
 			name VARCHAR(${nameSize}) NOT NULL,
 			PRIMARY KEY (id));
+			
+		CREATE SEQUENCE IF NOT EXISTS doc_seq
+                START WITH 1 
+                INCREMENT BY 1;
+	</insert>
+	
+	<select id="nextDocId" resultType="int">
+		select doc_seq.NEXTVAL
+    </select>
+    
+	<insert id="createDoc" parameterType="map">
+		INSERT INTO doc(id, name)
+		VALUES(#{id}, #{name})
 	</insert>
 
 </mapper>
