@@ -19,13 +19,15 @@ import example.app.CreateDataBaseTest;
 import example.app.GetDocsCountTest;
 import example.app.GetDocsPageTest;
 import example.app.RenameDocTest;
+import example.app.TxTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	CreateDataBaseTest.class,
 	GetDocsCountTest.class,
 	GetDocsPageTest.class,
-	RenameDocTest.class
+	RenameDocTest.class,
+	TxTest.class
 })
 public class AppTests_TestCase {
 	

@@ -17,6 +17,7 @@ import example.app.CreateDataBaseTest;
 import example.app.GetDocsCountTest;
 import example.app.GetDocsPageTest;
 import example.app.RenameDocTest;
+import example.app.TxTest;
 import example.common.app.CreateDataBase;
 
 @RunWith(Suite.class)
@@ -24,7 +25,8 @@ import example.common.app.CreateDataBase;
 	CreateDataBaseTest.class,
 	GetDocsCountTest.class,
 	GetDocsPageTest.class,
-	RenameDocTest.class
+	RenameDocTest.class,
+	TxTest.class
 })
 public class AppTests_TestCase {
 	

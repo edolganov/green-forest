@@ -7,7 +7,20 @@ public class ReflectionsUtil {
 	
 	@SuppressWarnings("unchecked")
 	public static <T> T getField(Object obj, String fieldName) throws Exception {
-		Field field = obj.getClass().getDeclaredField(fieldName);
+		Field field = null;
+		Class<?> curType = obj.getClass();
+		while(curType != null){
+			try {
+				field = curType.getDeclaredField(fieldName);
+				curType = null;
+			}catch (NoSuchFieldException e) {
+				curType = curType.getSuperclass();
+			}
+		}
+		if(field == null){
+			throw new NoSuchFieldException(fieldName);
+		}
+		
 		field.setAccessible(true);
 		return (T) field.get(obj);
 	}

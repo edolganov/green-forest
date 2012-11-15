@@ -7,7 +7,7 @@ import com.gf.service.ActionService;
 
 public abstract class ActionServiceWrapper implements ActionService {
 
-	private ActionService actionService;
+	protected ActionService actionService;
 
 	public ActionServiceWrapper(ActionService actionService) {
 		super();

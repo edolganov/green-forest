@@ -7,8 +7,10 @@ import javax.sql.DataSource;
 
 import org.junit.Before;
 
+import com.gf.core.Engine;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
+import com.gf.util.ReflectionsUtil;
 import com.gf.util.junit.AssertExt;
 
 public abstract class AbstractAppTest extends AssertExt {
@@ -30,6 +32,7 @@ public abstract class AbstractAppTest extends AssertExt {
 	protected Log log = LogFactory.getLog(getClass());
 	
 	protected App app;
+	protected Engine appEngine;
 	protected DataSource ds;
 	
 	@Before
@@ -42,6 +45,7 @@ public abstract class AbstractAppTest extends AssertExt {
 		
 		AppContext context = provider.createContext();
 		this.app = context.app;
+		this.appEngine = (Engine) ReflectionsUtil.getField(app, "actionService");
 		this.ds = context.ds;
 	}
 	

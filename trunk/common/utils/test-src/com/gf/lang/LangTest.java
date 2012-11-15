@@ -6,6 +6,11 @@ import com.gf.util.junit.AssertExt;
 
 public class LangTest extends AssertExt {
 	
+	@Test
+	public void test_parentClass_of_Object(){
+		assertEquals(null, Object.class.getSuperclass());
+	}
+	
 	
 	@Test
 	public void test_class_of_class(){

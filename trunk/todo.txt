@@ -8,11 +8,8 @@
 	
 === spring-and-mybatis ===	
 	- html дока
-	- тестовый запуск
-	- тесты на Tx - коммит, роллбек
-*	- GetDocsCountHandler
-*	- GetDocsPageHandler
-*	- RenameDocHandler
+*	- тестовый запуск
+
 
 
 
@@ -49,6 +46,10 @@ _____________________
 
 	
 === spring-and-mybatis ===
+	- тесты на Tx - коммит, роллбек
+	- GetDocsCountHandler
+	- GetDocsPageHandler
+	- RenameDocHandler
 	- создание дока с использованием сиквенса
 		-не проходит последний батч из списка создаваемых доков при @SqlSessionSettings(execType=ExecutorType.BATCH)
 	- рефакторинг jdbc приложения под новое заполнение бд
