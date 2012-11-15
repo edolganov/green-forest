@@ -11,8 +11,8 @@
 	- тестовый запуск
 	- тесты на Tx - коммит, роллбек
 *	- GetDocsCountHandler
-	- GetDocsPageHandler
-	- RenameDocHandler
+*	- GetDocsPageHandler
+*	- RenameDocHandler
 
 
 

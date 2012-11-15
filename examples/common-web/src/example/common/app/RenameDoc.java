@@ -5,7 +5,7 @@ import com.gf.Action;
 
 import example.common.model.Doc;
 
-public class RenameDoc extends Action<Doc, Doc>{
+public class RenameDoc extends Action<Doc, Void>{
 	
 	public RenameDoc(int id, String newName){
 		this(new Doc(id, newName));

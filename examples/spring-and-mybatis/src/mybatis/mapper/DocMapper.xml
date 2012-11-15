@@ -16,12 +16,29 @@
 	</insert>
 	
 	<select id="nextDocId" resultType="int">
-		select doc_seq.NEXTVAL
+		SELECT doc_seq.NEXTVAL
     </select>
     
 	<insert id="createDoc" parameterType="map">
 		INSERT INTO doc(id, name)
 		VALUES(#{id}, #{name})
 	</insert>
+	
+	<select id="getDocsCount" resultType="int">
+		SELECT count(id) 
+		FROM doc
+	</select>
+	
+	<select id="getDocsPage" parameterType="map" resultType="example.common.model.Doc">
+		SELECT * 
+		FROM doc 
+		LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<update id="renameDoc" parameterType="map">
+		UPDATE doc 
+		SET name=#{name} 
+		WHERE id=#{id}
+	</update>
 
 </mapper>
