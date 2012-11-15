@@ -1,7 +1,6 @@
-package jdbc.storage;
+package mybatis.storage;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import mybatis.mapper.DocMapper;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
@@ -14,7 +13,7 @@ import example.common.model.Doc;
 public class RenameDocHandler extends Handler<RenameDoc>{
 	
 	@Inject
-	Connection c;
+	DocMapper docMapper;
 
 	@Override
 	public void invoke(RenameDoc action) throws Exception {
@@ -23,10 +22,7 @@ public class RenameDocHandler extends Handler<RenameDoc>{
 		long id = input.id;
 		String newName = input.name;
 		
-		PreparedStatement ps = c.prepareStatement("UPDATE doc SET name=? WHERE id=?");
-		ps.setLong(2, id);
-		ps.setString(1, newName);
-		ps.executeUpdate();
+		docMapper.renameDoc(id, newName);
 		
 	}
 

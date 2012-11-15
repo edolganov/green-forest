@@ -14,8 +14,7 @@ public class RenameDocTest extends AbstractAppTest {
 		
 		int id = -1;
 		String newName = "new123";
-		Doc unexistResult = app.invoke(new RenameDoc(id, newName));
-		assertEquals(newName, unexistResult.name);
+		app.invoke(new RenameDoc(id, newName));
 
 	}
 	
@@ -24,8 +23,7 @@ public class RenameDocTest extends AbstractAppTest {
 		
 		int id = 1;
 		String newName = "new123";
-		Doc result = app.invoke(new RenameDoc(id, newName));
-		assertEquals(newName, result.name);
+		app.invoke(new RenameDoc(id, newName));
 		assertEquals(newName, getDocName(id));
 		
 		Doc resultFromDB = app.invoke(new GetDocsPage(0, 1)).list.get(0);

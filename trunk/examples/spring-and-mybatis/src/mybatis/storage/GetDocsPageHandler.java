@@ -1,10 +1,8 @@
-package jdbc.storage;
+package mybatis.storage;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.List;
 
+import mybatis.mapper.DocMapper;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
@@ -18,10 +16,10 @@ import example.common.model.Page;
 
 @Mapping(GetDocsPage.class)
 public class GetDocsPageHandler extends Handler<GetDocsPage>{
-
-	@Inject
-	Connection c;
 	
+	@Inject
+	DocMapper docMapper;
+
 	@Override
 	public void invoke(GetDocsPage action) throws Exception {
 		
@@ -31,27 +29,13 @@ public class GetDocsPageHandler extends Handler<GetDocsPage>{
 		int pageIndex = input.pageIndex;
 		int offset = pageIndex*limit;
 		
-		Statement st = c.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM doc LIMIT "+limit+" OFFSET "+offset);
-		
-		ArrayList<Doc> list = new ArrayList<Doc>();
-		while(rs.next()){
-			list.add(convert(rs));
-		}
-		st.close();
+		List<Doc> list = docMapper.getDocsPage(limit, offset);
 		
 		Integer count = subInvoke(new GetDocsCount());
 
 		Page<Doc> out = new Page<Doc>(list, pageIndex, limit, count);
 		action.setOutput(out);
 		
-	}
-
-	private Doc convert(ResultSet rs) throws Exception {
-		Doc doc = new Doc();
-		doc.id = rs.getInt(1);
-		doc.name = rs.getString(2);
-		return doc;
 	}
 
 }
