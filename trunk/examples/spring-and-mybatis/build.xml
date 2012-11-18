@@ -69,7 +69,6 @@
 		<copy todir="${src-all}">
 			<fileset dir="${module.src.dir}"/>
 			<fileset dir="${project.path.common-web}/src"/>
-			<fileset dir="${project.path.common-mybatis}/src"/>
 		</copy>
 		
         <javac srcdir="${src-all}"
