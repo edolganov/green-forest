@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/xml; charset=utf-8"/>
-    <title>Green-Forest & Servlet/JSP & JDBC</title>
+    <title>${label.title}</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
     <link href="css/ext.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h1 class="center">Green-Forest & Servlet/JSP & JDBC</h1>
+			<h1 class="center">${label.title}</h1>
 		</div>
 		
 		<div id="content">
