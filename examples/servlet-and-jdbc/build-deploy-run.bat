@@ -6,8 +6,8 @@ if %errorlevel% GEQ 1 goto ERROR_IN_BUILD
 
 taskkill /fi "WINDOWTITLE eq Tomcat"
 
-for /d %%i in (%SERVER_DEPLOY%\*) do rd /s /q %%i
-del /s /q %SERVER_DEPLOY%\*.*
+for /d %%i in (%SERVER_DEPLOY%\gf-servlet-jdbc) do rd /s /q %%i
+del /s /q %SERVER_DEPLOY%\gf-servlet-jdbc.*
 rd /s /q "%SERVER_DEPLOY%\..\work"
 rd /s /q "%SERVER_DEPLOY%\..\data"
 xcopy ".\build\*.war" 		"%SERVER_DEPLOY%\" /y /f

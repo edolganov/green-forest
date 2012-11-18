@@ -9,6 +9,7 @@
 === spring-and-mybatis ===	
 	- html дока
 *	- тестовый запуск
+	- переименовать лейбл в jsp
 
 
 
@@ -22,11 +23,13 @@
 === components ===
 	- конфиг UserTransactionFilter
 	
+	
+	
+	
 === другое ===
 	- писатель испольнения
 	- доступ к конфиг сервайсу в хендлере
 	- service-layer
-	- spring-mvc-and-mybatis
 	- jee
 
 
