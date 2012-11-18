@@ -1,6 +1,11 @@
 package example.web;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -12,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gf.extra.trace.Trace;
 import com.gf.key.core.TraceHandlers;
+import com.gf.log.Log;
+import com.gf.log.LogFactory;
 import com.gf.util.Util;
 
 import example.app.App;
@@ -26,14 +33,17 @@ public class AppServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private App app;
 	private transient ServletConfig config;
+	private Log log = LogFactory.getLog(getClass());
+	private App app;
+	private Map<Object, Object> labels = Collections.emptyMap();
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		this.config = config;
 		app = AbstractInitServlet.getApp();
+		initLabels();
 	}
 	
 	/** for manually init */
@@ -44,9 +54,24 @@ public class AppServlet extends HttpServlet {
 	/** for manually init */
 	public void setServletConfig(ServletConfig config){
 		this.config = config;
+		initLabels();
 	}
 	
 	
+	private void initLabels() {
+		String path = config.getServletContext().getRealPath("./WEB-INF/labels.properties");
+		File file = new File(path);
+		if(file.exists()){
+			try {
+				Properties props = new Properties();
+				props.load(new FileReader(file));
+				labels = props;
+			}catch (Exception e) {
+				log.error("can't load labels file", e);
+			}
+		}
+	}
+
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -58,6 +83,7 @@ public class AppServlet extends HttpServlet {
 		Page<Doc> page = app.invoke(action);
 		Trace trace = TraceHandlers.getTrace(action);
 		
+		req.setAttribute("label", labels);
 		req.setAttribute("page", page);
 		req.setAttribute("selectTrace", trace);
 		
