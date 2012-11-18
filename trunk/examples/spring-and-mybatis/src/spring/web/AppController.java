@@ -1,6 +1,7 @@
 package spring.web;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +20,9 @@ public class AppController {
 	@Autowired
 	App app;
 	
+	@Autowired
+	ServletConfig config;
+	
 	AppServlet delegate;
 	
 	@PostConstruct
@@ -27,6 +31,7 @@ public class AppController {
 		app.invoke(new CreateDataBase());
 		
 		delegate = new AppServlet();
+		delegate.setServletConfig(config);
 		delegate.setApp(app);
 	}
 	

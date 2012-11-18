@@ -12,7 +12,8 @@
 			<fileset dir="${project.path.atomikos}/build" includes="*.jar"/>
 			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
 			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
-			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
+			<fileset dir="${project.path.mybatis}/build" includes="*.jar"/>
+			
         </path>
     </target>
 
@@ -41,7 +42,7 @@
 			<fileset dir="${project.path.atomikos}/build" includes="*.jar"/>
 			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
 			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
-			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
+			<fileset dir="${project.path.mybatis}/build" includes="*.jar"/>
 			
 			<fileset file="${module.third-party.dir}/jstl-1.2.jar"/>
 			<fileset file="${module.third-party.dir}/atomikos-util.jar"/>
@@ -54,7 +55,17 @@
 			<fileset file="${module.third-party.dir}/transactions-jta.jar"/>
 			<fileset file="${module.third-party.dir}/compile/geronimo-j2ee-connector_1.5_spec.jar"/>
 			<fileset file="${module.third-party.dir}/compile/geronimo-jta_1.0.1B_spec.jar"/>
-
+			<fileset file="${module.third-party.dir}/mybatis-3.1.1.jar"/>
+			<fileset file="${module.third-party.dir}/mybatis-spring-1.1.1.jar"/>
+			<fileset file="${module.third-party.dir}/org.springframework.aop-3.0.6.RELEASE.jar"/>
+			<fileset file="${module.third-party.dir}/org.springframework.asm-3.0.6.RELEASE.jar"/>
+			<fileset file="${module.third-party.dir}/org.springframework.beans-3.0.6.RELEASE.jar"/>
+			<fileset file="${module.third-party.dir}/org.springframework.context-3.0.6.RELEASE.jar"/>
+			<fileset file="${module.third-party.dir}/org.springframework.core-3.0.6.RELEASE.jar"/>
+			<fileset file="${module.third-party.dir}/org.springframework.expression-3.0.6.RELEASE.jar"/>
+			<fileset file="${module.third-party.dir}/org.springframework.jdbc-3.0.6.RELEASE.jar"/>
+			<fileset file="${module.third-party.dir}/org.springframework.web-3.0.6.RELEASE.jar"/>
+			<fileset file="${module.third-party.dir}/org.springframework.web.servlet-3.0.6.RELEASE.jar"/>
         </copy>
 		
     </target>
