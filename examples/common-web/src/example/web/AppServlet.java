@@ -3,6 +3,7 @@ package example.web;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,10 +27,12 @@ public class AppServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private App app;
+	private transient ServletConfig config;
 	
 	@Override
-	public void init() throws ServletException {
-		super.init();
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		this.config = config;
 		app = AbstractInitServlet.getApp();
 	}
 	
@@ -37,6 +40,12 @@ public class AppServlet extends HttpServlet {
 	public void setApp(App app){
 		this.app = app;
 	}
+	
+	/** for manually init */
+	public void setServletConfig(ServletConfig config){
+		this.config = config;
+	}
+	
 	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -82,7 +91,7 @@ public class AppServlet extends HttpServlet {
 	
 	private void showView(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String viewPath = "/WEB-INF/jsp/app.jsp";
-		ServletContext servletContext = getServletContext();
+		ServletContext servletContext = config.getServletContext();
 		RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(viewPath);
 		requestDispatcher.forward(req, resp);
 	}
