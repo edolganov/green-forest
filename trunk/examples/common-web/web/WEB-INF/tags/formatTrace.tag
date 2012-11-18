@@ -12,18 +12,19 @@
 		<c:when test="${traceType eq 'Trace'}">
 			<div class="trace-elem">
 				<span class="trace">${trace.owner.name}</span>
-				(total time: <span class="work-time">${trace.duration}ms</span>)
+				&nbsp;<span class="work-time">${trace.duration}ms</span>
 			</div>
 		</c:when>
 		<c:when test="${traceType eq 'TraceLevel'}">
 			<div class="trace-elem">
 				<span class="trace-level">sub invoke</span>
-				(total time: <span class="work-time">${trace.duration}ms</span>)
+				&nbsp;<span class="work-time">${trace.duration}ms</span>
 			</div>
 		</c:when>
 		<c:otherwise>
-			<div class="trace-elem trace-level-item">
-				${trace.owner}
+			<div class="trace-elem">
+				<span class="trace-level-item">${trace.owner}</span>
+				&nbsp;<span class="work-time">${trace.duration}ms</span>
 			</div>
 		</c:otherwise>
 	</c:choose>
