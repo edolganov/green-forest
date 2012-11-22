@@ -1,4 +1,4 @@
-package com.gf.core;
+package com.gf.common;
 
 import com.gf.Action;
 import com.gf.exception.ExceptionWrapper;
