@@ -19,9 +19,9 @@ import com.gf.extra.trace.Trace;
 import com.gf.key.core.TraceHandlers;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
+import com.gf.service.ActionService;
 import com.gf.util.Util;
 
-import example.app.App;
 import example.common.app.GetDocsPage;
 import example.common.app.RenameDoc;
 import example.common.exception.ValidationException;
@@ -35,19 +35,18 @@ public class AppServlet extends HttpServlet {
 	
 	private transient ServletConfig config;
 	private Log log = LogFactory.getLog(getClass());
-	private App app;
+	private ActionService app;
 	private Map<Object, Object> labels = Collections.emptyMap();
 	
 	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		this.config = config;
+	public void init() throws ServletException {
+		this.config = getServletConfig();
 		app = AbstractInitServlet.getApp();
 		initLabels();
 	}
 	
 	/** for manually init */
-	public void setApp(App app){
+	public void setApp(ActionService app){
 		this.app = app;
 	}
 	
