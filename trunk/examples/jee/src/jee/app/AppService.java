@@ -14,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import com.gf.Action;
 import com.gf.common.ActionServiceFactory;
 import com.gf.common.ActionServiceSingleton;
+import com.gf.components.jee.SimpleTransactionManager;
 import com.gf.core.Engine;
 import com.gf.exception.ExceptionWrapper;
 import com.gf.exception.invoke.InvocationException;
@@ -46,11 +47,12 @@ public class AppService implements ActionService, ActionServiceFactory {
 	}
 	
 	@Override
-	public ActionService createService() {
+	public ActionService createActionService() {
 		
 		Engine engine = new Engine();
 		engine.addToContext(entityManager);
 		engine.addToContext(sessionContext);
+		engine.putFilter(SimpleTransactionManager.class);
 		engine.scanForAnnotations(getClass().getPackage());
 		
 		return engine;

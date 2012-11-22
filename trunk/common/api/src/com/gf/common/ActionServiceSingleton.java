@@ -10,7 +10,7 @@ public class ActionServiceSingleton {
 	public final synchronized ActionService getServiceAndRegisterClient(ActionServiceFactory factory){
 		if(service == null){
 			clientsCount = 0;
-			service = factory.createService();
+			service = factory.createActionService();
 		}
 		clientsCount++;
 		return service;

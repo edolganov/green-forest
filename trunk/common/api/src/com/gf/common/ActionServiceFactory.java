@@ -4,6 +4,6 @@ import com.gf.service.ActionService;
 
 public interface ActionServiceFactory {
 	
-	ActionService createService();
+	ActionService createActionService();
 
 }

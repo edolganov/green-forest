@@ -1,3 +1,40 @@
+
+http://onjava.com/pub/a/onjava/2005/07/20/transactions.html?page=2
+
+			// obtain UserTransaction object and start transaction
+			InitialContext ctx = new InitialContext();
+			UserTransaction userTransaction = (UserTransaction)
+				ctx.lookup("java:comp/UserTransaction");
+
+			// start first transaction
+			userTransaction.begin();
+						
+			// obtain TransactionManager 
+			// using one of the methods described above
+			TransactionManager tm = getTransactionManager();
+
+			// suspend transaction
+			// suspend() returns reference to suspended
+			// Transaction object which later should be passed
+			// to resume()
+			Transaction transaction = tm.suspend();
+							
+			// here you can do something outside of transaction
+			// or start new transaction, 
+			// do something and then commit or rollback
+			userTransaction.begin();
+				
+			// commit subtransaction
+			userTransaction.commit();
+
+			// resume suspended transaction
+			tm.resume(transaction);
+
+			// commit first transaction
+			userTransaction.commit();
+
+
+
 @TransactionAttribute(value= TransactionAttributeType.REQUIRED)
 
 
