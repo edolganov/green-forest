@@ -1,6 +1,6 @@
 package example.app;
 
-import com.gf.core.ActionServiceWrapper;
+import com.gf.common.ActionServiceWrapper;
 import com.gf.service.ActionService;
 
 public class App extends ActionServiceWrapper {
