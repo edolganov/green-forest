@@ -1,4 +1,30 @@
 
+http://onjava.com/onjava/2005/07/20/transactions.html
+
+			Get TransactionManager Directly from JNDI (JBoss, WebLogic)
+
+			In JBoss 3 and WebLogic 8, TransactionManager is available in JNDI, albeit under different names, and therefore can be obtained by simple lookup:
+			private TransactionManager getFromJNDI() 
+					throws Exception {
+				InitialContext ctx = new InitialContext();
+				try {
+					// WebLogic
+					return (TransactionManager)
+						ctx.lookup("javax.transaction.TransactionManager");
+				 }
+				 catch (Exception e) {  }
+
+				try {
+					// JBoss
+					return (TransactionManager)
+						ctx.lookup("java:/TransactionManager");
+				}
+				catch (Exception e) { }
+				return null;
+			}
+
+
+
 http://onjava.com/pub/a/onjava/2005/07/20/transactions.html?page=2
 
 			// obtain UserTransaction object and start transaction
