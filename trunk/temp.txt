@@ -1,3 +1,6 @@
+@TransactionAttribute(value= TransactionAttributeType.REQUIRED)
+
+
 sqlSession.flushStatements();
  sqlSession.commit();
 
