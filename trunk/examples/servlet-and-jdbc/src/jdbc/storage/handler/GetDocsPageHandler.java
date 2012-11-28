@@ -1,4 +1,4 @@
-package jdbc.storage;
+package jdbc.storage.handler;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,9 +10,9 @@ import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.app.GetDocsCount;
-import example.common.app.GetDocsPage;
-import example.common.app.GetDocsPage.Input;
+import example.common.action.GetDocsCount;
+import example.common.action.GetDocsPage;
+import example.common.action.GetDocsPage.Input;
 import example.common.model.Doc;
 import example.common.model.Page;
 

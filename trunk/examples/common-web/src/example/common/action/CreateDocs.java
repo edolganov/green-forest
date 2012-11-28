@@ -1,4 +1,4 @@
-package example.common.app;
+package example.common.action;
 
 import java.util.List;
 

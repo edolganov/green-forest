@@ -1,10 +1,10 @@
-package example.app;
+package example.app.handler;
 
 import com.gf.Handler;
 import com.gf.annotation.Mapping;
 import com.gf.util.Util;
 
-import example.common.app.CheckDocName;
+import example.common.action.CheckDocName;
 import example.common.exception.doc.DocEmptyNameException;
 import example.common.exception.doc.DocToLongNameException;
 import example.common.model.Doc;

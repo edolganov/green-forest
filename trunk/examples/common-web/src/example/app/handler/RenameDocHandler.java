@@ -1,12 +1,12 @@
-package example.app;
+package example.app.handler;
 
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.app.CheckDocName;
-import example.common.app.RenameDoc;
+import example.common.action.CheckDocName;
+import example.common.action.RenameDoc;
 import example.common.model.Doc;
 import example.storage.Storage;
 

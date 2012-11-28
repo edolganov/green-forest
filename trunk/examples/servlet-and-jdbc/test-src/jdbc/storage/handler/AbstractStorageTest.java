@@ -1,10 +1,12 @@
-package jdbc.storage;
+package jdbc.storage.handler;
 
 import java.sql.Connection;
 
 import javax.sql.DataSource;
 
 import jdbc.TestUtil;
+import jdbc.storage.handler.CreateDataBaseHandler;
+import jdbc.storage.handler.CreateDocsHandler;
 
 import com.gf.components.atomikos.jdbc.DataSourceManagerImpl;
 import com.gf.components.jdbc.DataSourceManager;
@@ -12,8 +14,8 @@ import com.gf.log.Log;
 import com.gf.log.LogFactory;
 
 import example.AbstractTest;
-import example.common.app.CreateDataBase;
-import example.common.app.CreateDocs;
+import example.common.action.CreateDataBase;
+import example.common.action.CreateDocs;
 
 public abstract class AbstractStorageTest extends AbstractTest {
 	

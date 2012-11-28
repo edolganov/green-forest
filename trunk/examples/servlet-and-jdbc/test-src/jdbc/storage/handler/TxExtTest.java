@@ -1,6 +1,10 @@
-package jdbc.storage;
+package jdbc.storage.handler;
 
 import java.sql.Connection;
+
+import jdbc.storage.handler.GetDocsCountHandler;
+import jdbc.storage.handler.GetDocsPageHandler;
+import jdbc.storage.handler.RenameDocHandler;
 
 
 import org.junit.Test;
@@ -10,8 +14,8 @@ import test.model.ThrowExceptionAfterHandler;
 import com.gf.core.Engine;
 import com.gf.exception.TestRuntimeException;
 
-import example.common.app.GetDocsPage;
-import example.common.app.RenameDoc;
+import example.common.action.GetDocsPage;
+import example.common.action.RenameDoc;
 import example.common.model.Doc;
 
 public class TxExtTest extends AbstractStorageTest {
