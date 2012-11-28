@@ -1,3 +1,5 @@
+@EJB(mappedName="StatlessEJBServiceImpl/local")
+
 Is used to specify a named query in the Java Persistence query language, which is a static query expressed in metadata. Query names are scoped to the persistence unit. 
 The following is an example of the definition of a named query in the Java Persistence query language: 
 
