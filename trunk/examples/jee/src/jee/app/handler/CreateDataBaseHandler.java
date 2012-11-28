@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 
-import jee.entity.DocEntity;
-
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
 import example.common.action.CreateDataBase;
 import example.common.action.CreateDocs;
+import example.common.action.GetDocsCount;
 import example.storage.StorageUtil;
 
 @Mapping(CreateDataBase.class)
@@ -23,7 +22,7 @@ public class CreateDataBaseHandler extends Handler<CreateDataBase>{
 	@Override
 	public void invoke(CreateDataBase action) throws Exception {
 		
-		Long count = (Long)em.createNamedQuery(DocEntity.Q_COUNT).getSingleResult();
+		Integer count = subInvoke(new GetDocsCount());
 		
 		if(count == 0){
 			

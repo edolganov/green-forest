@@ -43,7 +43,7 @@ public class CreateDocsHandler extends Handler<CreateDocs>{
 			DocEntity entity = new DocEntity(null, name);
 			em.persist(entity);
 			
-			Doc doc = new Doc(entity.getId(), name);
+			Doc doc = entity.getDoc();
 			out.add(doc);
 		}
 		
