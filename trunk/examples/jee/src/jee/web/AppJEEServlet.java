@@ -4,7 +4,8 @@ import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
-import jee.app.AppService;
+import com.gf.service.ActionService;
+
 import example.web.AppServlet;
 
 public class AppJEEServlet extends AppServlet {
@@ -16,8 +17,8 @@ public class AppJEEServlet extends AppServlet {
 	}
 	
 	@EJB(name="AppService")
-	public void setAppService(AppService appService){
-		setApp(appService);
+	public void setAppService(ActionService actionService){
+		setApp(actionService);
 	}
 
 }

@@ -29,7 +29,7 @@ public class AppService implements ActionService, ActionServiceFactory {
 	
 	private static final ActionServiceSingleton serviceSingleton = new ActionServiceSingleton();
 	
-	@PersistenceContext
+	@PersistenceContext(name="DefaultDS")
 	EntityManager entityManager;
 	
 	@Resource
