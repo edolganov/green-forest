@@ -22,8 +22,8 @@ import com.gf.service.ActionService;
 
 import example.app.handler.CheckDocNameHandler;
 
-@Local
-@Stateless
+@Stateless(name="AppService")
+@Local(ActionService.class)
 @TransactionManagement(TransactionManagementType.BEAN)
 public class AppService implements ActionService, ActionServiceFactory {
 	
