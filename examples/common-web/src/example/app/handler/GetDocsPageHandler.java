@@ -1,12 +1,12 @@
-package example.app;
+package example.app.handler;
 
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.app.GetDocsPage;
-import example.common.app.GetDocsPage.Input;
+import example.common.action.GetDocsPage;
+import example.common.action.GetDocsPage.Input;
 import example.storage.Storage;
 
 @Mapping(GetDocsPage.class)

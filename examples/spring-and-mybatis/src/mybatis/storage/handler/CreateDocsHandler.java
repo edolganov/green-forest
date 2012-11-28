@@ -1,4 +1,4 @@
-package mybatis.storage;
+package mybatis.storage.handler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 import com.gf.components.mybatis.SqlSessionSettings;
 
-import example.common.app.CreateDocs;
+import example.common.action.CreateDocs;
 import example.common.model.Doc;
 
 @SqlSessionSettings(execType=ExecutorType.BATCH)

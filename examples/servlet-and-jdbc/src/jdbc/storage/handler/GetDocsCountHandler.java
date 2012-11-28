@@ -1,4 +1,4 @@
-package jdbc.storage;
+package jdbc.storage.handler;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,7 +9,7 @@ import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.app.GetDocsCount;
+import example.common.action.GetDocsCount;
 
 @Mapping(GetDocsCount.class)
 public class GetDocsCountHandler extends Handler<GetDocsCount>{

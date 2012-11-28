@@ -20,6 +20,8 @@ import com.gf.exception.ExceptionWrapper;
 import com.gf.exception.invoke.InvocationException;
 import com.gf.service.ActionService;
 
+import example.app.handler.CheckDocNameHandler;
+
 @Local
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)
@@ -54,6 +56,7 @@ public class AppService implements ActionService, ActionServiceFactory {
 		engine.addToContext(sessionContext);
 		engine.putFilter(SimpleTransactionManager.class);
 		engine.scanForAnnotations(getClass().getPackage());
+		engine.putHandler(CheckDocNameHandler.class);
 		
 		return engine;
 	}

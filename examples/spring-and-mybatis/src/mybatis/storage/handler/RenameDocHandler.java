@@ -1,4 +1,4 @@
-package mybatis.storage;
+package mybatis.storage.handler;
 
 import mybatis.mapper.DocMapper;
 
@@ -6,7 +6,7 @@ import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.app.RenameDoc;
+import example.common.action.RenameDoc;
 import example.common.model.Doc;
 
 @Mapping(RenameDoc.class)

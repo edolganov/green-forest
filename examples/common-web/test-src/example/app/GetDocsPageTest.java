@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import example.common.app.GetDocsPage;
+import example.common.action.GetDocsPage;
 import example.common.model.Doc;
 
 public class GetDocsPageTest extends AbstractAppTest {

@@ -1,4 +1,4 @@
-package example.common.app;
+package example.common.action;
 
 
 import com.gf.Action;

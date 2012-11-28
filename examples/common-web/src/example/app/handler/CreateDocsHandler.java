@@ -1,4 +1,4 @@
-package example.app;
+package example.app.handler;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 import com.gf.util.Util;
 
-import example.common.app.CheckDocName;
-import example.common.app.CreateDocs;
+import example.common.action.CheckDocName;
+import example.common.action.CreateDocs;
 import example.storage.Storage;
 
 @Mapping(CreateDocs.class)

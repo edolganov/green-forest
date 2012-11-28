@@ -1,4 +1,4 @@
-package example.app;
+package example.app.handler;
 
 import java.util.ArrayList;
 
@@ -6,8 +6,8 @@ import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.app.CreateDataBase;
-import example.common.app.CreateDocs;
+import example.common.action.CreateDataBase;
+import example.common.action.CreateDocs;
 import example.storage.Storage;
 import example.storage.StorageUtil;
 

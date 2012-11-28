@@ -1,8 +1,9 @@
 package example.app;
 
 import java.sql.Connection;
-import jdbc.storage.GetDocsCountHandler;
-import jdbc.storage.GetDocsPageHandler;
+
+import jdbc.storage.handler.GetDocsCountHandler;
+import jdbc.storage.handler.GetDocsPageHandler;
 
 import org.junit.Test;
 
@@ -11,8 +12,8 @@ import test.model.ThrowExceptionAfterHandler;
 import com.gf.core.Engine;
 import com.gf.exception.TestRuntimeException;
 
-import example.common.app.GetDocsPage;
-import example.common.app.RenameDoc;
+import example.common.action.GetDocsPage;
+import example.common.action.RenameDoc;
 import example.common.model.Doc;
 
 public class TxTest extends AbstractAppTest {

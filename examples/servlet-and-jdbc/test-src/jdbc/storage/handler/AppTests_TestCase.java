@@ -1,4 +1,4 @@
-package jdbc.storage;
+package jdbc.storage.handler;
 
 import javax.sql.DataSource;
 

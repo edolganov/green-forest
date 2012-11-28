@@ -1,4 +1,4 @@
-package jdbc.storage;
+package jdbc.storage.handler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.app.CreateDocs;
+import example.common.action.CreateDocs;
 import example.common.model.Doc;
 
 @Mapping(CreateDocs.class)

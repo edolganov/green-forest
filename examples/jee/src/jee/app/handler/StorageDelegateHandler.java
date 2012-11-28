@@ -1,11 +1,11 @@
-package example.app;
+package jee.app.handler;
 
 import com.gf.Action;
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.app.GetDocsCount;
+import example.common.action.GetDocsCount;
 import example.storage.Storage;
 
 

@@ -18,7 +18,7 @@ import example.app.GetDocsCountTest;
 import example.app.GetDocsPageTest;
 import example.app.RenameDocTest;
 import example.app.TxTest;
-import example.common.app.CreateDataBase;
+import example.common.action.CreateDataBase;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

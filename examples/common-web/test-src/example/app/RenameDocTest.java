@@ -2,8 +2,8 @@ package example.app;
 
 import org.junit.Test;
 
-import example.common.app.GetDocsPage;
-import example.common.app.RenameDoc;
+import example.common.action.GetDocsPage;
+import example.common.action.RenameDoc;
 import example.common.model.Doc;
 
 public class RenameDocTest extends AbstractAppTest {

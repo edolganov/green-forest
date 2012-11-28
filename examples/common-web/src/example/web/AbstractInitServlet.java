@@ -10,7 +10,7 @@ import com.gf.log.Log;
 import com.gf.log.LogFactory;
 
 import example.app.App;
-import example.common.app.CreateDataBase;
+import example.common.action.CreateDataBase;
 import example.storage.Storage;
 
 

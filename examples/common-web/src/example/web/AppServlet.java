@@ -22,8 +22,8 @@ import com.gf.log.LogFactory;
 import com.gf.service.ActionService;
 import com.gf.util.Util;
 
-import example.common.app.GetDocsPage;
-import example.common.app.RenameDoc;
+import example.common.action.GetDocsPage;
+import example.common.action.RenameDoc;
 import example.common.exception.ValidationException;
 import example.common.model.Doc;
 import example.common.model.Page;
