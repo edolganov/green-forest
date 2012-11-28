@@ -1,6 +1,10 @@
 package jee.app.handler;
 
 
+import javax.persistence.EntityManager;
+
+import jee.entity.DocEntity;
+
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
@@ -8,13 +12,12 @@ import com.gf.annotation.Mapping;
 import example.common.action.CheckDocName;
 import example.common.action.RenameDoc;
 import example.common.model.Doc;
-import example.storage.Storage;
 
 @Mapping(RenameDoc.class)
 public class RenameDocHandler extends Handler<RenameDoc>{
 	
 	@Inject
-	Storage storage;
+	EntityManager em;
 
 	@Override
 	public void invoke(RenameDoc action) throws Exception {
@@ -24,8 +27,9 @@ public class RenameDocHandler extends Handler<RenameDoc>{
 		//validation
 		subInvoke(new CheckDocName(input));
 		
-		//update db
-		storage.invoke(action);
+		//update
+		DocEntity entity = new DocEntity(input);
+		em.merge(entity);
 		
 	}
 

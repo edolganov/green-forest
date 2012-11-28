@@ -1,5 +1,8 @@
 package jee.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import example.common.model.Doc;
 
 
 @NamedQueries({
@@ -40,6 +45,10 @@ public class DocEntity {
 		super();
 	}
 
+	public DocEntity(Doc doc) {
+		this(doc.id, doc.name);
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -56,6 +65,16 @@ public class DocEntity {
 		this.name = name;
 	}
 	
+	public Doc getDoc(){
+		return new Doc(id, name);
+	}
 	
+	public static List<Doc> getDocs(List<DocEntity> list){
+		ArrayList<Doc> out = new ArrayList<Doc>();
+		for(DocEntity entity : list){
+			out.add(entity.getDoc());
+		}
+		return out;
+	}
 
 }
