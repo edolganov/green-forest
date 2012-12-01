@@ -1,3 +1,11 @@
+		Reflections reflections = new Reflections(new ConfigurationBuilder()
+        .setUrls(ClasspathHelper.getUrlsForPackagePrefix(packagePreffix))
+        .setScanners(new TypeAnnotationsScanner())
+		.filterInputsBy(new FilterBuilder.Include(FilterBuilder.prefix(packagePreffix))));
+		
+		Set<Class<?>> all = reflections.getTypesAnnotatedWith(ControllerInfo.class);
+
+
 		Engine engine = new Engine();
 		engine.addToContext(entityManager);
 		engine.addToContext(sessionContext);
