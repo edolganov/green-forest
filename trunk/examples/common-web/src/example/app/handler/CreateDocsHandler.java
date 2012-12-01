@@ -9,13 +9,13 @@ import com.gf.util.Util;
 
 import example.common.action.CheckDocName;
 import example.common.action.CreateDocs;
-import example.storage.Storage;
+import example.storage.IStorage;
 
 @Mapping(CreateDocs.class)
 public class CreateDocsHandler extends Handler<CreateDocs>{
 	
 	@Inject
-	Storage storage;
+	IStorage storage;
 
 	@Override
 	public void invoke(CreateDocs action) throws Exception {

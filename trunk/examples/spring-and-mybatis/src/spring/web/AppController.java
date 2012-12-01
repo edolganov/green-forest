@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import example.app.App;
+import example.app.IApp;
 import example.common.action.CreateDataBase;
 import example.web.AppServlet;
 
@@ -18,7 +18,7 @@ import example.web.AppServlet;
 public class AppController {
 	
 	@Autowired
-	App app;
+	IApp app;
 	
 	@Autowired
 	ServletConfig config;

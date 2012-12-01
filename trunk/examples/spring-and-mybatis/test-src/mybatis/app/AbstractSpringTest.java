@@ -7,11 +7,11 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import example.AbstractTest;
-import example.app.App;
+import example.app.IApp;
 
 public abstract class AbstractSpringTest extends AbstractTest {
 	
-	protected App app;
+	protected IApp app;
 	protected DataSource ds;
 	
 	@Before
@@ -20,7 +20,7 @@ public abstract class AbstractSpringTest extends AbstractTest {
 		ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 		BeanFactory factory = (BeanFactory) appContext;
 		
-		app = (App) factory.getBean("app");
+		app = (IApp) factory.getBean("app");
 		ds = (DataSource)factory.getBean("dataSource");
 		
 	}

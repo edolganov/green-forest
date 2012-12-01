@@ -31,7 +31,7 @@ public abstract class AbstractAppTest extends AssertExt {
 	
 	protected Log log = LogFactory.getLog(getClass());
 	
-	protected App app;
+	protected IApp app;
 	protected Engine appEngine;
 	protected DataSource ds;
 	
