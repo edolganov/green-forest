@@ -1,6 +1,8 @@
 package jee.storage.handler;
 
-import mybatis.mapper.DocMapper;
+import javax.persistence.EntityManager;
+
+import jee.entity.DocEntity;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
@@ -12,13 +14,13 @@ import example.common.action.GetDocsCount;
 public class GetDocsCountHandler extends Handler<GetDocsCount>{
 	
 	@Inject
-	DocMapper docMapper;
+	EntityManager em;
 
 	@Override
 	public void invoke(GetDocsCount action) throws Exception {
 		
-		int count = docMapper.getDocsCount();
-		action.setOutput(count);
+		Long count = (Long)em.createNamedQuery(DocEntity.Q_COUNT).getSingleResult();
+		action.setOutput(count.intValue());
 		
 	}
 

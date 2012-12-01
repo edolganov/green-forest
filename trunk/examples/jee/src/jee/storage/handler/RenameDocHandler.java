@@ -1,6 +1,8 @@
 package jee.storage.handler;
 
-import mybatis.mapper.DocMapper;
+import javax.persistence.EntityManager;
+
+import jee.entity.DocEntity;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
@@ -13,16 +15,16 @@ import example.common.model.Doc;
 public class RenameDocHandler extends Handler<RenameDoc>{
 	
 	@Inject
-	DocMapper docMapper;
+	EntityManager em;
 
 	@Override
 	public void invoke(RenameDoc action) throws Exception {
 		
 		Doc input = action.input();
-		long id = input.id;
-		String newName = input.name;
 		
-		docMapper.renameDoc(id, newName);
+		//update
+		DocEntity entity = new DocEntity(input);
+		em.merge(entity);
 		
 	}
 

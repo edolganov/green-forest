@@ -3,24 +3,22 @@ package jee.storage.handler;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.session.ExecutorType;
+import javax.persistence.EntityManager;
 
-import mybatis.mapper.DocMapper;
+import jee.entity.DocEntity;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
-import com.gf.components.mybatis.SqlSessionSettings;
 
 import example.common.action.CreateDocs;
 import example.common.model.Doc;
 
-@SqlSessionSettings(execType=ExecutorType.BATCH)
 @Mapping(CreateDocs.class)
 public class CreateDocsHandler extends Handler<CreateDocs>{
 	
 	@Inject
-	DocMapper docMapper;
+	EntityManager em;
 
 	@Override
 	public void invoke(CreateDocs action) throws Exception {
@@ -29,9 +27,12 @@ public class CreateDocsHandler extends Handler<CreateDocs>{
 		List<Doc> out = new ArrayList<Doc>();
 		
 		for (String name : names) {
-			int id = docMapper.nextDocId();
-			docMapper.createDoc(id, name);
-			out.add(new Doc(id, name));
+			
+			DocEntity entity = new DocEntity(null, name);
+			em.persist(entity);
+			
+			Doc doc = entity.getDoc();
+			out.add(doc);
 		}
 		
 		action.setOutput(out);
