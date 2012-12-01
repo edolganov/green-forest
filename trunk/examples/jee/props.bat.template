@@ -1,4 +1,4 @@
 set WEB_DIR=%CD%\..\common-web\web
 set SERVER_HOME=c:\chapaj\projects\green-forest\app\jboss-as
-set SERVER_DEPLOY=%SERVER_HOME%\webapps
-set DEST_DIR=%SERVER_DEPLOY%\gf-jee
+set SERVER_DEPLOY=%SERVER_HOME%\server\default\deploy
+set DEST_DIR=%SERVER_DEPLOY%

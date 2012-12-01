@@ -18,6 +18,8 @@
 	<classpathentry kind="src" path="components/logging-apache-commons/test-src"/>
 	<classpathentry kind="src" path="components/jee/src"/>
 	<classpathentry kind="src" path="components/jee/test-src"/>
+	<classpathentry kind="src" path="components/reflections/src"/>
+	<classpathentry kind="src" path="components/reflections/test-src"/>
 	<classpathentry kind="src" path="examples/common-web/src"/>
 	<classpathentry kind="src" path="examples/common-web/test-src"/>
 	<classpathentry kind="src" path="examples/common-web/web"/>
@@ -59,5 +61,8 @@
 	<classpathentry kind="lib" path="thirdparty/ejb-api-3.0.jar" sourcepath="thirdparty-sources/ejb-api-3.0-sources.jar"/>
 	<classpathentry kind="lib" path="thirdparty/jsr250-api-1.0.jar" sourcepath="thirdparty-sources/jsr250-api-1.0-sources.jar"/>
 	<classpathentry kind="lib" path="thirdparty/persistence-api-1.0.jar" sourcepath="thirdparty-sources/persistence-api-1.0-sources.jar"/>
+	<classpathentry kind="lib" path="thirdparty/reflections-0.9.5.jar" sourcepath="thirdparty-sources/reflections-0.9.5-sources.jar"/>
+	<classpathentry kind="lib" path="thirdparty/guava-13.0.1.jar" sourcepath="thirdparty-sources/guava-13.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="thirdparty/javassist-3.8.0.GA.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

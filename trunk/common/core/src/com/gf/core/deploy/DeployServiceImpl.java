@@ -11,10 +11,12 @@ import com.gf.Action;
 import com.gf.Filter;
 import com.gf.Handler;
 import com.gf.Interceptor;
+import com.gf.InvocationObject;
 import com.gf.annotation.Mapping;
 import com.gf.core.repo.TypesRepo;
+import com.gf.core.scan.ClassScan;
+import com.gf.core.scan.ClassScanFactory;
 import com.gf.core.util.CoreUtil;
-import com.gf.core.util.ScanUtil;
 import com.gf.exception.ExceptionWrapper;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.invoke.HandlerNotFoundException;
@@ -83,11 +85,10 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	@Override
 	public void scanForAnnotations(String packageName) {
 		
-		log.info("Scanning and registering classes with @Mapping annotation...");
+		log.info("Scanning and registering classes...");
 		
-		ScanUtil<Class> scanUtil = new ScanUtil<Class>();
-	    scanUtil.find(new ScanUtil.IsA(Object.class), packageName);
-	    Set<Class<? extends Class>> mapperSet = scanUtil.getClasses();
+		ClassScan scan = ClassScanFactory.getScan();
+	    Set<Class<?>> mapperSet = scan.getClasses(packageName, InvocationObject.class);
 	    
 	    int totalFilters = 0;
 	    int totalInterceptors = 0;
