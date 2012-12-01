@@ -5,10 +5,10 @@ import javax.sql.DataSource;
 
 public class AppContext {
 	
-	public App app;
+	public IApp app;
 	public DataSource ds;
 	
-	public AppContext(App app, DataSource ds) {
+	public AppContext(IApp app, DataSource ds) {
 		super();
 		this.app = app;
 		this.ds = ds;

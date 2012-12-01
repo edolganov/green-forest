@@ -7,13 +7,13 @@ import com.gf.annotation.Mapping;
 
 import example.common.action.GetDocsPage;
 import example.common.action.GetDocsPage.Input;
-import example.storage.Storage;
+import example.storage.IStorage;
 
 @Mapping(GetDocsPage.class)
 public class GetDocsPageHandler extends Handler<GetDocsPage>{
 	
 	@Inject
-	Storage storage;
+	IStorage storage;
 
 	@Override
 	public void invoke(GetDocsPage action) throws Exception {

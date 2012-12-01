@@ -10,16 +10,17 @@ import com.gf.log.Log;
 import com.gf.log.LogFactory;
 
 import example.app.App;
+import example.app.IApp;
 import example.common.action.CreateDataBase;
-import example.storage.Storage;
+import example.storage.IStorage;
 
 
 public abstract class AbstractInitServlet extends HttpServlet {
 	
-	private static App app;
+	private static IApp app;
 	
 	
-	public static App getApp(){
+	public static IApp getApp(){
 		if(app == null){
 			throw new IllegalStateException("app is not inited");
 		}
@@ -32,20 +33,21 @@ public abstract class AbstractInitServlet extends HttpServlet {
 	 * Init the applicaton
 	 */
 	@Override
-	public void init(ServletConfig config) throws ServletException {
+	public void init() throws ServletException {
+		ServletConfig config = getServletConfig();
 		app = createApp(config);
 	}
 
-	private App createApp(ServletConfig config) throws ServletException {
+	private IApp createApp(ServletConfig config) throws ServletException {
 		
-		Storage storage = createStorage(config);
+		IStorage storage = createStorage(config);
 		
 		//create app's engine
 		Engine engine = new Engine("App Engine");
 		
 		//init
 		engine.addToContext(storage);
-		engine.scanForAnnotations(App.class.getPackage());
+		engine.scanForAnnotations(IApp.class.getPackage());
 		engine.setConfig(TraceHandlers.class, true);
 		
 		//invoke actions
@@ -55,6 +57,6 @@ public abstract class AbstractInitServlet extends HttpServlet {
 		return new App(engine);
 	}
 	
-	protected abstract Storage createStorage(ServletConfig config) throws ServletException;
+	protected abstract IStorage createStorage(ServletConfig config) throws ServletException;
 
 }

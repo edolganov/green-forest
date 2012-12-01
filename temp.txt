@@ -1,3 +1,11 @@
+		Engine engine = new Engine();
+		engine.addToContext(entityManager);
+		engine.addToContext(sessionContext);
+		engine.putFilter(SimpleTransactionManager.class);
+		engine.scanForAnnotations(getClass().getPackage());
+		engine.putHandler(CheckDocNameHandler.class);
+
+
 [vfs:/C:/chapaj/projects/green-forest/app/jboss-as/server/default/deploy/gf-jee.war/WEB-INF/classes/jee/app/]
 
 

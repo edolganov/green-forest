@@ -1,31 +1,28 @@
-package example.app.handler;
+package jee.storage.handler;
 
+import mybatis.mapper.DocMapper;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
-import example.common.action.CheckDocName;
 import example.common.action.RenameDoc;
 import example.common.model.Doc;
-import example.storage.IStorage;
 
 @Mapping(RenameDoc.class)
 public class RenameDocHandler extends Handler<RenameDoc>{
 	
 	@Inject
-	IStorage storage;
+	DocMapper docMapper;
 
 	@Override
 	public void invoke(RenameDoc action) throws Exception {
 		
 		Doc input = action.input();
+		long id = input.id;
+		String newName = input.name;
 		
-		//validation
-		subInvoke(new CheckDocName(input));
-		
-		//update db
-		storage.invoke(action);
+		docMapper.renameDoc(id, newName);
 		
 	}
 
