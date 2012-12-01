@@ -4,7 +4,7 @@ import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
-import example.app.IApp;
+import example.app.App;
 import example.web.AppServlet;
 
 public class AppJEEServlet extends AppServlet {
@@ -16,7 +16,7 @@ public class AppJEEServlet extends AppServlet {
 	}
 	
 	@EJB(name="App")
-	public void setAppService(IApp app){
+	public void setAppService(App app){
 		setApp(app);
 	}
 

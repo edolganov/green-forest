@@ -63,9 +63,21 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	}
 	
 	@Override
+	public void scanPackageForAnnotations(Object obj){
+		scanForAnnotations(obj.getClass().getPackage());
+	}
+	
+	@Override
+	public void scanPackageForAnnotations(Class<?> clazz){
+		scanForAnnotations(clazz.getPackage());
+	}
+	
+	@Override
 	public void scanForAnnotations(Package pckg) {
 		scanForAnnotations(pckg.getName());
 	}
+	
+
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override

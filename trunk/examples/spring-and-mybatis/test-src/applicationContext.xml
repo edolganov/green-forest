@@ -65,7 +65,7 @@
 		</property>
 	</bean>
 	
-	<bean id="storage" class="example.storage.Storage">
+	<bean id="storage" class="example.storage.StorageImpl">
 		<constructor-arg ref="storageEngine"/>
 	</bean>
 	
@@ -90,7 +90,7 @@
 		</property>
 	</bean>
 	
-	<bean id="app" class="example.app.App">
+	<bean id="app" class="example.app.AppImpl">
 		<constructor-arg ref="appEngine"/>
 	</bean>
 

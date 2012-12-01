@@ -21,7 +21,7 @@ import com.gf.log.Log;
 import com.gf.log.LogFactory;
 import com.gf.util.Util;
 
-import example.app.IApp;
+import example.app.App;
 import example.common.action.GetDocsPage;
 import example.common.action.RenameDoc;
 import example.common.exception.ValidationException;
@@ -35,7 +35,7 @@ public class AppServlet extends HttpServlet {
 	
 	private transient ServletConfig config;
 	private Log log = LogFactory.getLog(getClass());
-	private IApp app;
+	private App app;
 	private Map<Object, Object> labels = Collections.emptyMap();
 	
 	@Override
@@ -46,7 +46,7 @@ public class AppServlet extends HttpServlet {
 	}
 	
 	/** for manually init */
-	public void setApp(IApp app){
+	public void setApp(App app){
 		this.app = app;
 	}
 	

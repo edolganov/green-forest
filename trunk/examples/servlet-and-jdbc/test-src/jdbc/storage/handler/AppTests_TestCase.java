@@ -17,7 +17,7 @@ import example.app.AppProvider;
 import example.app.CreateDataBaseTest;
 import example.app.GetDocsCountTest;
 import example.app.GetDocsPageTest;
-import example.app.IApp;
+import example.app.App;
 import example.app.RenameDocTest;
 import example.app.TxTest;
 
@@ -44,7 +44,7 @@ public class AppTests_TestCase {
 				InitServlet servlet = new InitServlet();
 				servlet.init(TestUtil.getConfig(tmpDirPath, sessionId));
 				
-				IApp app = InitServlet.getApp();
+				App app = InitServlet.getApp();
 				DataSource ds = InitServletAccessor.getDataSource(servlet);
 				
 				return new AppContext(app, ds);

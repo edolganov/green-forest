@@ -10,17 +10,17 @@ import com.gf.log.Log;
 import com.gf.log.LogFactory;
 
 import example.app.App;
-import example.app.IApp;
+import example.app.AppImpl;
 import example.common.action.CreateDataBase;
-import example.storage.IStorage;
+import example.storage.Storage;
 
 
 public abstract class AbstractInitServlet extends HttpServlet {
 	
-	private static IApp app;
+	private static App app;
 	
 	
-	public static IApp getApp(){
+	public static App getApp(){
 		if(app == null){
 			throw new IllegalStateException("app is not inited");
 		}
@@ -38,25 +38,25 @@ public abstract class AbstractInitServlet extends HttpServlet {
 		app = createApp(config);
 	}
 
-	private IApp createApp(ServletConfig config) throws ServletException {
+	private App createApp(ServletConfig config) throws ServletException {
 		
-		IStorage storage = createStorage(config);
+		Storage storage = createStorage(config);
 		
 		//create app's engine
 		Engine engine = new Engine("App Engine");
 		
 		//init
 		engine.addToContext(storage);
-		engine.scanForAnnotations(IApp.class.getPackage());
+		engine.scanPackageForAnnotations(App.class);
 		engine.setConfig(TraceHandlers.class, true);
 		
 		//invoke actions
 		engine.invoke(new CreateDataBase());
 		
 		//return Application
-		return new App(engine);
+		return new AppImpl(engine);
 	}
 	
-	protected abstract IStorage createStorage(ServletConfig config) throws ServletException;
+	protected abstract Storage createStorage(ServletConfig config) throws ServletException;
 
 }

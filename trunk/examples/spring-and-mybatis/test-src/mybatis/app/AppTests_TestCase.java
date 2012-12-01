@@ -15,7 +15,7 @@ import example.app.AppProvider;
 import example.app.CreateDataBaseTest;
 import example.app.GetDocsCountTest;
 import example.app.GetDocsPageTest;
-import example.app.IApp;
+import example.app.App;
 import example.app.RenameDocTest;
 import example.app.TxTest;
 import example.common.action.CreateDataBase;
@@ -40,7 +40,7 @@ public class AppTests_TestCase {
 				ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 				BeanFactory factory = (BeanFactory) appContext;
 				
-				IApp app = (IApp) factory.getBean("app");
+				App app = (App) factory.getBean("app");
 				DataSource ds = (DataSource)factory.getBean("dataSource");
 				
 				app.invoke(new CreateDataBase());
