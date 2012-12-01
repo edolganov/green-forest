@@ -11,8 +11,8 @@ import com.gf.components.tx.TxManager;
 import com.gf.components.tx.UserTransactionInInvoke;
 import com.gf.core.Engine;
 
-import example.storage.IStorage;
 import example.storage.Storage;
+import example.storage.StorageImpl;
 import example.web.AbstractInitServlet;
 
 public class InitServlet extends AbstractInitServlet {
@@ -21,7 +21,7 @@ public class InitServlet extends AbstractInitServlet {
 
 	
 	@Override
-	protected IStorage createStorage(ServletConfig config) throws ServletException {
+	protected Storage createStorage(ServletConfig config) throws ServletException {
 		
 		//create storage's engine
 		Engine engine = new Engine("Storage Engine");
@@ -36,7 +36,7 @@ public class InitServlet extends AbstractInitServlet {
 		engine.scanForAnnotations("jdbc.storage");
 		
 		//return Storage
-		return new Storage(engine);
+		return new StorageImpl(engine);
 	}
 	
 	

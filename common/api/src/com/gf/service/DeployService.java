@@ -24,6 +24,12 @@ public interface DeployService {
 	void scanForAnnotations(String packageName) 
 			throws NoMappingAnnotationException, NotOneHandlerException;
 	
+	void scanPackageForAnnotations(Object obj)
+			throws NoMappingAnnotationException, NotOneHandlerException;
+	
+	void scanPackageForAnnotations(Class<?> clazz)
+			throws NoMappingAnnotationException, NotOneHandlerException;
+	
 	
 	void setHandlerTypes(Collection<Class<? extends Handler<?>>> handlerTypes) 
 			throws NoMappingAnnotationException, NotOneHandlerException;

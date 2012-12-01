@@ -11,17 +11,17 @@ import com.gf.core.Engine;
 import com.gf.key.core.TraceHandlers;
 import com.gf.service.ActionService;
 
-import example.app.IApp;
+import example.app.App;
 import example.common.action.CreateDataBase;
-import example.storage.IStorage;
+import example.storage.Storage;
 
 @Stateless(name="App")
-@Local(ActionService.class)
+@Local(App.class)
 @TransactionManagement(TransactionManagementType.BEAN)
-public class App extends ActionServiceBean implements IApp {
+public class AppBean extends ActionServiceBean implements App {
 	
 	@EJB(name="Storage")
-	IStorage storage;
+	Storage storage;
 	
 	
 	@Override
@@ -32,7 +32,7 @@ public class App extends ActionServiceBean implements IApp {
 		
 		//init
 		engine.addToContext(storage);
-		engine.scanForAnnotations("example.app.handler");
+		engine.scanPackageForAnnotations(App.class);
 		engine.setConfig(TraceHandlers.class, true);
 		
 		//invoke actions

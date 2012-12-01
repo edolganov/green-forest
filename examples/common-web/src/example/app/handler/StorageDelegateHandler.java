@@ -6,7 +6,7 @@ import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
 import example.common.action.GetDocsCount;
-import example.storage.IStorage;
+import example.storage.Storage;
 
 
 @Mapping({
@@ -15,7 +15,7 @@ import example.storage.IStorage;
 public class StorageDelegateHandler extends Handler<Action<?,?>>{
 	
 	@Inject
-	IStorage storage;
+	Storage storage;
 
 	@Override
 	public void invoke(Action<?, ?> action) throws Exception {

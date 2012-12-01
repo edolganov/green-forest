@@ -101,6 +101,18 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.scanForAnnotations(packageName);
 	}
+	
+	@Override
+	public void scanPackageForAnnotations(Object obj)
+			throws NoMappingAnnotationException, NotOneHandlerException {
+		deploy.scanPackageForAnnotations(obj);
+	}
+	
+	@Override
+	public void scanPackageForAnnotations(Class<?> clazz)
+			throws NoMappingAnnotationException, NotOneHandlerException {
+		deploy.scanPackageForAnnotations(clazz);
+	}
 
 
 	@Override

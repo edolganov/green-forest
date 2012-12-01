@@ -8,14 +8,14 @@ import com.gf.annotation.Mapping;
 
 import example.common.action.CreateDataBase;
 import example.common.action.CreateDocs;
-import example.storage.IStorage;
+import example.storage.Storage;
 import example.storage.StorageUtil;
 
 @Mapping(CreateDataBase.class)
 public class CreateDataBaseHandler extends Handler<CreateDataBase>{
 	
 	@Inject
-	IStorage storage;
+	Storage storage;
 
 	@Override
 	public void invoke(CreateDataBase action) throws Exception {

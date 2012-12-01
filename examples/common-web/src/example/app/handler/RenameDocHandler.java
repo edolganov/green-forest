@@ -8,13 +8,13 @@ import com.gf.annotation.Mapping;
 import example.common.action.CheckDocName;
 import example.common.action.RenameDoc;
 import example.common.model.Doc;
-import example.storage.IStorage;
+import example.storage.Storage;
 
 @Mapping(RenameDoc.class)
 public class RenameDocHandler extends Handler<RenameDoc>{
 	
 	@Inject
-	IStorage storage;
+	Storage storage;
 
 	@Override
 	public void invoke(RenameDoc action) throws Exception {

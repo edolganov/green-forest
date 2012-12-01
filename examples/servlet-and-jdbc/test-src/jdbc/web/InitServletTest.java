@@ -8,7 +8,7 @@ import jdbc.TestUtil;
 import org.junit.Test;
 
 import example.AbstractTest;
-import example.app.IApp;
+import example.app.App;
 import example.storage.StorageUtil;
 
 
@@ -36,7 +36,7 @@ public class InitServletTest extends AbstractTest {
 		
 		InitServlet servlet = new InitServlet();
 		servlet.init(TestUtil.getConfig(tmpDirPath, sessionId));
-		IApp app = InitServlet.getApp();
+		App app = InitServlet.getApp();
 		
 		assertNotNull(app);
 		
