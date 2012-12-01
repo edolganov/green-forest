@@ -2,7 +2,10 @@ package jee.storage.handler;
 
 import java.util.List;
 
-import mybatis.mapper.DocMapper;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import jee.entity.DocEntity;
 
 import com.gf.Handler;
 import com.gf.annotation.Inject;
@@ -18,8 +21,9 @@ import example.common.model.Page;
 public class GetDocsPageHandler extends Handler<GetDocsPage>{
 	
 	@Inject
-	DocMapper docMapper;
+	EntityManager em;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void invoke(GetDocsPage action) throws Exception {
 		
@@ -29,12 +33,16 @@ public class GetDocsPageHandler extends Handler<GetDocsPage>{
 		int pageIndex = input.pageIndex;
 		int offset = pageIndex*limit;
 		
-		List<Doc> list = docMapper.getDocsPage(limit, offset);
+		Query q = em.createNamedQuery(DocEntity.Q_GET_PAGE);
+		q.setFirstResult(offset);
+		q.setMaxResults(limit);
+		List<DocEntity> result = (List<DocEntity>)q.getResultList();
 		
 		Integer count = subInvoke(new GetDocsCount());
-
-		Page<Doc> out = new Page<Doc>(list, pageIndex, limit, count);
-		action.setOutput(out);
+		
+		List<Doc> list = DocEntity.getDocs(result);
+		Page<Doc> page = new Page<Doc>(list, pageIndex, limit, count);
+		action.setOutput(page);
 		
 	}
 
