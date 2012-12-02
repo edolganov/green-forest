@@ -11,7 +11,7 @@ public interface TypesRepo {
 	
 	boolean isOneHandlerOnly();
 	
-	void put(Class<?> handler) throws NoMappingAnnotationException, NotOneHandlerException;
+	Set<Class<?>> put(Class<?> handler) throws NoMappingAnnotationException, NotOneHandlerException;
 	
 	Set<Class<?>> getTypes(Class<?> target);
 

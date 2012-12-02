@@ -34,9 +34,11 @@ public class TypesRepoImpl implements TypesRepo {
 	private Lock writeLock = rw.writeLock();
 	
 	@Override
-	public void put(Class<?> handler) throws DeployException {
+	public Set<Class<?>> put(Class<?> handler) throws DeployException {
 		writeLock.lock();
 		try {
+			
+			HashSet<Class<?>> out = new HashSet<Class<?>>();
 			
 			Mapping annotation = handler.getAnnotation(Mapping.class);
 			if(Util.isEmpty(annotation)){
@@ -46,7 +48,10 @@ public class TypesRepoImpl implements TypesRepo {
 			HashMap<Class<?>, Set<Class<?>>> newMap = new HashMap<Class<?>, Set<Class<?>>>(initialMapping);
 			Class<?>[] targets = annotation.value();
 			for(Class<?> target : targets){
-				putToMapping(newMap, target, handler);
+				boolean added = putToMapping(newMap, target, handler);
+				if(added){
+					out.add(target);
+				}
 			}
 			
 			if(isOneHandler){
@@ -56,6 +61,8 @@ public class TypesRepoImpl implements TypesRepo {
 			//if ok: replace map, clear cache
 			initialMapping = newMap;
 			targetCache = new HashMap<Class<?>, Set<Class<?>>>();
+			
+			return out;
 			
 		}finally {
 			writeLock.unlock();
@@ -195,7 +202,7 @@ public class TypesRepoImpl implements TypesRepo {
 	}
 
 
-	private void putToMapping(HashMap<Class<?>, Set<Class<?>>> map, Class<?> target, Class<?> handler) {
+	private boolean putToMapping(HashMap<Class<?>, Set<Class<?>>> map, Class<?> target, Class<?> handler) {
 		Set<Class<?>> set = map.get(target);
 		if(set == null){
 			set = new HashSet<Class<?>>();
@@ -203,9 +210,10 @@ public class TypesRepoImpl implements TypesRepo {
 		}
 		if(set.contains(handler)){
 			log.warn("mapping already contains "+handler+" for "+target);
+			return false;
 		} else {
-    		log.info("["+handler.getName()+"] -> ["+target.getName()+"]");
 			set.add(handler);
+			return true;
 		}
 	}
 

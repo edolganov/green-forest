@@ -51,17 +51,20 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 
 	@Override
 	public void putHandler(Class<? extends Handler<?>> clazz) {
-		handlerTypes.put(clazz);
+		Set<Class<?>> targets = handlerTypes.put(clazz);
+		logMapping("PUT HANDLER:", clazz, targets);
 	}
 
 	@Override
 	public void putInterceptor(Class<? extends Interceptor<?>> clazz) {
-		interceptorTypes.put(clazz);
+		Set<Class<?>> targets = interceptorTypes.put(clazz);
+		logMapping("PUT INTERCEPTOR:", clazz, targets);
 	}
 
 	@Override
 	public void putFilter(Class<? extends Filter> clazz) {
 		filterTypes.add(clazz);
+		logMappingSingle("PUT FILTER:", clazz, null);
 	}
 	
 	@Override
@@ -232,6 +235,21 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		for (String packageName : packageNames) {
 			scanForAnnotations(packageName);
 		}
+	}
+	
+	
+	private void logMapping(String preffix, Class<?> handler, Set<Class<?>> targets) {
+		for (Class<?> target : targets) {
+			logMappingSingle(preffix, handler, target);
+		}
+		
+	}
+
+	private void logMappingSingle(String preffix, Class<?> handler, Class<?> target) {
+		String handlerPart = "["+handler.getName()+"]";
+		String targetPart = target != null? "-> [" + target.getName() + "]" : "";
+		String msg = preffix+" "+ handlerPart + targetPart;
+		log.info(msg);
 	}
 
 	
