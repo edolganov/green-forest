@@ -21,7 +21,7 @@ import example.storage.Storage;
 @TransactionManagement(TransactionManagementType.BEAN)
 public class StorageBean extends ActionServiceBean implements Storage {
 	
-    @PersistenceContext(name="DefaultDS")
+    @PersistenceContext(name="defaultEntityManager")
     EntityManager entityManager;
     
     @Resource
