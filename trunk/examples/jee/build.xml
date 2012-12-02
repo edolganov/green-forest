@@ -11,6 +11,7 @@
 			<fileset dir="${project.path.core}/build" includes="*.jar"/>
 			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
 			<fileset dir="${project.path.jee}/build" includes="*.jar"/>
+			<fileset dir="${project.path.reflections}/build" includes="*.jar"/>
 			
         </path>
     </target>
@@ -39,6 +40,11 @@
 			<fileset dir="${project.path.core}/build" includes="*.jar"/>
 			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
 			<fileset dir="${project.path.jee}/build" includes="*.jar"/>
+			<fileset dir="${project.path.reflections}/build" includes="*.jar"/>
+			
+			<fileset file="${module.third-party.dir}/guava-13.0.1.jar"/>
+			<fileset file="${module.third-party.dir}/javassist-3.8.0.GA.jar"/>
+			<fileset file="${module.third-party.dir}/reflections-0.9.5.jar"/>
 			
         </copy>
 		

@@ -9,6 +9,7 @@ import org.reflections.scanners.SubTypesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
+import org.reflections.vfs.Vfs;
 
 import com.gf.core.scan.ClassScan;
 import com.gf.log.Log;
@@ -17,10 +18,16 @@ import com.google.common.collect.Multimap;
 
 public class ReflectionsScan implements ClassScan {
 	
+	static {
+		Vfs.addDefaultURLTypes(new JBossVFSUrlType());
+	}
+	
 	Log log = LogFactory.getLog(getClass());
 
 	@Override
 	public Set<Class<?>> getClasses(String packageRoot, Class<?> parentClass) {
+		
+
 
 		SubTypesScanner subTypesScanner = new SubTypesScanner();
 		

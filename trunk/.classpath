@@ -64,5 +64,6 @@
 	<classpathentry kind="lib" path="thirdparty/reflections-0.9.5.jar" sourcepath="thirdparty-sources/reflections-0.9.5-sources.jar"/>
 	<classpathentry kind="lib" path="thirdparty/guava-13.0.1.jar" sourcepath="thirdparty-sources/guava-13.0.1-sources.jar"/>
 	<classpathentry kind="lib" path="thirdparty/javassist-3.8.0.GA.jar"/>
+	<classpathentry kind="lib" path="thirdparty/jboss-vfs-3.1.0.Final.jar" sourcepath="thirdparty-sources/jboss-vfs-3.1.0.Final-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

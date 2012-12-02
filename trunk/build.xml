@@ -13,6 +13,7 @@
 		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/mybatis/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/jee/build.xml" inheritAll="false" target="clean"/>
+		<ant antfile="./components/reflections/build.xml" inheritAll="false" target="clean"/>
 
     </target>
 
@@ -28,6 +29,7 @@
 		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false"/>
 		<ant antfile="./components/mybatis/build.xml" inheritAll="false"/>
 		<ant antfile="./components/jee/build.xml" inheritAll="false"/>
+		<ant antfile="./components/reflections/build.xml" inheritAll="false"/>
 		
     </target>
 
@@ -48,6 +50,7 @@
 			<fileset dir="./components/logging-slf4j/build" includes="*.jar"/>
 			<fileset dir="./components/mybatis/build" includes="*.jar"/>
 			<fileset dir="./components/jee/build" includes="*.jar"/>
+			<fileset dir="./components/reflections/build" includes="*.jar"/>
 		</copy>
 
     </target>
