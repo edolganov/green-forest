@@ -20,6 +20,7 @@
 	<classpathentry kind="src" path="components/jee/test-src"/>
 	<classpathentry kind="src" path="components/reflections/src"/>
 	<classpathentry kind="src" path="components/reflections/test-src"/>
+	<classpathentry kind="src" path="examples/basics/src"/>
 	<classpathentry kind="src" path="examples/common-web/src"/>
 	<classpathentry kind="src" path="examples/common-web/test-src"/>
 	<classpathentry kind="src" path="examples/common-web/web"/>
