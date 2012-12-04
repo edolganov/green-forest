@@ -15,7 +15,18 @@
 
 === core ===
 *	- java-doc к основным интерфейсам
-*		- проект с примерами кода
+	done:
+		- NotOneHandlerException
+		- NoMappingAnnotationException
+	todo:
+		- Engine
+		- Mapping
+		- MappingObject
+		- Handler
+		- Interceptor
+		- Filter
+		- Order
+		- проект с примерами кода
 		- генерация ява дока
 	- html дока - введение
 	- html дока - частые действия

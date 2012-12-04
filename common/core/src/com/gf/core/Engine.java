@@ -23,6 +23,24 @@ import com.gf.service.ConfigService;
 import com.gf.service.ContextService;
 import com.gf.service.DeployService;
 
+/**
+ * <tt>Engine</tt> is the central class of <tt>"Green-Forest Framework"</tt>.
+ * <br>Use it for create a isolated logic element with "action-handler" API:
+ * <p>
+ * <pre>
+ * Engine engine = new Engine();
+ * engine.putHandler(SomeActonHandler.class);
+ * String result = engine.invoke(new SomeAction("some data"));
+ * </pre>
+ * <p>
+ * 
+ * @author jenya.dolganov
+ * @see Action
+ * @see Handler
+ * @see Interceptor
+ * @see Filter
+ *
+ */
 public class Engine implements ActionService, DeployService, ConfigService, ContextService {
 	
 	private String name;
@@ -31,11 +49,16 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	private ActionService actions;
 	private ContextService context;
 	
-	
+	/**
+	 * Create new instance of <tt>Engine</tt> with empty name
+	 */
 	public Engine() {
 		this(null);
 	}
 	
+	/**
+	 * Create new instance of <tt>Engine</tt> with name
+	 */
 	public Engine(String name) {
 
 		this.name = name;
@@ -69,8 +92,10 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 			throws InvocationException, Exception {
 		return (O)actions.invokeUnwrap(action);
 	}
-
-
+	
+	/**
+	 * Put the <tt>handler</tt> class to this <tt>Engine</tt>.
+	 */
 	@Override
 	public void putHandler(Class<? extends Handler<?>> clazz)
 			throws NoMappingAnnotationException, NotOneHandlerException {
