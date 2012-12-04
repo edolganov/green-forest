@@ -26,6 +26,8 @@
 		- Interceptor
 		- Filter
 		- Order
+		- DeployService
+	extra:	
 		- проект с примерами кода
 		- генерация ява дока
 	- html дока - введение
