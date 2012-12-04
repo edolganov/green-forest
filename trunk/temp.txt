@@ -1,3 +1,7 @@
+@ - &#064;
+< - &lt;
+> - &gt;
+
 		Reflections reflections = new Reflections(new ConfigurationBuilder()
         .setUrls(ClasspathHelper.getUrlsForPackagePrefix(packagePreffix))
         .setScanners(new TypeAnnotationsScanner())

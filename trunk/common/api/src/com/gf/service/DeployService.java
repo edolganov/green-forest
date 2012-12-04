@@ -8,8 +8,20 @@ import com.gf.Interceptor;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
 
+/**
+ * 
+ *
+ * @author jenya.dolganov
+ *
+ */
 public interface DeployService {
 	
+	/**
+	 * 
+	 * @param clazz
+	 * @throws NoMappingAnnotationException
+	 * @throws NotOneHandlerException
+	 */
 	void putHandler(Class<? extends Handler<?>> clazz) 
 			throws NoMappingAnnotationException, NotOneHandlerException;
 	
