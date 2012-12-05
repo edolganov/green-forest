@@ -127,6 +127,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * @throws InvocationException <tt>Engine</tt>'s processing exception
 	 * @throws ExceptionWrapper wrapper of non-runtime <tt>Exception</tt> from handler's body
 	 * @throws RuntimeException runtime <tt>Exception</tt> from handler's body
+	 * @see Engine#invokeUnwrap(Action)
 	 * @see Action
 	 * @see Handler
 	 * @see Interceptor
@@ -138,6 +139,35 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 		return (O)actions.invoke(action);
 	}
 	
+	/**
+	 * This method is {@link Engine#invoke(Action)} analog with unwrap non-runtime exceptions.
+	 * <p>Example:
+	 * <pre>
+	 * &#064;Mapping(SomeAction.class)
+	 * public class ActionHandlerWithException extends Handler&lt;SomeAction&gt;{
+	 * 
+	 *   public void invoke(SomeAction action) throws Exception {
+	 *     //not-runtime exception
+	 *     throw new Exception("test expection");
+	 *   }
+	 *   
+	 * }
+	 * 
+	 * ...
+	 * 
+	 * //use invokeUnwrap
+	 * try {
+	 *   engine.invokeUnwrap(new SomeAction());
+	 * }catch (Exception e) {
+	 *   System.out.println(e);
+	 * }
+	 * 
+	 * //use invoke
+	 * engine.invoke(new SomeAction()); //throws ExceptionWrapper
+	 * </pre>
+	 * 
+	 * @see Engine#invoke(Action)
+	 */
 	@Override
 	public <I, O> O invokeUnwrap(Action<I, O> action) 
 			throws InvocationException, Exception {
