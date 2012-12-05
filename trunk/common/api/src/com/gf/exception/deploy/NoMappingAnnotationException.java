@@ -17,7 +17,7 @@ import com.gf.annotation.Mapping;
  * engine.putHandler(HandlerWithNoMapping.class); //throws NoMappingAnnotationException
  * 
  * </pre>
- * @author jenya.dolganov
+ * @author Evgeny Dolganov
  * @see Mapping
  * @see MappingObject
  *

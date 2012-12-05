@@ -3,7 +3,7 @@ package xx_not_one_handler;
 import com.gf.Handler;
 import com.gf.annotation.Mapping;
 
-import ex01_simple_create.SomeAction;
+import ex01_invoke.SomeAction;
 
 @Mapping(SomeAction.class)
 public class HandlerA extends Handler<SomeAction>{

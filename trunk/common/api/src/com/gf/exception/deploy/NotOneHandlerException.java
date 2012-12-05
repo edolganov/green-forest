@@ -18,7 +18,7 @@ import java.util.Set;
  * 
  * </pre>
  *
- * @author jenya.dolganov
+ * @author Evgeny Dolganov
  *
  */
 public class NotOneHandlerException extends DeployException {

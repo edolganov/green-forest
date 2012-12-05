@@ -1,4 +1,4 @@
-package ex01_simple_create;
+package ex01_invoke;
 
 import com.gf.Action;
 
