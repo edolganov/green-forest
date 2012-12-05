@@ -11,7 +11,7 @@ import com.gf.exception.deploy.NotOneHandlerException;
 /**
  * 
  *
- * @author jenya.dolganov
+ * @author Evgeny Dolganov
  *
  */
 public interface DeployService {

@@ -31,10 +31,14 @@ import com.gf.service.DeployService;
  * Engine engine = new Engine();
  * engine.putHandler(SomeActonHandler.class);
  * String result = engine.invoke(new SomeAction("some data"));
+ * 
+ * SomeAction otherAction = new SomeAction("other data");
+ * engine.invoke(otherAction);
+ * String otherResult = otherAction.getOutput();
  * </pre>
  * <p>
  * 
- * @author jenya.dolganov
+ * @author Evgeny Dolganov
  * @see Action
  * @see Handler
  * @see Interceptor
@@ -50,14 +54,16 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	private ContextService context;
 	
 	/**
-	 * Create new instance of <tt>Engine</tt> with empty name
+	 * Create new instance of <tt>Engine</tt> with empty name.
+	 * <p>Use engine's <tt>name</tt> for any information reason (for logging for example).
 	 */
 	public Engine() {
 		this(null);
 	}
 	
 	/**
-	 * Create new instance of <tt>Engine</tt> with name
+	 * Create new instance of <tt>Engine</tt> with <tt>name</tt>
+	 * <p>Use engine's <tt>name</tt> for any information reason (for logging for example).
 	 */
 	public Engine(String name) {
 
@@ -73,14 +79,59 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 		
 	}
 
+	/**
+	 * Get current name of this <tt>Engine</tt>.
+	 * <p>Use engine's <tt>name</tt> for any information reason (for logging for example).
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Set new name for this <tt>Engine</tt>.
+	 * <p>Use engine's <tt>name</tt> for any information reason (for logging for example).
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Handle the {@link Action} object with this <tt>Engine</tt>.
+	 * <br>Use {@link Handler}, {@link Interceptor}, {@link Filter} for this.
+	 * <p>The order of processing:
+	 * <ul>
+	 * <li>Filtes</li>
+	 * <li>Interceptors</li>
+	 * <li>Handler</li>
+	 * </ul>
+	 * 
+	 * <p>Interceptors and Handlers can call <tt>subInvoke</tt> method.
+	 * <br>In this case the order of processing:
+	 * <ul>
+	 * <li>Filtes <b>(was called only once)</b></li>
+	 * <li>Interceptors
+	 * 		<ul>
+	 * 			<li>Sub Interceptors</li>
+	 * 			<li>Sub Handler</li>
+	 * 		</ul>
+	 * </li>
+	 * <li>Handler
+	 * 		<ul>
+	 * 			<li>Sub Interceptors</li>
+	 * 			<li>Sub Handler</li>
+	 * 		</ul>
+	 * </li>
+	 * </ul>
+	 * @return <tt>Action</tt> output object.
+	 * <br><b>Note:</b> This return value is the equivalent of code {@code action.getOutput()} after the invoke method.
+	 * @throws InvocationException <tt>Engine</tt>'s processing exception
+	 * @throws ExceptionWrapper wrapper of non-runtime <tt>Exception</tt> from handler's body
+	 * @throws RuntimeException runtime <tt>Exception</tt> from handler's body
+	 * @see Action
+	 * @see Handler
+	 * @see Interceptor
+	 * @see Filter
+	 */
 	@Override
 	public <I, O> O invoke(Action<I, O> action) 
 			throws InvocationException, ExceptionWrapper, RuntimeException {
@@ -94,7 +145,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	}
 	
 	/**
-	 * Put the <tt>handler</tt> class to this <tt>Engine</tt>.
+	 * Put the <tt>Handler</tt> class to this <tt>Engine</tt>.
 	 */
 	@Override
 	public void putHandler(Class<? extends Handler<?>> clazz)
@@ -102,14 +153,18 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 		deploy.putHandler(clazz);
 	}
 
-
+	/**
+	 * Put the <tt>Interceptor</tt> class to this <tt>Engine</tt>.
+	 */
 	@Override
 	public void putInterceptor(Class<? extends Interceptor<?>> clazz)
 			throws NoMappingAnnotationException {
 		deploy.putInterceptor(clazz);
 	}
 
-
+	/**
+	 * Put the <tt>Filter</tt> class to this <tt>Engine</tt>.
+	 */
 	@Override
 	public void putFilter(Class<? extends Filter> clazz) {
 		deploy.putFilter(clazz);
