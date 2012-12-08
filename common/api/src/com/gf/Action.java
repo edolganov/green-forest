@@ -6,7 +6,7 @@ import java.util.Map;
 import com.gf.util.Util;
 
 /**
- * Data container.
+ * Data container and type for handlers's mapping.
  * Extend this class for your own container type, and create <tt>Handler</tt> for handle it.
  * <p>Example:
  * <pre>
