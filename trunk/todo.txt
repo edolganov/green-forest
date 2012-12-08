@@ -1,4 +1,8 @@
 
+=== релиз ===
+	- простановка копирайтов
+	- проверка пустых ява доков
+	- создание артефакта для мавна
 
 === servlet-and-jdbc ===
 	- html дока
@@ -19,14 +23,14 @@
 		- NotOneHandlerException
 		- NoMappingAnnotationException
 		- Action
-	todo:
-		- Engine
 		- Handler
-		- Interceptor
-		- Filter
+	todo:
 		- Mapping
-		- MappingObject
+		- Interceptor
 		- Order
+		- Filter
+		- Engine
+		- MappingObject
 		- DeployService
 	extra:	
 		- проект с примерами кода
@@ -34,6 +38,9 @@
 	- html дока - введение
 	- html дока - частые действия
 	- доступ к конфиг сервайсу в хендлере
+	- добавление объектов хендлеров вместо типов
+	- удаление хендлеров
+	- стейтлесс объекты
 
 	
 === components ===
