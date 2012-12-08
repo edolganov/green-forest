@@ -1,4 +1,4 @@
-package ex01_invoke;
+package actions;
 
 import com.gf.Action;
 

@@ -1,9 +1,11 @@
 package ex04_subInvoke;
 
+import actions.OtherAction;
+import actions.SomeAction;
+
 import com.gf.Handler;
 import com.gf.annotation.Mapping;
 
-import ex01_invoke.SomeAction;
 
 @Mapping(SomeAction.class)
 public class SomeHandler extends Handler<SomeAction>{

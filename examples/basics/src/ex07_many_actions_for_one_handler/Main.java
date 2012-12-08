@@ -1,19 +1,18 @@
-package ex03_use_action_attrs;
+package ex07_many_actions_for_one_handler;
 
+import actions.OtherAction;
 import actions.SomeAction;
 
 import com.gf.core.Engine;
-
 
 public class Main {
 	
 	public static void main(String[] args) {
 		
 		Engine engine = new Engine();
-		engine.putInterceptor(SomeInterceptor.class);
-		engine.putHandler(SomeHandler.class);
+		engine.putHandler(CommonHandler.class);
 		engine.invoke(new SomeAction());
-		
+		engine.invoke(new OtherAction());
 	}
 
 }
