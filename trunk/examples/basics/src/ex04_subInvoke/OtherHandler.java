@@ -1,5 +1,7 @@
 package ex04_subInvoke;
 
+import actions.OtherAction;
+
 import com.gf.Handler;
 import com.gf.annotation.Mapping;
 

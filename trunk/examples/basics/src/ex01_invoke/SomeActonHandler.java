@@ -1,5 +1,7 @@
 package ex01_invoke;
 
+import actions.SomeAction;
+
 import com.gf.Handler;
 import com.gf.annotation.Mapping;
 

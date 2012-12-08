@@ -1,8 +1,9 @@
 package ex04_subInvoke;
 
+import actions.SomeAction;
+
 import com.gf.core.Engine;
 
-import ex01_invoke.SomeAction;
 
 public class Main {
 	

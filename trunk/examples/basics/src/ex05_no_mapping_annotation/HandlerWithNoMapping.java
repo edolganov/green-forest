@@ -1,8 +1,9 @@
 package ex05_no_mapping_annotation;
 
+import actions.SomeAction;
+
 import com.gf.Handler;
 
-import ex01_invoke.SomeAction;
 
 //@Mapping(SomeAction.class)
 public class HandlerWithNoMapping extends Handler<SomeAction>{

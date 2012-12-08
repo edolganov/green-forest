@@ -1,9 +1,10 @@
 package ex06_not_one_handler;
 
+import actions.SomeAction;
+
 import com.gf.Handler;
 import com.gf.annotation.Mapping;
 
-import ex01_invoke.SomeAction;
 
 @Mapping(SomeAction.class)
 public class HandlerB extends Handler<SomeAction>{

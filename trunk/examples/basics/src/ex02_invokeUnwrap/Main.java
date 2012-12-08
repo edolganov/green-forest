@@ -1,9 +1,10 @@
 package ex02_invokeUnwrap;
 
+import actions.SomeAction;
+
 import com.gf.core.Engine;
 import com.gf.exception.ExceptionWrapper;
 
-import ex01_invoke.SomeAction;
 
 public class Main {
 	

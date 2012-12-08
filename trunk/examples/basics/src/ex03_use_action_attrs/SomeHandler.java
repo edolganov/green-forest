@@ -1,9 +1,10 @@
 package ex03_use_action_attrs;
 
+import actions.SomeAction;
+
 import com.gf.Handler;
 import com.gf.annotation.Mapping;
 
-import ex01_invoke.SomeAction;
 
 @Mapping(SomeAction.class)
 public class SomeHandler extends Handler<SomeAction>{
