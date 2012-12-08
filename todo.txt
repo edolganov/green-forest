@@ -28,11 +28,12 @@
 		- InvocationObject
 		- Interceptor
 		- MappingObject
-	todo:
 		- InterceptorChain
 		- Order
+	todo:
 		- Filter
 		- FilterChain
+		- Inject
 		- Engine
 		- DeployService
 		- InvocationService
@@ -46,6 +47,8 @@
 	- удаление хендлеров
 	- стейтлесс объекты
 	- дать возможность фильтрам и перехватчикам подменять action (chain.doNext(otherAction);)
+	- переброс из текущего контекста в дочерние
+	- глобальный контекст
 
 	
 === components ===
