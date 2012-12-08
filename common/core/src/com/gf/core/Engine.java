@@ -100,15 +100,14 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * <br>Use {@link Handler}, {@link Interceptor}, {@link Filter} for this.
 	 * <p>The order of processing:
 	 * <ul>
-	 * <li>Filtes</li>
+	 * <li>Filters</li>
 	 * <li>Interceptors</li>
 	 * <li>Handler</li>
 	 * </ul>
-	 * 
 	 * <p>Interceptors and Handlers can call <tt>subInvoke</tt> method.
 	 * <br>In this case the order of processing:
 	 * <ul>
-	 * <li>Filtes <b>(was called only once)</b></li>
+	 * <li>Filters <b>(was called only once)</b></li>
 	 * <li>Interceptors
 	 * 		<ul>
 	 * 			<li>Sub Interceptors</li>

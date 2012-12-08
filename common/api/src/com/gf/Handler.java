@@ -1,6 +1,7 @@
 package com.gf;
 
 import com.gf.annotation.Mapping;
+import com.gf.annotation.Order;
 
 
 
@@ -9,7 +10,34 @@ import com.gf.annotation.Mapping;
  * Use <tt>Handler</tt> for create an atomic logic "function".
  * The input attribute for this "function" is <tt>Action</tt>'s input data.
  * Set output data to <tt>Action</tt>'s output.
- * <p>Example:
+ * 
+ * <p><b>Note:</b> <tt>Handler</tt> must contains <tt>&#064;Mapping</tt> annotation to be valid for <tt>Engine</tt>.
+ * 
+ * <p>The order of processing:
+ * <ul>
+ * <li>Filters</li>
+ * <li>Interceptors</li>
+ * <li>Handler</li>
+ * </ul>
+ * <p>Interceptors and Handlers can call <tt>subInvoke</tt> method.
+ * <br>In this case the order of processing:
+ * <ul>
+ * <li>Filters <b>(was called only once)</b></li>
+ * <li>Interceptors
+ * 		<ul>
+ * 			<li>Sub Interceptors</li>
+ * 			<li>Sub Handler</li>
+ * 		</ul>
+ * </li>
+ * <li>Handler
+ * 		<ul>
+ * 			<li>Sub Interceptors</li>
+ * 			<li>Sub Handler</li>
+ * 		</ul>
+ * </li>
+ * </ul>
+ * 
+ * <p><p>Example:
  * <pre>
  * //action
  * public class SomeAction extends Action<String, String>{
@@ -37,7 +65,7 @@ import com.gf.annotation.Mapping;
  * </pre>
  * 
  * For call other handler from current use <tt>subInvoke(Action)</tt> method.
- * <p>Example:
+ * <p><p>Example:
  * <pre>
  * &#064;Mapping(SomeAction.class)
  * public class SomeHandler extends Handler&lt;SomeAction&gt;{
@@ -62,6 +90,7 @@ import com.gf.annotation.Mapping;
  *  
  * @author Evgeny Dolganov
  * @see Mapping
+ * @see Order
  * @see Action
  * @see Interceptor
  * @see Filter
