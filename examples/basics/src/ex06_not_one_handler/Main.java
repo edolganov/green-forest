@@ -1,4 +1,4 @@
-package xx_not_one_handler;
+package ex06_not_one_handler;
 
 import com.gf.core.Engine;
 

@@ -1,4 +1,4 @@
-package xx_no_mapping_annotation;
+package ex05_no_mapping_annotation;
 
 import com.gf.core.Engine;
 
