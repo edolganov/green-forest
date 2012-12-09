@@ -14,8 +14,8 @@ public class SecondInvocationContextSetterFilter extends Filter {
 	@Override
 	public void invoke(Action<?, ?> action, FilterChain chain) throws Exception {
 		
-		invocationContext.addToInvocationContext(new InvocationServiceImpl());
-		invocationContext.addToInvocationContext(new InvocationServiceImpl2());
+		addToInvocationContext(new InvocationServiceImpl());
+		addToInvocationContext(new InvocationServiceImpl2());
 		
 		chain.doNext();
 		

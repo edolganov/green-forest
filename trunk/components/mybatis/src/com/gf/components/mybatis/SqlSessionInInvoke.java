@@ -30,8 +30,8 @@ public class SqlSessionInInvoke extends InvocationReaderFilter {
 			
 			Connection connection = session.getConnection();
 			
-			invocationContext.addToInvocationContext(session);
-			invocationContext.addToInvocationContext(connection);
+			addToInvocationContext(session);
+			addToInvocationContext(connection);
 			chain.doNext();
 			
 			session.flushStatements();

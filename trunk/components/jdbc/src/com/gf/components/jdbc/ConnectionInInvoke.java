@@ -20,12 +20,12 @@ public class ConnectionInInvoke extends Filter {
 	public void invoke(Action<?, ?> action, FilterChain chain) throws Exception {
 		
 		DataSource dataSource = sourceManager.getDataSource();
-		invocationContext.addToInvocationContext(dataSource);
+		addToInvocationContext(dataSource);
 		
 		Connection connection = dataSource.getConnection();
 		try {
 			
-			invocationContext.addToInvocationContext(connection);
+			addToInvocationContext(connection);
 			chain.doNext();
 			
 		}catch (Exception e) {

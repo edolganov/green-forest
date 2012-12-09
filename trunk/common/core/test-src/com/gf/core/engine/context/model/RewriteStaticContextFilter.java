@@ -12,7 +12,7 @@ public class RewriteStaticContextFilter extends Filter {
 	@Override
 	public void invoke(Action<?, ?> action, FilterChain chain) throws Exception {
 		
-		invocationContext.addToInvocationContext(new StaticServiceImpl2());
+		addToInvocationContext(new StaticServiceImpl2());
 		
 		chain.doNext();
 		

@@ -12,7 +12,7 @@ public class InvocationContextSetterFilter extends Filter {
 	@Override
 	public void invoke(Action<?, ?> action, FilterChain chain) throws Exception {
 		
-		invocationContext.addToInvocationContext(new InvocationServiceImpl());
+		addToInvocationContext(new InvocationServiceImpl());
 		
 		chain.doNext();
 		
