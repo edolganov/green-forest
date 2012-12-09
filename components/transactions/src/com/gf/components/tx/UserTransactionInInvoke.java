@@ -21,7 +21,7 @@ public class UserTransactionInInvoke extends Filter {
 		userTx.begin();
 		try {
 			
-			invocationContext.addToInvocationContext(userTx);
+			addToInvocationContext(userTx);
 			chain.doNext();
 			userTx.commit();
 			

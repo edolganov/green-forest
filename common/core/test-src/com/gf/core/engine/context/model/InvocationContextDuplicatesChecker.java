@@ -18,11 +18,12 @@ public class InvocationContextDuplicatesChecker extends Filter {
 		
 		InvocationServiceImpl service = new InvocationServiceImpl();
 		
-		invocationContext.addToInvocationContext(service);
-		invocationContext.addToInvocationContext(service);
+		addToInvocationContext(service);
+		addToInvocationContext(service);
 		
-		ContextRepository context = ReflectionsUtil.getField(invocationContext, "invocationContext");
-		Collection<Object> all = context.getAll();
+		Object context = ReflectionsUtil.getField(this, "invocationContext");
+		ContextRepository contextRepo = ReflectionsUtil.getField(context, "invocationContext");
+		Collection<Object> all = contextRepo.getAll();
 		Assert.assertEquals(2, all.size());
 		
 	}
