@@ -1,0 +1,44 @@
+<html>
+<head>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="lang.js"></script>
+</head>
+<body>
+	<table style="width:600px;">
+		<tr>
+			<td>
+				<textarea id="original" cols="70" rows="30"></textarea>
+			</td>
+			<td>
+				<textarea id="formatted" cols="70" rows="30"></textarea>
+			</td>
+		</tr>
+	</table>
+	<button id="format">format</button>
+	<script>
+		$(document).ready(function(){
+			
+			var original = $("#original");
+			var formatted = $("#formatted");
+			var button = $("#format");
+			
+			button.click(function(){
+				var text = original.val();
+				var updated = text.replaceAll("\t","  ");
+				updated = updated.replaceAll("@","&#064;");
+				updated = updated.replaceAll("<","&lt;");
+				updated = updated.replaceAll(">","&gt;");
+				
+				var lines = updated.split("\n");
+				updated = "";
+				$.each(lines, function(i, line){
+					updated += " * "+line + "\n"; 
+				});
+				
+				formatted.val(updated);
+			});
+			
+		});
+	</script>
+</body>
+</html>
