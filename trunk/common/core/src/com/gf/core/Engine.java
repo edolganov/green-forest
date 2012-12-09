@@ -7,6 +7,7 @@ import com.gf.Action;
 import com.gf.Filter;
 import com.gf.Handler;
 import com.gf.Interceptor;
+import com.gf.annotation.Inject;
 import com.gf.config.ConfigKey;
 import com.gf.core.action.ActionServiceImpl;
 import com.gf.core.config.ConfigServiceImpl;
@@ -246,7 +247,42 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 		config.setConfigValues(props);
 	}
 	
-
+	/**
+	 * Add some object to current engine context.
+	 * So this object can be injected into filters, interceptors, handlers.
+	 * <p>Example:
+	 * <pre>
+	 * //engine
+	 * SomeService someService = new SomeService();
+	 * OtherService otherService = new OtherService();
+	 * Engine engine = new Engine();
+	 * engine.addToContext(someService);
+	 * engine.addToContext(otherService);
+	 * engine.putHandler(SomeHandler.class);
+	 * engine.invoke(new SomeAction());
+	 * 
+	 * //handler
+	 * &#064;Mapping(SomeAction.class)
+	 * public class SomeHandler extends Handler&lt;SomeAction&gt;{
+	 *   
+	 *   &#064;Inject
+	 *   SomeService service;
+	 *   
+	 *   &#064;Inject
+	 *   OtherService otherService;
+	 *   
+	 *   &#064;Override
+	 *   public void invoke(SomeAction action) throws Exception {
+	 *   
+	 *     service.someMethod();
+	 *     otherService.invoke(new OtherAction()); //it can be an another Engine. Why not?
+	 *     
+	 *   }
+	 * }
+	 * </pre>
+	 * 
+	 * @see Inject
+	 */
 	@Override
 	public void addToContext(Object object) {
 		context.addToContext(object);
