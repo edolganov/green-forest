@@ -20,6 +20,9 @@
 === core ===
 *	- java-doc к основным интерфейсам
 	done:
+		- Engine
+			- some methods
+			- addToContext
 		- NotOneHandlerException
 		- NoMappingAnnotationException
 		- Action
@@ -35,6 +38,10 @@
 	todo:
 		- Inject
 		- Engine
+			- scanForAnnotations
+			- getConfig
+			- setContextObjects
+		- ContextService
 		- DeployService
 		- InvocationService
 	extra:	
