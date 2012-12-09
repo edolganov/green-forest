@@ -18,6 +18,12 @@
 
 
 === core ===
+*	- ПЕРЕДЕЛАТЬ подключение сканнера классов через конфиг
+		- тест jee
+		- сканнер спринга
+			- тест
+*	- ПЕРЕДЕЛАТЬ подключение логов через конфиг
+		- тест jee, и т.д.
 *	- java-doc к основным интерфейсам
 	done:
 		- Engine
@@ -39,11 +45,13 @@
 	todo:
 		- Engine
 			- scanForAnnotations
+				- note about config scanner
 			- getConfig
 			- setContextObjects
 		- ContextService
 		- DeployService
 		- InvocationService
+		- ConfigSerivce
 	extra:	
 		- проект с примерами кода
 		- генерация ява дока

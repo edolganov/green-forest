@@ -175,7 +175,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	}
 	
 	/**
-	 * Put the <tt>Handler</tt> class to this <tt>Engine</tt>.
+	 * Put the <tt>Handler</tt> class into this <tt>Engine</tt>.
 	 */
 	@Override
 	public void putHandler(Class<? extends Handler<?>> clazz)
@@ -184,7 +184,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	}
 
 	/**
-	 * Put the <tt>Interceptor</tt> class to this <tt>Engine</tt>.
+	 * Put the <tt>Interceptor</tt> class into this <tt>Engine</tt>.
 	 */
 	@Override
 	public void putInterceptor(Class<? extends Interceptor<?>> clazz)
@@ -193,23 +193,32 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	}
 
 	/**
-	 * Put the <tt>Filter</tt> class to this <tt>Engine</tt>.
+	 * Put the <tt>Filter</tt> class into this <tt>Engine</tt>.
 	 */
 	@Override
 	public void putFilter(Class<? extends Filter> clazz) {
 		deploy.putFilter(clazz);
 	}
 	
-	@Override
-	public void scanForAnnotations(Package pckg)
-			throws NoMappingAnnotationException, NotOneHandlerException{
-		deploy.scanForAnnotations(pckg);
-	}
-	
+	/**
+	 * Scan packages and put all handlers, interceptors, filters into this <tt>Engine</tt>.
+	 * 
+	 * <p>Example:
+	 * <pre>
+	 * </pre>
+	 * 
+	 * @param packageName root package for scan (example: "com.some.package")
+	 */
 	@Override
 	public void scanForAnnotations(String packageName)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.scanForAnnotations(packageName);
+	}
+	
+	@Override
+	public void scanForAnnotations(Package pckg)
+			throws NoMappingAnnotationException, NotOneHandlerException{
+		deploy.scanForAnnotations(pckg);
 	}
 	
 	@Override
@@ -223,7 +232,12 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.scanPackageForAnnotations(clazz);
 	}
-
+	
+	@Override
+	public void setScanForAnnotationsPackages(Collection<String> packageNames)
+			throws NoMappingAnnotationException, NotOneHandlerException {
+		deploy.setScanForAnnotationsPackages(packageNames);
+	}
 
 	@Override
 	public <T> T getConfig(ConfigKey<T> key) {
@@ -308,12 +322,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	@Override
 	public void setFilterTypes(Collection<Class<? extends Filter>> filterTypes) {
 		deploy.setFilterTypes(filterTypes);
-	}
-
-	@Override
-	public void setScanForAnnotationsPackages(Collection<String> packageNames)
-			throws NoMappingAnnotationException, NotOneHandlerException {
-		deploy.setScanForAnnotationsPackages(packageNames);
 	}
 
 	
