@@ -15,13 +15,13 @@ import com.gf.util.junit.AssertExt;
 
 public abstract class AbstractTypesRepoTest extends AssertExt {
 	
-	protected abstract TypesRepo getRepo();
+	protected abstract TypesRepository getRepo();
 	
 	
 	@Test
 	public void test_reload_cache_after_put(){
 		
-		TypesRepo repo = getRepo();
+		TypesRepository repo = getRepo();
 		
 		repo.put(TestHandler_superclass.class);
 		Set<Class<?>> set1 = repo.getTypes(TestTarget_superclass.class);
@@ -39,7 +39,7 @@ public abstract class AbstractTypesRepoTest extends AssertExt {
 	@Test
 	public void test_change_one_handler_flag(){
 		
-		TypesRepo repo = getRepo();
+		TypesRepository repo = getRepo();
 		
 		repo.setOneHandlerOnly(true);
 		repo.put(TestHandler_superclass.class);
@@ -69,7 +69,7 @@ public abstract class AbstractTypesRepoTest extends AssertExt {
 	@Test
 	public void test_rollback_after_many_handlers_exception(){
 		
-		TypesRepo repo = getRepo();
+		TypesRepository repo = getRepo();
 		
 		repo.setOneHandlerOnly(true);
 		repo.put(TestHandler_superclass.class);
@@ -90,7 +90,7 @@ public abstract class AbstractTypesRepoTest extends AssertExt {
 	@Test(expected=NotOneHandlerException.class)
 	public void test_one_handler_only_true(){
 		
-		TypesRepo repo = getRepo();
+		TypesRepository repo = getRepo();
 		repo.setOneHandlerOnly(true);
 		
 		assertTrue(repo.isOneHandlerOnly());
@@ -104,7 +104,7 @@ public abstract class AbstractTypesRepoTest extends AssertExt {
 	@Test
 	public void test_get(){
 		
-		TypesRepo repo = getRepo();
+		TypesRepository repo = getRepo();
 		repo.put(TestHandler_superclass.class);
 		repo.put(TestHandler_interface.class);
 		repo.put(TestHandler_final_class.class);
@@ -140,7 +140,7 @@ public abstract class AbstractTypesRepoTest extends AssertExt {
 	@Test
 	public void test_put() throws Exception{
 		
-		TypesRepo repo = getRepo();
+		TypesRepository repo = getRepo();
 		repo.put(StringEcho.class);
 		
 		containsOnly(repo.getTypes(StringAction.class), StringEcho.class);
@@ -151,7 +151,7 @@ public abstract class AbstractTypesRepoTest extends AssertExt {
 	@Test(expected=NoMappingAnnotationException.class)
 	public void test_put_without_mapping() throws Exception{
 		
-		TypesRepo repo = getRepo();
+		TypesRepository repo = getRepo();
 		repo.put(WithoutMappingHandler.class);
 		
 	}

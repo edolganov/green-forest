@@ -1,14 +1,14 @@
 package com.gf.core.repo;
 
-import com.gf.core.repo.TypesRepo;
-import com.gf.core.repo.TypesRepoImpl;
+import com.gf.core.repo.TypesRepository;
+import com.gf.core.repo.TypesRepositoryImpl;
 
 
 public class TypesRepoImplTest extends AbstractTypesRepoTest {
 
 	@Override
-	protected TypesRepo getRepo() {
-		return new TypesRepoImpl();
+	protected TypesRepository getRepo() {
+		return new TypesRepositoryImpl();
 	}
 	
 	
