@@ -1,4 +1,4 @@
-package mybatis.app;
+package spring;
 
 import javax.sql.DataSource;
 
@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import example.AbstractTest;
 import example.app.App;
+import example.common.action.CreateDataBase;
 
 public abstract class AbstractSpringTest extends AbstractTest {
 	
@@ -21,6 +22,8 @@ public abstract class AbstractSpringTest extends AbstractTest {
 		BeanFactory factory = (BeanFactory) appContext;
 		
 		app = (App) factory.getBean("app");
+		app.invoke(new CreateDataBase());
+		
 		ds = (DataSource)factory.getBean("dataSource");
 		
 	}

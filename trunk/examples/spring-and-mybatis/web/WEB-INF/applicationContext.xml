@@ -84,7 +84,7 @@
 		</property>
 		<property name="configValues">
 			<props>
-				<prop key="com.gf.key.core.TraceHandlers">true</prop>
+				<prop key="com.gf.key.TraceHandlers">true</prop>
 			</props>
 		</property>
 	</bean>
