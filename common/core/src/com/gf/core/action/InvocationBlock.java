@@ -9,8 +9,8 @@ import com.gf.core.action.trace.Body;
 import com.gf.core.action.trace.TraceWrapper;
 import com.gf.core.context.ContextRepository;
 import com.gf.exception.invoke.InvokeDepthMaxSizeException;
-import com.gf.key.core.InvokeDepthMaxSize;
-import com.gf.key.core.TraceHandlers;
+import com.gf.key.InvokeDepthMaxSize;
+import com.gf.key.TraceHandlers;
 
 
 public class InvocationBlock {

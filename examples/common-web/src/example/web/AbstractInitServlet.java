@@ -5,7 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 import com.gf.core.Engine;
-import com.gf.key.core.TraceHandlers;
+import com.gf.key.TraceHandlers;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
 

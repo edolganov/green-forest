@@ -7,7 +7,7 @@ import com.gf.core.Engine;
 import com.gf.extra.trace.TraceElement;
 import com.gf.extra.trace.TraceLevel;
 import com.gf.extra.trace.TraceLevelItem;
-import com.gf.key.core.TraceHandlers;
+import com.gf.key.TraceHandlers;
 import com.gf.util.junit.AssertExt;
 
 public abstract class AbstractEngineTest extends AssertExt {

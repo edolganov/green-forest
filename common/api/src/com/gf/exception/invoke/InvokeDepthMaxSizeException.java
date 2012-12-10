@@ -1,6 +1,6 @@
 package com.gf.exception.invoke;
 
-import com.gf.key.core.InvokeDepthMaxSize;
+import com.gf.key.InvokeDepthMaxSize;
 
 public class InvokeDepthMaxSizeException extends InvocationException {
 

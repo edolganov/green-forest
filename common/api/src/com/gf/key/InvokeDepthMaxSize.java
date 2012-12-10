@@ -1,4 +1,4 @@
-package com.gf.key.core;
+package com.gf.key;
 
 import com.gf.config.ConfigKey;
 
