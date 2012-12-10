@@ -16,7 +16,7 @@ public class ReflectionsScanTest extends AssertExt {
 	public void test_invoke(){
 		
 		String packageRoot = ReflectionsScanTest.class.getPackage().getName();
-		Set<Class<?>> set = new ReflectionsScan().getClasses(packageRoot, InvocationObject.class);
+		Set<Class<?>> set = new ReflectionsScanner().getClasses(packageRoot, InvocationObject.class);
 		assertEquals(3, set.size());
 		assertTrue(set.contains(TestA.class));
 		assertTrue(set.contains(TestB.class));

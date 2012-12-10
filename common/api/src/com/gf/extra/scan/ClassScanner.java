@@ -1,8 +1,8 @@
-package com.gf.core.scan;
+package com.gf.extra.scan;
 
 import java.util.Set;
 
-public interface ClassScan {
+public interface ClassScanner {
 	
 	Set<Class<?>> getClasses(String packageRoot, Class<?> parentClass);
 

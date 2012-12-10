@@ -3,9 +3,10 @@ package com.gf.core.scan;
 import java.util.Set;
 
 import com.gf.core.util.ScanUtil;
+import com.gf.extra.scan.ClassScanner;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class DefaultClassScan implements ClassScan {
+public class DefaultClassScanner implements ClassScanner {
 
 	
 	@Override
