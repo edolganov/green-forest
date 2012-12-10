@@ -1,7 +1,7 @@
-package com.gf.core.repo;
+package com.gf.core.deploy;
 
-import com.gf.core.repo.TypesRepository;
-import com.gf.core.repo.TypesRepositoryImpl;
+import com.gf.core.deploy.TypesRepository;
+import com.gf.core.deploy.TypesRepositoryImpl;
 
 
 public class TypesRepoImplTest extends AbstractTypesRepoTest {
