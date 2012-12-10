@@ -13,12 +13,13 @@ import com.gf.Handler;
 import com.gf.Interceptor;
 import com.gf.InvocationObject;
 import com.gf.annotation.Mapping;
-import com.gf.core.scan.ClassScan;
-import com.gf.core.scan.ClassScanFactory;
+import com.gf.core.util.CoreUtil;
 import com.gf.exception.ExceptionWrapper;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.NotOneHandlerException;
+import com.gf.extra.scan.ClassScanner;
+import com.gf.key.scan.ClassScannerKey;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
 import com.gf.service.ConfigService;
@@ -33,6 +34,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	TypesRepository interceptorTypes;
 	CopyOnWriteArraySet<Class<?>> filterTypes = new CopyOnWriteArraySet<Class<?>>();
 	OrderComparator orderComparator = new OrderComparator();
+	ClassScanner scanner;
 	
 	public DeployServiceImpl(ConfigService config) {
 		
@@ -41,6 +43,9 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		
 		handlerTypes = new TypesRepositoryImpl();
 		handlerTypes.setOneHandlerOnly(true);
+		
+		Class<?> type = config.getConfig(new ClassScannerKey());
+		scanner = CoreUtil.createInstance(type);
 
 	}
 
@@ -85,8 +90,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		
 		log.info("Scanning and registering classes...");
 		
-		ClassScan scan = ClassScanFactory.getScan();
-	    Set<Class<?>> mapperSet = scan.getClasses(packageName, InvocationObject.class);
+	    Set<Class<?>> mapperSet = scanner.getClasses(packageName, InvocationObject.class);
 	    
 	    int totalFilters = 0;
 	    int totalInterceptors = 0;

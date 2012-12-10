@@ -11,12 +11,12 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import org.reflections.vfs.Vfs;
 
-import com.gf.core.scan.ClassScan;
+import com.gf.extra.scan.ClassScanner;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
 import com.google.common.collect.Multimap;
 
-public class ReflectionsScan implements ClassScan {
+public class ReflectionsScanner implements ClassScanner {
 	
 	static {
 		Vfs.addDefaultURLTypes(new JBossVFSUrlType());
