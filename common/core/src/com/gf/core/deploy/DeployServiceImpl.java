@@ -14,7 +14,7 @@ import com.gf.Interceptor;
 import com.gf.InvocationObject;
 import com.gf.annotation.Mapping;
 import com.gf.core.util.CoreUtil;
-import com.gf.exception.ExceptionWrapper;
+import com.gf.exception.InvalidStateException;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.NotOneHandlerException;
@@ -30,22 +30,21 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	
 	Log log = LogFactory.getLog(getClass()); 
 	
+	ConfigService config;
 	TypesRepository handlerTypes;
 	TypesRepository interceptorTypes;
 	CopyOnWriteArraySet<Class<?>> filterTypes = new CopyOnWriteArraySet<Class<?>>();
 	OrderComparator orderComparator = new OrderComparator();
-	ClassScanner scanner;
 	
 	public DeployServiceImpl(ConfigService config) {
+		
+		this.config = config;
 		
 		interceptorTypes = new TypesRepositoryImpl();
 		interceptorTypes.setOneHandlerOnly(false);
 		
 		handlerTypes = new TypesRepositoryImpl();
 		handlerTypes.setOneHandlerOnly(true);
-		
-		Class<?> type = config.getConfig(new ClassScannerKey());
-		scanner = CoreUtil.createInstance(type);
 
 	}
 
@@ -90,6 +89,9 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		
 		log.info("Scanning and registering classes...");
 		
+		
+		Class<?> scannerType = config.getConfig(new ClassScannerKey());
+		ClassScanner scanner = CoreUtil.createInstance(scannerType);
 	    Set<Class<?>> mapperSet = scanner.getClasses(packageName, InvocationObject.class);
 	    
 	    int totalFilters = 0;
@@ -132,7 +134,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 			Object newInstance = handlerType.newInstance();
 			out = (Handler<?>) newInstance;
 		}catch (Exception e) {
-			throw new ExceptionWrapper("can't create handler by "+handlerType, e);
+			throw new InvalidStateException("can't create handler by "+handlerType, e);
 		}
 		
 		return out;
@@ -166,7 +168,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 				Filter filter = (Filter) newInstance;
 				out.add(filter);
 			}catch (Exception e) {
-				throw new ExceptionWrapper("can't create filter by "+filterType, e);
+				throw new InvalidStateException("can't create filter by "+filterType, e);
 			}
 		}
 		
@@ -189,7 +191,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 				Interceptor<?> interceptor = (Interceptor<?>) newInstance;
 				out.add(interceptor);
 			}catch (Exception e) {
-				throw new ExceptionWrapper("can't create interceptor by "+interceptorType, e);
+				throw new InvalidStateException("can't create interceptor by "+interceptorType, e);
 			}
 		}
 		
