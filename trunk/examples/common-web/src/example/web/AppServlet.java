@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gf.extra.trace.Trace;
-import com.gf.key.core.TraceHandlers;
+import com.gf.key.TraceHandlers;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
 import com.gf.util.Util;

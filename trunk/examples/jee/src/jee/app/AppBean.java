@@ -8,7 +8,7 @@ import javax.ejb.TransactionManagementType;
 
 import com.gf.components.jee.ActionServiceBean;
 import com.gf.core.Engine;
-import com.gf.key.core.TraceHandlers;
+import com.gf.key.TraceHandlers;
 import com.gf.service.ActionService;
 
 import example.app.App;
