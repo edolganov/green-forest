@@ -2,6 +2,7 @@ package com.gf.core.util;
 
 import com.gf.exception.BaseException;
 import com.gf.exception.ExceptionWrapper;
+import com.gf.exception.InvalidStateException;
 
 
 public class CoreUtil {
@@ -12,7 +13,7 @@ public class CoreUtil {
 		try {
 			return (T)type.newInstance();
 		} catch (Exception e) {
-			throw new ExceptionWrapper("cannot create instance of "+type, e);
+			throw new InvalidStateException("cannot create instance of "+type, e);
 		}
 	}
 	
