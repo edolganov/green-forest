@@ -13,15 +13,14 @@ import com.gf.Handler;
 import com.gf.Interceptor;
 import com.gf.InvocationObject;
 import com.gf.annotation.Mapping;
-import com.gf.core.repo.TypesRepo;
+import com.gf.core.repo.TypesRepository;
+import com.gf.core.repo.TypesRepositoryImpl;
 import com.gf.core.scan.ClassScan;
 import com.gf.core.scan.ClassScanFactory;
-import com.gf.core.util.CoreUtil;
 import com.gf.exception.ExceptionWrapper;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.NotOneHandlerException;
-import com.gf.key.core.actionservice.TypesRepoClass;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
 import com.gf.service.ConfigService;
@@ -32,19 +31,17 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	
 	Log log = LogFactory.getLog(getClass()); 
 	
-	TypesRepo handlerTypes;
-	TypesRepo interceptorTypes;
+	TypesRepository handlerTypes;
+	TypesRepository interceptorTypes;
 	CopyOnWriteArraySet<Class<?>> filterTypes = new CopyOnWriteArraySet<Class<?>>();
 	OrderComparator orderComparator = new OrderComparator();
 	
 	public DeployServiceImpl(ConfigService config) {
 		
-		Class<?> typeRepoClass = config.getConfig(new TypesRepoClass());
-		
-		interceptorTypes = CoreUtil.createInstance(typeRepoClass);
+		interceptorTypes = new TypesRepositoryImpl();
 		interceptorTypes.setOneHandlerOnly(false);
 		
-		handlerTypes = CoreUtil.createInstance(typeRepoClass);
+		handlerTypes = new TypesRepositoryImpl();
 		handlerTypes.setOneHandlerOnly(true);
 
 	}

@@ -17,9 +17,9 @@ import com.gf.log.Log;
 import com.gf.log.LogFactory;
 import com.gf.util.Util;
 
-public class TypesRepoImpl implements TypesRepo {
+public class TypesRepositoryImpl implements TypesRepository {
 	
-	private static Log log = LogFactory.getLog(TypesRepoImpl.class);
+	private static Log log = LogFactory.getLog(TypesRepositoryImpl.class);
 	
 	//[target - [current handlers]]
 	private HashMap<Class<?>, Set<Class<?>>> initialMapping = new HashMap<Class<?>, Set<Class<?>>>();

@@ -5,7 +5,7 @@ import java.util.Set;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
 
-public interface TypesRepo {
+public interface TypesRepository {
 	
 	void setOneHandlerOnly(boolean val) throws NotOneHandlerException;
 	
