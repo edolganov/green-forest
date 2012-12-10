@@ -1,4 +1,4 @@
-package com.gf.core.deploy;
+package com.gf.core.engine.deploy;
 
 import com.gf.core.deploy.TypesRepository;
 import com.gf.core.deploy.TypesRepositoryImpl;
