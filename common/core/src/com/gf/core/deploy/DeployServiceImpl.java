@@ -13,8 +13,6 @@ import com.gf.Handler;
 import com.gf.Interceptor;
 import com.gf.InvocationObject;
 import com.gf.annotation.Mapping;
-import com.gf.core.repo.TypesRepository;
-import com.gf.core.repo.TypesRepositoryImpl;
 import com.gf.core.scan.ClassScan;
 import com.gf.core.scan.ClassScanFactory;
 import com.gf.exception.ExceptionWrapper;

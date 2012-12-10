@@ -1,10 +1,11 @@
-package com.gf.core.repo;
+package com.gf.core.deploy;
 
 import java.util.Set;
 
 import org.junit.Test;
 
 import com.gf.annotation.Mapping;
+import com.gf.core.deploy.TypesRepository;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
 import com.gf.test.action.StringAction;

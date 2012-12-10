@@ -1,4 +1,4 @@
-package com.gf.core.repo;
+package com.gf.core.deploy;
 
 import java.util.HashMap;
 import java.util.HashSet;
