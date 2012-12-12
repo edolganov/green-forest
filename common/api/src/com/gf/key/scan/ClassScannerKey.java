@@ -3,6 +3,12 @@ package com.gf.key.scan;
 import com.gf.config.ConfigKey;
 import com.gf.extra.scan.ClassScanner;
 
+/**
+ * Config key for {@link ClassScanner} implementation.
+ *
+ * @author Evgeny Dolganov
+ * @see ClassScanner
+ */
 public class ClassScannerKey extends ConfigKey<Class<?>>{
 
 	@Override

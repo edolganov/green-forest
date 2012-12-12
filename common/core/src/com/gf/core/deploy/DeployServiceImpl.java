@@ -93,6 +93,9 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		Class<?> scannerType = config.getConfig(new ClassScannerKey());
 		ClassScanner scanner = CoreUtil.createInstance(scannerType);
 	    Set<Class<?>> mapperSet = scanner.getClasses(packageName, InvocationObject.class);
+	    if(mapperSet == null){
+	    	mapperSet = Collections.emptySet();
+	    }
 	    
 	    int totalFilters = 0;
 	    int totalInterceptors = 0;

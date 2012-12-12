@@ -31,6 +31,9 @@
 		- Engine
 			- some methods
 			- addToContext
+			- scanForAnnotations
+				- note about config scanner
+				- ClassScanner
 		- NotOneHandlerException
 		- NoMappingAnnotationException
 		- Action
@@ -46,14 +49,13 @@
 		- Inject
 	todo:
 		- Engine
-			- scanForAnnotations
-				- note about config scanner
 			- getConfig
 			- setContextObjects
 		- ContextService
 		- DeployService
 		- InvocationService
 		- ConfigSerivce
+		- ConfigKey
 	extra:	
 		- проект с примерами кода
 		- генерация ява дока
