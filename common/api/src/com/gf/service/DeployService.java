@@ -51,7 +51,7 @@ public interface DeployService {
 	
 	void setFilterTypes(Collection<Class<? extends Filter>> filterTypes);
 	
-	void setScanForAnnotationsPackages(Collection<String> packageNames) 
+	void setScanForAnnotations(Collection<String> packageNames) 
 			throws NoMappingAnnotationException, NotOneHandlerException;
 	
 	

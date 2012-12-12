@@ -233,7 +233,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	}
 
 	@Override
-	public void setScanForAnnotationsPackages(Collection<String> packageNames)
+	public void setScanForAnnotations(Collection<String> packageNames)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		if(packageNames == null) return;
 		for (String packageName : packageNames) {

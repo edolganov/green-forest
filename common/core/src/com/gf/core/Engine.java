@@ -231,28 +231,56 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 		deploy.scanForAnnotations(packageName);
 	}
 	
+	/**
+	 * Analog for {@link #scanForAnnotations(String)}: <tt>scanForAnnotations(pckg.getName())</tt>.
+	 * 
+	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
+	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
+	 * Or you can use your own {@link ClassScanner}.
+	 * <p>
+	 */
 	@Override
 	public void scanForAnnotations(Package pckg)
 			throws NoMappingAnnotationException, NotOneHandlerException{
 		deploy.scanForAnnotations(pckg);
 	}
 	
-	@Override
-	public void scanPackageForAnnotations(Object obj)
-			throws NoMappingAnnotationException, NotOneHandlerException {
-		deploy.scanPackageForAnnotations(obj);
-	}
-	
+	/**
+	 * Analog for {@link #scanForAnnotations(Package)}: <tt>scanForAnnotations(clazz.getPackage())</tt>
+	 * 
+	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
+	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
+	 * Or you can use your own {@link ClassScanner}.
+	 * <p>
+	 */
 	@Override
 	public void scanPackageForAnnotations(Class<?> clazz)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.scanPackageForAnnotations(clazz);
 	}
 	
+	/**
+	 * Analog for {@link #scanPackageForAnnotations(Class)}: <tt>scanForAnnotations(obj.getClass())</tt>
+	 * 
+	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
+	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
+	 * Or you can use your own {@link ClassScanner}.
+	 * <p>
+	 */
 	@Override
-	public void setScanForAnnotationsPackages(Collection<String> packageNames)
+	public void scanPackageForAnnotations(Object obj)
 			throws NoMappingAnnotationException, NotOneHandlerException {
-		deploy.setScanForAnnotationsPackages(packageNames);
+		deploy.scanPackageForAnnotations(obj);
+	}
+	
+	/**
+	 * For Java-Bean logic (in Spring's xml for example).
+	 * <br> Analog of 
+	 */
+	@Override
+	public void setScanForAnnotations(Collection<String> packageNames)
+			throws NoMappingAnnotationException, NotOneHandlerException {
+		deploy.setScanForAnnotations(packageNames);
 	}
 
 	@Override
