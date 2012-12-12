@@ -232,7 +232,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	}
 	
 	/**
-	 * Analog for {@link #scanForAnnotations(String)}: <tt>scanForAnnotations(pckg.getName())</tt>.
+	 * Analog for {@link #scanForAnnotations(String)}: <tt>scanForAnnotations(clazz.getPackage().getName())</tt>
 	 * 
 	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
 	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
@@ -240,42 +240,30 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * <p>
 	 */
 	@Override
-	public void scanForAnnotations(Package pckg)
-			throws NoMappingAnnotationException, NotOneHandlerException{
-		deploy.scanForAnnotations(pckg);
-	}
-	
-	/**
-	 * Analog for {@link #scanForAnnotations(Package)}: <tt>scanForAnnotations(clazz.getPackage())</tt>
-	 * 
-	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
-	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
-	 * Or you can use your own {@link ClassScanner}.
-	 * <p>
-	 */
-	@Override
-	public void scanPackageForAnnotations(Class<?> clazz)
+	public void scanForAnnotations(Class<?> clazz)
 			throws NoMappingAnnotationException, NotOneHandlerException {
-		deploy.scanPackageForAnnotations(clazz);
+		deploy.scanForAnnotations(clazz);
 	}
 	
+	
 	/**
-	 * Analog for {@link #scanPackageForAnnotations(Class)}: <tt>scanForAnnotations(obj.getClass())</tt>
+	 * For JavaBean logic (in Spring's xml for example).
+	 * <br> Analog of multi call of {@link #scanForAnnotations(String)}.
+	 * <p>Spring xml example:
+	 * <pre>
+	 *   &lt;bean id="appEngine" class="com.gf.core.Engine"&gt;
+	 *     &lt;property name="scanForAnnotations"&gt;
+	 *       &lt;list&gt;
+	 *         &lt;value&gt;some.package&lt;/value&gt;
+	 *       &lt;/list&gt;
+	 *     &lt;/property&gt;
+	 *   &lt;/bean&gt;
+	 * </pre>
 	 * 
 	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
 	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
 	 * Or you can use your own {@link ClassScanner}.
 	 * <p>
-	 */
-	@Override
-	public void scanPackageForAnnotations(Object obj)
-			throws NoMappingAnnotationException, NotOneHandlerException {
-		deploy.scanPackageForAnnotations(obj);
-	}
-	
-	/**
-	 * For Java-Bean logic (in Spring's xml for example).
-	 * <br> Analog of 
 	 */
 	@Override
 	public void setScanForAnnotations(Collection<String> packageNames)

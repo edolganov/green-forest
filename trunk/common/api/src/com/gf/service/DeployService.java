@@ -30,16 +30,10 @@ public interface DeployService {
 	
 	void putFilter(Class<? extends Filter> clazz);
 	
-	void scanForAnnotations(Package pckg) 
-			throws NoMappingAnnotationException, NotOneHandlerException;
-	
 	void scanForAnnotations(String packageName) 
 			throws NoMappingAnnotationException, NotOneHandlerException;
 	
-	void scanPackageForAnnotations(Object obj)
-			throws NoMappingAnnotationException, NotOneHandlerException;
-	
-	void scanPackageForAnnotations(Class<?> clazz)
+	void scanForAnnotations(Class<?> clazz)
 			throws NoMappingAnnotationException, NotOneHandlerException;
 	
 	

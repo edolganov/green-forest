@@ -13,7 +13,7 @@ public class ConfigScannerTest extends AbstractEngineTest {
 		
 		Engine engine = new Engine();
 		engine.setConfig(ClassScannerKey.class, TestClassScanner.class);
-		engine.scanPackageForAnnotations(this);
+		engine.scanForAnnotations(this.getClass());
 		
 		int instances = TestClassScanner.instanceCounter.get();
 		assertEquals(1, instances);
