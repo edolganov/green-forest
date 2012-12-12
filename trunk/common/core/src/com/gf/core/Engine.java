@@ -19,6 +19,8 @@ import com.gf.exception.ExceptionWrapper;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
 import com.gf.exception.invoke.InvocationException;
+import com.gf.extra.scan.ClassScanner;
+import com.gf.key.scan.ClassScannerKey;
 import com.gf.service.ActionService;
 import com.gf.service.ConfigService;
 import com.gf.service.ContextService;
@@ -202,12 +204,26 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	
 	/**
 	 * Scan packages and put all handlers, interceptors, filters into this <tt>Engine</tt>.
-	 * 
 	 * <p>Example:
 	 * <pre>
+	 * //handler
+	 * package some.package.subPackage;
+	 * &#064;Mapping(SomeAction.class)
+	 * public class SomeHandler extends Handler&lt;SomeAction&gt;{...}
+	 * 
+	 * //engine
+	 * Engine engine = new Engine();
+	 * engine.scanForAnnotations("some.package");
+	 * engine.invoke(new SomeAction());
 	 * </pre>
 	 * 
+	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
+	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
+	 * Or you can use your own {@link ClassScanner}.
+	 * <p>
 	 * @param packageName root package for scan (example: "com.some.package")
+	 * @see ClassScanner
+	 * @see ClassScannerKey
 	 */
 	@Override
 	public void scanForAnnotations(String packageName)
