@@ -10,6 +10,7 @@
 			- этот вариант нравится больше - можно попробовать его первым, т.к. из комьюнити пути назад нет
 	- простановка копирайтов
 	- проверка пустых ява доков
+	- создание ява доков
 	- создание артефакта для мавна
 
 === servlet-and-jdbc ===
@@ -51,14 +52,13 @@
 		- Engine
 			- getConfig
 			- setContextObjects
+			- Java Bean methods
 		- ContextService
 		- DeployService
 		- InvocationService
 		- ConfigSerivce
 		- ConfigKey
-	extra:	
-		- проект с примерами кода
-		- генерация ява дока
+		- search code for more
 	- html дока - введение
 	- html дока - частые действия
 	- доступ к конфиг сервайсу в хендлере
