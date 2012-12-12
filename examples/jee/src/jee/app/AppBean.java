@@ -32,7 +32,7 @@ public class AppBean extends ActionServiceBean implements App {
 		
 		//init
 		engine.addToContext(storage);
-		engine.scanPackageForAnnotations(App.class);
+		engine.scanForAnnotations(App.class);
 		engine.setConfig(TraceHandlers.class, true);
 		
 		//invoke actions

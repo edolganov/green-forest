@@ -66,21 +66,11 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		logMappingSingle("PUT FILTER:", clazz, null);
 	}
 	
-	@Override
-	public void scanPackageForAnnotations(Object obj){
-		scanForAnnotations(obj.getClass().getPackage());
-	}
 	
 	@Override
-	public void scanPackageForAnnotations(Class<?> clazz){
-		scanForAnnotations(clazz.getPackage());
+	public void scanForAnnotations(Class<?> clazz){
+		scanForAnnotations(clazz.getPackage().getName());
 	}
-	
-	@Override
-	public void scanForAnnotations(Package pckg) {
-		scanForAnnotations(pckg.getName());
-	}
-	
 
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })

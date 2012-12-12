@@ -38,7 +38,7 @@ public class StorageBean extends ActionServiceBean implements Storage {
 		engine.addToContext(entityManager);
 		engine.addToContext(sessionContext);
 		engine.putFilter(SimpleTransactionManager.class);
-		engine.scanPackageForAnnotations(this);
+		engine.scanForAnnotations(this.getClass());
 		
 		return engine;
 	}
