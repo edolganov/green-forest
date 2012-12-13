@@ -30,38 +30,19 @@
 *	- java-doc к основным интерфейсам
 	done:
 		- Engine
-			- some methods
-			- addToContext
-			- scanForAnnotations
-				- note about config scanner
-				- ClassScanner
-		- NotOneHandlerException
-		- NoMappingAnnotationException
-		- Action
-		- Handler
-		- Mapping
-		- InvocationObject
-		- Interceptor
-		- MappingObject
-		- InterceptorChain
-		- Order
-		- Filter
-		- FilterChain
-		- Inject
+			- getConfig
 	todo:
 		- Engine
-			- getConfig
 			- setContextObjects
 			- Java Bean methods
+		- ConfigKey
+		- ConfigSerivce
 		- ContextService
 		- DeployService
 		- InvocationService
-		- ConfigSerivce
-		- ConfigKey
 		- search code for more
 	- html дока - введение
 	- html дока - частые действия
-*	- доступ к конфиг сервайсу в хендлере
 	- добавление объектов хендлеров вместо типов
 	- удаление хендлеров
 	- стейтлесс объекты
@@ -86,6 +67,27 @@ _____________________
 
 
 === core ===
+	- java-doc к основным интерфейсам
+		- Engine
+			- some methods
+			- addToContext
+			- scanForAnnotations
+				- note about config scanner
+				- ClassScanner
+		- NotOneHandlerException
+		- NoMappingAnnotationException
+		- Action
+		- Handler
+		- Mapping
+		- InvocationObject
+		- Interceptor
+		- MappingObject
+		- InterceptorChain
+		- Order
+		- Filter
+		- FilterChain
+		- Inject
+	- доступ к конфиг сервайсу в хендлере
 	- подключение сканнера классов через конфиг
 		- тест core
 		- тест jee

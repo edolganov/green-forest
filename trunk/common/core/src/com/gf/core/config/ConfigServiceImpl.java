@@ -10,6 +10,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import com.gf.config.ConfigKey;
 import com.gf.core.config.converter.AbstractConverter;
 import com.gf.core.config.converter.ConfigKeyConverters;
+import com.gf.exception.config.EmptyClassException;
+import com.gf.exception.config.GetConfigValueException;
+import com.gf.exception.config.ParsePropertiesException;
 import com.gf.service.ConfigService;
 import com.gf.util.Util;
 
@@ -45,7 +48,10 @@ public class ConfigServiceImpl implements ConfigService {
 	
 	@Override
 	public <T> void setConfig(Class<? extends ConfigKey<T>> keyType, T value){
-		Util.checkArgumentForEmpty(keyType, "type is null");
+		
+		if(keyType == null){
+			throw new EmptyClassException();
+		}
 		
 		writeLock.lock();
 		try {
@@ -84,7 +90,7 @@ public class ConfigServiceImpl implements ConfigService {
 		try {
 			valueType = (Class<?>)((ParameterizedType) keyType.getGenericSuperclass()).getActualTypeArguments()[0];
 		}catch (Exception e) {
-			throw new IllegalStateException("can't get value type from ["+keyType.getName()+"]", e);
+			throw new ParsePropertiesException("can't get value type from ["+keyType.getName()+"]", e);
 		}
 		
 		AbstractConverter<?> converter = converters.get(valueType);
@@ -123,7 +129,7 @@ public class ConfigServiceImpl implements ConfigService {
 				T out = (T) value;
 				return out;
 			}catch (Exception e) {
-				throw new IllegalStateException("can't converting value to valid type for key ["+type.getName()+"]", e);
+				throw new GetConfigValueException("can't converting value to valid type for key ["+type.getName()+"]", e);
 			}
 			
 		} else {
@@ -131,10 +137,10 @@ public class ConfigServiceImpl implements ConfigService {
 				try {
 					return key.getDefaultValue();
 				} catch (Exception e) {
-					throw new IllegalStateException("can't get default value for key ["+type.getName()+"]", e);
+					throw new GetConfigValueException("can't get default value for key ["+type.getName()+"]", e);
 				}
 			} else {
-				throw new IllegalStateException("unknown key ["+type.getName()+"]");
+				throw new GetConfigValueException("unknown key ["+type.getName()+"]");
 			}
 		}
 	}

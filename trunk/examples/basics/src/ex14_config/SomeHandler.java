@@ -12,8 +12,8 @@ public class SomeHandler extends Handler<SomeAction>{
 	@Override
 	public void invoke(SomeAction action) throws Exception {
 		
-		String input = action.input();
-		action.setOutput(input);
+		String value = config.getConfig(new SomeConfigKey());
+		log.info(value);
 		
 	}
 
