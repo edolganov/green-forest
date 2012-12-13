@@ -9,6 +9,7 @@ import com.gf.Action;
 import com.gf.Filter;
 import com.gf.Handler;
 import com.gf.Interceptor;
+import com.gf.InvocationObject;
 import com.gf.MappingObject;
 import com.gf.annotation.Inject;
 import com.gf.core.action.reader.InvocationReaderImpl;
@@ -41,42 +42,37 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	
 	
 	public void initMappingObject(MappingObject ob){
-		
-		injectAllContexts(ob);
+		init(ob);
 		ob.setInvocation(this);
-		setInvocationReader(ob);
 	}
 
 	public void initFilter(Filter ob){
-		
-		injectAllContexts(ob);
-		setInvocationContext(ob);
-		setInvocationReader(ob);
-		
-	}
-
-	private void setInvocationContext(Filter ob) {
+		init(ob);
 		ob.setInvocationContext(this);
 	}
+
+	private void init(InvocationObject obj) {
+		
+		//context
+		Collection<Object> invocationContextObjects = invocationContext.getAll();
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.addAll(invocationContextObjects);
+		list.addAll(staticContextObjects);
+		inject(obj, list);
+		
+		//config
+		obj.setConfigService(config);
+		
+		//extra
+		setInvocationReader(obj);
+		
+	}
 	
-	
-	private void setInvocationReader(Object ob) {
+	private void setInvocationReader(InvocationObject ob) {
 		if(ob instanceof HasInvocationReader){
 			InvocationReader reader = new InvocationReaderImpl(this, ob);
 			((HasInvocationReader)ob).setInvocationReader(reader);
 		}
-	}
-
-	private void injectAllContexts(Object obj) {
-		
-		Collection<Object> invocationContextObjects = invocationContext.getAll();
-		
-		ArrayList<Object> list = new ArrayList<Object>();
-		list.addAll(invocationContextObjects);
-		list.addAll(staticContextObjects);
-
-		inject(obj, list);
-		
 	}
 
 	

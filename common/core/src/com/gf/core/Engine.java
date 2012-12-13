@@ -270,6 +270,17 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.setScanForAnnotations(packageNames);
 	}
+	
+	
+	/**
+	 * Set config value by key type. You can create own config keys for using in handlers.
+	 * <p>Example of
+	 * @see ConfigKey
+	 */
+	@Override
+	public <T> void setConfig(Class<? extends ConfigKey<T>> keyType, T value) {
+		config.setConfig(keyType, value);
+	}
 
 	@Override
 	public <T> T getConfig(ConfigKey<T> key) {
@@ -283,10 +294,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	}
 
 
-	@Override
-	public <T> void setConfig(Class<? extends ConfigKey<T>> keyType, T value) {
-		config.setConfig(keyType, value);
-	}
+
 	
 	@Override
 	public void setConfigValues(Properties props) {
