@@ -350,6 +350,8 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 *     
 	 * engine.getConfig(new OtherConfigKey()); //<---------- get GetConfigValueException
 	 * </pre>
+	 * 
+	 * @see ConfigKey
 	 */
 	@Override
 	public <T> T getConfig(ConfigKey<T> key) throws GetConfigValueException {
@@ -359,6 +361,8 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	/**
 	 * Get boolean value of <tt>Boolean</tt> config key. If value is <tt>null</tt> return false.
 	 * Anolog of {@link #getConfig(ConfigKey)}: <tt>Boolean.TRUE.equals(getConfig(key))</tt>
+	 * 
+	 * @see ConfigKey
 	 */
 	@Override
 	public boolean isTrueConfig(ConfigKey<Boolean> key) throws GetConfigValueException {
@@ -402,6 +406,8 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 *     &lt;/property&gt;
 	 *   &lt;/bean&gt;
 	 * </pre>
+	 * 
+	 * @see ConfigKey
 	 */
 	@Override
 	public void setConfigValues(Properties props) throws ParsePropertiesException {
