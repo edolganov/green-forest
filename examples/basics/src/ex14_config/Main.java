@@ -10,6 +10,7 @@ public class Main {
 		
 		Engine engine = new Engine();
 		engine.putHandler(SomeHandler.class);
+		engine.setConfig(SomeConfigKey.class, "some value");
 		engine.invoke(new SomeAction());
 	}
 

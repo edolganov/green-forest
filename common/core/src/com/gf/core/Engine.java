@@ -16,6 +16,9 @@ import com.gf.core.context.StaticContext;
 import com.gf.core.deploy.DeployServiceImpl;
 import com.gf.core.deploy.ResourseService;
 import com.gf.exception.ExceptionWrapper;
+import com.gf.exception.config.EmptyClassException;
+import com.gf.exception.config.GetConfigValueException;
+import com.gf.exception.config.ParsePropertiesException;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
 import com.gf.exception.invoke.InvocationException;
@@ -274,30 +277,134 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	
 	/**
 	 * Set config value by key type. You can create own config keys for using in handlers.
-	 * <p>Example of
+	 * <br>Example of using:
+	 * <pre>
+	 * //key
+	 * public class SomeConfigKey extends ConfigKey&lt;String&gt;{
+	 * 
+	 *   public boolean hasDefaultValue() {
+	 *     return true;
+	 *   }
+	 *   
+	 *   public String getDefaultValue() throws Exception {
+	 *     return "some default value";
+	 *   }
+	 * }
+	 * 
+	 * //handler
+	 * &#064;Mapping(SomeAction.class)
+	 * public class SomeHandler extends Handler&lt;SomeAction&gt;{
+	 * 
+	 *   public void invoke(SomeAction action) throws Exception {
+	 *     String value = config.getConfig(new SomeConfigKey());
+	 *     log.info(value);
+	 *   }
+	 * }
+	 * 
+	 * //engine
+	 * Engine engine = new Engine();
+	 * engine.putHandler(SomeHandler.class);
+	 * engine.setConfig(SomeConfigKey.class, "some value");
+	 * engine.invoke(new SomeAction());
+	 * </pre>
 	 * @see ConfigKey
 	 */
 	@Override
-	public <T> void setConfig(Class<? extends ConfigKey<T>> keyType, T value) {
+	public <T> void setConfig(Class<? extends ConfigKey<T>> keyType, T value) throws EmptyClassException {
 		config.setConfig(keyType, value);
 	}
-
+	
+	/**
+	 * Get config value or default value or exception if key doesn't have default value.
+	 * <br>Example:
+	 * <pre>
+	 * //key with default value
+	 * public class SomeConfigKey extends ConfigKey&lt;String&gt;{
+	 * 
+	 *   public boolean hasDefaultValue() {
+	 *     return true;
+	 *   }
+	 *   
+	 *   public String getDefaultValue() throws Exception {
+	 *     return "some default value";
+	 *   }
+	 * }
+	 * 
+	 * //key without default value
+	 * public class OtherConfigKey extends ConfigKey&lt;String&gt;{
+	 * 
+	 *   public boolean hasDefaultValue() {
+	 *     return false;
+	 *   }
+	 * }
+	 * 
+	 * //engine
+	 * Engine engine = new Engine();
+	 * 
+	 * String val1 = engine.getConfig(new SomeConfigKey());
+	 * System.out.println(val1); //<--------- print "some default value"
+	 *     
+	 * engine.setConfig(SomeConfigKey.class, "some value");
+	 * String val2 = engine.getConfig(new SomeConfigKey());
+	 * System.out.println(val2); //<--------- print "some value"
+	 *     
+	 * engine.getConfig(new OtherConfigKey()); //<---------- get GetConfigValueException
+	 * </pre>
+	 */
 	@Override
-	public <T> T getConfig(ConfigKey<T> key) {
+	public <T> T getConfig(ConfigKey<T> key) throws GetConfigValueException {
 		return (T) config.getConfig(key);
 	}
 
-
+	/**
+	 * Get boolean value of <tt>Boolean</tt> config key. If value is <tt>null</tt> return false.
+	 * Anolog of {@link #getConfig(ConfigKey)}: <tt>Boolean.TRUE.equals(getConfig(key))</tt>
+	 */
 	@Override
-	public boolean isTrueConfig(ConfigKey<Boolean> key) {
+	public boolean isTrueConfig(ConfigKey<Boolean> key) throws GetConfigValueException {
 		return config.isTrueConfig(key);
 	}
-
-
-
 	
+	/**
+	 * Parse config values from Properties. Key must be a config key's <tt>Class</tt> string.
+	 * <br> Analog of multi call of {@link #setConfig(Class, Object)}.
+	 * For example:
+	 * <pre>
+	 * //file config.properties
+	 * some.package.SomeConfigKey=value 1
+	 * some.package.OtherConfigKey=value 2
+	 * com.gf.key.TraceHandlers=true 
+	 * 
+	 * //props
+	 * InputStream is = getResourceAsStream("config.properties");
+	 * Properties props = new Properties();
+	 * props.load(is);
+	 * 
+	 * //engine
+	 * Engine engine = new Engine();
+	 * engine.setConfigValues(props);
+	 * String val1 = engine.getConfig(new SomeConfigKey());
+	 * String val2 = engine.getConfig(new OtherConfigKey());
+	 * boolean val3 = engine.isTrueConfig(new TraceHandlers());
+	 * System.out.println(val1); //print "value 1"
+	 * System.out.println(val2); //print "value 2"
+	 * System.out.println(val3); //print "true"
+	 * </pre>
+	 * 
+	 * <p>Can use for JavaBean logic (in Spring's xml for example).
+	 * <p>Spring xml example:
+	 * <pre>
+	 *   &lt;bean id="appEngine" class="com.gf.core.Engine"&gt;
+	 *     &lt;property name="configValues"&gt;
+	 *       &lt;props&gt;
+	 *         &lt;prop key="com.gf.key.TraceHandlers"&gt;true&lt;/prop&gt;
+	 *       &lt;/props&gt;
+	 *     &lt;/property&gt;
+	 *   &lt;/bean&gt;
+	 * </pre>
+	 */
 	@Override
-	public void setConfigValues(Properties props) {
+	public void setConfigValues(Properties props) throws ParsePropertiesException {
 		config.setConfigValues(props);
 	}
 	
