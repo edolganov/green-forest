@@ -15,7 +15,7 @@ public abstract class MappingObject extends InvocationObject {
 	private InvocationService invocation;
 	
 	/**
-	 * sub invoke the action.
+	 * Sub invoke the action.
 	 * <p>Interceptors and Handlers can call <tt>subInvoke</tt> method.
 	 * <br>In this case the order of processing:
 	 * <ul>
