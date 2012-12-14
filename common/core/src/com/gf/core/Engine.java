@@ -297,6 +297,9 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * engine.setConfig(SomeConfigKey.class, "some value");
 	 * engine.invoke(new SomeAction());
 	 * </pre>
+	 * @param keyType not null type
+	 * @param value some value for this config type (can be null)
+	 * @throws EmptyClassException if <tt>keyType</tt> is null
 	 * @see ConfigKey
 	 */
 	@Override
@@ -361,8 +364,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	
 	/**
 	 * Parse config values from Properties. Key must be a config key's <tt>Class</tt> string.
-	 * <br> Analog of multi call of {@link #setConfig(Class, Object)}.
-	 * For example:
+	 * <br>For example:
 	 * <pre>
 	 * //file config.properties
 	 * some.package.SomeConfigKey=value 1
