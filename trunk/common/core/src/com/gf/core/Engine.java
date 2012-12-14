@@ -250,18 +250,8 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	
 	
 	/**
-	 * For JavaBean logic (in Spring's xml for example).
-	 * <br> Analog of multi call of {@link #scanForAnnotations(String)}.
-	 * <p>Spring xml example:
-	 * <pre>
-	 *   &lt;bean id="appEngine" class="com.gf.core.Engine"&gt;
-	 *     &lt;property name="scanForAnnotations"&gt;
-	 *       &lt;list&gt;
-	 *         &lt;value&gt;some.package&lt;/value&gt;
-	 *       &lt;/list&gt;
-	 *     &lt;/property&gt;
-	 *   &lt;/bean&gt;
-	 * </pre>
+	 * Analog of multi call of {@link #scanForAnnotations(String)}.
+	 * For example for JavaBean logic.
 	 * 
 	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
 	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
@@ -395,18 +385,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * System.out.println(val3); //print "true"
 	 * </pre>
 	 * 
-	 * <p>Can use for JavaBean logic (in Spring's xml for example).
-	 * <p>Spring xml example:
-	 * <pre>
-	 *   &lt;bean id="appEngine" class="com.gf.core.Engine"&gt;
-	 *     &lt;property name="configValues"&gt;
-	 *       &lt;props&gt;
-	 *         &lt;prop key="com.gf.key.TraceHandlers"&gt;true&lt;/prop&gt;
-	 *       &lt;/props&gt;
-	 *     &lt;/property&gt;
-	 *   &lt;/bean&gt;
-	 * </pre>
-	 * 
 	 * @see ConfigKey
 	 */
 	@Override
@@ -455,23 +433,39 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 		context.addToContext(object);
 	}
 	
+	/**
+	 * Analog of multi call of {@link #addToContext(Object)}.
+	 * For example for JavaBean logic.
+	 */
 	@Override
 	public void setContextObjects(Collection<Object> objects) {
 		context.setContextObjects(objects);
 	}
 
+	/**
+	 * Analog of multi call of {@link #putHandler(Class)}.
+	 * For example for JavaBean logic.
+	 */
 	@Override
 	public void setHandlerTypes(Collection<Class<? extends Handler<?>>> handlerTypes)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.setHandlerTypes(handlerTypes);
 	}
 
+	/**
+	 * Analog of multi call of {@link #putInterceptor(Class)}.
+	 * For example for JavaBean logic.
+	 */
 	@Override
 	public void setInterceptorTypes(Collection<Class<? extends Interceptor<?>>> interceptorTypes)
 			throws NoMappingAnnotationException{
 		deploy.setInterceptorTypes(interceptorTypes);
 	}
 
+	/**
+	 * Analog of multi call of {@link #putFilter(Class)}.
+	 * For example for JavaBean logic.
+	 */
 	@Override
 	public void setFilterTypes(Collection<Class<? extends Filter>> filterTypes) {
 		deploy.setFilterTypes(filterTypes);

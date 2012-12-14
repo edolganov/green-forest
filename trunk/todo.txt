@@ -31,15 +31,15 @@
 	done:
 		- Engine
 			- getConfig
-	todo:
-		- Engine
 			- setContextObjects
 			- Java Bean methods
+	todo:
 		- ConfigKey
 		- ConfigSerivce
 		- ContextService
 		- DeployService
 		- InvocationService
+		- Exceptions
 		- search code for more
 	- html дока - введение
 	- html дока - частые действия
