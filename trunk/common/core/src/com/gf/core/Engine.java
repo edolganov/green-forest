@@ -132,7 +132,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * @throws InvocationException <tt>Engine</tt>'s processing exception
 	 * @throws ExceptionWrapper wrapper of non-runtime <tt>Exception</tt> from handler's body
 	 * @throws RuntimeException runtime <tt>Exception</tt> from handler's body
-	 * @see Engine#invokeUnwrap(Action)
+	 * @see #invokeUnwrap(Action)
 	 * @see Action
 	 * @see Handler
 	 * @see Interceptor
@@ -171,7 +171,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * engine.invoke(new SomeAction()); //throws ExceptionWrapper
 	 * </pre>
 	 * 
-	 * @see Engine#invoke(Action)
+	 * @see #invoke(Action)
 	 */
 	@Override
 	public <I, O> O invokeUnwrap(Action<I, O> action) 
