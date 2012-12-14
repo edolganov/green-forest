@@ -27,24 +27,16 @@
 
 
 === core ===
-*	- java-doc к основным интерфейсам
-	done:
-		- Engine
-			- getConfig
-			- setContextObjects
-			- Java Bean methods
-		- ConfigKey
-		- ConfigSerivce
-		- ContextService
-		- DeployService
-		- InvocationService
-		- ActionService
-	todo:
-		- ActionServiceSingleton *
-		- Exceptions
-		- search code for more
 	- html дока - введение
 	- html дока - частые действия
+	- ява-доки:
+		- com.gf.common 
+		- com.gf.config
+		- com.gf.exception
+		- com.gf.extra
+		- com.gf.key
+		- com.gf.log
+		- InvocationContextService
 	- добавление объектов хендлеров вместо типов
 	- удаление хендлеров
 	- стейтлесс объекты
@@ -55,7 +47,15 @@
 	
 === components ===
 	- конфиг UserTransactionFilter
-	
+	- ява-доки:
+		- jdbc
+		- transactions
+		- atomikos
+		- mybatis
+		- logging-apache-commons
+		- jee
+		- reflections
+	- logging-slf4j
 	
 	
 	
@@ -71,11 +71,20 @@ _____________________
 === core ===
 	- java-doc к основным интерфейсам
 		- Engine
+			- getConfig
+			- setContextObjects
+			- Java Bean methods
 			- some methods
 			- addToContext
 			- scanForAnnotations
 				- note about config scanner
 				- ClassScanner
+		- ConfigKey
+		- ConfigSerivce
+		- ContextService
+		- DeployService
+		- InvocationService
+		- ActionService
 		- NotOneHandlerException
 		- NoMappingAnnotationException
 		- Action
