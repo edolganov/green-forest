@@ -35,9 +35,9 @@
 			- Java Bean methods
 		- ConfigKey
 		- ConfigSerivce
-	todo:
 		- ContextService
 		- DeployService
+	todo:
 		- InvocationService
 		- Exceptions
 		- search code for more

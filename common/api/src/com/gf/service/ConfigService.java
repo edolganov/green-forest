@@ -12,6 +12,7 @@ import com.gf.exception.config.ParsePropertiesException;
  * Main implementaion is {@link com.gf.core.Engine}.
  *
  * @author Evgeny Dolganov
+ * @see ConfigKey
  * @see com.gf.core.Engine
  */
 public interface ConfigService {
