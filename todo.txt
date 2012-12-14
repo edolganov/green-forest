@@ -38,7 +38,9 @@
 		- ContextService
 		- DeployService
 		- InvocationService
+		- ActionService
 	todo:
+		- ActionServiceSingleton *
 		- Exceptions
 		- search code for more
 	- html дока - введение
