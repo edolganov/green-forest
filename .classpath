@@ -16,6 +16,8 @@
 	<classpathentry kind="src" path="components/mybatis/test-src"/>
 	<classpathentry kind="src" path="components/logging-apache-commons/src"/>
 	<classpathentry kind="src" path="components/logging-apache-commons/test-src"/>
+	<classpathentry kind="src" path="components/logging-slf4j/src"/>
+	<classpathentry kind="src" path="components/logging-slf4j/test-src"/>
 	<classpathentry kind="src" path="components/jee/src"/>
 	<classpathentry kind="src" path="components/jee/test-src"/>
 	<classpathentry kind="src" path="components/reflections/src"/>
