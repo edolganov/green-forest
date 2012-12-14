@@ -33,9 +33,9 @@
 			- getConfig
 			- setContextObjects
 			- Java Bean methods
-	todo:
 		- ConfigKey
 		- ConfigSerivce
+	todo:
 		- ContextService
 		- DeployService
 		- InvocationService
