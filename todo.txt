@@ -6,12 +6,10 @@
 	- статья на инглиш аналоге хабра
 
 === релиз 0.9 ===
-	- сборка
-*		- создание сборки 0.9
-			- gf-0.9-javadoc.jar
-			- gf-0.9-sources.jar
-			- gf-0.9.jar
-			- gf-0.9-all.zip
+*	- logging-slf4j
+*	- сборка исходников gf-0.9-javadoc.jar
+*	- сборка javadoc gf-0.9-sources.jar
+	- сборка all
 	- логотип
 	- доки
 		- основная страница
@@ -25,6 +23,10 @@
 		- поиск "создание мавен репозитория"
 		- поиск "интеграция в центральные репозитории"
 			- пример http://repo1.maven.org/maven2/org/reflections/reflections/0.9.8/
+			- guide: https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+				- раздел "7c. Deploy Snapshots and Stage Releases with Ant"
+			- guide: http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+				- http://stackoverflow.com/questions/8331209/how-to-add-own-project-to-public-maven-repository
 	- кнопка донате как у http://code.google.com/p/reflections/
 	- update changelog
 
@@ -76,6 +78,7 @@
 _____________________
 
 === релиз 0.9 ===
+	- создание сборки с простановкой 0.9
 	- файл changelog.txt
 		- пример http://code.google.com/p/tortoisegit/source/browse/src/Changelog.txt
 	- посмотреть как проставляется в спринге

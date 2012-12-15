@@ -36,6 +36,11 @@
         <jar jarfile="${module.dist.dir}/${module.name}-${global.version}.jar">
             <fileset dir="${module.build.dir}"/>
         </jar>
+		
+		<javadoc sourcepath="${module.src.dir}" destdir="${build.dir}/javadoc-files"/>
+        <jar jarfile="${module.dist.dir}/javadoc/${module.name}-${global.version}-javadoc.jar">
+            <fileset dir="${build.dir}/javadoc-files"/>
+        </jar>
     </target>
 
 </project>
