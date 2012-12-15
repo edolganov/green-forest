@@ -1,0 +1,37 @@
+= Version 0.9.1 =
+Released: unreleased
+
+== Features ==
+ - register handler objects (not only types)
+ - stateless handlers
+ - removing handlers
+
+== Bug Fix ==
+ - none
+  
+== Known Issue ==
+ - none
+
+
+= Version 0.9 =
+Released: unreleased
+
+== Features ==
+ - engine
+ - integration with atomikos
+ - integration with jdbc
+ - integration with jee
+ - integration with logging-apache-commons
+ - integration with mybatis
+ - integration with reflections
+ - integration with transactions
+ - "green-forest & servlet & jdbc" example (war)
+ - "green-forest & spring & mybatis" example (war)
+ - "green-forest & jee" example (war)
+ - reference guide
+  
+== Bug Fix ==
+ - none
+  
+== Known Issue ==
+ - none
