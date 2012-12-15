@@ -1,0 +1,2 @@
+Copyright (C) 2012
+Evgeny Dolganov <evgenij.dolganov@gmail.com> and contributors
