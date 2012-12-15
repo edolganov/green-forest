@@ -21,7 +21,8 @@ Released: unreleased
  - integration with atomikos
  - integration with jdbc
  - integration with jee
- - integration with logging-apache-commons
+ - integration with commons-logging
+ - integration with commons-slf4j
  - integration with mybatis
  - integration with reflections
  - integration with transactions
