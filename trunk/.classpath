@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="common/utils/src"/>
+	<classpathentry kind="src" path="tools/copyright-setter"/>
 	<classpathentry kind="src" path="common/utils/test-src"/>
 	<classpathentry kind="src" path="common/api/src"/>
 	<classpathentry kind="src" path="common/api/test-src"/>

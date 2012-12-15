@@ -91,9 +91,9 @@ public class CopyrightSetter {
 			
 			String header = copyrightText;
 			String body = oldContent.toString();
-			if(body.endsWith("\n")){
-				body = body.substring(0, body.length()-1);
-			}
+			//if(body.endsWith("\n")){
+			//	body = body.substring(0, body.length()-1);
+			//}
 			
 			File bakFile = new File(file.getParent(),file.getName()+".BAK");
 			boolean backuped = file.renameTo(bakFile);
