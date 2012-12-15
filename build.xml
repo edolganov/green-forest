@@ -10,7 +10,7 @@
 		<ant antfile="./components/transactions/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/atomikos/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false" target="clean"/>
-		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="clean"/>
+		<!--<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="clean"/>-->
 		<ant antfile="./components/mybatis/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/jee/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/reflections/build.xml" inheritAll="false" target="clean"/>
@@ -26,7 +26,7 @@
 		<ant antfile="./components/transactions/build.xml" inheritAll="false"/>
 		<ant antfile="./components/atomikos/build.xml" inheritAll="false"/>
 		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false"/>
-		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false"/>
+		<!--<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false"/>-->
 		<ant antfile="./components/mybatis/build.xml" inheritAll="false"/>
 		<ant antfile="./components/jee/build.xml" inheritAll="false"/>
 		<ant antfile="./components/reflections/build.xml" inheritAll="false"/>
@@ -47,7 +47,7 @@
 			<fileset dir="./components/transactions/build" includes="*.jar"/>
 			<fileset dir="./components/atomikos/build" includes="*.jar"/>
 			<fileset dir="./components/logging-apache-commons/build" includes="*.jar"/>
-			<fileset dir="./components/logging-slf4j/build" includes="*.jar"/>
+			<!--<fileset dir="./components/logging-slf4j/build" includes="*.jar"/>-->
 			<fileset dir="./components/mybatis/build" includes="*.jar"/>
 			<fileset dir="./components/jee/build" includes="*.jar"/>
 			<fileset dir="./components/reflections/build" includes="*.jar"/>
