@@ -27,6 +27,10 @@ public class CopyrightSetter {
 
 	public static void main(String[] args) throws Exception {
 		String root = ".";
+		if(args.length > 0){
+			root = args[0];
+		}
+		
 		File rootDir = new File(root);
 		
 		LinkedList<File> queue = new LinkedList<File>();
@@ -34,7 +38,7 @@ public class CopyrightSetter {
 			queue.addLast(rootDir);
 		}
 		
-		log("begin");
+		log("begin. \nscan dir: "+rootDir.getAbsolutePath());
 		while( ! queue.isEmpty()){
 			File dir = queue.removeFirst();
 			File[] children = dir.listFiles();
