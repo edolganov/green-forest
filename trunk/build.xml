@@ -63,6 +63,10 @@
         <jar jarfile="build/green-forest-${global.version}.jar">
             <fileset dir="build/classes"/>
         </jar>
+		
+		<copy todir="build/bin">
+			<fileset dir="build" includes="*.jar"/>
+		</copy>
 
     </target>
 	

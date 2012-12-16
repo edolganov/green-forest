@@ -8,13 +8,7 @@
     <target name="init" description="Build initialization">
         <path id="libs">
             <fileset dir="${module.third-party.dir}" includes="${module.third-party.lib}"/>
-			<fileset dir="${project.path.util}/build" includes="*.jar"/>
-			<fileset dir="${project.path.api}/build" includes="*.jar"/>
-			<fileset dir="${project.path.core}/build" includes="*.jar"/>
-			<fileset dir="${project.path.atomikos}/build" includes="*.jar"/>
-			<fileset dir="${project.path.jdbc}/build" includes="*.jar"/>
-			<fileset dir="${project.path.logging-apache-commons}/build" includes="*.jar"/>
-			<fileset dir="${project.path.transactions}/build" includes="*.jar"/>
+			<fileset dir="${project.path.gf}/build/bin" includes="*.jar"/>
         </path>
     </target>
 
