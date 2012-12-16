@@ -1,4 +1,4 @@
-<project name="common-utils" default="deploy" basedir=".">
+<project name="common-api" default="deploy" basedir=".">
 
     <target name="init" description="Build initialization">
 		<property file="../../build.properties"/>
@@ -37,11 +37,20 @@
             <fileset dir="${module.build.dir}"/>
         </jar>
 		
-		<javadoc sourcepath="${module.src.dir}" destdir="${build.dir}/javadoc-files"/>
-        <jar jarfile="${module.dist.dir}/javadoc/${module.name}-${global.version}-javadoc.jar">
-            <fileset dir="${build.dir}/javadoc-files"/>
-        </jar>
     </target>
+	
+	<!-- addititon artifacts -->
+    <target name="full-deploy" depends="deploy">
+		<javadoc sourcepath="${module.src.dir}" destdir="${build.dir}/javadoc-files">
+			<classpath refid="libs"/>
+		</javadoc>
+		<jar jarfile="${module.dist.dir}/javadoc/${module.name}-${global.version}-javadoc.jar">
+			<fileset dir="${build.dir}/javadoc-files"/>
+		</jar>
+		<jar jarfile="${module.dist.dir}/sources/${module.name}-${global.version}-sources.jar">
+			<fileset dir="${module.src.dir}"/>
+		</jar>
+	</target>
 
 </project>
 
