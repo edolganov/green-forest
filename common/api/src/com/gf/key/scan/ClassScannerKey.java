@@ -16,6 +16,7 @@
 package com.gf.key.scan;
 
 import com.gf.config.ConfigKey;
+import com.gf.extra.components.ComponentChecker;
 import com.gf.extra.scan.ClassScanner;
 
 /**
@@ -34,22 +35,23 @@ public class ClassScannerKey extends ConfigKey<Class<?>>{
 	@Override
 	public Class<?> getDefaultValue() throws Exception {
 		
+		Class<?> scannerClass = null;
+		
 		//ReflectionsScanner
-		try {
-			return Class.forName("com.gf.components.reflections.ReflectionsScanner");
-		}catch (ClassNotFoundException e) {
-			//nothing
+		if(scannerClass == null){
+			scannerClass = ComponentChecker.findAndCheckBy("com.gf.components.reflections.ReflectionsChecker");
 		}
 		
 		//DefaultClassScanner
-		try {
-			return Class.forName("com.gf.core.scan.DefaultClassScanner");
-		}catch (Exception e) {
-			//nothing
+		if(scannerClass == null){
+			try {
+				scannerClass = Class.forName("com.gf.core.scan.DefaultClassScanner");
+			}catch (Exception e) {
+				throw new IllegalStateException("can't find any default implementation of "+ClassScanner.class, e);
+			}
 		}
 		
-		throw new IllegalStateException("can't find any default implementation of "+ClassScanner.class);
-		
+		return scannerClass;
 		
 	}
 

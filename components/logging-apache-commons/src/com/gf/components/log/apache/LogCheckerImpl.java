@@ -15,25 +15,18 @@
  */
 package com.gf.components.log.apache;
 
-import com.gf.log.LogChecker;
+import com.gf.extra.components.ComponentChecker;
 
-public class LogCheckerImpl implements LogChecker {
+public class LogCheckerImpl extends ComponentChecker {
 
 	@Override
 	public boolean isValid() {
-		
-		try {
-			Class.forName("org.apache.commons.logging.LogFactory");
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+		return exists("org.apache.commons.logging.LogFactory");
 	}
 
 	@Override
-	public String getProviderClass() {
-		String packageName = this.getClass().getPackage().getName();
-		return packageName+".ApacheLogProvider";
+	public String getComponentClass() {
+		return getWithCurrentPackage("ApacheLogProvider");
 	}
 
 }
