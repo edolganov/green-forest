@@ -13,12 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gf.log;
+package com.gf.components.reflections;
 
-public interface LogChecker {
-	
-	public boolean isValid();
-	
-	public String getProviderClass();
+import com.gf.extra.components.ComponentChecker;
+
+public class ReflectionsChecker extends ComponentChecker {
+
+	@Override
+	public boolean isValid() {
+		return exists("org.reflections.Reflections");
+	}
+
+	@Override
+	public String getComponentClass() {
+		return getWithCurrentPackage("ReflectionsScanner");
+	}
 
 }

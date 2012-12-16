@@ -21,11 +21,9 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import com.gf.exception.InvalidStateException;
+import com.gf.extra.components.ComponentChecker;
 
 public class LogFactory {
-	
-	private static final String APACHE_LOG_CHECKER = "com.gf.components.log.apache.LogCheckerImpl";
-	private static final String SLF4J_LOG_CHECKER = "com.gf.components.log.slf4j.LogCheckerImpl";
 	
 	private static final LogProvider provider = findProvider();
 	
@@ -48,11 +46,11 @@ public class LogFactory {
 		Class<?> providerClass = null;
 		
 		if(providerClass == null){
-			providerClass = findProvider(APACHE_LOG_CHECKER);
+			providerClass = ComponentChecker.findAndCheckBy("com.gf.components.log.apache.LogCheckerImpl");
 		}
 		
 		if(providerClass == null){
-			providerClass = findProvider(SLF4J_LOG_CHECKER);
+			providerClass = ComponentChecker.findAndCheckBy("com.gf.components.log.slf4j.LogCheckerImpl");
 		}
 		
 		if(providerClass == null){
@@ -60,25 +58,6 @@ public class LogFactory {
 		}
 		
 		return providerClass;
-	}
-
-	private static Class<?> findProvider(String logCheckerClass) {
-		
-		try {
-			
-			LogChecker logChecker = (LogChecker)Class.forName(logCheckerClass).newInstance();
-			boolean valid = logChecker.isValid();
-			if( ! valid){
-				return null;
-			}
-			
-			String providerClass = logChecker.getProviderClass();
-			return Class.forName(providerClass);
-			
-		}catch (Exception e) {
-			//no provider
-			return null;
-		}
 	}
 
 	public static final Log getLog(Class<?> clazz) {

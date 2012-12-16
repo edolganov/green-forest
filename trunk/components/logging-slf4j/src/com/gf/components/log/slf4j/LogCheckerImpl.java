@@ -15,25 +15,19 @@
  */
 package com.gf.components.log.slf4j;
 
-import com.gf.log.LogChecker;
+import com.gf.extra.components.ComponentChecker;
 
-public class LogCheckerImpl implements LogChecker {
+public class LogCheckerImpl extends ComponentChecker {
 
 	@Override
 	public boolean isValid() {
 		
-		try {
-			Class.forName("org.slf4j.LoggerFactory");
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+		return exists("org.slf4j.LoggerFactory");
 	}
 
 	@Override
-	public String getProviderClass() {
-		String packageName = this.getClass().getPackage().getName();
-		return packageName+".Slf4JLogProvider";
+	public String getComponentClass() {
+		return getWithCurrentPackage("Slf4JLogProvider");
 	}
 
 }
