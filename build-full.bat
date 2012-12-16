@@ -1,0 +1,1 @@
+ant -Dglobal.deploy-type=full-deploy

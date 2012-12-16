@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="icar-server" default="collect-all" basedir=".">
 
+	<property file="build.properties"/>
+
     <target name="clean-all">
         <ant antfile="./common/utils/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./common/api/build.xml" inheritAll="false" target="clean"/>
@@ -10,7 +12,7 @@
 		<ant antfile="./components/transactions/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/atomikos/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false" target="clean"/>
-		<!--<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="clean"/>-->
+		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/mybatis/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/jee/build.xml" inheritAll="false" target="clean"/>
 		<ant antfile="./components/reflections/build.xml" inheritAll="false" target="clean"/>
@@ -18,18 +20,18 @@
     </target>
 
     <target name="build-all" depends="clean-all">
-        <ant antfile="./common/utils/build.xml" inheritAll="false"/>
-		<ant antfile="./common/api/build.xml" inheritAll="false"/>
-		<ant antfile="./common/core/build.xml" inheritAll="false"/>
+        <ant antfile="./common/utils/build.xml" inheritAll="false" target="${global.deploy-type}"/>
+		<ant antfile="./common/api/build.xml" inheritAll="false" target="${global.deploy-type}"/>
+		<ant antfile="./common/core/build.xml" inheritAll="false" target="${global.deploy-type}"/>
 		
-		<ant antfile="./components/jdbc/build.xml" inheritAll="false"/>
-		<ant antfile="./components/transactions/build.xml" inheritAll="false"/>
-		<ant antfile="./components/atomikos/build.xml" inheritAll="false"/>
-		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false"/>
-		<!--<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false"/>-->
-		<ant antfile="./components/mybatis/build.xml" inheritAll="false"/>
-		<ant antfile="./components/jee/build.xml" inheritAll="false"/>
-		<ant antfile="./components/reflections/build.xml" inheritAll="false"/>
+		<ant antfile="./components/jdbc/build.xml" inheritAll="false" target="${global.deploy-type}"/>
+		<ant antfile="./components/transactions/build.xml" inheritAll="false" target="${global.deploy-type}"/>
+		<ant antfile="./components/atomikos/build.xml" inheritAll="false" target="${global.deploy-type}"/>
+		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false" target="${global.deploy-type}"/>
+		<!--<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="${global.deploy-type}"/>-->
+		<ant antfile="./components/mybatis/build.xml" inheritAll="false" target="${global.deploy-type}"/>
+		<ant antfile="./components/jee/build.xml" inheritAll="false" target="${global.deploy-type}"/>
+		<ant antfile="./components/reflections/build.xml" inheritAll="false" target="${global.deploy-type}"/>
 		
     </target>
 

@@ -1,4 +1,4 @@
-<project name="Module build" default="deploy" basedir=".">
+<project name="common-core" default="deploy" basedir=".">
 	<property file="../../build.properties"/>
     <property file="build.properties"/>
 	
@@ -42,7 +42,21 @@
         <jar jarfile="${module.dist.dir}/${module.name}-${global.version}.jar">
             <fileset dir="${module.build.dir}"/>
         </jar>
+		
     </target>
+	
+	<!-- addititon artifacts -->
+    <target name="full-deploy" depends="deploy">
+		<javadoc sourcepath="${module.src.dir}" destdir="${build.dir}/javadoc-files">
+			<classpath refid="libs"/>
+		</javadoc>
+		<jar jarfile="${module.dist.dir}/javadoc/${module.name}-${global.version}-javadoc.jar">
+			<fileset dir="${build.dir}/javadoc-files"/>
+		</jar>
+		<jar jarfile="${module.dist.dir}/sources/${module.name}-${global.version}-sources.jar">
+			<fileset dir="${module.src.dir}"/>
+		</jar>
+	</target>
 
 </project>
 
