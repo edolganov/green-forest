@@ -10,7 +10,7 @@
 		<ant antfile="./components/transactions/build.xml" inheritAll="false" target="deploy"/>
 		<ant antfile="./components/atomikos/build.xml" inheritAll="false" target="deploy"/>
 		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false" target="deploy"/>
-		<!--<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="deploy"/>-->
+		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="deploy"/>
 		<ant antfile="./components/mybatis/build.xml" inheritAll="false" target="deploy"/>
 		<ant antfile="./components/jee/build.xml" inheritAll="false" target="deploy"/>
 		<ant antfile="./components/reflections/build.xml" inheritAll="false" target="deploy"/>
@@ -38,7 +38,7 @@
 			<fileset dir="./components/transactions/src"/>
 			<fileset dir="./components/atomikos/src"/>
 			<fileset dir="./components/logging-apache-commons/src"/>
-			<!--<fileset dir="./components/logging-slf4j/src"/>-->
+			<fileset dir="./components/logging-slf4j/src"/>
 			<fileset dir="./components/mybatis/src"/>
 			<fileset dir="./components/jee/src"/>
 			<fileset dir="./components/reflections/src"/>
