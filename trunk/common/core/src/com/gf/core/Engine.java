@@ -235,8 +235,8 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * engine.invoke(new SomeAction());
 	 * </pre>
 	 * 
-	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
-	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
+	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example)
+	 * you need to setup {@link com.gf.components.reflections.ReflectionsScanner}.
 	 * Or you can use your own {@link ClassScanner}.
 	 * <p>
 	 * @param packageName root package for scan (example: "com.some.package")
@@ -252,8 +252,8 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	/**
 	 * Analog for {@link #scanForAnnotations(String)}: <tt>scanForAnnotations(clazz.getPackage().getName())</tt>
 	 * 
-	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
-	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
+	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example)
+	 * you need to setup {@link com.gf.components.reflections.ReflectionsScanner}.
 	 * Or you can use your own {@link ClassScanner}.
 	 * <p>
 	 */
@@ -268,8 +268,8 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * Analog of multi call of {@link #scanForAnnotations(String)}.
 	 * For example for JavaBean logic.
 	 * 
-	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example) 
-	 * you need to include <tt>green-forest-reflections</tt> jar (with it's dependencies) into libraries for correct work.
+	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example)
+	 * you need to setup {@link com.gf.components.reflections.ReflectionsScanner}.
 	 * Or you can use your own {@link ClassScanner}.
 	 * <p>
 	 */

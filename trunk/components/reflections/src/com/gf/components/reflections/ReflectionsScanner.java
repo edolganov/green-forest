@@ -31,6 +31,18 @@ import com.gf.log.Log;
 import com.gf.log.LogFactory;
 import com.google.common.collect.Multimap;
 
+/**
+ * Class scanner implementation.
+ * Use it for JBoss AS for example.
+ * <p>For using this component you need this additional libraries (include them into CLASSPATH):
+ * <ul>
+ * 	 <li><a href='http://code.google.com/p/reflections/'>Reflections</a></li>
+ *   <li><a href='http://code.google.com/p/guava-libraries/'>The Guava project</a></li>
+ *   <li><a href='http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/'>Javassist</a></li>
+ * </ul>
+ * @author Evgeny Dolganov
+ *
+ */
 public class ReflectionsScanner implements ClassScanner {
 	
 	static {
