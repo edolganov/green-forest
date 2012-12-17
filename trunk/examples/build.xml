@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="green-forest-examples" default="deploy" basedir=".">
+
+    <target name="deploy">
+	
+        <delete dir="build"/>
+        <mkdir dir="build"/>
+		
+		<ant antfile="./servlet-and-jdbc/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./spring-and-mybatis/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./jee/build.xml" inheritAll="false" target="deploy"/>
+		
+		
+		<mkdir dir="build/01-basics"/>
+		<copy todir="build/01-basics">
+			<fileset dir="basics/src"/>
+		</copy>
+		
+		<mkdir dir="build/02-servlet-and-jdbc"/>
+		<copy todir="build/02-servlet-and-jdbc">
+			<fileset dir="./servlet-and-jdbc/build" includes="*.war"/>
+		</copy>
+		
+		<mkdir dir="build/03-spring-and-mybatis"/>
+		<copy todir="build/03-spring-and-mybatis">
+			<fileset dir="./spring-and-mybatis/build" includes="*.war"/>
+		</copy>
+		
+		<mkdir dir="build/04-jee"/>
+		<copy todir="build/04-jee">
+			<fileset dir="./jee/build" includes="*.war"/>
+		</copy>
+
+    </target>
+	
+</project>
+

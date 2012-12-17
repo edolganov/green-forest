@@ -83,7 +83,32 @@
 		<jar jarfile="build/green-forest-${global.version}-sources.jar">
 			<fileset dir="build/src-all"/>
 		</jar>
-
+		
+		<!-- pack -->
+		<zip destfile="build/pack/green-forest-${global.version}-pack.zip" compress="false">
+			<fileset dir="build" includes="*.jar"/>
+		</zip>
+		
+		<!-- all -->
+		<ant antfile="./examples/build.xml" inheritAll="false" target="deploy"/>
+		
+		<mkdir dir="build/all-files"/>
+		<mkdir dir="build/all-files/lib"/>
+		<mkdir dir="build/all-files/examples"/>
+		
+		<copy todir="build/all-files/lib">
+			<fileset dir="build" includes="*.jar"/>
+		</copy>
+		
+		<copy todir="build/all-files/examples">
+			<fileset dir="./examples/build" />
+		</copy>
+		
+		<zip destfile="build/all/green-forest-${global.version}-all.zip" compress="true">
+			<fileset dir="build/all-files" />
+		</zip>
+		
+		
 	</target>
 </project>
 
