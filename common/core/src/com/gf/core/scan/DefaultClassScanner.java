@@ -24,7 +24,6 @@ import com.gf.extra.scan.ClassScanner;
 public class DefaultClassScanner implements ClassScanner {
 
 	
-	@Override
 	public Set<Class<?>> getClasses(String packageRoot, Class<?> parentClass) {
 		
 		ScanUtil<Class> scanUtil = new ScanUtil<Class>();

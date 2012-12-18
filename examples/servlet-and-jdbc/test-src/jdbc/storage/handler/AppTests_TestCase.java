@@ -27,12 +27,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import example.app.AbstractAppTest;
+import example.app.App;
 import example.app.AppContext;
 import example.app.AppProvider;
 import example.app.CreateDataBaseTest;
 import example.app.GetDocsCountTest;
 import example.app.GetDocsPageTest;
-import example.app.App;
 import example.app.RenameDocTest;
 import example.app.TxTest;
 
@@ -50,7 +50,6 @@ public class AppTests_TestCase {
 	public static void initProvider(){
 		AbstractAppTest.setTestContext(new AppProvider() {
 			
-			@Override
 			public AppContext createContext() throws Exception {
 				
 				String sessionId = String.valueOf(System.currentTimeMillis());

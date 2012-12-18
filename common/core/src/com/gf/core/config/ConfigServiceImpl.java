@@ -47,7 +47,6 @@ public class ConfigServiceImpl implements ConfigService {
 	
 	
 	
-	@Override
 	public void setConfigValues(Properties props){
 		if(props == null) return;
 		
@@ -61,7 +60,6 @@ public class ConfigServiceImpl implements ConfigService {
 	} 
 	
 	
-	@Override
 	public <T> void setConfig(Class<? extends ConfigKey<T>> keyType, T value){
 		
 		if(keyType == null){
@@ -116,7 +114,6 @@ public class ConfigServiceImpl implements ConfigService {
 	}
 
 
-	@Override
 	public <T> T getConfig(ConfigKey<T> key) {
 		Util.checkArgumentForEmpty(key, "key is null");
 		
@@ -128,7 +125,6 @@ public class ConfigServiceImpl implements ConfigService {
 		}
 	}
 	
-	@Override
 	public boolean isTrueConfig(ConfigKey<Boolean> key) {
 		Boolean val = getConfig(key);
 		return Boolean.TRUE.equals(val);

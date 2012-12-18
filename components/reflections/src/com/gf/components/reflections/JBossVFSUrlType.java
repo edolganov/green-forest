@@ -28,12 +28,10 @@ import org.reflections.vfs.ZipDir;
 
 public class JBossVFSUrlType implements UrlType {
 	
-	@Override
 	public boolean matches(URL url) {
         return url.getProtocol().equals("vfs");
     }
 
-    @Override
 	public Vfs.Dir createDir(URL url) {
         VirtualFile content;
         try {

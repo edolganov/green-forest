@@ -51,7 +51,6 @@ public class ReflectionsScanner implements ClassScanner {
 	
 	Log log = LogFactory.getLog(getClass());
 
-	@Override
 	public Set<Class<?>> getClasses(String packageRoot, Class<?> parentClass) {
 		
 

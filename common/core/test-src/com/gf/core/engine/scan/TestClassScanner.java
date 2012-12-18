@@ -29,7 +29,6 @@ public class TestClassScanner implements ClassScanner {
 		instanceCounter.incrementAndGet();
 	}
 
-	@Override
 	public Set<Class<?>> getClasses(String packageRoot, Class<?> parentClass) {
 		return Collections.emptySet();
 	}

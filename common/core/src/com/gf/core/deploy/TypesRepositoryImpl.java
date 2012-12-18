@@ -48,7 +48,6 @@ public class TypesRepositoryImpl implements TypesRepository {
 	private Lock readLock = rw.readLock();
 	private Lock writeLock = rw.writeLock();
 	
-	@Override
 	public Set<Class<?>> put(Class<?> handler) throws DeployException {
 		writeLock.lock();
 		try {
@@ -85,7 +84,6 @@ public class TypesRepositoryImpl implements TypesRepository {
 	}
 	
 	
-	@Override
 	public Set<Class<?>> getTypes(Class<?> target) {
 		
 		//check-create
@@ -112,7 +110,6 @@ public class TypesRepositoryImpl implements TypesRepository {
 		}
 	}
 	
-	@Override
 	public void setOneHandlerOnly(boolean val) {
 		writeLock.lock();
 		try {
@@ -129,7 +126,6 @@ public class TypesRepositoryImpl implements TypesRepository {
 	}
 
 
-	@Override
 	public boolean isOneHandlerOnly() {
 		readLock.lock();
 		try {

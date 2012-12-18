@@ -21,7 +21,6 @@ public abstract class InvocationReaderFilter extends Filter implements HasInvoca
 	
 	protected InvocationReader invocationReader;
 
-	@Override
 	public void setInvocationReader(InvocationReader invocationReader) {
 		this.invocationReader = invocationReader;
 	}

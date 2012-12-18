@@ -153,7 +153,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * @see Interceptor
 	 * @see Filter
 	 */
-	@Override
 	public <I, O> O invoke(Action<I, O> action) 
 			throws InvocationException, ExceptionWrapper, RuntimeException {
 		return (O)actions.invoke(action);
@@ -188,7 +187,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * 
 	 * @see #invoke(Action)
 	 */
-	@Override
 	public <I, O> O invokeUnwrap(Action<I, O> action) 
 			throws InvocationException, Exception {
 		return (O)actions.invokeUnwrap(action);
@@ -197,7 +195,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	/**
 	 * Put the <tt>Handler</tt> class into this <tt>Engine</tt>.
 	 */
-	@Override
 	public void putHandler(Class<? extends Handler<?>> clazz)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.putHandler(clazz);
@@ -206,7 +203,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	/**
 	 * Put the <tt>Interceptor</tt> class into this <tt>Engine</tt>.
 	 */
-	@Override
 	public void putInterceptor(Class<? extends Interceptor<?>> clazz)
 			throws NoMappingAnnotationException {
 		deploy.putInterceptor(clazz);
@@ -215,7 +211,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	/**
 	 * Put the <tt>Filter</tt> class into this <tt>Engine</tt>.
 	 */
-	@Override
 	public void putFilter(Class<? extends Filter> clazz) {
 		deploy.putFilter(clazz);
 	}
@@ -243,7 +238,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * @see ClassScanner
 	 * @see ClassScannerKey
 	 */
-	@Override
 	public void scanForAnnotations(String packageName)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.scanForAnnotations(packageName);
@@ -257,7 +251,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * Or you can use your own {@link ClassScanner}.
 	 * <p>
 	 */
-	@Override
 	public void scanForAnnotations(Class<?> clazz)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.scanForAnnotations(clazz);
@@ -273,7 +266,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * Or you can use your own {@link ClassScanner}.
 	 * <p>
 	 */
-	@Override
 	public void setScanForAnnotations(Collection<String> packageNames)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.setScanForAnnotations(packageNames);
@@ -317,7 +309,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * @throws EmptyClassException if <tt>keyType</tt> is null
 	 * @see ConfigKey
 	 */
-	@Override
 	public <T> void setConfig(Class<? extends ConfigKey<T>> keyType, T value) throws EmptyClassException {
 		config.setConfig(keyType, value);
 	}
@@ -361,7 +352,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * 
 	 * @see ConfigKey
 	 */
-	@Override
 	public <T> T getConfig(ConfigKey<T> key) throws GetConfigValueException {
 		return (T) config.getConfig(key);
 	}
@@ -372,7 +362,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * 
 	 * @see ConfigKey
 	 */
-	@Override
 	public boolean isTrueConfig(ConfigKey<Boolean> key) throws GetConfigValueException {
 		return config.isTrueConfig(key);
 	}
@@ -404,7 +393,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * 
 	 * @see ConfigKey
 	 */
-	@Override
 	public void setConfigValues(Properties props) throws ParsePropertiesException {
 		config.setConfigValues(props);
 	}
@@ -445,7 +433,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * 
 	 * @see Inject
 	 */
-	@Override
 	public void addToContext(Object object) {
 		context.addToContext(object);
 	}
@@ -454,7 +441,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * Analog of multi call of {@link #addToContext(Object)}.
 	 * For example for JavaBean logic.
 	 */
-	@Override
 	public void setContextObjects(Collection<Object> objects) {
 		context.setContextObjects(objects);
 	}
@@ -463,7 +449,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * Analog of multi call of {@link #putHandler(Class)}.
 	 * For example for JavaBean logic.
 	 */
-	@Override
 	public void setHandlerTypes(Collection<Class<? extends Handler<?>>> handlerTypes)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		deploy.setHandlerTypes(handlerTypes);
@@ -473,7 +458,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * Analog of multi call of {@link #putInterceptor(Class)}.
 	 * For example for JavaBean logic.
 	 */
-	@Override
 	public void setInterceptorTypes(Collection<Class<? extends Interceptor<?>>> interceptorTypes)
 			throws NoMappingAnnotationException{
 		deploy.setInterceptorTypes(interceptorTypes);
@@ -483,7 +467,6 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * Analog of multi call of {@link #putFilter(Class)}.
 	 * For example for JavaBean logic.
 	 */
-	@Override
 	public void setFilterTypes(Collection<Class<? extends Filter>> filterTypes) {
 		deploy.setFilterTypes(filterTypes);
 	}

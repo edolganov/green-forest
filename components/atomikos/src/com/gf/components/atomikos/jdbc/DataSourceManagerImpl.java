@@ -52,7 +52,6 @@ public class DataSourceManagerImpl implements DataSourceManager {
 		ds.close();
 	}
 
-	@Override
 	public DataSource getDataSource() {
 		return ds;
 	}

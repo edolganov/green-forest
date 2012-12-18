@@ -38,8 +38,7 @@ public class AppBean extends ActionServiceBean implements App {
 	@EJB(name="Storage")
 	Storage storage;
 	
-	
-	@Override
+
 	public ActionService createActionService() {
 		
 		//create app's engine

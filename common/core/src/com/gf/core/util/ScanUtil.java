@@ -115,7 +115,6 @@ public class ScanUtil<T> {
 		/**
 		 * Returns true if type is assignable to the parent type supplied in the constructor.
 		 */
-		@Override
 		@SuppressWarnings("unchecked")
 		public boolean matches(Class type) {
 			return type != null && parent.isAssignableFrom(type);
@@ -144,7 +143,6 @@ public class ScanUtil<T> {
 		/**
 		 * Returns true if the type is annotated with the class provided to the constructor.
 		 */
-		@Override
 		@SuppressWarnings("unchecked")
 		public boolean matches(Class type) {
 			return type != null && type.isAnnotationPresent(annotation);
@@ -327,7 +325,7 @@ public class ScanUtil<T> {
 						log.debug("Listing directory " + file.getAbsolutePath());
 						if (file.isDirectory()) {
 							children = Arrays.asList(file.list(new FilenameFilter() {
-								@Override
+								
 								public boolean accept(File dir, String name) {
 									return isRelevantResource(name);
 								}

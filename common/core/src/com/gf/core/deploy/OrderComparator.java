@@ -21,7 +21,6 @@ import com.gf.annotation.Order;
 
 public class OrderComparator implements Comparator<Object>{
 
-	@Override
 	public int compare(Object a, Object b) {
 		int aOrder = Order.DEFAULT_ORDER;
 		int bOrder = Order.DEFAULT_ORDER;

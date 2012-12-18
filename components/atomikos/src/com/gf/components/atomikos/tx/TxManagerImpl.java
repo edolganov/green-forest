@@ -37,7 +37,6 @@ public class TxManagerImpl implements TxManager {
 		utm.close();
 	}
 
-	@Override
 	public UserTransaction getUserTransaction() {
 		return new UserTransactionImp();
 	}
