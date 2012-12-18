@@ -16,10 +16,12 @@
 package jee.web;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
 import example.app.App;
+import example.common.exception.ValidationException;
 import example.web.AppServlet;
 
 public class AppJEEServlet extends AppServlet {
@@ -34,5 +36,17 @@ public class AppJEEServlet extends AppServlet {
 	public void setAppService(App app){
 		setApp(app);
 	}
+	
+	@Override
+	protected ValidationException tryConvert(RuntimeException e) {
+		if(e instanceof EJBException){
+			Exception ex = ((EJBException)e).getCausedByException();
+			if(ex instanceof ValidationException){
+				return (ValidationException)ex;
+			}
+		}
+		return null;
+	}
+	
 
 }
