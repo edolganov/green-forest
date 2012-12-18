@@ -25,24 +25,20 @@ public class ServletConfigMock implements ServletConfig {
 	
 	public HashMap<String, String> initPatams = new HashMap<String, String>();
 
-	@Override
 	public String getServletName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public ServletContext getServletContext() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public String getInitParameter(String name) {
 		return initPatams.get(name);
 	}
 
-	@Override
 	public Enumeration getInitParameterNames() {
 		// TODO Auto-generated method stub
 		return null;

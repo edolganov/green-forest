@@ -25,12 +25,12 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import example.app.AbstractAppTest;
+import example.app.App;
 import example.app.AppContext;
 import example.app.AppProvider;
 import example.app.CreateDataBaseTest;
 import example.app.GetDocsCountTest;
 import example.app.GetDocsPageTest;
-import example.app.App;
 import example.app.RenameDocTest;
 import example.app.TxTest;
 import example.common.action.CreateDataBase;
@@ -49,7 +49,6 @@ public class AppTests_TestCase {
 	public static void initProvider(){
 		AbstractAppTest.setTestContext(new AppProvider() {
 			
-			@Override
 			public AppContext createContext() throws Exception {
 				
 				ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");

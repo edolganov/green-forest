@@ -82,7 +82,6 @@ class InterceptorChainItem implements InterceptorChain {
 
 	}
 
-	@Override
 	public void doNext() throws Exception {
 		int nextIndex = index + 1;
 		if( owner.hasItem(nextIndex)){

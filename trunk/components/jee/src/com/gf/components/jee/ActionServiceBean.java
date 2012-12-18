@@ -42,12 +42,10 @@ public abstract class ActionServiceBean implements ActionService, ActionServiceF
 		serviceSingleton.unregisterClient();
 	}
 	
-	@Override
 	public <I, O> O invoke(Action<I, O> action) throws InvocationException, ExceptionWrapper, RuntimeException {
 		return (O) actionService.invoke(action);
 	}
 
-	@Override
 	public <I, O> O invokeUnwrap(Action<I, O> action) throws InvocationException, Exception {
 		return (O) actionService.invokeUnwrap(action);
 	}

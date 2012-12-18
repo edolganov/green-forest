@@ -23,7 +23,6 @@ public abstract class InvocationReaderInterceptor<T extends Action<?,?>>
 	
 	protected InvocationReader invocationReader;
 
-	@Override
 	public void setInvocationReader(InvocationReader invocationReader) {
 		this.invocationReader = invocationReader;
 	}

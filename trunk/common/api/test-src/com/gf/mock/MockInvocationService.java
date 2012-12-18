@@ -23,7 +23,6 @@ public class MockInvocationService implements InvocationService {
 	
 	Object singleReturnVal;
 
-	@Override
 	public <I, O> O subInvoke(Action<I, O> action) throws Exception {
 		
 		if(singleReturnVal != null){

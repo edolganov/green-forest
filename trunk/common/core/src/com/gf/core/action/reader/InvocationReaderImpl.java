@@ -34,7 +34,6 @@ public class InvocationReaderImpl implements InvocationReader {
 		this.curHandler = currentHandler;
 	}
 
-	@Override
 	public List<InvocationObject> getLocalPrevObjects() {
 		
 		ArrayList<InvocationObject> out = new ArrayList<InvocationObject>();
@@ -58,7 +57,6 @@ public class InvocationReaderImpl implements InvocationReader {
 		return out;
 	}
 
-	@Override
 	public List<InvocationObject> getLocalNextObjects() {
 		
 		ArrayList<InvocationObject> out = new ArrayList<InvocationObject>();
@@ -91,7 +89,6 @@ public class InvocationReaderImpl implements InvocationReader {
 		return out;
 	}
 
-	@Override
 	public Handler<?> getHandler() {
 		return c.handler;
 	}

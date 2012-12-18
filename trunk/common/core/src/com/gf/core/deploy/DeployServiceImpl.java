@@ -63,33 +63,28 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 
 	}
 
-	@Override
 	public void putHandler(Class<? extends Handler<?>> clazz) {
 		Set<Class<?>> targets = handlerTypes.put(clazz);
 		logMapping("PUT HANDLER:", clazz, targets);
 	}
 
-	@Override
 	public void putInterceptor(Class<? extends Interceptor<?>> clazz) {
 		Set<Class<?>> targets = interceptorTypes.put(clazz);
 		logMapping("PUT INTERCEPTOR:", clazz, targets);
 	}
 
-	@Override
 	public void putFilter(Class<? extends Filter> clazz) {
 		filterTypes.add(clazz);
 		logMappingSingle("PUT FILTER:", clazz, null);
 	}
 	
 	
-	@Override
 	public void scanForAnnotations(Class<?> clazz){
 		scanForAnnotations(clazz.getPackage().getName());
 	}
 
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
 	public void scanForAnnotations(String packageName) {
 		
 		log.info("Scanning and registering classes...");
@@ -132,7 +127,6 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	}
 
 	
-	@Override
 	public Handler<?> getHandler(Action<?, ?> action) {
 		
 		Class<?> handlerType = getHandlerType(action);
@@ -165,7 +159,6 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		return out;
 	}
 
-	@Override
 	public List<Filter> getFilters() {
 		
 		ArrayList<Filter> out = new ArrayList<Filter>();
@@ -185,7 +178,6 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		return out;
 	}
 	
-	@Override
 	public List<Interceptor<?>> getInterceptors(Action<?, ?> action) {
 		
 		Class<?> clazz = action.getClass();
@@ -209,7 +201,6 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		return out;
 	}
 
-	@Override
 	public void setHandlerTypes(
 			Collection<Class<? extends Handler<?>>> handlerTypes)
 			throws NoMappingAnnotationException, NotOneHandlerException {
@@ -219,7 +210,6 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		}
 	}
 
-	@Override
 	public void setInterceptorTypes(
 			Collection<Class<? extends Interceptor<?>>> interceptorTypes)
 			throws NoMappingAnnotationException {
@@ -229,7 +219,6 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		}
 	}
 
-	@Override
 	public void setFilterTypes(Collection<Class<? extends Filter>> filterTypes) {
 		if(filterTypes == null) return;
 		for (Class<? extends Filter> clazz : filterTypes) {
@@ -237,7 +226,6 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		}
 	}
 
-	@Override
 	public void setScanForAnnotations(Collection<String> packageNames)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		if(packageNames == null) return;
