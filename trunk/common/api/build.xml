@@ -22,6 +22,7 @@
                debug="${compiler.debug}"
                optimize="${compiler.optimize}"
                deprecation="${compiler.deprecation}"
+			   target="${compiler.target}"
                encoding="${compiler.encoding}">
             <classpath refid="libs"/>
         </javac>

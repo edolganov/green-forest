@@ -1,4 +1,5 @@
 <project name="Module build" default="deploy" basedir=".">
+	<property file="../../build.properties"/>
     <property file="build.properties"/>
 	
 	<target name="build-dependencies">
@@ -26,6 +27,7 @@
                debug="${compiler.debug}"
                optimize="${compiler.optimize}"
                deprecation="${compiler.deprecation}"
+			   target="${compiler.target}"
                encoding="${compiler.encoding}">
             <classpath refid="libs"/>
         </javac>
