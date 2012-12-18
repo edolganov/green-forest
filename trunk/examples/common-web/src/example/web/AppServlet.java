@@ -116,10 +116,16 @@ public class AppServlet extends HttpServlet {
 		try {
 			app.invoke(action);
 			req.setAttribute("doc.renamed."+id, Boolean.TRUE);
-		}catch (ValidationException e) {
-			req.setAttribute("doc.error-key."+id, e.getClass().getSimpleName());
-			req.setAttribute("doc.error-obj."+id, e);
+		}catch (RuntimeException e) {
+			ValidationException ve = tryConvert(e);
+			if(ve != null){
+				req.setAttribute("doc.error-key."+id, ve.getClass().getSimpleName());
+				req.setAttribute("doc.error-obj."+id, ve);
+			} else {
+				throw e;
+			}
 		}
+		
 		req.setAttribute("doc.newName."+id, newName);
 		
 		Trace updateTrace = TraceHandlers.getTrace(action);
@@ -127,6 +133,14 @@ public class AppServlet extends HttpServlet {
 		
 		//show a page
 		this.doGet(req, resp);
+	}
+
+	/** override if need */
+	protected ValidationException tryConvert(RuntimeException e) {
+		if(e instanceof ValidationException){
+			return (ValidationException) e;
+		}
+		return null;
 	}
 	
 	private void showView(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
