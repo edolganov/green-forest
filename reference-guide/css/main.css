@@ -1,0 +1,26 @@
+body {
+	color: #333333;
+    font-family: 'Lucida Grande',Geneva,Verdana,Arial,sans-serif;
+    font-size: 12px;
+    line-height: 150%;
+    text-align: justify;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    background-color: transparent;
+    color: #4A5D75;
+    line-height: 130%;
+}
+
+h1 {
+	font-size: 1.6em;
+}
+
+#wrap {
+	margin: 0px auto;
+    max-width: 660px;
+}
+
+div.section {
+	padding-top: 24px;
+}

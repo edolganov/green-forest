@@ -1,3 +1,5 @@
+https://green-forest.googlecode.com/svn/trunk/changelog.txt
+
 examples\
 	01-basics\
 	02-servlet-and-jdbc\
