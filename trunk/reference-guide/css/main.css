@@ -16,11 +16,36 @@ h1 {
 	font-size: 1.6em;
 }
 
+h2 {
+	font-size: 1.6em;
+	margin-bottom: 15px;
+}
+
+a:link {
+    color: #0066CC;
+}
+a:visited {
+    color: #6699CC;
+}
+
+p {
+	margin: 12px 0;
+}
+
+
 #wrap {
 	margin: 0px auto;
     max-width: 660px;
 }
 
-div.section {
+#logo {
+	height: 80px;
+}
+
+.section {
 	padding-top: 24px;
-} 
+}
+
+.toc {
+	margin-bottom: 10px;
+}
