@@ -7,7 +7,8 @@
 
 === релиз 0.9 ===
 	- доки
-		- reference guide
+*		- reference guide
+*			- js ускорители
 			- ядро
 			- утилиты апи
 			- компоненты
@@ -23,6 +24,7 @@
 			- guide: http://maven.apache.org/guides/mini/guide-central-repository-upload.html
 				- http://stackoverflow.com/questions/8331209/how-to-add-own-project-to-public-maven-repository
 	- кнопка донате как у http://code.google.com/p/reflections/
+	- фиксация динамич.доков в статичные
 	- update changelog
 
 
