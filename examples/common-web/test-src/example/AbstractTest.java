@@ -17,7 +17,7 @@ package example;
 
 import org.junit.After;
 
-import com.gf.util.file.FileUtil;
+import com.gf.util.FileUtil;
 import com.gf.util.junit.AssertExt;
 
 public abstract class AbstractTest extends AssertExt {

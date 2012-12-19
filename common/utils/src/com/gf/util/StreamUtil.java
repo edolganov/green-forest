@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gf.util.stream;
+package com.gf.util;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.gf.util.ExceptionUtil;
-import com.gf.util.Util;
 
 public class StreamUtil {
 
