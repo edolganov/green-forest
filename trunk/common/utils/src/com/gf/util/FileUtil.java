@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gf.util.file;
+package com.gf.util;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -31,9 +31,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.channels.FileChannel;
 
-import com.gf.util.ExceptionUtil;
-import com.gf.util.stream.StreamUtil;
-import com.gf.util.stream.StreamUtil.ExceptionHandler;
+import com.gf.util.StreamUtil.ExceptionHandler;
 
 public class FileUtil {
 

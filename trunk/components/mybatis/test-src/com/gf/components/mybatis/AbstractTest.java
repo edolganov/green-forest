@@ -27,7 +27,7 @@ import org.junit.After;
 import org.junit.Before;
 
 import com.gf.components.atomikos.jdbc.DataSourceManagerImpl;
-import com.gf.util.file.FileUtil;
+import com.gf.util.FileUtil;
 import com.gf.util.junit.AssertExt;
 
 public class AbstractTest extends AssertExt {
