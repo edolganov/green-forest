@@ -3,7 +3,10 @@ body {
     font-family: 'Lucida Grande',Geneva,Verdana,Arial,sans-serif;
     font-size: 12px;
     line-height: 150%;
-    text-align: justify;
+}
+
+p {
+	text-align: justify;
 }
 
 h1, h2, h3, h4, h5, h6 {
