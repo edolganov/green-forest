@@ -27,26 +27,27 @@
 	
 	<div class="section toc"></div>
 	
-	<h2 class="section">Overview</h2>
-	<p><gff> is the simple <a href='http://en.wikipedia.org/wiki/Inversion_of_control'>IoC Container</a> 
+	<h2>Overview</h2>
+	<p><gff> is the simple <a target="_blank" href='http://en.wikipedia.org/wiki/Inversion_of_control'>IoC Container</a> 
 	with "Action-Handler" architecture. It's not a competitor for <sf> or <jee> but it's a powerful 
 	addition for this frameworks. You can use <gf> for a single class implementation and 
 	for a complex business logic.
 	<p>API of <gf> has only one method: <tt>invoke</tt>. This method takes <tt>Action</tt> object with 
 	input data, finds targeted <tt>Handler</tt> and return handler's output. Here it is the "Action-Handler" pattern.
-	<br>Look at this pattern example:
+	<br>Look at the pattern's example:
 	<pre class="brush: java;">
-		//creating Green-forest Engine
+		//create Green-forest Engine
 		Engine engine = new Engine();
 		
-		//registering some handler
+		//register some handler
 		engine.putHandler(SomeActonHandler.class);
 		
-		//create some action
-		SomeAction action = new SomeAction("some data");
+		//invoke some action and get result
+		String result = engine.invoke(new SomeAction("some data"));</pre>
 		
-		//get the result
-		String result = engine.invoke(action);</pre>
+	<h2>Features</h2>
+	
+<!-- 	<h2>Installing</h2> -->
 
 </div>
 
