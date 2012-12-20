@@ -5,6 +5,11 @@ body {
     line-height: 150%;
 }
 
+.syntaxhighlighter { 
+	overflow-y: hidden !important; 
+	overflow-x: auto !important; 
+}
+
 p {
 	text-align: justify;
 }
