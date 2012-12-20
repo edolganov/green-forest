@@ -68,6 +68,7 @@ GuideController = function(){
 			p = $(p);
 			var text = p.html();
 			text = "&nbsp;&nbsp;"+text;
+			text = text.replaceAll("<br>","<br>&nbsp;&nbsp;");
 			p.html(text);
 		});
 		
