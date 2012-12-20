@@ -26,7 +26,8 @@ public class Main {
 		Engine engine = new Engine();
 		engine.putHandler(SomeActonHandler.class);
 		
-		String result = engine.invoke(new SomeAction("some data"));
+		SomeAction action = new SomeAction("some data");
+		String result = engine.invoke(action);
 		System.out.println(result);
 		
 		SomeAction otherAction = new SomeAction("other data");
