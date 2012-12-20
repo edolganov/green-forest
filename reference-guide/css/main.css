@@ -49,3 +49,8 @@ p {
 .toc {
 	margin-bottom: 10px;
 }
+
+.name{
+	color: #4A5D75;
+	letter-spacing: 1px;
+}

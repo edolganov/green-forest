@@ -11,6 +11,8 @@ GuideController = function(){
 	this.init = function(){
 		
 		initToc();
+		initSpecialTags();
+		addSpaceToP();
 		
 	};
 	
@@ -37,6 +39,36 @@ GuideController = function(){
 			
 		});
 		
+	}
+	
+	
+	function initSpecialTags(){
+		
+		replaceSpecialTag("gf", "<span class='name'>Green-forest Framework</span>");
+		replaceSpecialTag("sf", "<span class='name'>Spring Framework</span>");
+		replaceSpecialTag("jee", "<span class='name'>JEE</span>");
+		
+	}
+	
+	function replaceSpecialTag(name, replaceHtml){
+		var parentElems = $(name).parent();
+		parentElems.each(function(i, parent){
+			parent = $(parent);
+			var text = parent.html();
+			text = text.replaceAll("<"+name+">", replaceHtml);
+			parent.html(text);
+		});
+
+	}
+	
+	function addSpaceToP(){
+		
+		$("p").each(function(i, p){
+			p = $(p);
+			var text = p.html();
+			text = "&nbsp;&nbsp;"+text;
+			p.html(text);
+		});
 		
 	}
 	
