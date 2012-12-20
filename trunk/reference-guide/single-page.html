@@ -22,10 +22,12 @@
 	<div class="section toc"></div>
 	
 	<h2 class="section">Overview</h2>
-	<p><gf> is the simple <a href='http://en.wikipedia.org/wiki/Inversion_of_control'>IoC Container</a> 
+	<p><gff> is the simple <a href='http://en.wikipedia.org/wiki/Inversion_of_control'>IoC Container</a> 
 	with "Action-Handler" architecture. It's not a competitor for <sf> or <jee> but it's a powerful 
-	addition for this frameworks. "Action-Handler" means
-	<p>
+	addition for this frameworks. You can use <gf> for a single class implementation and 
+	for a complex business logic.
+	<p>API of <gf> has only one method: <tt>invoke</tt>. This method takes <tt>Action</tt> object with 
+	input data, finds targeted <tt>Handler</tt> and return handler's output. Here it is "Action-Handler" pattern.
 
 </div>
 

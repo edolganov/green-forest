@@ -44,7 +44,8 @@ GuideController = function(){
 	
 	function initSpecialTags(){
 		
-		replaceSpecialTag("gf", "<span class='name'>Green-forest Framework</span>");
+		replaceSpecialTag("gff", "<span class='name'>Green-forest Framework</span>");
+		replaceSpecialTag("gf", "<span class='name'>Green-forest</span>");
 		replaceSpecialTag("sf", "<span class='name'>Spring Framework</span>");
 		replaceSpecialTag("jee", "<span class='name'>JEE</span>");
 		
