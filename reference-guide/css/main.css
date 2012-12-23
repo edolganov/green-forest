@@ -66,6 +66,10 @@ p {
 	margin-bottom: 10px;
 }
 
+.start-space {
+	margin-left: 6px;
+}
+
 .name{
 	color: #4A5D75;
 	letter-spacing: 1px;
@@ -78,20 +82,25 @@ p {
 }
 
 .more-top {
-	margin-top: 28px;
+	margin-top: 30px;
 }
 
 .image-wrap{
-	margin: 20px 0;
+	margin: 0 0 20px 0;
 	text-align: center;
 	color: #4A5D75;
 	font-weight: bold;
 	font-size: 10px;
+	background-color: #eee;
+	padding: 15px 0 10px 0;
+	width: auto;
 }
 
-.pic {
-	border-width: 1px;
-	border-style: solid;
-	border-color: #ddd;
+.pic,.pic2 {
 	padding: 10px;
+	background-color: #FFF;
+}
+
+.pic2 {
+	padding: 15px;
 }

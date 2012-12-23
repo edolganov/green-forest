@@ -45,7 +45,7 @@ import com.gf.service.ContextService;
 import com.gf.service.DeployService;
 
 /**
- * <tt>Engine</tt> is the central class of <tt>"Green-Forest Framework"</tt>.
+ * <tt>Engine</tt> is the central class of <tt>"Green-forest Framework"</tt>.
  * <br>Use it for create a isolated logic element with "action-handler" API:
  * <p>
  * <pre>

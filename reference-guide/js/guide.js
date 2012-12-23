@@ -65,10 +65,11 @@ GuideController = function(){
 	function addSpaceToP(){
 		
 		$("p").each(function(i, p){
+			var spaceStr = "<span class='start-space'/>";
 			p = $(p);
 			var text = p.html();
-			text = "&nbsp;&nbsp;"+text;
-			text = text.replaceAll("<br>","<br>&nbsp;&nbsp;");
+			text = spaceStr+text;
+			text = text.replaceAll("<br>","<br>"+spaceStr);
 			p.html(text);
 		});
 		

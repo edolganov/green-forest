@@ -34,7 +34,7 @@
 	<gff> is the simple <a href='#ioc-container'>IoC Container</a> with <a href="#action-handler">Action-Handler Architecture</a>. 
 	It's not a competitor for <sf> or <jee> but it's a powerful addition for this frameworks. 
 	You can use <gf> for a single class implementation and for a complex business logic.
-		
+	
 	<h2>Features</h2>
 	
 	<p>
@@ -44,21 +44,15 @@
 	Also you can add an external object into invocation context and use it by dependency injection.
 	
 	<p class="more-top">
-	<span class="title">Isolated contexts</span>
-	<br>You can use one <gf> inside another like external object.
-	In this way you can separate a big application context to few small isolated contexts that use each other.
-	<br>Take a look for the illustrating picture:
-	<div class="image-wrap">
-		<img class="pic" src="i/isolated-context.png" width="90%">
-		<div>Difference between single and isolated contexts</div>
-	</div>
-	
-	
-	<p class="more-top">
 	<span class="title"><a id="action-handler">Action-Handler Architecture</a></span>
 	<br>API of <gf> has only one method: <tt>invoke</tt>. 
 	This method takes <a href="#action">Action</a> object with input data, finds targeted <a href="#handler">Handler</a> and return handler's output. 
-	<br>Example:
+	<br>Take a look for the illustrating picture:
+	<div class="image-wrap">
+		<img class="pic2" src="i/action-handler-pattern.png" width="90%">
+		<div>Action-Handler architecture</div>
+	</div>
+	<p>Code example:
 	<pre class="brush: java;">
 		//create Green-forest Engine
 		Engine engine = new Engine();
@@ -69,11 +63,44 @@
 		//invoke some action and get result
 		String result = engine.invoke(new SomeAction("some data"));</pre>
 		
-
+		
+	<p class="more-top">
+	<span class="title">Isolated contexts</span>
+	<br>You can use one <gf> inside another like external object.
+	In this way you can separate a big application context to few small isolated contexts that use each other.
+	<br>Take a look for the illustrating picture:
+	<div class="image-wrap">
+		<img class="pic" src="i/isolated-context.png" width="90%">
+		<div>Difference between single and isolated contexts</div>
+	</div>
+	<p>Code example:
+	<pre class="brush: java;">
+		//Handler
+		@Mapping(SomeAction.class)
+		public class SomeHandler extends Handler&lt;SomeAction&gt;{
+		
+			@Inject
+			SomeService service;
+			
+			@Inject
+			OtherService otherService;
+			
+			@Override
+			public void invoke(SomeAction action) throws Exception {
+					
+				//external object with action-handler API
+				service.invoke(new OtherAction());
+				
+				//other external object
+				otherService.someMethod();
+				
+			}
+		}</pre>
 		
 		
 	
-<!-- 	<h2>Installing</h2> -->
+ 	<h2>Getting Started</h2>
+ 	
 
 </div>
 
