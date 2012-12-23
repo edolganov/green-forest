@@ -9,7 +9,13 @@
 	- доки
 *		- reference guide
 *			- Features
-				- main goal is
+				- IOC
+					- img classin Ioc anf Gf ioc
+				- Action-handler
+					- why?
+				- Depency Injection
+				- Class scanner
+				
 			- Installing
 			- ядро
 			- утилиты апи
