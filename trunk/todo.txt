@@ -9,6 +9,7 @@
 	- доки
 *		- reference guide
 *			- Features
+				- main goal is
 			- Installing
 			- ядро
 			- утилиты апи

@@ -10,11 +10,13 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	
 	<script type="text/javascript" src="js/jquery-1.6.1-min.js" ></script>
+	<script type="text/javascript" src="js/jquery-ui-1.8.24.custom.min.js" ></script>
 	<script type="text/javascript" src="js/lang.js" ></script>
 	<script type="text/javascript" src="js/guide.js" ></script>
 	<script type="text/javascript" src="js/shCore.js"></script>
 	<script type="text/javascript" src="js/shBrushJava.js"></script>
 	<script type="text/javascript">SyntaxHighlighter.all();</script>
+	<script type="text/javascript" src="js/effects.js"></script>
 </head>
 <body>
 
@@ -29,12 +31,15 @@
 	
 	<h2>Overview</h2>
 	<p><gff> is the simple <a target="_blank" href='http://en.wikipedia.org/wiki/Inversion_of_control'>IoC Container</a> 
-	with "Action-Handler" architecture. It's not a competitor for <sf> or <jee> but it's a powerful 
+	with <a href="#action-handler">Action-Handler Architecture</a>. It's not a competitor for <sf> or <jee> but it's a powerful 
 	addition for this frameworks. You can use <gf> for a single class implementation and 
 	for a complex business logic.
-	<p>API of <gf> has only one method: <tt>invoke</tt>. This method takes <tt>Action</tt> object with 
-	input data, finds targeted <tt>Handler</tt> and return handler's output. Here it is the "Action-Handler" pattern.
-	<br>Look at the pattern's example:
+		
+	<h2>Features</h2>
+	<p><span class="title"><a id="action-handler">Action-Handler Architecture</a></span>
+	<br>API of <gf> has only one method: <tt>invoke</tt>. This method takes <tt>Action</tt> object with 
+	input data, finds targeted <tt>Handler</tt> and return handler's output. 
+	<br>Example:
 	<pre class="brush: java;">
 		//create Green-forest Engine
 		Engine engine = new Engine();
@@ -44,8 +49,6 @@
 		
 		//invoke some action and get result
 		String result = engine.invoke(new SomeAction("some data"));</pre>
-		
-	<h2>Features</h2>
 	
 <!-- 	<h2>Installing</h2> -->
 
