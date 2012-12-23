@@ -50,7 +50,8 @@ p {
 
 #wrap {
 	margin: 0px auto;
-    max-width: 660px;
+    max-width: 655px;
+    padding: 0 5px;
 }
 
 #logo {
@@ -74,4 +75,8 @@ p {
 	color: #4A5D75;
 	font-size: larger;
 	font-weight: bold;
+}
+
+.more-top {
+	margin-top: 28px;
 }
