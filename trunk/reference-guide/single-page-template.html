@@ -44,6 +44,12 @@
 	Also you can add an external object into invocation context and use it by dependency injection.
 	
 	<p class="more-top">
+	<span class="title">Isolated contexts</span>
+	<br>You can use one <gf> inside another like external object.
+	In this way you can separate a big application context to few small isolated contexts that use each other.
+	Take a look for the illustrating picture:
+	
+	<p class="more-top">
 	<span class="title"><a id="action-handler">Action-Handler Architecture</a></span>
 	<br>API of <gf> has only one method: <tt>invoke</tt>. 
 	This method takes <a href="#action">Action</a> object with input data, finds targeted <a href="#handler">Handler</a> and return handler's output. 
