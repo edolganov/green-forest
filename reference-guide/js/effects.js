@@ -33,7 +33,7 @@ EffectsController = function(){
 	function highlightElemById(id){
 		
 		var elem = $("#"+id);
-		elem.effect("highlight", {}, 1000);
+		elem.effect("highlight", {}, 2000);
 		
 	}
 	
