@@ -9,14 +9,7 @@
 	- доки
 *		- reference guide
 *			- Features
-				- IOC
-					- img classin Ioc anf Gf ioc
-				- Action-handler
-					- why?
-				- Depency Injection
-				- Class scanner
-				
-			- Installing
+			- Getting Started
 			- ядро
 			- утилиты апи
 			- компоненты
