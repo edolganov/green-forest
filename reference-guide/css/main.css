@@ -104,3 +104,14 @@ p {
 .pic2 {
 	padding: 15px;
 }
+
+.def {
+	margin: 5px 20px 5px 6px;
+	padding: 10px;
+	border-color: #4A5D75;
+	border-style: solid;
+	border-width: 2px;
+	background-color: #FFFFDE;
+	border-radius: 5px;
+	font-size: 14px;
+}

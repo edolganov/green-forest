@@ -136,10 +136,29 @@
  	
  	
 	<p class="more-top">
-	<span class="title">Create actions API</span>
-	<br><a id="action">Action</a> presents some atomic logic operation (like classic function in Object). 
-	It contains input and output data.
-	For example CreateDoc action with input String (name of the doc) and output Doc (created object). 
+	<span class="title">Create Actions</span>
+	<div class="def">
+		<p><b><a id="action">Action</a></b> presents some atomic logic operation (like classic function in Object) 
+		and contains input and output data. 
+	</div>
+	
+	<p>For example we have <tt>Doc</tt> class for presents some document object. 
+	So in our app we can create actions like 
+	<tt>CreateDoc</tt>, 
+	<tt>RenameDoc</tt>, 
+	<tt>DeleteDoc</tt> for working with documents. 
+	And <tt>CreateDoc</tt> for example has input <tt>String</tt> (name of the doc) and output <tt>Doc</tt> (created object):
+
+	<pre class="brush: java;">
+		import com.gf.Action;
+	
+		public class CreateDoc extends Action&lt;String, Doc&gt;{
+		
+			public CreateDoc(String name) {
+				super(name);
+			}
+			
+		}</pre>
 
 	
  	

@@ -21,10 +21,10 @@ import java.util.Map;
 import com.gf.util.Util;
 
 /**
- * <tt>Action</tt> presents some atomic logic operation (like classic function in Object).
- * It contains input and output data.
+ * <tt>Action</tt> presents some atomic logic operation (like classic function in Object)
+ * and contains input and output data.
  * 
- * <p>For example we have Doc class for presents some document object. 
+ * <p>For example we have Doc class for presenting some document object. 
  * <br>So in our app we can create actions like
  * <tt>CreateDoc</tt>, <tt>RenameDoc</tt>, <tt>DeleteDoc</tt> for working with documents.
  * And <tt>CreateDoc</tt> for example has input String (name of the doc)
