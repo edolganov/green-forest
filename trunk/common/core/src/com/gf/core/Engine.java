@@ -46,7 +46,7 @@ import com.gf.service.DeployService;
 
 /**
  * <tt>Engine</tt> is the central class of <tt>"Green-forest Framework"</tt>.
- * <br>Use it for create a isolated logic element with "action-handler" API:
+ * <br>Use it for create object with Action-Handler API:
  * <p>
  * <pre>
  * Engine engine = new Engine();

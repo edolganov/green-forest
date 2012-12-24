@@ -21,7 +21,7 @@ import java.util.Map;
 import com.gf.util.Util;
 
 /**
- * <tt>Action</tt> presents some atomic logic operation (like classic function in Object)
+ * <tt>Action</tt> presents some atomic logic operation (like function in interface)
  * and contains input and output data.
  * 
  * <p>For example we have Doc class for presenting some document object. 
