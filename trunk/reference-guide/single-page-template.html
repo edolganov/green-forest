@@ -63,7 +63,33 @@
 		//invoke some action and get result
 		String result = engine.invoke(new SomeAction("some data"));</pre>
 		
+
+	<p class="more-top">
+	<span class="title">Aspects implementation</span>
+	<br><gf> contains <a href="#filter">Filters</a> and <a href="#interceptor">Interceptors</a>. 
+	With these instruments you can implement a lot of aspects things (like <tt>validation</tt>, <tt>wrapping</tt>, <tt>logging</tt> etc)
+	without using special aspect libraries (like <span class='name'>AspectJ</span>).
+	<p>Code example:
+	<pre class="brush: java;">
+		public class WorktimeFilter extends Filter {
 		
+			@Override
+			public void invoke(Action&lt;?, ?&gt; action, FilterChain chain) 
+				throws Exception {
+				
+				Date begin = new Date();
+				try {
+					//next handler
+					chain.doNext();
+				}finally {
+					long worktime = System.currentTimeMillis() - begin.getTime();
+					log.info("worktime: "+worktime+"ms");
+				}
+			}
+		
+		}</pre>
+	
+
 	<p class="more-top">
 	<span class="title">Isolated contexts</span>
 	<br>You can use one <gf> inside another like external object.

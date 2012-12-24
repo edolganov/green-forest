@@ -8,8 +8,7 @@
 === релиз 0.9 ===
 	- доки
 *		- reference guide
-*			- Features
-			- Getting Started
+*			- Getting Started
 			- ядро
 			- утилиты апи
 			- компоненты
@@ -78,6 +77,7 @@ _____________________
 === релиз 0.9 ===
 	- доки
 		- reference guide
+			- Features
 			- Overview
 			- js ускорители
 	- сборка под 1.5
