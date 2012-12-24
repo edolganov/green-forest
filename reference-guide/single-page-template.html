@@ -138,10 +138,9 @@
 	<p class="more-top">
 	<span class="title">Create Actions</span>
 	<div class="def">
-		<p><b><a id="action">Action</a></b> presents some atomic logic operation (like classic function in Object) 
+		<p><b><a id="action">Action</a></b> presents some atomic logic operation (like function in interface) 
 		and contains input and output data. 
 	</div>
-	
 	<p>For example we have <tt>Doc</tt> class for presents some document object. 
 	So in our app we can create actions like 
 	<tt>CreateDoc</tt>, 
@@ -160,16 +159,54 @@
 			
 		}</pre>
 
+
+	<p class="more-top">
+	<span class="title">Create Handlers</span>
+	<div class="def">
+		<p><b><a id="handler">Handler</a></b> implements logic of the action (like interface function's implementation). 
+		It uses Action object for taking input data and setting output data.
+	</div>
+	<p>Handler must contains <tt>@Mapping</tt> annotation:
+	<pre class="brush: java;">
+	import com.gf.Handler;
+	import com.gf.annotation.Mapping;
+	
+	import foo.Storage
+	
+	@Mapping(CreateDoc.class)
+	public class CreateDocHandler extends Handler&lt;CreateDoc&gt;{
+	
+		@Inject
+		Storage storage;
+		
+		public void invoke(CreateDoc action) throws Exception {
+		
+			String name = action.getInput();
+			Doc created = storage.createNewDoc(name);
+			
+			action.setOutput(created);
+		}
+	}</pre>
 	
  	
 	<p class="more-top">
-	<span class="title">Create Engine</span>
-	<br><tt>Engine</tt> is the central class of <gff>. 
-	Use it for create a isolated logic element with Action-Handler API:
+	<span class="title">Connect actions with handlers by Engine</span>
+	<div class="def">
+		<p><b>Engine</b> is the central class of <gff>. 
+		Use it for create object with Action-Handler API.
+	</div>
 	<pre class="brush: java;">
 	import com.gf.core.Engine;
 	
-	Engine engine = new Engine();</pre>
+	Engine engine = new Engine();
+	engine.addToContext(storage);
+	engine.putHandler(CreateDocHandler.class);
+	
+	Doc result = engine.invoke(new CreateDoc("some name"));</pre>
+	
+	
+	<p class="more-top">
+	<span class="title">Create your own Action-Handler API</span>
 	
 
 	

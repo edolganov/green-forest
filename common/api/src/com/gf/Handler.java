@@ -22,11 +22,9 @@ import com.gf.annotation.Order;
 
 
 /**
- * Use <tt>Handler</tt> for create an atomic logic "function".
- * The input attribute for this "function" is <tt>Action</tt>'s input data.
- * Set output data to <tt>Action</tt>'s output.
- * 
- * <p><b>Note:</b> <tt>Handler</tt> must contains <tt>&#064;Mapping</tt> annotation to be valid for <tt>Engine</tt>.
+ * <tt>Handler</tt> implements logic of the {@link Action} (like interface function's implementation). 
+ * It uses <tt>Action</tt> object for taking input data and setting output data. 
+ * <p><b>Note:</b> <tt>Handler</tt> must contains {@link Mapping} annotation to be valid for <tt>Engine</tt>.
  * 
  * <p>The order of processing:
  * <ul>
@@ -55,31 +53,35 @@ import com.gf.annotation.Order;
  * <p><p>Example:
  * <pre>
  * //action
- * public class SomeAction extends Action<String, String>{
+ * public class CreateDoc extends Action&lt;String, Doc&gt;{
  * 
- *   public SomeAction(String input) {
- *     super(input);
+ *   public CreateDoc(String name) {
+ *     super(name);
  *   }
  * }
  * 
- * //handler
- * &#064;Mapping(SomeAction.class)
- * public class SomeActonHandler extends Handler&lt;SomeAction&gt;{
+ * //implementation of this action
+ * &#064;Mapping(CreateDoc.class)
+ * public class CreateDocHandler extends Handler&lt;CreateDoc&gt;{
  * 
- *   public void invoke(SomeAction action) throws Exception {
- *     String input = action.getInput();
- *     log.info("input is "+input);
- *     action.setOutput(input);
+ *   &#064;Inject
+ *   Storage storage;
+ * 
+ *   public void invoke(CreateDoc action) throws Exception {
+ *     String name = action.getInput();
+ *     Doc created = storage.createNewDoc(name);
+ *     action.setOutput(created);
  *   }
  * }
  * 
- * //engine
+ * //use example
  * Engine engine = new Engine();
- * engine.putHandler(SomeActonHandler.class);
- * String result = engine.invoke(new SomeAction("some data"));
+ * engine.addToContext(storage);
+ * engine.putHandler(CreateDocHandler.class);
+ * Doc result = engine.invoke(new CreateDoc("some name"));
  * </pre>
  * 
- * For call other handler from current use <tt>subInvoke(Action)</tt> method.
+ * For call other handler from current use {@link MappingObject#subInvoke(Action) subInvoke(Action)} method.
  * <p><p>Example:
  * <pre>
  * &#064;Mapping(SomeAction.class)
@@ -104,9 +106,9 @@ import com.gf.annotation.Order;
  *  </pre>
  *  
  * @author Evgeny Dolganov
+ * @see Action
  * @see Mapping
  * @see Order
- * @see Action
  * @see Interceptor
  * @see Filter
  * @see com.gf.core.Engine
