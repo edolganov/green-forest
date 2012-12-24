@@ -35,8 +35,9 @@
 	It's not a competitor for <sf> or <jee> but it's a powerful addition for this frameworks. 
 	You can use <gf> for a single class implementation and for a complex business logic.
 	
-	<h2>Features</h2>
 	
+	
+	<h2>Features</h2>
 	<p>
 	<span class="title"><a id="ioc-container">IoC Container</a></span>
 	<br>With <gf> you can separate your application's logic into simple atomic classes. 
@@ -126,6 +127,45 @@
 		
 	
  	<h2>Getting Started</h2>
+ 	
+	<p>
+	<span class="title">Add library to project</span>
+ 	<br>Get the latest version of <gff> from <a target="_blank" href="https://code.google.com/p/green-forest/downloads/list">download page</a>.
+ 	The zip archive with name like <tt>"green-forest-X.X-pack"</tt> contains binaries, javadocs and sources. 
+ 	<gf> has no dependencies for itself. Add the library to your Project.
+ 	
+ 	
+	<p class="more-top">
+	<span class="title">Create actions API</span>
+	<br><a id="action">Action</a> presents some atomic logic operation (like classic function in Object). 
+	It contains input and output data.
+	For example CreateDoc action with input String (name of the doc) and output Doc (created object). 
+
+	
+ 	
+	<p class="more-top">
+	<span class="title">Create Engine</span>
+	<br><tt>Engine</tt> is the central class of <gff>. 
+	Use it for create a isolated logic element with Action-Handler API:
+	<pre class="brush: java;">
+	import com.gf.core.Engine;
+	
+	Engine engine = new Engine();</pre>
+	
+
+	
+ 	
+ 	<!--  
+ 	<div class="warning">
+ 		<div class="title">Special for Jboss AS</div>
+ 		<p>If you want use class scanner in <span class="name">JBoss AS</span> you need this additional libraries:
+ 		<ul>
+ 			<li><a href='http://code.google.com/p/reflections/'>Reflections</a></li>
+ 			<li><a href='http://code.google.com/p/guava-libraries/'>The Guava project</a></li>
+ 			<li><a href='http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/'>Javassist</a></li>
+ 		</ul>
+ 	</div>
+ 	-->
  	
 
 </div>
