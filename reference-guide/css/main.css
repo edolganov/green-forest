@@ -7,7 +7,7 @@ body {
 
 .syntaxhighlighter { 
 	overflow-y: hidden !important; 
-	overflow-x: auto !important; 
+	overflow-x: auto !important;
 }
 
 p {
@@ -82,7 +82,7 @@ p {
 }
 
 .more-top {
-	margin-top: 30px;
+	margin-top: 45px;
 }
 
 .image-wrap{
