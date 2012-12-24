@@ -21,33 +21,42 @@ import java.util.Map;
 import com.gf.util.Util;
 
 /**
- * Data container and type for handlers's mapping.
- * Extend this class for your own container type, and create <tt>Handler</tt> for handle it.
- * <p>Example:
+ * <tt>Action</tt> presents some atomic logic operation (like classic function in Object).
+ * It contains input and output data.
+ * 
+ * <p>For example we have Doc class for presents some document object. 
+ * <br>So in our app we can create actions like
+ * <tt>CreateDoc</tt>, <tt>RenameDoc</tt>, <tt>DeleteDoc</tt> for working with documents.
+ * And <tt>CreateDoc</tt> for example has input String (name of the doc)
+ * and output Doc (created object):
  * <pre>
  * //action
- * public class SomeAction extends Action<String, String>{
+ * public class CreateDoc extends Action&lt;String, Doc&gt;{
  * 
- *   public SomeAction(String input) {
- *     super(input);
+ *   public CreateDoc(String name) {
+ *     super(name);
  *   }
  * }
  * 
- * //handler
- * &#064;Mapping(SomeAction.class)
- * public class SomeActonHandler extends Handler&lt;SomeAction&gt;{
+ * //implementation of this action
+ * &#064;Mapping(CreateDoc.class)
+ * public class CreateDocHandler extends Handler&lt;CreateDoc&gt;{
  * 
- *   public void invoke(SomeAction action) throws Exception {
- *     String input = action.getInput();
- *     log.info("input is "+input);
- *     action.setOutput(input);
+ *   &#064;Inject
+ *   Storage storage;
+ * 
+ *   public void invoke(CreateDoc action) throws Exception {
+ *     String name = action.getInput();
+ *     Doc created = storage.createNewDoc(name);
+ *     action.setOutput(created);
  *   }
  * }
  * 
- * //engine
+ * //use example
  * Engine engine = new Engine();
- * engine.putHandler(SomeActonHandler.class);
- * String result = engine.invoke(new SomeAction("some data"));
+ * engine.addToContext(storage);
+ * engine.putHandler(CreateDocHandler.class);
+ * Doc result = engine.invoke(new CreateDoc("some name"));
  * </pre>
  * 
  * @param <I> input data
