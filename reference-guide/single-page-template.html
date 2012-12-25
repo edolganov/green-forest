@@ -31,7 +31,7 @@
 	
 	<h2>Overview</h2>
 	<p>
-	<gff> is the simple <a href='#ioc-container'>IoC Container</a> with <a href="#action-handler">Action-Handler Architecture</a>. 
+	<gff> is the simple <a href='#ioc-container'>IoC Container</a> with <a href="#action-handler">Action-Handler architecture</a>. 
 	It's not a competitor for <sf> or <jee> but it's a powerful addition for this frameworks. 
 	You can use <gf> for a single class implementation and for a complex business logic.
 	
@@ -45,7 +45,7 @@
 	Also you can add an external object into invocation context and use it by dependency injection.
 	
 	<p class="more-top">
-	<span class="title"><a id="action-handler">Action-Handler Architecture</a></span>
+	<span class="title"><a id="action-handler">Action-Handler architecture</a></span>
 	<br>API of <gf> has only one method: <tt>invoke</tt>. 
 	This method takes <a href="#action">Action</a> object with input data, finds targeted <a href="#handler">Handler</a> and return handler's output. 
 	<br>Take a look for the illustrating picture:
@@ -171,7 +171,7 @@
 	import com.gf.Handler;
 	import com.gf.annotation.Mapping;
 	
-	import foo.Storage
+	import foo.Storage;
 	
 	@Mapping(CreateDoc.class)
 	public class CreateDocHandler extends Handler&lt;CreateDoc&gt;{
@@ -206,19 +206,52 @@
 	
 	
 	<p class="more-top">
-	<span class="title">IV. Create your own Action-Handler API</span>
+	<span class="title">IV. Create understandable interface</span>
+	<br>Use understandable name of your API not just the universal <tt>Engine</tt>.
+	For this reason you can extend <tt>ActionService</tt> interface: 
+	<pre class="brush: java;">
+	import com.gf.service.ActionService;
+
+	public interface DocService extends ActionService { }</pre>
+	
+	<p>And create implementation with <tt>Engine</tt> inside:
+	<pre class="brush: java;">
+	import com.gf.core.Engine;
+	import foo.Storage;
+	
+	public class DocServiceImpl implements DocService {
+
+		private Engine engine;
+	
+		public DocServiceImpl() {
+		
+			Storage storage = new Storage();
+			
+			engine = new Engine();
+			engine.addToContext(storage);
+			engine.putHandler(CreateDocHandler.class);
+		}
+		
+		
+		public &lt;I, O&gt; O invoke(Action&lt;I, O&gt; action) {
+			return actionService.invoke(action);
+		}
+		
+		public &lt;I, O&gt; O invokeUnwrap(Action&lt;I, O&gt; action) 
+			throws Exception {
+			return actionService.invokeUnwrap(action);
+		}
+	
+	}</pre>
 	
 	
 	<p class="more-top">
-	<span class="title">V. Use your service in the App</span>
+	<span class="title">V. Add aspects things</span>
 	
-	
-	<p class="more-top">
-	<span class="title">VI. Add some aspects things</span>
 	
 	
 	<p class="more-top">
-	<span class="title">VII. Create nested Action-Handler Abstraction</span>
+	<span class="title">VI. Use nested Actions</span>
 	
 
 	
