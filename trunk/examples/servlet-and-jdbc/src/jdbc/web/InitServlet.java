@@ -48,7 +48,7 @@ public class InitServlet extends AbstractInitServlet {
 		engine.putFilter(UserTransactionInInvoke.class);
 		engine.putFilter(ConnectionInInvoke.class);
 		
-		engine.scanForAnnotations("jdbc.storage");
+		engine.scanAndPut("jdbc.storage");
 		
 		//return Storage
 		return new StorageImpl(engine);

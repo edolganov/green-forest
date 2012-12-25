@@ -34,7 +34,7 @@ public class DeployTest extends AbstractEngineTest {
 		Engine engine = new Engine();
 		enableTracing(engine);
 		
-		engine.scanForAnnotations("com.gf.core.engine.deploy");
+		engine.scanAndPut("com.gf.core.engine.deploy");
 		
 		EmptyAction action = new EmptyAction();
 		engine.invoke(action);

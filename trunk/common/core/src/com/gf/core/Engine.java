@@ -226,7 +226,7 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * 
 	 * //engine
 	 * Engine engine = new Engine();
-	 * engine.scanForAnnotations("some.package");
+	 * engine.scanAndPut("some.package");
 	 * engine.invoke(new SomeAction());
 	 * </pre>
 	 * 
@@ -238,27 +238,27 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * @see ClassScanner
 	 * @see ClassScannerKey
 	 */
-	public void scanForAnnotations(String packageName)
+	public void scanAndPut(String packageName)
 			throws NoMappingAnnotationException, NotOneHandlerException {
-		deploy.scanForAnnotations(packageName);
+		deploy.scanAndPut(packageName);
 	}
 	
 	/**
-	 * Analog for {@link #scanForAnnotations(String)}: <tt>scanForAnnotations(clazz.getPackage().getName())</tt>
+	 * Analog for {@link #scanAndPut(String)}: <tt>scanAndPut(clazz.getPackage().getName())</tt>
 	 * 
 	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example)
 	 * you need to setup {@link com.gf.components.reflections.ReflectionsScanner}.
 	 * Or you can use your own {@link ClassScanner}.
 	 * <p>
 	 */
-	public void scanForAnnotations(Class<?> clazz)
+	public void scanAndPut(Class<?> clazz)
 			throws NoMappingAnnotationException, NotOneHandlerException {
-		deploy.scanForAnnotations(clazz);
+		deploy.scanAndPut(clazz);
 	}
 	
 	
 	/**
-	 * Analog of multi call of {@link #scanForAnnotations(String)}.
+	 * Analog of multi call of {@link #scanAndPut(String)}.
 	 * For example for JavaBean logic.
 	 * 
 	 * <p><b>Note:</b> For some Application Servers (JBoss AS for example)
@@ -266,9 +266,9 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 * Or you can use your own {@link ClassScanner}.
 	 * <p>
 	 */
-	public void setScanForAnnotations(Collection<String> packageNames)
+	public void setScanAndPut(Collection<String> packageNames)
 			throws NoMappingAnnotationException, NotOneHandlerException {
-		deploy.setScanForAnnotations(packageNames);
+		deploy.setScanAndPut(packageNames);
 	}
 	
 	

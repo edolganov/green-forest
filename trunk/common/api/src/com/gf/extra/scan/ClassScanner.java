@@ -20,7 +20,7 @@ import java.util.Set;
 import com.gf.key.scan.ClassScannerKey;
 
 /**
- * Interface for package scanning. Used for {@link com.gf.core.Engine#scanForAnnotations(String)} logic.
+ * Interface for package scanning. Used for {@link com.gf.core.Engine#scanAndPut(String)} logic.
  * <br>There are two default implementations: 
  * <ul>
  * 	<li>{@link com.gf.core.scan.DefaultClassScanner}: for standalone app, Tomcat Web Server</li>

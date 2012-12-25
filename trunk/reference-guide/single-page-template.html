@@ -166,7 +166,8 @@
 		<p><b><a id="handler">Handler</a></b> implements logic of the action (like interface function's implementation). 
 		It uses Action object for taking input data and setting output data.
 	</div>
-	<p>Handler must contains <tt>@Mapping</tt> annotation:
+	<p>Note: Handler must contains <tt>@Mapping</tt> annotation.
+	<p>Let's implement <tt>CreateDoc</tt> logic:
 	<pre class="brush: java;">
 	import com.gf.Handler;
 	import com.gf.annotation.Mapping;
@@ -212,7 +213,12 @@
 	<pre class="brush: java;">
 	import com.gf.service.ActionService;
 
-	public interface DocService extends ActionService { }</pre>
+	public interface DocService extends ActionService { }
+	
+	
+	//example of service using
+	DocService service = getService();
+	Doc result = service.invoke(new CreateDoc("some name"));</pre>
 	
 	<p>And create implementation with <tt>Engine</tt> inside:
 	<pre class="brush: java;">
@@ -247,11 +253,62 @@
 	
 	<p class="more-top">
 	<span class="title">V. Add aspects things</span>
+	<br>In next step you can use <tt>Filters</tt> and <tt>Interveptors</tt> for aspects (like validation or security).
+	<p>Example of security filter:
+	<pre class="brush: java;">
+	import com.gf.Filter;
 	
+	public class SecurityFilter extends Filter {
+		
+		@Override
+		public void invoke(Action&lt;?, ?&gt; action, FilterChain chain) 
+				throws Exception {
+			
+			boolean isPermitted = checkUserPermissions();
+			
+			if( ! isPermitted) throw new SecutiryException();
+			else chain.doNext();
+			
+		}
+	
+	}</pre>
+	
+	<p>And example of validation interceptor:
+	<pre class="brush: java;">
+	import com.gf.Interceptor;
+	import com.gf.annotation.Mapping;
+
+	@Mapping(CreateDoc.class)
+	public class CheckNameInterceptor extends Interceptor&lt;CreateDoc&gt;{
+	
+		@Override
+		public void invoke(CreateDoc action, InterceptorChain chain)
+				throws Exception {
+			
+			String name = action.input();
+			if(name == null 
+					|| name.length() == 0)
+				throw new InvalidNameException();
+			
+			chain.doNext();
+			
+		}
+	
+	}</pre>
 	
 	
 	<p class="more-top">
-	<span class="title">VI. Use nested Actions</span>
+	<span class="title">VI. Use class scanner</span>
+	<br>If you have a set of handlers, interceptors and filters you can add all of them by package scanning:
+	<pre class="brush: java;">
+	import com.gf.core.Engine;
+	
+	Engine engine = new Engine();
+	
+	//put all valid handlers, interceptors and filters
+	engine.scanAndPut("foo.bar");
+	
+	Doc result = engine.invoke(new CreateDoc("some name"));</pre>
 	
 
 	

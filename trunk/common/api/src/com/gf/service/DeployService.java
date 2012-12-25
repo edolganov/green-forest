@@ -56,13 +56,13 @@ public interface DeployService {
 	/**
 	 * Scan packages and put all handlers, interceptors, filters.
 	 */
-	void scanForAnnotations(String packageName) 
+	void scanAndPut(String packageName) 
 			throws NoMappingAnnotationException, NotOneHandlerException;
 	
 	/**
-	 * Analog for {@link #scanForAnnotations(String)}: <tt>scanForAnnotations(clazz.getPackage().getName())</tt>
+	 * Analog for {@link #scanAndPut(String)}: <tt>scanAndPut(clazz.getPackage().getName())</tt>
 	 */
-	void scanForAnnotations(Class<?> clazz)
+	void scanAndPut(Class<?> clazz)
 			throws NoMappingAnnotationException, NotOneHandlerException;
 	
 	/**
@@ -86,10 +86,10 @@ public interface DeployService {
 	void setFilterTypes(Collection<Class<? extends Filter>> filterTypes);
 	
 	/**
-	 * Analog of multi call of {@link #scanForAnnotations(String)}.
+	 * Analog of multi call of {@link #scanAndPut(String)}.
 	 * For example for JavaBean logic.
 	 */
-	void setScanForAnnotations(Collection<String> packageNames) 
+	void setScanAndPut(Collection<String> packageNames) 
 			throws NoMappingAnnotationException, NotOneHandlerException;
 	
 	
