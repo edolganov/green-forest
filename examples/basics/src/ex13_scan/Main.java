@@ -24,7 +24,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Engine engine = new Engine();
-		engine.scanForAnnotations("ex13_scan");
+		engine.scanAndPut("ex13_scan");
 		engine.invoke(new SomeAction());
 	}
 

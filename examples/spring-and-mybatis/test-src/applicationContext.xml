@@ -43,7 +43,7 @@
 	
 	<bean id="storageEngine" class="com.gf.core.Engine">
 		<property name="name" value="Storage Engine"/>
-		<property name="scanForAnnotations">
+		<property name="scanAndPut">
 			<list>
 				<value>mybatis.storage</value>
 			</list>
@@ -73,7 +73,7 @@
 	
 	<bean id="appEngine" class="com.gf.core.Engine">
 		<property name="name" value="App Engine"/>
-		<property name="scanForAnnotations">
+		<property name="scanAndPut">
 			<list>
 				<value>example.app</value>
 			</list>

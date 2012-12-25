@@ -62,7 +62,7 @@ public abstract class AbstractInitServlet extends HttpServlet {
 		
 		//init
 		engine.addToContext(storage);
-		engine.scanForAnnotations(App.class);
+		engine.scanAndPut(App.class);
 		engine.setConfig(TraceHandlers.class, true);
 		
 		//invoke actions

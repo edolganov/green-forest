@@ -79,15 +79,15 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	}
 	
 	
-	public void scanForAnnotations(Class<?> clazz){
-		scanForAnnotations(clazz.getPackage().getName());
+	public void scanAndPut(Class<?> clazz){
+		scanAndPut(clazz.getPackage().getName());
 	}
 
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void scanForAnnotations(String packageName) {
+	public void scanAndPut(String packageName) {
 		
-		log.info("Scanning and registering classes...");
+		log.info("Scanning and putting classes...");
 		
 		
 		Class<?> scannerType = config.getConfig(new ClassScannerKey());
@@ -226,11 +226,11 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		}
 	}
 
-	public void setScanForAnnotations(Collection<String> packageNames)
+	public void setScanAndPut(Collection<String> packageNames)
 			throws NoMappingAnnotationException, NotOneHandlerException {
 		if(packageNames == null) return;
 		for (String packageName : packageNames) {
-			scanForAnnotations(packageName);
+			scanAndPut(packageName);
 		}
 	}
 	
