@@ -5,16 +5,19 @@
 	- статья на хабре
 	- статья на инглиш аналоге хабра
 
+
 === релиз 0.9 ===
 	- доки
 *		- reference guide
-*			- Getting Started
-			- ядро
-			- утилиты апи
-			- компоненты
-		- доки по примерам
+		- Best practices
+		- Complex examples
+		- Issues (jboss as)
+	- удалить доки по примерам
+		- заменить на текстовые описания
 	- основная страница
-	- сборки в раздел download
+	- фиксация динамич.доков в статичные
+	- update changelog
+	- заливка сборки в download
 	- создание артефакта для мавна
 		- поиск "создание мавен репозитория"
 		- поиск "интеграция в центральные репозитории"
@@ -24,8 +27,7 @@
 			- guide: http://maven.apache.org/guides/mini/guide-central-repository-upload.html
 				- http://stackoverflow.com/questions/8331209/how-to-add-own-project-to-public-maven-repository
 	- кнопка донате как у http://code.google.com/p/reflections/
-	- фиксация динамич.доков в статичные
-	- update changelog
+	
 
 
 === core ===
@@ -77,6 +79,7 @@ _____________________
 === релиз 0.9 ===
 	- доки
 		- reference guide
+			- Getting Started
 			- Features
 			- Overview
 			- js ускорители
