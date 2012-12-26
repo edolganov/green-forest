@@ -24,7 +24,6 @@ import jdbc.storage.handler.RenameDocHandler;
 
 import org.junit.Test;
 
-import test.model.ThrowExceptionAfterHandler;
 
 import com.gf.core.Engine;
 import com.gf.exception.TestRuntimeException;
@@ -32,6 +31,7 @@ import com.gf.exception.TestRuntimeException;
 import example.common.action.GetDocsPage;
 import example.common.action.RenameDoc;
 import example.common.model.Doc;
+import example.model.ThrowExceptionAfterHandler;
 
 public class TxExtTest extends AbstractStorageTest {
 	

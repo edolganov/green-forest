@@ -17,16 +17,20 @@ package example.app;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.Collection;
 
 import javax.sql.DataSource;
 
 import org.junit.Before;
 
 import com.gf.core.Engine;
+import com.gf.core.context.ContextServiceImpl;
 import com.gf.log.Log;
 import com.gf.log.LogFactory;
 import com.gf.util.ReflectionsUtil;
 import com.gf.util.junit.AssertExt;
+
+import example.storage.Storage;
 
 public abstract class AbstractAppTest extends AssertExt {
 	
@@ -48,6 +52,7 @@ public abstract class AbstractAppTest extends AssertExt {
 	
 	protected App app;
 	protected Engine appEngine;
+	protected Engine storageEngine;
 	protected DataSource ds;
 	
 	@Before
@@ -61,6 +66,19 @@ public abstract class AbstractAppTest extends AssertExt {
 		AppContext context = provider.createContext();
 		this.app = context.app;
 		this.appEngine = (Engine) ReflectionsUtil.getField(app, "actionService");
+		
+		Storage storage = null;
+		ContextServiceImpl appContext = ((ContextServiceImpl)ReflectionsUtil.getField(appEngine, "context"));
+		Collection<Object> list = appContext.getStaticContextObjects();
+		for (Object object : list) {
+			if(object instanceof Storage){
+				storage = (Storage)object;
+				break;
+			}
+		}
+		this.storageEngine = (Engine) ReflectionsUtil.getField(storage, "actionService");
+		
+		
 		this.ds = context.ds;
 	}
 	

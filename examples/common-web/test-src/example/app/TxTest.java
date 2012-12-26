@@ -22,14 +22,13 @@ import jdbc.storage.handler.GetDocsPageHandler;
 
 import org.junit.Test;
 
-import test.model.ThrowExceptionAfterHandler;
-
 import com.gf.core.Engine;
 import com.gf.exception.TestRuntimeException;
 
 import example.common.action.GetDocsPage;
 import example.common.action.RenameDoc;
 import example.common.model.Doc;
+import example.model.ThrowExceptionAfterHandler;
 
 public class TxTest extends AbstractAppTest {
 	
@@ -38,7 +37,7 @@ public class TxTest extends AbstractAppTest {
 		
 		Doc initDoc = app.invoke(new GetDocsPage(0, 1)).list.get(0);
 		
-		appEngine.putInterceptor(ThrowExceptionAfterHandler.class);
+		storageEngine.putInterceptor(ThrowExceptionAfterHandler.class);
 		
 		int id = 1;
 		String newName = "new123";

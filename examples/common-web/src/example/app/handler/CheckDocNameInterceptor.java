@@ -31,6 +31,8 @@ public class CheckDocNameInterceptor extends Interceptor<Action<?,?>>{
 			checkName(name);
 		}
 		
+		chain.doNext();
+		
 	}
 
 	private void checkName(String name) {
