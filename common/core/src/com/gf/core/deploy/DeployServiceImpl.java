@@ -244,7 +244,7 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 
 	private void logMappingSingle(String preffix, Class<?> handler, Class<?> target) {
 		String handlerPart = "["+handler.getName()+"]";
-		String targetPart = target != null? "-> [" + target.getName() + "]" : "";
+		String targetPart = target != null? " -> [" + target.getName() + "]" : "";
 		String msg = preffix+" "+ handlerPart + targetPart;
 		log.info(msg);
 	}
