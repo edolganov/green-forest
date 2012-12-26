@@ -75,12 +75,12 @@ public abstract class Action<I, O> {
 	/**
 	 * input data for handlers
 	 */
-	private I input;
+	protected I input;
 	
 	/**
 	 * output data from handlers
 	 */
-	private O output;
+	protected O output;
 	
 	/**
 	 * additional attributes

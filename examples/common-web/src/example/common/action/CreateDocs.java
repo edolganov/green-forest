@@ -20,9 +20,10 @@ import java.util.List;
 import com.gf.Action;
 import com.gf.util.Util;
 
+import example.common.action.validation.HasDocNames;
 import example.common.model.Doc;
 
-public class CreateDocs extends Action<List<String>, List<Doc>>{
+public class CreateDocs extends Action<List<String>, List<Doc>> implements HasDocNames {
 
 	public CreateDocs() {
 		super();
@@ -34,6 +35,10 @@ public class CreateDocs extends Action<List<String>, List<Doc>>{
 	
 	public CreateDocs(String name) {
 		super(Util.list(name));
+	}
+
+	public List<String> getNames() {
+		return input;
 	}
 	
 	

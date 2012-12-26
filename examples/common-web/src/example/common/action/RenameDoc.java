@@ -16,11 +16,15 @@
 package example.common.action;
 
 
-import com.gf.Action;
+import java.util.List;
 
+import com.gf.Action;
+import com.gf.util.Util;
+
+import example.common.action.validation.HasDocNames;
 import example.common.model.Doc;
 
-public class RenameDoc extends Action<Doc, Void>{
+public class RenameDoc extends Action<Doc, Void> implements HasDocNames {
 	
 	public RenameDoc(int id, String newName){
 		this(new Doc(id, newName));
@@ -28,6 +32,13 @@ public class RenameDoc extends Action<Doc, Void>{
 
 	public RenameDoc(Doc input) {
 		super(input);
+	}
+
+	public List<String> getNames() {
+		if(input != null){
+			return Util.list(input.name);
+		}
+		return null;
 	}
 	
 	

@@ -20,12 +20,16 @@ import com.gf.Handler;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Mapping;
 
+import example.common.action.CreateDocs;
 import example.common.action.GetDocsCount;
+import example.common.action.RenameDoc;
 import example.storage.Storage;
 
 
 @Mapping({
-	GetDocsCount.class
+	GetDocsCount.class,
+	CreateDocs.class,
+	RenameDoc.class
 })
 public class StorageDelegateHandler extends Handler<Action<?,?>>{
 	
