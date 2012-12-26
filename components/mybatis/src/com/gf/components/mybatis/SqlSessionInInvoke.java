@@ -53,6 +53,7 @@ public class SqlSessionInInvoke extends InvocationReaderFilter {
 			session.commit();
 			
 		}catch (Exception e) {
+			session.rollback();
 			throw e;
 		} finally {
 			try {

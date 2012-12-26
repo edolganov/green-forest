@@ -35,7 +35,7 @@
 	  <property name="dataSource" ref="dataSource" />
 	  <property name="mapperLocations" value="classpath*:mybatis/mapper/**/*.xml" />
 	  <property name="transactionFactory">
-	  	<bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" />
+	  	<bean class="org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory" />
 	  </property>  
 	</bean>
 	
