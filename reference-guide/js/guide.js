@@ -10,11 +10,73 @@ GuideController = function(){
 	
 	this.init = function(){
 		
-		initToc();
-		initSpecialTags();
-		addSpaceToP();
+		loadImports(function(){
+			initToc();
+			initSpecialTags();
+			addSpaceToP();
+			
+			//page logic
+			SyntaxHighlighter.config.bloggerMode = true;
+			SyntaxHighlighter.defaults['toolbar'] = false;
+			SyntaxHighlighter.highlight();
+			new EffectsController().init();
+			
+		});
+
 		
 	};
+	
+	
+	function loadImports(finishCallback){
+		
+		var imports = $(".importBlock");
+		var elems = [];
+		$.each(imports, function(i, elem){
+			elems.push($(elem));
+		});
+		
+		var i = 0;
+		var onLoad = function(html){
+			
+			//process loaded
+			var elem = elems[i];
+			setImportHtml(elem, html);
+			
+			//load next
+			i++;
+			if(i < elems.length){
+				loadImport(elems[i], onLoad);
+			} else {
+				finishCallback();
+			}
+		};
+		
+		//load first
+		if(elems.length > 0){
+			loadImport(elems[i], onLoad);
+		}
+		
+	}
+	
+	function loadImport(elem, callback){
+		
+		var url = elem.attr("p-url");
+		$.ajax({
+			url: url,
+			cache:false,
+			dataType:"text",
+			success: callback,
+			error: function(){
+				alert("error while loading html by url: "+url);
+			}
+		});
+		
+	}
+	
+	function setImportHtml(elem, html){
+		elem.html(html);
+	}
+	
 	
 	function initToc(){
 		

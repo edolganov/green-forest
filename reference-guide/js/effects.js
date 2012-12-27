@@ -1,8 +1,4 @@
-$(document).ready(function(){
-	
-	new EffectsController().init();
-	
-});
+
 
 EffectsController = function(){
 	

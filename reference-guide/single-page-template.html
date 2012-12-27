@@ -15,7 +15,6 @@
 	<script type="text/javascript" src="js/guide.js" ></script>
 	<script type="text/javascript" src="js/shCore.js"></script>
 	<script type="text/javascript" src="js/shBrushJava.js"></script>
-	<script type="text/javascript">SyntaxHighlighter.all();</script>
 	<script type="text/javascript" src="js/effects.js"></script>
 </head>
 <body>
@@ -29,100 +28,11 @@
 	
 	<div class="section toc"></div>
 	
-	<h2>Overview</h2>
-	<p>
-	<gff> is the simple <a href='#ioc-container'>IoC Container</a> with <a href="#action-handler">Action-Handler architecture</a>. 
-	It's not a competitor for <sf> or <jee> but it's a powerful addition for this frameworks. 
-	You can use <gf> for a single class implementation and for a complex business logic.
-	
-	
-	
-	<h2>Features</h2>
-	<p>
-	<span class="title"><a id="ioc-container">IoC Container</a></span>
-	<br>With <gf> you can separate your application's logic into simple atomic classes. 
-	The framework organizes communications between this classes.
-	Also you can add an external object into invocation context and use it by dependency injection.
-	
-	<p class="more-top">
-	<span class="title"><a id="action-handler">Action-Handler architecture</a></span>
-	<br>API of <gf> has only one method: <tt>invoke</tt>. 
-	This method takes <a href="#action">Action</a> object with input data, finds targeted <a href="#handler">Handler</a> and return handler's output. 
-	<br>Take a look for the illustrating picture:
-	<div class="image-wrap">
-		<img class="pic2" src="i/action-handler-pattern.png" width="90%">
-		<div>Action-Handler architecture</div>
-	</div>
-	<p>Code example:
-	<pre class="brush: java;">
-		//create Green-forest Engine
-		Engine engine = new Engine();
-		
-		//register some handler
-		engine.putHandler(SomeActonHandler.class);
-		
-		//invoke some action and get result
-		String result = engine.invoke(new SomeAction("some data"));</pre>
-		
-
-	<p class="more-top">
-	<span class="title">Aspects implementation</span>
-	<br><gf> contains <a href="#aspects">Filters</a> and <a href="#aspects">Interceptors</a>. 
-	With these instruments you can implement a lot of aspects things (like <tt>validation</tt>, <tt>wrapping</tt>, <tt>logging</tt> etc)
-	without using special aspect libraries (like <span class='name'>AspectJ</span>).
-	<p>Code example:
-	<pre class="brush: java;">
-		public class WorktimeFilter extends Filter {
-		
-			@Override
-			public void invoke(Action&lt;?, ?&gt; action, FilterChain chain) 
-				throws Exception {
-				
-				Date begin = new Date();
-				try {
-					//next handler
-					chain.doNext();
-				}finally {
-					long worktime = System.currentTimeMillis() - begin.getTime();
-					log.info("worktime: "+worktime+"ms");
-				}
-			}
-		
-		}</pre>
+	<div class="importBlock" p-url="./chapters/01_overview.html"></div>
+	<div class="importBlock" p-url="./chapters/02_features.html"></div>
 	
 
-	<p class="more-top">
-	<span class="title">Isolated contexts</span>
-	<br>You can use one <gf> inside another like external object.
-	In this way you can separate a big application context to few small isolated contexts that use each other.
-	<br>Take a look for the illustrating picture:
-	<div class="image-wrap">
-		<img class="pic" src="i/isolated-context.png" width="90%">
-		<div>Difference between single and isolated contexts</div>
-	</div>
-	<p>Code example:
-	<pre class="brush: java;">
-		//Handler
-		@Mapping(SomeAction.class)
-		public class SomeHandler extends Handler&lt;SomeAction&gt;{
-		
-			@Inject
-			SomeService service;
-			
-			@Inject
-			OtherService otherService;
-			
-			@Override
-			public void invoke(SomeAction action) throws Exception {
-					
-				//external object with action-handler API
-				service.invoke(new OtherAction());
-				
-				//other external object
-				otherService.someMethod();
-				
-			}
-		}</pre>
+	
 		
 		
 	

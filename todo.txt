@@ -11,8 +11,16 @@
 *		- reference guide
 			- imports
 			- Integrations
+				- jee
+				- spring
+				- mybatis
+				- JDBC and Transactions
+				- Logging
 			- Complex examples
 			- Issues (jboss as)
+			- license
+			- footer
+				пример: SyntaxHighlighter was originally created in 2004 and is still maintained by Alex Gorbatchev. Copyright 2004-2011 Alex Gorbatchev.
 	- удалить доки по примерам
 		- заменить на текстовые описания
 	- фиксация динамич.доков в статичные
