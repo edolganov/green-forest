@@ -309,16 +309,79 @@
 	}</pre>
 	
 
- 	<h2>Best practices</h2>
+ 	<h2>Best Practices</h2>
  	
  	<p>
-	<span class="title"></span>
+	<span class="title">Use Action for additional logic</span>
+	<br><tt>Action</tt> can be not only the data container: you can use it for validation and standardization's things.
+	<br>Example of additional action's logic:
+	<pre class="brush: java;">
+	//1. create common interface for validation
+	public interface HasDocNames {
+	
+		List&lt;String&gt; getNames();
+	
+	}
+	
+	//2. add interface to acitons:
+	public class CreateDocs extends Action&lt;List&lt;String&gt;, List&lt;Doc&gt;&gt; 
+		implements HasDocNames {
+	
+		public CreateDocs(List&lt;String&gt; names) {
+			super(names);
+		}
+		
+		//additional logic
+		public List&lt;String&gt; getNames() {
+			return input;
+		}
+	
+	}
+	
+	public class RenameDoc extends Action&lt;Doc, Void&gt; 
+		implements HasDocNames {
+		
+		public RenameDoc(int id, String newName){
+			this(new Doc(id, newName));
+		}
+	
+		//additional logic
+		public List&lt;String&gt; getNames() {
+			if(input != null){
+				return Util.list(input.name);
+			}
+			return null;
+		}
+	
+	}
+	
+	//3. use additional logic in validation
+	@Mapping(HasDocNames.class)
+	public class CheckDocNameInterceptor extends Interceptor&lt;Action&lt;?,?&gt;&gt;{
+	
+		@Override
+		public void invoke(Action&lt;?, ?&gt; action, InterceptorChain chain) 
+			throws Exception {
+			
+			HasDocNames hasDocNames = ((HasDocNames)action);
+			List&lt;String&gt; names = hasDocNames.getNames();
+			
+			boolean isValid = validateNames(names);
+			
+			if( ! isValid) throw new InvalidNameException();
+			
+			chain.doNext();
+			
+		}
+	
+	}
+	</pre>
  	
  	
- 	<h2>Complex examples</h2>
+ 	<h2>Complex Examples</h2>
 
  	
- 	<h2>Issues</h2>
+ 	<h2>Known Issues</h2>
  	
  	
 
