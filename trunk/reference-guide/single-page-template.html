@@ -67,7 +67,7 @@
 
 	<p class="more-top">
 	<span class="title">Aspects implementation</span>
-	<br><gf> contains <a href="#filter">Filters</a> and <a href="#interceptor">Interceptors</a>. 
+	<br><gf> contains <a href="#aspects">Filters</a> and <a href="#aspects">Interceptors</a>. 
 	With these instruments you can implement a lot of aspects things (like <tt>validation</tt>, <tt>wrapping</tt>, <tt>logging</tt> etc)
 	without using special aspect libraries (like <span class='name'>AspectJ</span>).
 	<p>Code example:
@@ -129,7 +129,7 @@
  	<h2>Getting Started</h2>
  	
 	<p>
-	<span class="title">0. Add library to project</span>
+	<span class="title">Add library to project</span>
  	<br>Get the latest version of <gff> from <a target="_blank" href="https://code.google.com/p/green-forest/downloads/list">download page</a>.
  	The zip archive with name like <tt>"green-forest-X.X-pack"</tt> contains binaries, javadocs and sources. 
  	<gf> has no dependencies for itself. Add the library to your Project.
@@ -205,9 +205,22 @@
 	
 	Doc result = engine.invoke(new CreateDoc("some name"));</pre>
 	
+	<p class="more-top">
+	<span class="title">IV. Use class scanner</span>
+	<br>If you have a set of handlers, interceptors and filters you can add all of them by package scanning:
+	<pre class="brush: java;">
+	import com.gf.core.Engine;
+	
+	Engine engine = new Engine();
+	
+	//put all valid handlers, interceptors and filters
+	engine.scanAndPut("foo.bar");
+	
+	Doc result = engine.invoke(new CreateDoc("some name"));</pre>
+	
 	
 	<p class="more-top">
-	<span class="title">IV. Create understandable interface</span>
+	<span class="title">V. Create understandable interface</span>
 	<br>Use understandable name of your API not just the universal <tt>Engine</tt>.
 	For this reason you can extend <tt>ActionService</tt> interface: 
 	<pre class="brush: java;">
@@ -240,19 +253,18 @@
 		
 		
 		public &lt;I, O&gt; O invoke(Action&lt;I, O&gt; action) {
-			return actionService.invoke(action);
+			return engine.invoke(action);
 		}
 		
-		public &lt;I, O&gt; O invokeUnwrap(Action&lt;I, O&gt; action) 
-			throws Exception {
-			return actionService.invokeUnwrap(action);
+		public &lt;I, O&gt; O invokeUnwrap(Action&lt;I, O&gt; action) throws Exception {
+			return engine.invokeUnwrap(action);
 		}
 	
 	}</pre>
 	
 	
 	<p class="more-top">
-	<span class="title">V. Add aspects things</span>
+	<span class="title"><a id="aspects">VI. Add aspects things</a></span>
 	<br>In next step you can use <tt>Filters</tt> and <tt>Interveptors</tt> for aspects (like validation or security).
 	<p>Example of security filter:
 	<pre class="brush: java;">
@@ -295,20 +307,6 @@
 		}
 	
 	}</pre>
-	
-	
-	<p class="more-top">
-	<span class="title">VI. Use class scanner</span>
-	<br>If you have a set of handlers, interceptors and filters you can add all of them by package scanning:
-	<pre class="brush: java;">
-	import com.gf.core.Engine;
-	
-	Engine engine = new Engine();
-	
-	//put all valid handlers, interceptors and filters
-	engine.scanAndPut("foo.bar");
-	
-	Doc result = engine.invoke(new CreateDoc("some name"));</pre>
 	
 
  	<h2>Best practices</h2>
