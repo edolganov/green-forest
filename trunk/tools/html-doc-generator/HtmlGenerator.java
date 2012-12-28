@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.LinkedList;
 
 
 public class HtmlGenerator {
@@ -63,42 +62,40 @@ public class HtmlGenerator {
 		while((line = br.readLine())!= null){
 			
 			String normalStr = line.toLowerCase();
-			if(normalStr.contains(" copyright ") && normalStr.contains("*")){
-				hasCopyright = true;
-				break;
+			
+			if(normalStr.contains("<body>")){
+				line += "\n"+"<span class='disablePreprocessingFlag'></span>";
+				appendLine(content, line);
+				continue;
 			}
 			
-			appendLine(oldContent, line);
+			if(normalStr.contains("importblock") && normalStr.contains("p-url")){
+				String importedContent = importContent(file, line);
+				line = insertContentToBlock(line, importedContent);
+				appendLine(content, line);
+				continue;
+			}
+			
+			appendLine(content, line);
 			
 		}
 		fileReader.close();
 		
-		
-		if( ! hasCopyright){
-			
-			String header = copyrightText;
-			String body = oldContent.toString();
-			//if(body.endsWith("\n")){
-			//	body = body.substring(0, body.length()-1);
-			//}
-			
-			File bakFile = new File(file.getParent(),file.getName()+".BAK");
-			boolean backuped = file.renameTo(bakFile);
-			if( ! backuped){
-				throw new IllegalStateException("can't rename for backup "+file);
-			}
-			
-			FileWriter fileWriter = new FileWriter(file);
-
-			fileWriter.write(header);
-			fileWriter.write(body);
-			fileWriter.close();
-			
-			bakFile.delete();
-			
-			log("updated: "+file.getName());
-		}
+		String out = content.toString();
+		return out;
 	}
+
+
+	private static String importContent(File file, String line) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	private static String insertContentToBlock(String line, String importedContent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	private static void appendLine(StringBuilder sb, String line) {
 		sb.append(line).append('\n');
