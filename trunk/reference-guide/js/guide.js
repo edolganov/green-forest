@@ -10,13 +10,19 @@ GuideController = function(){
 	
 	this.init = function(){
 		
-		loadImports(function(){
-			initToc();
-			initSpecialTags();
-			addSpaceToP();
-			
+		var skipPreprocessing = $(".disablePreprocessingFlag").length > 0;
+		
+		if( ! skipPreprocessing){
+			loadImports(function(){
+				initToc();
+				initSpecialTags();
+				addSpaceToP();
+				
+				afterPreprocessing();
+			});
+		} else {
 			afterPreprocessing();
-		});
+		}
 
 		
 	};

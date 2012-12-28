@@ -9,6 +9,7 @@
 === релиз 0.9 ===
 	- доки
 		- сделать генератор финальной Html на Java
+			- <span class="disablePreprocessingFlag"></span>
 *		- reference guide
 			- кнопка back-to-top
 			- Integrations
