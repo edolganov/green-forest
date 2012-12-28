@@ -8,10 +8,6 @@
 
 === релиз 0.9 ===
 	- доки
-		- сделать генератор финальной Html на Java
-*			- initToc();
-			- initSpecialTags();
-			- addSpaceToP();
 *		- reference guide
 			- кнопка back-to-top
 			- Integrations
@@ -25,6 +21,7 @@
 			- license
 			- footer
 				пример: SyntaxHighlighter was originally created in 2004 and is still maintained by Alex Gorbatchev. Copyright 2004-2011 Alex Gorbatchev.
+		- reference guide page
 	- удалить доки по примерам
 		- заменить на текстовые описания
 	- фиксация динамич.доков в статичные
@@ -104,7 +101,7 @@ _____________________
 			- Overview
 			- js ускорители
 		- сделать генератор финальной Html на Java
-			- disablePreprocessingFlag
+			- отказался т.к. довольно громоздко - проще просто сохранять через save-as
 	- доработать примеры - добавив валидацию через перехватчик
 		- фикс всплывшей баги в юнит-тестах
 		- тесты сборок
