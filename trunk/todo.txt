@@ -9,7 +9,6 @@
 === релиз 0.9 ===
 	- доки
 *		- reference guide
-			- кнопка back-to-top
 			- Integrations
 				- jee
 				- spring
@@ -21,6 +20,8 @@
 			- license
 			- footer
 				пример: SyntaxHighlighter was originally created in 2004 and is still maintained by Alex Gorbatchev. Copyright 2004-2011 Alex Gorbatchev.
+			- кнопка back-to-top
+				http://agyuku.net/2009/05/back-to-top-link-using-jquery/
 		- reference guide page
 	- удалить доки по примерам
 		- заменить на текстовые описания
