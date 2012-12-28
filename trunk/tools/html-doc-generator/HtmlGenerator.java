@@ -1,7 +1,12 @@
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 
 public class HtmlGenerator {
@@ -86,14 +91,46 @@ public class HtmlGenerator {
 	}
 
 
-	private static String importContent(File file, String line) {
-		// TODO Auto-generated method stub
-		return null;
+	private static String importContent(File file, String line) throws IOException {
+		String urlParam = "p-url=";
+		int index = line.indexOf(urlParam);
+		if(index < 0){
+			return "";
+		}
+		
+		int beginIndex = urlParam.length()+index+1;
+		int endIndex = line.indexOf("\"", beginIndex);
+		if(endIndex < 0){
+			return "";
+		}
+		
+		String url = line.substring(beginIndex, endIndex);
+		String parentPath = file.getParentFile().getPath();
+		parentPath = parentPath.replace("\\", "/");
+		if( ! parentPath.endsWith("/")){
+			parentPath = parentPath + "/";
+		}
+		
+		String importFilePath = parentPath+url;
+		File importFile = new File(importFilePath);
+		if( ! importFile.exists() || ! importFile.isFile()){
+			return "";
+		}
+		
+		String content = readFileUTF8(importFile);
+		return content;
 	}
 	
-	private static String insertContentToBlock(String line, String importedContent) {
-		// TODO Auto-generated method stub
-		return null;
+	private static String insertContentToBlock(String line, String content) {
+		String endTag = "</";
+		int index = line.indexOf(endTag);
+		if(index < 0){
+			return content;
+		}
+		
+		String begin = line.substring(0, index);
+		String end = line.substring(index);
+		return begin+"\n"+content+"\n"+end;
 	}
 
 
@@ -103,6 +140,42 @@ public class HtmlGenerator {
 
 	private static void log(String msg){
 		System.out.println(msg);
+	}
+	
+	public static String readFileUTF8(File file) throws IOException {
+		return readFile(file, "UTF8");
+	}
+
+	public static String readFile(File file, String charset) throws IOException {
+		InputStreamReader r = null;
+		OutputStreamWriter w = null;
+
+		try {
+			r = new InputStreamReader(new FileInputStream(file), charset);
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			w = new OutputStreamWriter(out, charset);
+			char[] buff = new char[1024 * 4];
+			int i;
+			while ((i = r.read(buff)) > 0) {
+				w.write(buff, 0, i);
+			}
+			w.flush();
+			return out.toString(charset);
+		} finally {
+			if (r != null)
+				try {
+					r.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			if (w != null)
+				try {
+					w.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
 	}
 
 }
