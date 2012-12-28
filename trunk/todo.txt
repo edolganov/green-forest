@@ -10,7 +10,6 @@
 	- доки
 *		- reference guide
 			- Integrations
-				- jee
 				- spring
 				- mybatis
 				- JDBC and Transactions
@@ -95,6 +94,8 @@ _____________________
 === релиз 0.9 ===
 	- доки
 		- reference guide
+			- Integrations
+				- jee
 			- imports
 			- Best practices
 			- Getting Started
