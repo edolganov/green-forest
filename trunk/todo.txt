@@ -8,7 +8,9 @@
 
 === релиз 0.9 ===
 	- доки
+		- сделать генератор финальной Html на Java
 *		- reference guide
+			- кнопка back-to-top
 			- Integrations
 				- jee
 				- spring
