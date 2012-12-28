@@ -9,7 +9,9 @@
 === релиз 0.9 ===
 	- доки
 		- сделать генератор финальной Html на Java
-			- <span class="disablePreprocessingFlag"></span>
+*			- initToc();
+			- initSpecialTags();
+			- addSpaceToP();
 *		- reference guide
 			- кнопка back-to-top
 			- Integrations
@@ -101,6 +103,8 @@ _____________________
 			- Features
 			- Overview
 			- js ускорители
+		- сделать генератор финальной Html на Java
+			- disablePreprocessingFlag
 	- доработать примеры - добавив валидацию через перехватчик
 		- фикс всплывшей баги в юнит-тестах
 		- тесты сборок
