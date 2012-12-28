@@ -15,16 +15,18 @@ GuideController = function(){
 			initSpecialTags();
 			addSpaceToP();
 			
-			//page logic
-			SyntaxHighlighter.config.bloggerMode = true;
-			SyntaxHighlighter.defaults['toolbar'] = false;
-			SyntaxHighlighter.highlight();
-			new EffectsController().init();
-			
+			afterPreprocessing();
 		});
 
 		
 	};
+	
+	function afterPreprocessing(){
+		SyntaxHighlighter.config.bloggerMode = true;
+		SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.highlight();
+		new EffectsController().init();
+	}
 	
 	
 	function loadImports(finishCallback){
@@ -54,6 +56,8 @@ GuideController = function(){
 		//load first
 		if(elems.length > 0){
 			loadImport(elems[i], onLoad);
+		} else {
+			finishCallback();
 		}
 		
 	}
