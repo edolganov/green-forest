@@ -25,17 +25,37 @@ import com.gf.exception.ExceptionWrapper;
 import com.gf.exception.invoke.InvocationException;
 import com.gf.service.ActionService;
 
+/**
+ * Abstract class of EJB bean for storing {@link ActionService} singleton object.
+ *
+ * @author Evgeny Dolganov
+ *
+ */
 public abstract class ActionServiceBean implements ActionService, ActionServiceFactory {
 	
+	/**
+	 * Singleton storage
+	 */
 	private static final ActionServiceSingleton serviceSingleton = new ActionServiceSingleton();
 	
+	/**
+	 * Link to action service from current object
+	 */
 	protected ActionService actionService;
 	
 	
+	/**
+	 * Create and store ActionService object (only one time)
+	 */
 	@PostConstruct
 	public void init(){
 		actionService = serviceSingleton.getServiceAndRegisterClient(this);
 	}
+	
+	/**
+	 * Create singleton <tt>ActionService</tt>
+	 */
+	public abstract ActionService createActionService();
 	
 	@PreDestroy
 	public void preDestroy(){

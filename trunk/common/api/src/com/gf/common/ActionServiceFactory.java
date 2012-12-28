@@ -17,8 +17,17 @@ package com.gf.common;
 
 import com.gf.service.ActionService;
 
+/**
+ * Factory for creating {@link ActionService} objects
+ *
+ * @author Evgeny Dolganov
+ *
+ */
 public interface ActionServiceFactory {
 	
+	/**
+	 * Create {@link ActionService} object
+	 */
 	ActionService createActionService();
 
 }

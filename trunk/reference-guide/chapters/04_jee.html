@@ -1,1 +1,118 @@
-	<h2>JEE Integration</h2>
+
+<h2>JEE Integration</h2>
+
+<p>Use <gff> in <tt>Statless</tt> or <tt>Singleton</tt> beans for creating Action-Handler API instead of classic API.
+You can use <jee> features like context objects in your <a href="#engine">Engine</a> and inject them to handlers.
+<br>Example of classic <jee> interface and implementation:
+<pre class="brush: java;">
+import foo.Doc
+
+//interface
+public interface SomeService {
+	
+	Doc createDoc(String name);
+	
+	Doc getDoc(int id);
+	
+	void deleteDoc(int id);
+
+}
+
+//implementation
+@Stateless
+public class SomeBean implements SomeService {
+	
+    @PersistenceContext
+    EntityManager entityManager;
+
+	public Doc createDoc(String name) {
+		//some impl
+	}
+
+	public Doc getDoc(int id) {
+		//some impl
+	}
+
+	public void deleteDoc(int id) {
+		//some impl
+	}
+
+}</pre>
+
+<br>
+<a id="jee5impl"></a>Example of refactoring this API to Action-Hanlder API:
+<pre class="brush: java;">
+import com.gf.components.jee.ActionServiceBean;
+import com.gf.core.Engine;
+import com.gf.service.ActionService;
+
+//interface
+public interface OtherService extends ActionService { }
+
+
+//implementation
+@Stateless
+public class OtherBean extends ActionServiceBean implements OtherService {
+	
+    @PersistenceContext
+    EntityManager entityManager;
+
+	//create singleton intance
+	public ActionService createActionService() {
+		
+		//create engine
+		Engine engine = new Engine();
+		engine.addToContext(entityManager);
+		engine.scanAndPut("foo.blah");
+
+		return engine;
+	}
+	
+}</pre>
+
+<p class="more-top">
+<span class="title">JEE 5</span>
+<br>
+In JEE 5 there is no a standart singleton bean. 
+<br>So you can extend <b><tt>com.gf.components.jee.ActionServiceBean</tt></b> for Engine storing 
+(see <a href="#jee5impl">example above</a>).
+
+
+<p class="more-top">
+<span class="title">JEE 6</span>
+<br>
+In JEE 6 you can use Singleton bean:
+<br>Example of JEE 6 Action-Hanlder API:
+<pre class="brush: java;">
+import com.gf.core.Engine;
+import com.gf.service.ActionService;
+
+//interface
+public interface OtherService extends ActionService { }
+
+
+//implementation
+@Singleton
+public class OtherBean implements OtherService {
+	
+    @PersistenceContext
+    EntityManager entityManager;
+    
+    Engine engine;
+    
+	@PostConstruct
+	public void createEngine(){
+		engine = new Engine();
+		engine.addToContext(entityManager);
+		engine.scanAndPut("foo.blah");
+	}
+	
+	public &lt;I, O&gt; O invoke(Action&lt;I, O&gt; action) {
+		return (O) engine.invoke(action);
+	}
+
+	public &lt;I, O&gt; O invokeUnwrap(Action&lt;I, O&gt; action) throws Exception {
+		return (O) engine.invokeUnwrap(action);
+	}
+	
+}</pre>
