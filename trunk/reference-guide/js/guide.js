@@ -13,6 +13,9 @@ GuideController = function(){
 		var skipPreprocessing = $(".disablePreprocessingFlag").length > 0;
 		
 		if( ! skipPreprocessing){
+			
+			addSkipFlag();
+			
 			loadImports(function(){
 				initToc();
 				initSpecialTags();
@@ -20,12 +23,17 @@ GuideController = function(){
 				
 				afterPreprocessing();
 			});
+			
 		} else {
 			afterPreprocessing();
 		}
 
 		
 	};
+	
+	function addSkipFlag(){
+		$("body").prepend("<span class='disablePreprocessingFlag'></span>");
+	}
 	
 	function afterPreprocessing(){
 		SyntaxHighlighter.config.bloggerMode = true;
