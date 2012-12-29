@@ -30,6 +30,17 @@ import com.gf.extra.invocation.reader.InvocationReaderFilter;
 import com.gf.service.FilterChain;
 import com.gf.util.Util;
 
+/**
+ * Filter for creating {@link SqlSession} and adding it into the handler's context.
+ * Also the filter adds {@link Connection} object into the handler's context.
+ * For work the filter need a {@link SqlSessionFactory} object in context.
+ * <br>Example:
+ * <pre>
+ * 
+ * </pre>
+ * @author Evgeny Dolganov
+ *
+ */
 @Order(Order.SYSTEM_ORDER)
 public class SqlSessionInInvoke extends InvocationReaderFilter {
 	
