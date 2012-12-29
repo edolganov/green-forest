@@ -6,3 +6,31 @@
 by adding <b><tt>com.gf.components.mybatis.SqlSessionInInvoke</tt></b> filter 
 and <tt>SqlSessionFactory</tt> object into <tt>Engine</tt>.
 <br>Example:
+<pre class="brush: java;">
+//engine
+SqlSessionFactory sqlSessionFactory = ... 
+
+Engine engine = new Engine();
+engine.putFilter(SqlSessionInInvoke.class);
+engine.addToContext(sqlSessionFactory);
+engine.putHandler(SomeHandler.class);
+
+
+//handler
+import java.sql.Connection;
+import org.apache.ibatis.session.SqlSession;
+
+@Mapping(SomeAction.class)
+public class SomeHandler extends Handler&lt;SomeAction>{
+	
+	@Inject
+	Connection connection;
+	
+	@Inject
+	SqlSession session;
+
+	public void invoke(SomeAction action) throws Exception {
+		...
+	}
+
+}</pre>

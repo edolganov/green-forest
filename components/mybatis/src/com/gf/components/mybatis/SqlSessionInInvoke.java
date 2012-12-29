@@ -33,10 +33,34 @@ import com.gf.util.Util;
 /**
  * Filter for creating {@link SqlSession} and adding it into the handler's context.
  * Also the filter adds {@link Connection} object into the handler's context.
- * For work the filter need a {@link SqlSessionFactory} object in context.
+ * For work the filter needs a {@link SqlSessionFactory} object in context.
  * <br>Example:
  * <pre>
+ * //engine
+ * SqlSessionFactory sqlSessionFactory = ...
+ * Engine engine = new Engine();
+ * engine.addToContext(sqlSessionFactory);
+ * engine.putFilter(SqlSessionInInvoke.class);
+ * engine.putHandler(SomeHandler.class);
  * 
+ * //handler
+ * import java.sql.Connection;
+ * import org.apache.ibatis.session.SqlSession;
+ * 
+ * &#064;Mapping(SomeAction.class)
+ * public class SomeHandler extends Handler&lt;SomeAction&gt;{
+ *   
+ *   &#064;Inject
+ *   Connection connection;
+ *   
+ *   &#064;Inject
+ *   SqlSession session;
+ * 
+ *   public void invoke(SomeAction action) throws Exception {
+ *   	//...
+ *   }
+ * 
+ * }
  * </pre>
  * @author Evgeny Dolganov
  *
