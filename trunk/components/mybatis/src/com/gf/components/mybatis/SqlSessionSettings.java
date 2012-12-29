@@ -21,8 +21,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
 
-
+/**
+ * Annotation for setup {@link SqlSession} from a handler.
+ * Used in {@link SqlSessionInInvoke} filter.
+ * @author Evgeny Dolganov
+ *
+ */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SqlSessionSettings {

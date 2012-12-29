@@ -62,6 +62,19 @@ import com.gf.util.Util;
  * 
  * }
  * </pre>
+ * 
+ * <p>You can setup SqlSession's {@link ExecutorType} in a handler by {@link SqlSessionSettings} annotaiton:
+ * <pre>
+ * &#064;SqlSessionSettings(execType=ExecutorType.BATCH)
+ * &#064;Mapping(SomeActon.class)
+ * public class SomeHandler extends Handler&lt;SomeActon&gt;{
+ * 
+ *   public void invoke(SomeActon action) throws Exception {
+ *      ...
+ *   }
+ * 
+ * }
+ * </pre>
  * @author Evgeny Dolganov
  *
  */

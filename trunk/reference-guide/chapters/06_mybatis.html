@@ -3,7 +3,7 @@
 <p>
 <span class="title">SqlSession</span>
 <br>You can use <tt>SqlSession</tt> of <span class="name">MyBatis</span> 
-by adding <b><tt>com.gf.components.mybatis.SqlSessionInInvoke</tt></b> filter 
+by adding <tt>com.gf.components.mybatis.SqlSessionInInvoke</tt> filter 
 and <tt>SqlSessionFactory</tt> object into <tt>Engine</tt>.
 <br>Example:
 <pre class="brush: java;">
@@ -36,4 +36,20 @@ public class SomeHandler extends Handler&lt;SomeAction>{
 		...
 	}
 
+}</pre>
+
+<p class='text-align-left'>
+You can setup SqlSession's <tt>ExecutorType</tt> in a handler by <tt>com.gf.components.mybatis.SqlSessionSettings</tt> annotation:
+<pre class="brush: java;">
+import org.apache.ibatis.session.ExecutorType;
+import com.gf.components.mybatis.SqlSessionSettings;
+
+@SqlSessionSettings(execType=ExecutorType.BATCH)
+@Mapping(SomeActon.class)
+public class SomeHandler extends Handler&lt;SomeActon>{
+
+	public void invoke(SomeActon action) throws Exception {
+		...
+	}
+	
 }</pre>
