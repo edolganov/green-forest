@@ -8,9 +8,7 @@
 
 === релиз 0.9 ===
 	- доки
-*		- java-doc
 *		- reference guide
-			- link to javadoc
 			- Logging
 			- Configuration
 			- Complex examples
@@ -94,6 +92,7 @@ _____________________
 === релиз 0.9 ===
 	- доки
 		- reference guide
+			- link to javadoc
 			- JDBC and Transactions
 			- Integrations
 				- mybatis
@@ -105,6 +104,7 @@ _____________________
 			- Features
 			- Overview
 			- js ускорители
+		- java-doc
 		- сделать генератор финальной Html на Java
 			- отказался т.к. довольно громоздко - проще просто сохранять через save-as
 	- доработать примеры - добавив валидацию через перехватчик

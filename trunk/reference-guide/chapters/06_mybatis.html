@@ -3,7 +3,7 @@
 <p>
 <span class="title">SqlSession</span>
 <br>You can use <tt>SqlSession</tt> of <span class="name">MyBatis</span> 
-by adding <tt>com.gf.components.mybatis.SqlSessionInInvoke</tt> filter 
+by adding <a target="_blank" href="../javadoc/com/gf/components/mybatis/SqlSessionInInvoke.html"><tt>SqlSessionInInvoke</tt></a> filter 
 and <tt>SqlSessionFactory</tt> object into <tt>Engine</tt>.
 <br>Example:
 <pre class="brush: java;">
@@ -39,7 +39,8 @@ public class SomeHandler extends Handler&lt;SomeAction>{
 }</pre>
 
 <p class='text-align-left'>
-Also you can setup SqlSession's <tt>ExecutorType</tt> in a handler by <tt>com.gf.components.mybatis.SqlSessionSettings</tt> annotation:
+Also you can setup SqlSession's <tt>ExecutorType</tt> in a handler by 
+<a target="_blank" href="../javadoc/com/gf/components/mybatis/SqlSessionSettings.html"><tt>SqlSessionSettings</tt></a> annotation:
 <pre class="brush: java;">
 import org.apache.ibatis.session.ExecutorType;
 import com.gf.components.mybatis.SqlSessionSettings;
@@ -58,7 +59,8 @@ public class SomeHandler extends Handler&lt;SomeActon>{
 
 <p class="more-top text-align-left">
 <span class="title">Inject Mappers</span>
-<br>With <tt>SqlSession</tt> you can inject mappers into your handlers by <tt>com.gf.components.mybatis.InjectMappers</tt> interceptor:
+<br>With <tt>SqlSession</tt> you can inject mappers into your handlers by 
+<a target="_blank" href="../javadoc/com/gf/components/mybatis/InjectMappers.html"><tt>InjectMappers</tt></a> interceptor:
 <pre class="brush: java;">
 //engine
 import org.apache.ibatis.session.SqlSessionFactory;
