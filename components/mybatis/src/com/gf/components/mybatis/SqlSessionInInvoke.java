@@ -63,7 +63,7 @@ import com.gf.util.Util;
  * }
  * </pre>
  * 
- * <p>You can setup SqlSession's {@link ExecutorType} in a handler by {@link SqlSessionSettings} annotaiton:
+ * <p>Also you can setup SqlSession's {@link ExecutorType} in a handler by {@link SqlSessionSettings} annotaiton:
  * <pre>
  * &#064;SqlSessionSettings(execType=ExecutorType.BATCH)
  * &#064;Mapping(SomeActon.class)
