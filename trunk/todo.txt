@@ -8,10 +8,11 @@
 
 === релиз 0.9 ===
 	- доки
+*		- java-doc
 *		- reference guide
-			- Integrations
-				- JDBC and Transactions
-				- Logging
+			- link to javadoc
+			- Logging
+			- Configuration
 			- Complex examples
 			- Issues (jboss as)
 			- license
@@ -93,6 +94,7 @@ _____________________
 === релиз 0.9 ===
 	- доки
 		- reference guide
+			- JDBC and Transactions
 			- Integrations
 				- mybatis
 				- spring

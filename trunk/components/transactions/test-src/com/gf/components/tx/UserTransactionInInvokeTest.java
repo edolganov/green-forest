@@ -35,9 +35,9 @@ public class UserTransactionInInvokeTest extends AssertExt {
 		
 		
 		EmptyAction action = new EmptyAction();
-		assertFalse(action.containsAttr(UserTxAndConnection.USER_TX_IN_INVOKE_FLAG));
+		assertFalse(action.containsAttr(UserTxAndConnection.OPENED_USER_TX_FLAG));
 		engine.invoke(action);
-		assertFalse(action.containsAttr(UserTxAndConnection.USER_TX_IN_INVOKE_FLAG));
+		assertFalse(action.containsAttr(UserTxAndConnection.OPENED_USER_TX_FLAG));
 		
 	}
 

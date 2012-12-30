@@ -80,6 +80,13 @@
 		<jar jarfile="build/green-forest-${global.version}-javadoc.jar">
 			<fileset dir="build/javadoc-files"/>
 		</jar>
+		
+        <delete dir="javadoc"/>
+        <mkdir dir="javadoc"/>
+		<copy todir="javadoc">
+			<fileset dir="build/javadoc-files"/>
+		</copy>
+		
 
 		<jar jarfile="build/green-forest-${global.version}-sources.jar">
 			<fileset dir="build/src-all"/>

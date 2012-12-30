@@ -29,6 +29,8 @@ import com.gf.service.FilterChain;
 /**
  * Filter for adding {@link Connection} into handler's context.
  * The filter opens a connection before handler and finally closes it.
+ * The filter rollbacks the connection by any exception if there is no opened UserTransaction 
+ * by {@link com.gf.components.tx.UserTransactionInInvoke}.
  * Need {@link DataSourceManager} for work.
  * <br>Example:
  * <pre>
@@ -90,7 +92,7 @@ public class ConnectionInInvoke extends Filter {
 		}catch (Exception e) {
 			
 			//rollback if there is no ongoing UserTransaction in invoke
-			if( ! action.containsAttr(UserTxAndConnection.USER_TX_IN_INVOKE_FLAG)){
+			if( ! action.containsAttr(UserTxAndConnection.OPENED_USER_TX_FLAG)){
 				connection.rollback();
 			}
 			

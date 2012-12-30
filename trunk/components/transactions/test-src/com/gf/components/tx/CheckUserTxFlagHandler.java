@@ -27,7 +27,7 @@ public class CheckUserTxFlagHandler extends Handler<Action<?,?>>{
 	@Override
 	public void invoke(Action<?, ?> action) throws Exception {
 		
-		AssertExt.assertTrue(action.containsAttr(UserTxAndConnection.USER_TX_IN_INVOKE_FLAG));
+		AssertExt.assertTrue(action.containsAttr(UserTxAndConnection.OPENED_USER_TX_FLAG));
 		
 	}
 
