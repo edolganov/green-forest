@@ -10,8 +10,6 @@
 	- доки
 *		- reference guide
 			- Integrations
-				- spring
-				- mybatis
 				- JDBC and Transactions
 				- Logging
 			- Complex examples
@@ -21,6 +19,7 @@
 				пример: SyntaxHighlighter was originally created in 2004 and is still maintained by Alex Gorbatchev. Copyright 2004-2011 Alex Gorbatchev.
 			- кнопка back-to-top
 				http://agyuku.net/2009/05/back-to-top-link-using-jquery/
+			- активный TOC (подсвечивание при скролле)
 		- reference guide page
 	- удалить доки по примерам
 		- заменить на текстовые описания
@@ -95,6 +94,8 @@ _____________________
 	- доки
 		- reference guide
 			- Integrations
+				- mybatis
+				- spring
 				- jee
 			- imports
 			- Best practices

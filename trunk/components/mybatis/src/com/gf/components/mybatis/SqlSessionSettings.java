@@ -26,6 +26,8 @@ import org.apache.ibatis.session.SqlSession;
 /**
  * Annotation for setup {@link SqlSession} from a handler.
  * Used in {@link SqlSessionInInvoke} filter.
+ * 
+ * <p>This annotation is processed by {@link SqlSessionInInvoke}.
  * @author Evgeny Dolganov
  *
  */

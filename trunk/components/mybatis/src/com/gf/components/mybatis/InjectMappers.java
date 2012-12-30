@@ -29,6 +29,57 @@ import com.gf.extra.invocation.reader.InvocationReaderInterceptor;
 import com.gf.extra.util.ReflectionsUtil;
 import com.gf.service.InterceptorChain;
 
+/**
+ * Interceptor for inject mappers into handler.
+ * Need {@link SqlSessionInInvoke} filter for work.
+ * <br>Example:
+ * <pre>
+ * //engine
+ * import org.apache.ibatis.session.SqlSessionFactory;
+ * import com.gf.components.mybatis.SqlSessionInInvoke;
+ * import com.gf.components.mybatis.InjectMappers;
+ *  
+ * SqlSessionFactory sqlSessionFactory = ... 
+ *  
+ * Engine engine = new Engine();
+ * engine.putFilter(SqlSessionInInvoke.class);
+ * engine.putInterceptor(InjectMappers.class);
+ * engine.addToContext(sqlSessionFactory);
+ * engine.putHandler(SomeHandler.class);
+ *  
+ *  
+ * //mapper
+ * import org.apache.ibatis.annotations.Param;
+ *  
+ * public interface DocMapper  {
+ *      
+ *     void createDoc(&#064;Param("id")long id, &#064;Param("name")String name);
+ *      
+ *     int renameDoc(&#064;Param("id")long id, &#064;Param("name")String name);
+ *  
+ * }
+ *  
+ *  
+ * //handler
+ * import java.sql.Connection;
+ * import org.apache.ibatis.session.SqlSession;
+ *  
+ * &#064;Mapping(SomeAction.class)
+ * public class SomeHandler extends Handler&lt;SomeAction&gt;{
+ *      
+ *     &#064;Inject
+ *     DocMapper docMapper;
+ *  
+ *     public void invoke(SomeAction action) throws Exception {
+ *         ...
+ *     }
+ *  
+ * }
+ * </pre>
+ *
+ * @author Evgeny Dolganov
+ *
+ */
 @Order(Order.SYSTEM_ORDER)
 @Mapping(Action.class)
 public class InjectMappers extends InvocationReaderInterceptor<Action<?,?>> {
