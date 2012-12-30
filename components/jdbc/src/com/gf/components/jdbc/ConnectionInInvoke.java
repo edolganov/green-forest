@@ -25,6 +25,13 @@ import com.gf.annotation.Inject;
 import com.gf.annotation.Order;
 import com.gf.service.FilterChain;
 
+/**
+ * Filter for putting {@link DataSource} into handler's context.
+ * Need {@link DataSourceManager} for work.
+ *
+ * @author Evgeny Dolganov
+ *
+ */
 @Order(Order.SYSTEM_ORDER)
 public class ConnectionInInvoke extends Filter {
 	

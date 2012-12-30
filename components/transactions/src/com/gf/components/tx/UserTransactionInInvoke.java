@@ -23,6 +23,13 @@ import com.gf.annotation.Inject;
 import com.gf.annotation.Order;
 import com.gf.service.FilterChain;
 
+/**
+ * Filter for putting {@link UserTransaction} into handler's context.
+ * Need {@link TxManager} for work.
+ *
+ * @author Evgeny Dolganov
+ *
+ */
 @Order(Order.SYSTEM_ORDER)
 public class UserTransactionInInvoke extends Filter {
 	
