@@ -22,6 +22,6 @@ public class UserTxAndConnection {
 	public static final int ORDER_OF_USER_TX = Order.SYSTEM_ORDER-1;
 	public static final int ORDER_OF_CONN = ORDER_OF_USER_TX+1;
 	
-	public static final String USER_TX_IN_INVOKE_FLAG = "UserTxAndConnection.TX_IN_INVOKE_FLAG";
+	public static final String OPENED_USER_TX_FLAG = "UserTxAndConnection.TX_IN_INVOKE_FLAG";
 
 }

@@ -16,19 +16,38 @@ public class DataSourceManagerImpl implements DataSourceManager {
 
 }
 
+
+//impl of TxManager
+import javax.transaction.UserTransaction;
+
+public class TxManagerImpl implements TxManager {
+
+	public UserTransaction getUserTransaction() {
+		return userTx;
+	}
+
+}
+
 //engine
 DataSourceManagerImpl dataSourceManagerImpl = ...;
+TxManagerImpl txManagerImpl = ...;
 Engine engine = new Engine();
 engine.addToContext(dataSourceManagerImpl);
+engine.addToContext(txManagerImpl);
 engine.putFilter(ConnectionInInvoke.class);
+engine.putFilter(UserTransactionInInvoke.class);
 engine.putHandler(SomeHandler.class);
 
 
 //handler
 import java.sql.Connection;
+import javax.transaction.UserTransaction;
 
 @Mapping(SomeAction.class)
 public class SomeHandler extends Handler&lt;SomeAction>{
+	
+	@Inject
+	UserTransaction userTx;
 	
 	@Inject
 	Connection connection;

@@ -26,7 +26,7 @@ import com.gf.service.FilterChain;
 
 /**
  * Filter for putting {@link UserTransaction} into handler's context.
- * The filter begin a UserTransaction before handler and finally commit it if no exception or rollback if exception.
+ * The filter begins a UserTransaction before handler and finally commits it if no exception or rollbacks if exception.
  * Need {@link TxManager} for work.
  *
  * @author Evgeny Dolganov
@@ -43,7 +43,7 @@ public class UserTransactionInInvoke extends Filter {
 		
 		UserTransaction userTx = txManager.getUserTransaction();
 		userTx.begin();
-		action.putAttr(UserTxAndConnection.USER_TX_IN_INVOKE_FLAG, null);
+		action.putAttr(UserTxAndConnection.OPENED_USER_TX_FLAG, Boolean.TRUE);
 		try {
 			
 			addToInvocationContext(userTx);
@@ -58,7 +58,7 @@ public class UserTransactionInInvoke extends Filter {
 			}
 			throw e;
 		}finally {
-			action.removeAttr(UserTxAndConnection.USER_TX_IN_INVOKE_FLAG);
+			action.removeAttr(UserTxAndConnection.OPENED_USER_TX_FLAG);
 		}
 	}
 
