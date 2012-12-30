@@ -21,16 +21,18 @@ import com.gf.Action;
 import com.gf.Filter;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Order;
+import com.gf.core.components.UserTxAndConnection;
 import com.gf.service.FilterChain;
 
 /**
  * Filter for putting {@link UserTransaction} into handler's context.
+ * The filter begin a UserTransaction before handler and finally commit it if no exception or rollback if exception.
  * Need {@link TxManager} for work.
  *
  * @author Evgeny Dolganov
  *
  */
-@Order(Order.SYSTEM_ORDER)
+@Order(UserTxAndConnection.ORDER_OF_USER_TX)
 public class UserTransactionInInvoke extends Filter {
 	
 	@Inject
@@ -41,6 +43,7 @@ public class UserTransactionInInvoke extends Filter {
 		
 		UserTransaction userTx = txManager.getUserTransaction();
 		userTx.begin();
+		action.putAttr(UserTxAndConnection.USER_TX_IN_INVOKE_FLAG, null);
 		try {
 			
 			addToInvocationContext(userTx);
@@ -54,6 +57,8 @@ public class UserTransactionInInvoke extends Filter {
 				log.error("can't rollback", e2);
 			}
 			throw e;
+		}finally {
+			action.removeAttr(UserTxAndConnection.USER_TX_IN_INVOKE_FLAG);
 		}
 	}
 
