@@ -15,6 +15,7 @@
  */
 package com.gf;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,17 +74,17 @@ import com.gf.util.Util;
 public abstract class Action<I, O> {
 	
 	/**
-	 * input data for handlers
+	 * Input data for handlers
 	 */
 	protected I input;
 	
 	/**
-	 * output data from handlers
+	 * Output data from handlers
 	 */
 	protected O output;
 	
 	/**
-	 * additional attributes
+	 * Additional attributes
 	 */
 	private Map<String, Object> attrs;
 	
@@ -97,14 +98,14 @@ public abstract class Action<I, O> {
 	}
 	
 	/**
-	 * get input data for handlers
+	 * Get input data for handlers
 	 */
 	public I getInput() {
 		return input;
 	}
 	
 	/**
-	 * analog of {@link Action#getInput()}
+	 * Analog of {@link Action#getInput()}
 	 */
 	public I input(){
 		return getInput();
@@ -115,21 +116,21 @@ public abstract class Action<I, O> {
 	}
 
 	/**
-	 * get output data from handlers
+	 * Get output data from handlers
 	 */
 	public O getOutput() {
 		return output;
 	}
 
 	/**
-	 * set output data from handlers
+	 * Set output data from handlers
 	 */
 	public void setOutput(O output) {
 		this.output = output;
 	}
 	
 	/**
-	 * put some additional attribute
+	 * Put some additional attribute
 	 * @param key key for attribute
 	 * @param value value object or <tt>null</tt>
 	 * @return the previous value associated with key, or <tt>null</tt> if there was no mapping for key. 
@@ -147,7 +148,7 @@ public abstract class Action<I, O> {
 	}
 	
 	/**
-	 * get additional attribute by key
+	 * Get additional attribute by key
 	 * @return the value to which the specified key is mapped, 
 	 * or <tt>null</tt> if this attributes contains no mapping for the key
 	 */
@@ -159,6 +160,27 @@ public abstract class Action<I, O> {
 	}
 	
 	/**
+	 * Returns <tt>true</tt> if attributes contains a mapping for the specified key. 
+	 */
+	public boolean containsAttr(String key){
+		if(attrs == null){
+			return false;
+		}
+		return attrs.containsKey(key);
+	}
+	
+	/**
+	 * Remove attribute by key
+	 * @return the previous attribute associated with key, or null if there was no mapping for key.
+	 */
+	public Object removeAttr(String key){
+		if(attrs == null){
+			return null;
+		}
+		return attrs.remove(key);
+	}
+	
+	/**
 	 * put the map of attributes
 	 */
 	public void putAllAttrs(Map<String, Object> attrs){
@@ -167,11 +189,11 @@ public abstract class Action<I, O> {
 	}
 	
 	/**
-	 * get all attributes
+	 * Get all attributes
 	 */
 	public Map<String, Object> getAllAttrs(){
 		if(attrs == null){
-			return new HashMap<String, Object>();
+			return Collections.emptyMap();
 		}
 		return new HashMap<String, Object>(attrs);
 	}

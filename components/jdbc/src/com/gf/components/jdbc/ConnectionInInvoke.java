@@ -23,16 +23,53 @@ import com.gf.Action;
 import com.gf.Filter;
 import com.gf.annotation.Inject;
 import com.gf.annotation.Order;
+import com.gf.core.components.UserTxAndConnection;
 import com.gf.service.FilterChain;
 
 /**
- * Filter for putting {@link DataSource} into handler's context.
+ * Filter for adding {@link Connection} into handler's context.
+ * The filter opens a connection before handler and finally closes it.
  * Need {@link DataSourceManager} for work.
- *
+ * <br>Example:
+ * <pre>
+ * //impl of DataSourceManager
+ * import javax.sql.DataSource;
+ * 
+ * public class DataSourceManagerImpl implements DataSourceManager {
+ * 
+ *   public DataSource getDataSource() {
+ *     return dataSource;
+ *   }
+ * 
+ * }
+ * 
+ * //engine
+ * DataSourceManagerImpl dataSourceManagerImpl = ...;
+ * Engine engine = new Engine();
+ * engine.addToContext(dataSourceManagerImpl);
+ * engine.putFilter(ConnectionInInvoke.class);
+ * engine.putHandler(SomeHandler.class);
+ * 
+ * 
+ * //handler
+ * import java.sql.Connection;
+ * 
+ * &#064;Mapping(SomeAction.class)
+ * public class SomeHandler extends Handler&lt;SomeAction&gt;{
+ *   
+ *   &#064;Inject
+ *   Connection connection;
+ * 
+ *   public void invoke(SomeAction action) throws Exception {
+ *     ...
+ *   }
+ * 
+ * }
+ * </pre>
  * @author Evgeny Dolganov
  *
  */
-@Order(Order.SYSTEM_ORDER)
+@Order(UserTxAndConnection.ORDER_OF_CONN)
 public class ConnectionInInvoke extends Filter {
 	
 	@Inject
@@ -51,6 +88,12 @@ public class ConnectionInInvoke extends Filter {
 			chain.doNext();
 			
 		}catch (Exception e) {
+			
+			//rollback if there is no ongoing UserTransaction in invoke
+			if( ! action.containsAttr(UserTxAndConnection.USER_TX_IN_INVOKE_FLAG)){
+				connection.rollback();
+			}
+			
 			throw e;
 		} finally {
 			
