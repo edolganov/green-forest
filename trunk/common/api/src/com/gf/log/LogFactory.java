@@ -45,6 +45,19 @@ public class LogFactory {
 	private static Class<?> findProviderClass() {
 		Class<?> providerClass = null;
 		
+		//try get from property
+		if(providerClass == null){
+			String customProviderClass = System.getProperty("com.gf.log.LogProvider");
+			if(customProviderClass != null){
+				try {
+					providerClass = Class.forName(customProviderClass);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
 		if(providerClass == null){
 			providerClass = ComponentChecker.findAndCheckBy("com.gf.components.log.apache.LogCheckerImpl");
 		}
