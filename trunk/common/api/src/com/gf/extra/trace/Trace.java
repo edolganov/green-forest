@@ -15,7 +15,14 @@
  */
 package com.gf.extra.trace;
 
+import com.gf.key.TraceHandlers;
 
+/**
+ * Trace information.
+ *
+ * @author Evgeny Dolganov
+ * @see TraceHandlers
+ */
 public class Trace extends TraceLevel {
 	
 	public final Object owner;
