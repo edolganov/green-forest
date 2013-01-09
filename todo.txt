@@ -9,7 +9,6 @@
 === релиз 0.9 ===
 	- доки
 *		- reference guide
-			- Configuration
 			- Complex examples
 			- Issues (jboss as)
 			- license
@@ -104,6 +103,7 @@ _____________________
 === релиз 0.9 ===
 	- доки
 		- reference guide
+			- Configuration
 			- Logging
 			- link to javadoc
 			- JDBC and Transactions

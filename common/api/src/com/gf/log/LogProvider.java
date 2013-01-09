@@ -19,7 +19,13 @@ package com.gf.log;
  * Factory interface for creating {@link Log} implementations.
  * For setup implementation use <tt>"com.gf.log.LogProvider"</tt> system property:
  * <pre>
- * System.setProperty("com.gf.log.LogProvider", "foo.blah.CustomLogProvider");
+ * //setup on start
+ * java -Dcom.gf.log.LogProvider=foo.blah.CustomLogProvider
+ * 
+ * //or setup in app BEFORE first call of Green-forest
+ * static {
+ *   System.setProperty("com.gf.log.LogProvider", "foo.blah.CustomLogProvider");
+ * }
  * </pre>
  * 
  * @author Evgeny Dolganov

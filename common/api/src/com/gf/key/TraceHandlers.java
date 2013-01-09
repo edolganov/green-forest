@@ -19,6 +19,22 @@ import com.gf.Action;
 import com.gf.config.ConfigKey;
 import com.gf.extra.trace.Trace;
 
+/**
+ * Trace invocation config.
+ * <br>Example of usage:
+ * <pre>
+ * Engine engine = new Engine();
+ * engine.setConfig(TraceHandlers.class, true);
+ * ...
+ * SomeAction someActon = new SomeAction();
+ * engine.invoke(someActon);
+ *     
+ * Trace trace = TraceHandlers.getTrace(someActon);</pre>
+ *
+ * @author Evgeny Dolganov
+ * @see Trace
+ *
+ */
 public class TraceHandlers extends ConfigKey<Boolean> {
 	
 	public static final String ATTR_KEY = TraceHandlers.class.getName()+".Trace";

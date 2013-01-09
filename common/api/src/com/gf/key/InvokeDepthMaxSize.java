@@ -16,7 +16,16 @@
 package com.gf.key;
 
 import com.gf.config.ConfigKey;
+import com.gf.exception.invoke.InvokeDepthMaxSizeException;
 
+/**
+ * Max value of sub invokes.
+ * <br>If there are more than that value - throws {@link InvokeDepthMaxSizeException}
+ *
+ * @author Evgeny Dolganov
+ * @see InvokeDepthMaxSizeException
+ *
+ */
 public class InvokeDepthMaxSize extends ConfigKey<Integer>{
 
 	@Override
