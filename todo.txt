@@ -10,6 +10,9 @@
 	- доки
 *		- reference guide
 			- Complex examples
+*				- jee
+				- spring
+				- standalone
 			- Issues (jboss as)
 			- license
 			- footer
@@ -28,6 +31,9 @@
 	- фиксация динамич.доков в статичные
 		- референс
 		- доки по примерам
+			- jee
+			- spring
+			- standalone
 	- добавить ява-док, референс и доки по примерам в all сборку
 	- update changelog
 	- заливка сборки в download
