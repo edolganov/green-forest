@@ -15,6 +15,12 @@
  */
 package com.gf.log;
 
+/**
+ * Factory interface for creating {@link Log} implementations.
+ * 
+ * @author Evgeny Dolganov
+ *
+ */
 public interface LogProvider {
 	
 	Log getLog(Class<?> clazz);

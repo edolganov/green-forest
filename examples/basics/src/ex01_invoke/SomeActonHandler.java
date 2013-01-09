@@ -26,6 +26,8 @@ public class SomeActonHandler extends Handler<SomeAction>{
 	@Override
 	public void invoke(SomeAction action) throws Exception {
 		
+		log.info("some log message");
+		
 		String input = action.getInput();
 		
 		log.info("input is "+input);
