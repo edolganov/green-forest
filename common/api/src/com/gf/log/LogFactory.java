@@ -25,7 +25,11 @@ import com.gf.extra.components.ComponentChecker;
 
 public class LogFactory {
 	
-	private static final LogProvider provider = findProvider();
+	private static LogProvider provider = findProvider();
+	
+	static void reFindProvider(){
+		provider = findProvider();
+	}
 	
 	private static HashMap<Class<?>, Log> cache = new HashMap<Class<?>, Log>();
 	private static ReadWriteLock rw = new ReentrantReadWriteLock();

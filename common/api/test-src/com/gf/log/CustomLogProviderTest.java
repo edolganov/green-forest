@@ -8,6 +8,7 @@ public class CustomLogProviderTest extends AssertExt {
 	
 	static {
 		System.setProperty("com.gf.log.LogProvider", "com.gf.log.CustomLogProvider");
+		LogFactory.reFindProvider();
 	}
 	
 	@Test
