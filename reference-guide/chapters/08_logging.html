@@ -14,7 +14,30 @@ public class SomeActonHandler extends Handler&lt;SomeAction>{
 
 }</pre>
 
-<p>If your app contains <span class="name">commons-logging</span> or <span class="name">slf4j</span> log library 
+<p>
+If your app contains <span class="name">commons-logging</span> or <span class="name">slf4j</span> log library 
 then <gf> will use an appropriate wrapper.
-<br>For creating your own implementation of <a target="_blank" href="../javadoc/com/gf/log/Log.html">Logger</a> interface
-use 
+
+<p class='text-align-left'>
+For using your own implementation of <a target="_blank" href="../javadoc/com/gf/log/Log.html">Logger</a> interface
+create custom <a target="_blank" href="../javadoc/com/gf/log/LogProvider.html">LogProvider</a> and set 
+<tt>"com.gf.log.LogProvider"</tt> system property:
+
+<pre class="brush: java;">
+//factory impl
+public class CustomLogProvider implements LogProvider {
+
+	public Log getLog(Class&lt;?> clazz) {
+		return new CustomLogImpl(clazz);
+	}
+
+}
+
+//setup on start
+java -Dcom.gf.log.LogProvider=foo.blah.CustomLogProvider
+
+//or setup in app BEFORE first call of Green-forest
+static {
+	System.setProperty("com.gf.log.LogProvider", "foo.blah.CustomLogProvider");
+}
+</pre>
