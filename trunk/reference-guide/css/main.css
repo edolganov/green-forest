@@ -119,3 +119,11 @@ p {
 .text-align-left {
 	text-align: left;
 }
+
+
+#copyright {
+	margin: 30px auto;
+    max-width: 860px;
+    color: #484848;
+    font-size: 0.9em;
+}
