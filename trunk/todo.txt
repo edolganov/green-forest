@@ -10,7 +10,8 @@
 	- доки
 *		- reference guide
 			- Complex examples
-				- spring
+				- jee
+*				- spring
 				- standalone
 			- Issues (jboss as)
 			- license
@@ -19,8 +20,6 @@
 		- reference guide page
 	- доки по примерам
 		- jdbc
-			- ссылку в референсе
-		- jee
 			- ссылку в референсе
 		- spring
 			- ссылку в референсе
@@ -103,8 +102,13 @@
 _____________________
 
 === релиз 0.9 ===
+	- доки по примерам
+		- jee
+			- ссылку в референсе
 	- доки
 		- reference guide
+		- jee
+			- ссылку в референсе
 			- Complex examples
 				- jee
 			- footer
