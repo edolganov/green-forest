@@ -31,7 +31,7 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 }</pre>
 
 
-<br>Example of handler:
+<br>Example of app handler:
 <pre class="brush: java;">
 package example.app.handler;
 
@@ -72,7 +72,7 @@ public class GetDocsPageHandler extends Handler&lt;GetDocsPage>{
 <p class="more-top">
 <span class="title">II. App Layer</span>
 <br>
-Class <tt>jee.app.AppBean</tt> contains setup of <a target="_blank" href="./single-page.html#engine">Engine</a>:
+Class <tt>jee.app.AppBean</tt> contains setup of App's <a target="_blank" href="./single-page.html#engine">Engine</a>:
 <pre class="brush: java;">
 @Stateless(name="App")
 @Local(App.class)
@@ -106,7 +106,7 @@ public class AppBean extends ActionServiceBean implements App {
 <p class="more-top">
 <span class="title">III. Storage Layer</span>
 <br>
-Class <tt>jee.storage.StorageBean</tt> contains setup of <a target="_blank" href="./single-page.html#engine">Engine</a>:
+Class <tt>jee.storage.StorageBean</tt> contains setup of Storage's <a target="_blank" href="./single-page.html#engine">Engine</a>:
 <pre class="brush: java;">
 @Stateless(name="Storage")
 @Local(Storage.class)

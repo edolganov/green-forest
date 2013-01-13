@@ -31,7 +31,7 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 }</pre>
 
 
-<br>Example of handler:
+<br>Example of app handler:
 <pre class="brush: java;">
 package example.app.handler;
 
@@ -69,102 +69,117 @@ public class GetDocsPageHandler extends Handler&lt;GetDocsPage>{
 
 
 
-<p class="more-top">
+<p class="more-top text-align-left">
 <span class="title">II. App Layer</span>
 <br>
-Class <tt>jee.app.AppBean</tt> contains setup of <a target="_blank" href="./single-page.html#engine">Engine</a>:
-<pre class="brush: java;">
-@Stateless(name="App")
-@Local(App.class)
-@TransactionManagement(TransactionManagementType.BEAN)
-public class AppBean extends ActionServiceBean implements App {
-	
-	@EJB(name="Storage")
-	Storage storage;
-	
+File <tt>gf-spring-mybatis.war/WEB-INF/<b>applicationContext.xml</b></tt> contains setup of App's 
+<a target="_blank" href="./single-page.html#engine">Engine</a>:
+<pre class="brush: xml;">
+&lt;bean id="appEngine" class="com.gf.core.Engine">
+	&lt;property name="name" value="App Engine"/>
+	&lt;property name="scanAndPut">
+		&lt;list>
+			&lt;value>example.app&lt;/value>
+		&lt;/list>
+	&lt;/property>
+	&lt;property name="contextObjects">
+		&lt;list>
+			&lt;ref bean="storage"/>
+		&lt;/list>
+	&lt;/property>
+	&lt;property name="configValues">
+		&lt;props>
+			&lt;prop key="com.gf.key.TraceHandlers">true&lt;/prop>
+		&lt;/props>
+	&lt;/property>
+&lt;/bean>
 
-	public ActionService createActionService() {
-		
-		//create app's engine
-		Engine engine = new Engine("App Engine");
-		
-		//init
-		engine.addToContext(storage);
-		engine.scanAndPut(App.class);
-		engine.setConfig(TraceHandlers.class, true);
-		
-		//invoke actions
-		engine.invoke(new CreateDataBase());
-
-		return engine;
-	}
-
-}</pre>
+&lt;bean id="app" class="example.app.AppImpl">
+	&lt;constructor-arg ref="appEngine"/>
+&lt;/bean>
+</pre>
 
 
 
-<p class="more-top">
+<p class="more-top text-align-left">
 <span class="title">III. Storage Layer</span>
 <br>
-Class <tt>jee.storage.StorageBean</tt> contains setup of <a target="_blank" href="./single-page.html#engine">Engine</a>:
-<pre class="brush: java;">
-@Stateless(name="Storage")
-@Local(Storage.class)
-@TransactionManagement(TransactionManagementType.BEAN)
-public class StorageBean extends ActionServiceBean implements Storage {
-	
-    @PersistenceContext(name="defaultEntityManager")
-    EntityManager entityManager;
-    
-    @Resource
-    SessionContext sessionContext;
+File <tt>gf-spring-mybatis.war/WEB-INF/<b>applicationContext.xml</b></tt> contains setup of Storage's 
+<a target="_blank" href="./single-page.html#engine">Engine</a>:
+<pre class="brush: xml;">
+&lt;bean id="storageEngine" class="com.gf.core.Engine">
+	&lt;property name="name" value="Storage Engine"/>
+	&lt;property name="scanAndPut">
+		&lt;list>
+			&lt;value>mybatis.storage&lt;/value>
+		&lt;/list>
+	&lt;/property>
+	&lt;property name="contextObjects">
+		&lt;list>
+			&lt;ref bean="sqlSessionFactory"/>
+		&lt;/list>
+	&lt;/property>
+	&lt;property name="filterTypes">
+		&lt;list>
+			&lt;value>com.gf.components.mybatis.SqlSessionInInvoke&lt;/value>
+		&lt;/list>
+	&lt;/property>
+	&lt;property name="interceptorTypes">
+		&lt;list>
+			&lt;value>com.gf.components.mybatis.InjectMappers&lt;/value>
+		&lt;/list>
+	&lt;/property>
+&lt;/bean>
 
-
-	public ActionService createActionService() {
-		
-		//create storage's engine
-		Engine engine = new Engine("Storage Engine");
-		
-		//init
-		engine.addToContext(entityManager);
-		engine.addToContext(sessionContext);
-		engine.putFilter(SimpleTransactionManager.class);
-		engine.scanAndPut(this.getClass());
-		
-		return engine;
-	}
-
-}</pre>
+&lt;bean id="storage" class="example.storage.StorageImpl">
+	&lt;constructor-arg ref="storageEngine"/>
+&lt;/bean>
+</pre>
 
 
 <br>Example of storage handler:
 <pre class="brush: java;">
-package jee.storage.handler;
+package mybatis.storage.handler;
 
 @Mapping(GetDocsPage.class)
 public class GetDocsPageHandler extends Handler&lt;GetDocsPage>{
 	
 	@Inject
-	EntityManager em;
+	DocMapper docMapper;
 
 	@Override
 	public void invoke(GetDocsPage action) throws Exception {
 		
 		Input input = action.input();
 		
-		Query q = em.createNamedQuery(DocEntity.Q_GET_PAGE);
-		q.setFirstResult(input.pageIndex * input.limit);
-		q.setMaxResults(input.limit);
-		List&lt;DocEntity> result = (List&lt;DocEntity>)q.getResultList();
+		int limit = input.limit;
+		int pageIndex = input.pageIndex;
+		int offset = pageIndex*limit;
+		
+		List&lt;Doc> list = docMapper.getDocsPage(limit, offset);
 		
 		Integer count = subInvoke(new GetDocsCount());
-		
-		List&lt;Doc> list = DocEntity.getDocs(result);
+
 		action.setOutput(new Page&lt;Doc>(list, pageIndex, limit, count));
 		
 	}
 
 }</pre>
+
+
+<p class="more-top text-align-left">
+<span class="title">IV. MyBatis</span>
+<br>
+File <tt>gf-spring-mybatis.war/WEB-INF/<b>applicationContext.xml</b></tt> contains setup of MyBatis:
+<pre class="brush: xml;">
+&lt;bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  &lt;property name="dataSource" ref="dataSource" />
+  &lt;property name="mapperLocations" value="classpath*:mybatis/mapper/**/*.xml" />
+  &lt;property name="transactionFactory">
+  	&lt;bean class="org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory" />
+  &lt;/property>  
+&lt;/bean>
+</pre>
 
 
 
