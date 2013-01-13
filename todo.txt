@@ -9,20 +9,18 @@
 === релиз 0.9 ===
 	- доки
 *		- reference guide
-			- Complex examples
+*			- Complex examples
 				- jee
-*				- spring
+				- spring
 				- standalone
 			- Issues (jboss as)
 			- license
 			- кнопка back-to-top
 				http://agyuku.net/2009/05/back-to-top-link-using-jquery/
-		- reference guide page
 	- доки по примерам
-		- jdbc
+*		- jdbc
 			- ссылку в референсе
-		- spring
-			- ссылку в референсе
+		- добавить readme файлы в примеры
 	- фиксация динамич.доков в статичные
 		- референс
 		- доки по примерам
@@ -103,6 +101,8 @@ _____________________
 
 === релиз 0.9 ===
 	- доки по примерам
+		- spring
+			- ссылку в референсе
 		- jee
 			- ссылку в референсе
 	- доки
