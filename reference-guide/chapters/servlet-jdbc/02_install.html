@@ -5,27 +5,5 @@ You can download the example's <tt>war</tt> file from
 <a target="_blank" href="https://code.google.com/p/green-forest/downloads/list">download page</a>.
 The zip archive with name like <tt>"green-forest-X.X-all.zip"</tt> contains all examples in folder "examples". 
 <p>
-Deploy <tt>gf-jee.war</tt> file into your <jee> Aplication Server.
-This application was tested on the <tt>JBoss Application Server 6.1.0</tt>.
-
-<div class="def">
-	<p class="text-align-left">You need to change <b>persistence.xml</b> by path
-	<tt>gf-jee.war\WEB-INF\classes\META-INF\persistence.xml</tt> for setup <tt>jta-data-source</tt>.
-</div>
-
-<p>Default <tt>persistence.xml</tt> content is:
-<pre  class="brush: xml;">
-&lt;persistence ...>
-    &lt;persistence-unit name="defaultEntityManager" transaction-type="JTA">
-        &lt;provider>org.hibernate.ejb.HibernatePersistence&lt;/provider>
-        
-        &lt;!-- Setup this data-source!  -->
-        &lt;jta-data-source>java:/DefaultDS&lt;/jta-data-source>
-        
-        &lt;properties>
-            &lt;property name="hibernate.hbm2ddl.auto" value="update" />
-            &lt;property name="hibernate.show_sql" value="false" />
-        &lt;/properties>
-    &lt;/persistence-unit>
-&lt;/persistence>
-</pre>
+Deploy <tt>gf-servlet-jdbc.war</tt> file into your Web Server.
+This application was tested on the <tt>Tomcat&nbsp;7.0.28</tt> web server.
