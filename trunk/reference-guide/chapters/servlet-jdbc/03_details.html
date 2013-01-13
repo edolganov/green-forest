@@ -1,0 +1,170 @@
+
+<h2>Explanation of Example</h2>
+
+<p>
+<span class="title">I. Action API</span>
+<br>Package <b><tt>example.common.action</tt></b> contains Action API.
+<br>Package <b><tt>example.app.handler</tt></b> contains handlers for this actions.
+
+<p>Example of using this API from <tt>jee.web.AppJEEServlet</tt>:
+<pre class="brush: java;">
+public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+
+	int pageIndex = ...;
+	int limit = ...;
+	
+	GetDocsPage action = new GetDocsPage(pageIndex, limit);
+	Page&lt;Doc> page = app.invoke(action);
+	
+	req.setAttribute("page", page);
+	
+}
+
+public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+	
+	int id = ...;
+	String newName = ...;
+	
+	RenameDoc action = new RenameDoc(id, newName);
+	app.invoke(action);
+	
+}</pre>
+
+
+<br>Example of app handler:
+<pre class="brush: java;">
+package example.app.handler;
+
+@Mapping(GetDocsPage.class)
+public class GetDocsPageHandler extends Handler&lt;GetDocsPage>{
+	
+	@Inject
+	Storage storage;
+
+	@Override
+	public void invoke(GetDocsPage action) throws Exception {
+		
+		Input input = action.input();
+		int updatedPageIndex = input.pageIndex;
+		int updatedLimit = input.limit;
+		
+		if(updatedPageIndex < 0){
+			updatedPageIndex = 0;
+		}
+		
+		if(updatedLimit < 0){
+			updatedLimit = 0;
+		} else if(updatedLimit > 50){
+			updatedLimit = 50;
+		}
+		
+		input.limit = updatedLimit;
+		input.pageIndex = updatedPageIndex;
+		
+		storage.invoke(action);
+		
+	}
+
+}</pre>
+
+
+
+<p class="more-top">
+<span class="title">II. App Layer</span>
+<br>
+Class <tt>jee.app.AppBean</tt> contains setup of App's <a target="_blank" href="./single-page.html#engine">Engine</a>:
+<pre class="brush: java;">
+@Stateless(name="App")
+@Local(App.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+public class AppBean extends ActionServiceBean implements App {
+	
+	@EJB(name="Storage")
+	Storage storage;
+	
+
+	public ActionService createActionService() {
+		
+		//create app's engine
+		Engine engine = new Engine("App Engine");
+		
+		//init
+		engine.addToContext(storage);
+		engine.scanAndPut(App.class);
+		engine.setConfig(TraceHandlers.class, true);
+		
+		//invoke actions
+		engine.invoke(new CreateDataBase());
+
+		return engine;
+	}
+
+}</pre>
+
+
+
+<p class="more-top">
+<span class="title">III. Storage Layer</span>
+<br>
+Class <tt>jee.storage.StorageBean</tt> contains setup of Storage's <a target="_blank" href="./single-page.html#engine">Engine</a>:
+<pre class="brush: java;">
+@Stateless(name="Storage")
+@Local(Storage.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+public class StorageBean extends ActionServiceBean implements Storage {
+	
+    @PersistenceContext(name="defaultEntityManager")
+    EntityManager entityManager;
+    
+    @Resource
+    SessionContext sessionContext;
+
+
+	public ActionService createActionService() {
+		
+		//create storage's engine
+		Engine engine = new Engine("Storage Engine");
+		
+		//init
+		engine.addToContext(entityManager);
+		engine.addToContext(sessionContext);
+		engine.putFilter(SimpleTransactionManager.class);
+		engine.scanAndPut(this.getClass());
+		
+		return engine;
+	}
+
+}</pre>
+
+
+<br>Example of storage handler:
+<pre class="brush: java;">
+package jee.storage.handler;
+
+@Mapping(GetDocsPage.class)
+public class GetDocsPageHandler extends Handler&lt;GetDocsPage>{
+	
+	@Inject
+	EntityManager em;
+
+	@Override
+	public void invoke(GetDocsPage action) throws Exception {
+		
+		Input input = action.input();
+		
+		Query q = em.createNamedQuery(DocEntity.Q_GET_PAGE);
+		q.setFirstResult(input.pageIndex * input.limit);
+		q.setMaxResults(input.limit);
+		List&lt;DocEntity> result = (List&lt;DocEntity>)q.getResultList();
+		
+		Integer count = subInvoke(new GetDocsCount());
+		
+		List&lt;Doc> list = DocEntity.getDocs(result);
+		action.setOutput(new Page&lt;Doc>(list, pageIndex, limit, count));
+		
+	}
+
+}</pre>
+
+
+
