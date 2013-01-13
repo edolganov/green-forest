@@ -122,8 +122,9 @@ p {
 
 
 #copyright {
-	margin: 30px auto;
+	margin: 20px auto;
     max-width: 860px;
     color: #484848;
     font-size: 0.9em;
+    margin-top: 50px;
 }
