@@ -6,7 +6,7 @@
 <br>Package <b><tt>example.common.action</tt></b> contains Action API.
 <br>Package <b><tt>example.app.handler</tt></b> contains handlers for this actions.
 
-<p>Example of using this API from <tt>jee.web.AppJEEServlet</tt>:
+<p>Example of using this API from <tt>example.web.AppServlet</tt>:
 <pre class="brush: java;">
 public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
@@ -72,18 +72,15 @@ public class GetDocsPageHandler extends Handler&lt;GetDocsPage>{
 <p class="more-top">
 <span class="title">II. App Layer</span>
 <br>
-Class <tt>jee.app.AppBean</tt> contains setup of App's <a target="_blank" href="./single-page.html#engine">Engine</a>:
+Class <tt>example.web.AbstractInitServlet</tt> contains setup of App's <a target="_blank" href="./single-page.html#engine">Engine</a>:
 <pre class="brush: java;">
-@Stateless(name="App")
-@Local(App.class)
-@TransactionManagement(TransactionManagementType.BEAN)
-public class AppBean extends ActionServiceBean implements App {
-	
-	@EJB(name="Storage")
-	Storage storage;
-	
+public abstract class AbstractInitServlet extends HttpServlet {
 
-	public ActionService createActionService() {
+
+
+	private App createApp(ServletConfig config) {
+		
+		Storage storage = createStorage(config);
 		
 		//create app's engine
 		Engine engine = new Engine("App Engine");
@@ -95,73 +92,86 @@ public class AppBean extends ActionServiceBean implements App {
 		
 		//invoke actions
 		engine.invoke(new CreateDataBase());
-
-		return engine;
+		
+		//return Application
+		return new AppImpl(engine);
 	}
-
-}</pre>
+	
+}
+</pre>
 
 
 
 <p class="more-top">
 <span class="title">III. Storage Layer</span>
 <br>
-Class <tt>jee.storage.StorageBean</tt> contains setup of Storage's <a target="_blank" href="./single-page.html#engine">Engine</a>:
+Class <tt>jdbc.web.InitServlet</tt> contains setup of Storage's <a target="_blank" href="./single-page.html#engine">Engine</a>:
 <pre class="brush: java;">
-@Stateless(name="Storage")
-@Local(Storage.class)
-@TransactionManagement(TransactionManagementType.BEAN)
-public class StorageBean extends ActionServiceBean implements Storage {
-	
-    @PersistenceContext(name="defaultEntityManager")
-    EntityManager entityManager;
-    
-    @Resource
-    SessionContext sessionContext;
+public class InitServlet extends AbstractInitServlet {
 
 
-	public ActionService createActionService() {
+
+	protected Storage createStorage(ServletConfig config) {
 		
 		//create storage's engine
 		Engine engine = new Engine("Storage Engine");
 		
 		//init
-		engine.addToContext(entityManager);
-		engine.addToContext(sessionContext);
-		engine.putFilter(SimpleTransactionManager.class);
-		engine.scanAndPut(this.getClass());
+		engine.addToContext(createTxManager());
+		engine.addToContext(createDataSourceManager(config));
 		
-		return engine;
+		engine.putFilter(UserTransactionInInvoke.class);
+		engine.putFilter(ConnectionInInvoke.class);
+		
+		engine.scanAndPut("jdbc.storage");
+		
+		//return Storage
+		return new StorageImpl(engine);
 	}
-
-}</pre>
+}
+</pre>
 
 
 <br>Example of storage handler:
 <pre class="brush: java;">
-package jee.storage.handler;
+package jdbc.storage.handler;
 
 @Mapping(GetDocsPage.class)
 public class GetDocsPageHandler extends Handler&lt;GetDocsPage>{
-	
-	@Inject
-	EntityManager em;
 
+	@Inject
+	Connection c;
+	
 	@Override
 	public void invoke(GetDocsPage action) throws Exception {
 		
 		Input input = action.input();
 		
-		Query q = em.createNamedQuery(DocEntity.Q_GET_PAGE);
-		q.setFirstResult(input.pageIndex * input.limit);
-		q.setMaxResults(input.limit);
-		List&lt;DocEntity> result = (List&lt;DocEntity>)q.getResultList();
+		int limit = input.limit;
+		int pageIndex = input.pageIndex;
+		int offset = pageIndex*limit;
+		
+		Statement st = c.createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM doc LIMIT "
+			+limit+" OFFSET "+offset);
+		
+		ArrayList&lt;Doc> list = new ArrayList&lt;Doc>();
+		while(rs.next()){
+			list.add(convert(rs));
+		}
+		st.close();
 		
 		Integer count = subInvoke(new GetDocsCount());
-		
-		List&lt;Doc> list = DocEntity.getDocs(result);
+
 		action.setOutput(new Page&lt;Doc>(list, pageIndex, limit, count));
 		
+	}
+
+	private Doc convert(ResultSet rs) throws Exception {
+		Doc doc = new Doc();
+		doc.id = rs.getInt(1);
+		doc.name = rs.getString(2);
+		return doc;
 	}
 
 }</pre>
