@@ -9,10 +9,6 @@
 === релиз 0.9 ===
 	- доки
 *		- reference guide
-*			- Complex examples
-				- jee
-				- spring
-				- standalone
 			- Issues (jboss as)
 			- license
 			- кнопка back-to-top
@@ -107,7 +103,11 @@ _____________________
 			- ссылку в референсе
 	- доки
 		- reference guide
-		- jee
+			- Complex examples
+				- jee
+				- spring
+				- standalone
+			- jee
 			- ссылку в референсе
 			- Complex examples
 				- jee
