@@ -5,6 +5,7 @@ EffectsController = function(){
 	this.init = function(){
 		
 		showTargetAnchor();
+		initBackToTop();
 		
 	};
 	
@@ -30,6 +31,22 @@ EffectsController = function(){
 		
 		var elem = $("#"+id);
 		elem.effect("highlight", {}, 2000);
+		
+	}
+	
+	function initBackToTop(){
+		
+		$(window).scroll(function() {
+			if($(this).scrollTop() != 0) {
+				$('#toTop').fadeIn();	
+			} else {
+				$('#toTop').fadeOut();
+			}
+		});
+	 
+		$('#toTop').click(function() {
+			$('body,html').animate({scrollTop:0},0);
+		});
 		
 	}
 	

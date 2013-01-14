@@ -7,11 +7,6 @@
 
 
 === релиз 0.9 ===
-	- доки
-*		- reference guide
-			- license
-			- кнопка back-to-top
-				http://agyuku.net/2009/05/back-to-top-link-using-jquery/
 	- доки по примерам
 		- добавить readme файлы в примеры
 	- фиксация динамич.доков в статичные
@@ -102,6 +97,9 @@ _____________________
 			- ссылку в референсе
 	- доки
 		- reference guide
+			- кнопка back-to-top
+				http://agyuku.net/2009/05/back-to-top-link-using-jquery/
+			- license
 			- Issues (jboss as)
 			- Complex examples
 				- jee
