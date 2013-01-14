@@ -9,7 +9,6 @@
 === релиз 0.9 ===
 	- доки
 *		- reference guide
-			- Issues (jboss as)
 			- license
 			- кнопка back-to-top
 				http://agyuku.net/2009/05/back-to-top-link-using-jquery/
@@ -103,6 +102,7 @@ _____________________
 			- ссылку в референсе
 	- доки
 		- reference guide
+			- Issues (jboss as)
 			- Complex examples
 				- jee
 				- spring
