@@ -58,9 +58,9 @@
 				<value>com.gf.components.mybatis.SqlSessionInInvoke</value>
 			</list>
 		</property>
-		<property name="interceptorTypes">
+		<property name="initializers">
 			<list>
-				<value>com.gf.components.mybatis.InjectMappers</value>
+				<bean class="com.gf.components.mybatis.InjectMappers"/>
 			</list>
 		</property>
 	</bean>

@@ -30,6 +30,7 @@ import com.gf.annotation.Inject;
 import com.gf.core.action.reader.InvocationReaderImpl;
 import com.gf.core.action.trace.TraceWrapper;
 import com.gf.core.context.ContextRepository;
+import com.gf.extra.invocation.InvocationObjectInitializer;
 import com.gf.extra.invocation.reader.HasInvocationReader;
 import com.gf.extra.invocation.reader.InvocationReader;
 import com.gf.extra.util.ReflectionsUtil;
@@ -45,7 +46,6 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	int depth;
 	ContextRepository invocationContext;
 	
-	
 	public ActionServiceImpl actions; 
 	public ConfigService config;
 	public Action<?,?> action;
@@ -54,25 +54,31 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 	public Handler handler;
 	public Collection<Object> staticContextObjects;
 	public TraceWrapper traceWrapper;
+	public List<InvocationObjectInitializer> initializers;
 	
 	
-	public void initMappingObject(MappingObject ob){
+	public void initMappingObject(MappingObject ob) throws Exception{
 		init(ob);
 		ob.setInvocation(this);
 	}
 
-	public void initFilter(Filter ob){
+	public void initFilter(Filter ob) throws Exception{
 		init(ob);
 		ob.setInvocationContext(this);
 	}
 
-	private void init(InvocationObject obj) {
+	private void init(InvocationObject obj) throws Exception {
 		
-		//context
 		Collection<Object> invocationContextObjects = invocationContext.getAll();
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.addAll(invocationContextObjects);
 		list.addAll(staticContextObjects);
+		
+		for(InvocationObjectInitializer initializer : initializers){
+			initializer.beforeObjectInited(obj, list);
+		}
+		
+		//context
 		inject(obj, list);
 		
 		//config
@@ -80,6 +86,11 @@ public class InvocationContext implements InvocationService, InvocationContextSe
 		
 		//extra
 		setInvocationReader(obj);
+		
+		
+		for(InvocationObjectInitializer initializer : initializers){
+			initializer.afterObjectInited(obj, list);
+		}
 		
 	}
 	

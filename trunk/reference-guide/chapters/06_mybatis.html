@@ -71,7 +71,7 @@ SqlSessionFactory sqlSessionFactory = ...
 
 Engine engine = new Engine();
 engine.putFilter(SqlSessionInInvoke.class);
-engine.putInterceptor(InjectMappers.class);
+engine.putInitializer(new InjectMappers());
 engine.addToContext(sqlSessionFactory);
 engine.putHandler(SomeHandler.class);
 
@@ -103,3 +103,9 @@ public class SomeHandler extends Handler&lt;SomeAction>{
 	}
 
 }</pre>
+
+
+<p>
+<div class="def">
+	See example of app with <span class="name">MyBatis</span> <a target="_blank" href="./example-spring-mybatis.html">here</a>.
+</div>

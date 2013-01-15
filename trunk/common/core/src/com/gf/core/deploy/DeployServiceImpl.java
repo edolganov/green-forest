@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import com.gf.Action;
@@ -33,6 +34,7 @@ import com.gf.exception.InvalidStateException;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.NotOneHandlerException;
+import com.gf.extra.invocation.InvocationObjectInitializer;
 import com.gf.extra.scan.ClassScanner;
 import com.gf.key.scan.ClassScannerKey;
 import com.gf.log.Log;
@@ -46,10 +48,15 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 	Log log = LogFactory.getLog(getClass()); 
 	
 	ConfigService config;
+	
 	TypesRepository handlerTypes;
 	TypesRepository interceptorTypes;
 	CopyOnWriteArraySet<Class<?>> filterTypes = new CopyOnWriteArraySet<Class<?>>();
 	OrderComparator orderComparator = new OrderComparator();
+	
+	CopyOnWriteArrayList<InvocationObjectInitializer> initializers = new CopyOnWriteArrayList<InvocationObjectInitializer>();
+	
+	
 	
 	public DeployServiceImpl(ConfigService config) {
 		
@@ -242,6 +249,23 @@ public class DeployServiceImpl implements DeployService, ResourseService {
 		
 	}
 
+	public void putInitializer(InvocationObjectInitializer initializer) {
+		initializers.add(initializer);
+		logMappingSingle("PUT INITIALIZER:", initializer.getClass(), null);
+	}
+
+	public void setInitializers(
+			Collection<InvocationObjectInitializer> initializers) {
+		if(initializers == null) return;
+		for (InvocationObjectInitializer initializer : initializers) {
+			putInitializer(initializer);
+		}
+	}
+
+	public List<InvocationObjectInitializer> getInitializers() {
+		return initializers;
+	}
+	
 	private void logMappingSingle(String preffix, Class<?> handler, Class<?> target) {
 		String handlerPart = "["+handler.getName()+"]";
 		String targetPart = target != null? " -> [" + target.getName() + "]" : "";

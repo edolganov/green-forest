@@ -124,9 +124,9 @@ File <tt>gf-spring-mybatis.war/WEB-INF/<b>applicationContext.xml</b></tt> contai
 			&lt;value>com.gf.components.mybatis.SqlSessionInInvoke&lt;/value>
 		&lt;/list>
 	&lt;/property>
-	&lt;property name="interceptorTypes">
+	&lt;property name="initializers">
 		&lt;list>
-			&lt;value>com.gf.components.mybatis.InjectMappers&lt;/value>
+			&lt;bean class="com.gf.components.mybatis.InjectMappers"/>
 		&lt;/list>
 	&lt;/property>
 &lt;/bean>

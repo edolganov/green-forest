@@ -105,6 +105,7 @@ public class InvocationBlock {
 		}
 		c.interceptors = (List)c.actions.resourse.getInterceptors(c.action);
 		c.handler = c.actions.resourse.getHandler(c.action);
+		c.initializers = c.actions.resourse.getInitializers();
 		
 		return c;
 	}
