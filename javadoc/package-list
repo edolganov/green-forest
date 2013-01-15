@@ -30,6 +30,7 @@ com.gf.exception.config
 com.gf.exception.deploy
 com.gf.exception.invoke
 com.gf.extra.components
+com.gf.extra.invocation
 com.gf.extra.invocation.reader
 com.gf.extra.invocation.writer
 com.gf.extra.scan

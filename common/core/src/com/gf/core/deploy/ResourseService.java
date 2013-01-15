@@ -23,6 +23,7 @@ import com.gf.Handler;
 import com.gf.Interceptor;
 import com.gf.exception.invoke.HandlerNotFoundException;
 import com.gf.exception.invoke.NotOneHandlerException;
+import com.gf.extra.invocation.InvocationObjectInitializer;
 
 public interface ResourseService {
 	
@@ -31,5 +32,7 @@ public interface ResourseService {
 	List<Filter> getFilters();
 
 	List<Interceptor<?>> getInterceptors(Action<?, ?> action);
+	
+	List<InvocationObjectInitializer> getInitializers();
 
 }

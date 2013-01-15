@@ -37,6 +37,7 @@ import com.gf.exception.config.ParsePropertiesException;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
 import com.gf.exception.invoke.InvocationException;
+import com.gf.extra.invocation.InvocationObjectInitializer;
 import com.gf.extra.scan.ClassScanner;
 import com.gf.key.scan.ClassScannerKey;
 import com.gf.service.ActionService;
@@ -469,6 +470,21 @@ public class Engine implements ActionService, DeployService, ConfigService, Cont
 	 */
 	public void setFilterTypes(Collection<Class<? extends Filter>> filterTypes) {
 		deploy.setFilterTypes(filterTypes);
+	}
+
+	/**
+	 * Put the <tt>InvocationObjectInitializer</tt> class into this <tt>Engine</tt>.
+	 */
+	public void putInitializer(InvocationObjectInitializer initializer) {
+		deploy.putInitializer(initializer);
+	}
+
+	/**
+	 * Analog of multi call of {@link #putInitializer(InvocationObjectInitializer)}.
+	 * For example for JavaBean logic.
+	 */
+	public void setInitializers(Collection<InvocationObjectInitializer> initializers) {
+		deploy.setInitializers(initializers);
 	}
 
 	

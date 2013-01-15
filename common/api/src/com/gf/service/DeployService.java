@@ -22,6 +22,7 @@ import com.gf.Handler;
 import com.gf.Interceptor;
 import com.gf.exception.deploy.NoMappingAnnotationException;
 import com.gf.exception.deploy.NotOneHandlerException;
+import com.gf.extra.invocation.InvocationObjectInitializer;
 
 /**
  * Interface for adding handlers, interceptors and filters.
@@ -31,27 +32,34 @@ import com.gf.exception.deploy.NotOneHandlerException;
  * @see Handler
  * @see Interceptor
  * @see Filter
+ * @see InvocationObjectInitializer
  * @see com.gf.core.Engine
  *
  */
 public interface DeployService {
 	
 	/**
-	 * Put the <tt>Handler</tt> class.
+	 * Put the {@link Handler} class.
 	 */
 	void putHandler(Class<? extends Handler<?>> clazz) 
 			throws NoMappingAnnotationException, NotOneHandlerException;
 	
 	/**
-	 * Put the <tt>Interceptor</tt> class.
+	 * Put the {@link Interceptor} class.
 	 */
 	void putInterceptor(Class<? extends Interceptor<?>> clazz) 
 			throws NoMappingAnnotationException;
 	
 	/**
-	 * Put the <tt>Filter</tt> class.
+	 * Put the {@link Filter} class.
 	 */
 	void putFilter(Class<? extends Filter> clazz);
+	
+	/**
+	 * Put {@link InvocationObjectInitializer} object
+	 */
+	void putInitializer(InvocationObjectInitializer initializer);
+	
 	
 	/**
 	 * Scan packages and put all handlers, interceptors, filters.
@@ -84,6 +92,12 @@ public interface DeployService {
 	 * For example for JavaBean logic.
 	 */
 	void setFilterTypes(Collection<Class<? extends Filter>> filterTypes);
+	
+	/**
+	 * Analog of multi call of {@link #putInitializer(InvocationObjectInitializer)}.
+	 * For example for JavaBean logic.
+	 */
+	void setInitializers(Collection<InvocationObjectInitializer> initializers);
 	
 	/**
 	 * Analog of multi call of {@link #scanAndPut(String)}.

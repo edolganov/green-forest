@@ -16,22 +16,20 @@
 package com.gf.components.mybatis;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.gf.Action;
 import com.gf.InvocationObject;
 import com.gf.annotation.Inject;
-import com.gf.annotation.Mapping;
-import com.gf.annotation.Order;
-import com.gf.extra.invocation.reader.InvocationReaderInterceptor;
+import com.gf.extra.invocation.InvocationObjectInitializer;
 import com.gf.extra.util.ReflectionsUtil;
-import com.gf.service.InterceptorChain;
 
 /**
- * Interceptor for inject mappers into handler.
- * Need {@link SqlSessionInInvoke} filter for work.
+ * Inject mappers initializer.
+ * Need {@link SqlSession} object in invocation context 
+ * (it can be setted by {@link SqlSessionInInvoke} filter).
  * <br>Example:
  * <pre>
  * //engine
@@ -43,7 +41,7 @@ import com.gf.service.InterceptorChain;
  *  
  * Engine engine = new Engine();
  * engine.putFilter(SqlSessionInInvoke.class);
- * engine.putInterceptor(InjectMappers.class);
+ * engine.putInitializer(new InjectMappers());
  * engine.addToContext(sqlSessionFactory);
  * engine.putHandler(SomeHandler.class);
  *  
@@ -80,25 +78,21 @@ import com.gf.service.InterceptorChain;
  * @author Evgeny Dolganov
  *
  */
-@Order(Order.SYSTEM_ORDER)
-@Mapping(Action.class)
-public class InjectMappers extends InvocationReaderInterceptor<Action<?,?>> {
-	
-	@Inject
-	SqlSession session;
+public class InjectMappers extends InvocationObjectInitializer {
+
 
 	@Override
-	public void invoke(Action<?, ?> action, InterceptorChain chain) throws Exception {
+	public void beforeObjectInited(InvocationObject obj, Collection<Object> context) throws Exception {
 		
-		List<InvocationObject> nextObjects = invocationReader.getLocalNextObjects();
-		for (InvocationObject ob : nextObjects) {
-			injectTo(ob, session);
+		SqlSession session = findByType(context, SqlSession.class);
+		if(session == null){
+			return;
 		}
 		
-		chain.doNext();
+		injectTo(obj, session);
 		
 	}
-
+	
 	private void injectTo(InvocationObject ob, SqlSession session) throws Exception {
 		
 		List<Field> fields = ReflectionsUtil.getRequiredFields(ob, Inject.class);
