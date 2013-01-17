@@ -112,6 +112,17 @@
 			<fileset dir="./examples/build" />
 		</copy>
 		
+		<copy todir="build/all-files/javadoc">
+			<fileset dir="./javadoc" />
+		</copy>
+		
+		<copy todir="build/all-files/reference-guide">
+			<fileset dir="./reference-guide">
+				<exclude name="**/*template-*.html*"/>
+				<exclude name="**/*chapters/"/>
+			</fileset>
+		</copy>
+		
 		<zip destfile="build/all/green-forest-${global.version}-all.zip" compress="true">
 			<fileset dir="build/all-files" />
 		</zip>
