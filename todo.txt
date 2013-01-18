@@ -12,6 +12,7 @@
 	- заливка сборки в download
 	- основная страница
 		- копи-паст из референса и ссылка на гуид 0.9
+			https://green-forest.googlecode.com/svn/tags/0.9/reference-guide/single-page.html
 		
 	- УРА!
 	далее...
