@@ -4,4 +4,7 @@ call start.bat
 popd
 
 ::build all
-ant full-deploy
+call ant full-deploy
+
+::create maven repo
+generate-artifact.bat

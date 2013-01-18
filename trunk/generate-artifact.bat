@@ -1,0 +1,1 @@
+mvn install:install-file -DpomFile=./pom.xml -DcreateChecksum=true -Dfile=./build/green-forest-0.9.jar -Djavadoc=./build/green-forest-0.9-javadoc.jar -Dsources=./build/green-forest-0.9-sources.jar -DgroupId=com.gf -DartifactId=green-forest -Dversion=0.9 -Dpackaging=jar -DgeneratePom=false -DlocalRepositoryPath=./build/repo -e

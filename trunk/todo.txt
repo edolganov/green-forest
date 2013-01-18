@@ -7,20 +7,20 @@
 
 
 === релиз 0.9 ===
+*	- создание локального репозитори€ мавна
+	- добавка в референс
 	- заливка сборки в download
 	- основна€ страница
 		- копи-паст из референса и ссылка на гуид
 		
 	- ”–ј!
 	далее...
-	- создание артефакта дл€ мавна
-		- поиск "создание мавен репозитори€"
-		- поиск "интеграци€ в центральные репозитории"
-			- пример http://repo1.maven.org/maven2/org/reflections/reflections/0.9.8/
-			- guide: https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
-				- раздел "7c. Deploy Snapshots and Stage Releases with Ant"
-			- guide: http://maven.apache.org/guides/mini/guide-central-repository-upload.html
-				- http://stackoverflow.com/questions/8331209/how-to-add-own-project-to-public-maven-repository
+	- поиск "интеграци€ в центральные репозитории"
+		- пример http://repo1.maven.org/maven2/org/reflections/reflections/0.9.8/
+		- guide: https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+			- раздел "7c. Deploy Snapshots and Stage Releases with Ant"
+		- guide: http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+			- http://stackoverflow.com/questions/8331209/how-to-add-own-project-to-public-maven-repository
 	- кнопка донате как у http://code.google.com/p/reflections/
 		- добавить упоминание о ней в документашке
 	
