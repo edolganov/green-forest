@@ -3,19 +3,10 @@
 === продвижение ===
 	- статья на инглиш аналоге хабра
 	- статья на хабре
+	- ссылка Айрату, Игорю, Ринату
 	- блог проекта на блогспоте
 
-
-=== релиз 0.9 ===
-	- создвание тега 0.9
-	- поправка версии в pom.xml
-	- заливка сборки в download
-	- основная страница
-		- копи-паст из референса и ссылка на гуид 0.9
-			https://green-forest.googlecode.com/svn/tags/0.9/reference-guide/single-page.html
-		
-	- УРА!
-	далее...
+=== релиз 0.9.5 === 
 	- поиск "интеграция в центральные репозитории"
 		- пример http://repo1.maven.org/maven2/org/reflections/reflections/0.9.8/
 		- guide: https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
@@ -24,6 +15,7 @@
 			- http://stackoverflow.com/questions/8331209/how-to-add-own-project-to-public-maven-repository
 	- кнопка донате как у http://code.google.com/p/reflections/
 		- добавить упоминание о ней в документашке
+
 	
 
 
@@ -76,9 +68,58 @@
 	- service-layer
 
 
+	
+	
+	
+_____________________	
+	
+
+=== продвижение ===	
+	
+
+	
+	
+=== core ===
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+_____________________
+2013-01-19
 _____________________
 
 === релиз 0.9 ===
+	- основная страница
+		- копи-паст из референса и ссылка на гуид 0.9
+			https://green-forest.googlecode.com/svn/tags/0.9/reference-guide/single-page.html
+	- заливка сборки в download
+	- создвание тега 0.9
+	- поправка версии в pom.xml
 	- создание локального репозитория мавна
 		- добавка в референс
 	- update changelog
