@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="green-forest" default="deploy" basedir=".">
+
+    <target name="build-standalone-modules">
+        <ant antfile="./common/utils/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./common/api/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./common/core/build.xml" inheritAll="false" target="deploy"/>
+		
+		<ant antfile="./components/jdbc/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./components/transactions/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./components/atomikos/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./components/logging-apache-commons/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./components/logging-slf4j/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./components/mybatis/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./components/jee/build.xml" inheritAll="false" target="deploy"/>
+		<ant antfile="./components/reflections/build.xml" inheritAll="false" target="deploy"/>
+		
+    </target>
+
+
+    <target name="deploy" depends="build-standalone-modules">
+	
+		<property file="build.properties"/>
+		<path id="libs">
+			<fileset dir="thirdparty" includes=""/>
+		</path>
+		
+        <delete dir="build"/>
+        <mkdir dir="build"/>
+		<mkdir dir="build/classes"/>
+
+		<copy todir="build/src-all">
+			<fileset dir="./common/utils/src"/>
+			<fileset dir="./common/api/src"/>
+			<fileset dir="./common/core/src"/>
+			
+			<fileset dir="./components/jdbc/src"/>
+			<fileset dir="./components/transactions/src"/>
+			<fileset dir="./components/atomikos/src"/>
+			<fileset dir="./components/logging-apache-commons/src"/>
+			<fileset dir="./components/logging-slf4j/src"/>
+			<fileset dir="./components/mybatis/src"/>
+			<fileset dir="./components/jee/src"/>
+			<fileset dir="./components/reflections/src"/>
+		</copy>
+		
+        <javac srcdir="build/src-all"
+               destdir="build/classes"
+               debug="${compiler.debug}"
+               optimize="${compiler.optimize}"
+               deprecation="${compiler.deprecation}"
+			   target="${compiler.target}"
+               encoding="${compiler.encoding}">
+            <classpath refid="libs"/>
+        </javac>
+		
+        <copy todir="build/classes">
+            <fileset dir="build/src-all">
+                <include name="**/*"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+		
+        <jar jarfile="build/green-forest-${global.version}.jar">
+            <fileset dir="build/classes"/>
+        </jar>
+		
+		<copy todir="build/bin">
+			<fileset dir="build" includes="*.jar"/>
+		</copy>
+
+    </target>
+	
+	<!-- addititon artifacts -->
+    <target name="full-deploy" depends="deploy">
+		
+		<javadoc sourcepath="build/src-all" destdir="build/javadoc-files">
+			<classpath refid="libs"/>
+		</javadoc>
+		<jar jarfile="build/green-forest-${global.version}-javadoc.jar">
+			<fileset dir="build/javadoc-files"/>
+		</jar>
+		
+        <delete dir="javadoc"/>
+        <mkdir dir="javadoc"/>
+		<copy todir="javadoc">
+			<fileset dir="build/javadoc-files"/>
+		</copy>
+		
+
+		<jar jarfile="build/green-forest-${global.version}-sources.jar">
+			<fileset dir="build/src-all"/>
+		</jar>
+		
+		<!-- pack -->
+		<zip destfile="build/pack/green-forest-${global.version}-pack.zip" compress="false">
+			<fileset dir="build" includes="*.jar"/>
+		</zip>
+		
+		<!-- all -->
+		<ant antfile="./examples/build.xml" inheritAll="false" target="deploy"/>
+		
+		<mkdir dir="build/all-files"/>
+		<mkdir dir="build/all-files/lib"/>
+		<mkdir dir="build/all-files/examples"/>
+		
+		<copy todir="build/all-files/lib">
+			<fileset dir="build" includes="*.jar"/>
+		</copy>
+		
+		<copy todir="build/all-files/examples">
+			<fileset dir="./examples/build" />
+		</copy>
+		
+		<copy todir="build/all-files/javadoc">
+			<fileset dir="./javadoc" />
+		</copy>
+		
+		<copy todir="build/all-files/reference-guide">
+			<fileset dir="./reference-guide">
+				<exclude name="**/*template-*.html*"/>
+				<exclude name="**/*chapters/"/>
+			</fileset>
+		</copy>
+		
+		<zip destfile="build/all/green-forest-${global.version}-all.zip" compress="true">
+			<fileset dir="build/all-files" />
+		</zip>
+		
+		
+	</target>
+</project>
+

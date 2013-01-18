@@ -1,0 +1,18 @@
+<h2>Known Issues</h2>
+
+<p class='text-align-left'>
+<span class="title">Need of setup of ClassScanner for JBoss AS</span>
+<br>
+In JBoss AS for using Engine's <a target="_blank" href="../javadoc/com/gf/core/Engine.html#scanAndPut(java.lang.String)">scanAndPut</a> method
+you need this additional libraries (include them into CLASSPATH):
+<ul>
+	<li><a target="_blank" href='http://code.google.com/p/reflections/'>Reflections</a></li>
+	<li><a target="_blank" href='http://code.google.com/p/guava-libraries/'>The Guava project</a></li>
+	<li><a target="_blank" href='http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/'>Javassist</a></li>
+</ul>
+
+<p>
+This additional libraries are used in <a target="_blank" href="./example-jee.html">JEE example application</a>.
+
+<p>
+Or you can implement your own <a target="_blank" href="../javadoc/com/gf/extra/scan/ClassScanner.html">ClassScanner</a>.

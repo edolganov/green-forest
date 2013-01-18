@@ -1,0 +1,145 @@
+body {
+	color: #333333;
+    font-family: 'Lucida Grande',Geneva,Verdana,Arial,sans-serif;
+    font-size: 12px;
+    line-height: 150%;
+}
+
+.syntaxhighlighter { 
+	overflow-y: hidden !important; 
+	overflow-x: auto !important;
+}
+
+p {
+	text-align: justify;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    background-color: transparent;
+    color: #4A5D75;
+    line-height: 130%;
+}
+
+h1 {
+	font-size: 1.6em;
+}
+
+h2 {
+	font-size: 1.6em;
+	margin-bottom: 15px;
+	padding-top: 24px;
+}
+
+ol, ul {
+	list-style-type: disc;
+	list-style-position: inside;
+	margin-left: 10px;
+}
+
+a:link {
+    color: #0066CC;
+}
+a:visited {
+    color: #6699CC;
+}
+
+p {
+	margin: 12px 0;
+}
+
+
+#wrap {
+	margin: 0px auto;
+    max-width: 655px;
+    padding: 0 5px;
+}
+
+#logo {
+	height: 80px;
+}
+
+.section {
+	padding-top: 24px;
+}
+
+.toc {
+	margin-bottom: 10px;
+}
+
+.start-space {
+	margin-left: 6px;
+}
+
+.name{
+	color: #4A5D75;
+	letter-spacing: 1px;
+}
+
+.title {
+	color: #4A5D75;
+	font-size: larger;
+	font-weight: bold;
+}
+
+.more-top {
+	margin-top: 45px;
+}
+
+.image-wrap{
+	margin: 0 0 20px 0;
+	text-align: center;
+	color: #4A5D75;
+	font-weight: bold;
+	font-size: 10px;
+	background-color: #eee;
+	padding: 15px 0 10px 0;
+	width: auto;
+}
+
+.pic,.pic2 {
+	padding: 10px;
+	background-color: #FFF;
+}
+
+.pic2 {
+	padding: 15px;
+}
+
+.def {
+	margin: 5px 20px 5px 6px;
+	padding: 10px;
+	border-color: #4A5D75;
+	border-style: solid;
+	border-width: 2px;
+	background-color: #FFFFDE;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+.text-align-left {
+	text-align: left;
+}
+
+
+#copyright {
+	margin: 20px auto;
+    max-width: 860px;
+    color: #484848;
+    font-size: 0.9em;
+    margin-top: 50px;
+}
+
+#toTop {
+	width:100px;
+	border:1px solid #ccc;
+	background:#f7f7f7;
+	text-align:center;
+	padding:5px;
+	position:fixed; /* this is the magic */
+	bottom:10px; /* together with this to put the div at the bottom*/
+	right:10px;
+	cursor:pointer;
+	display:none;
+	color:#333;
+	font-size:11px;
+}

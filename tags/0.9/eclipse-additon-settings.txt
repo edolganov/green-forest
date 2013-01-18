@@ -1,0 +1,5 @@
+#Abbreviate package names
+com.gf={gf}
+com.gf.util={util}
+com.gf.core={core}
+com.gf.components={comp}

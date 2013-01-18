@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<bean id="uid" class="com.gf.util.Util" factory-method="randomUUID"/>
+	
+	<bean id="dataSourceManager" 
+		class="com.gf.components.atomikos.jdbc.DataSourceManagerImpl"
+		init-method="init"
+		destroy-method="close">
+		<property name="user" value="sa"/>
+		<property name="password" value=""/>
+		<property name="driverClass" value="org.h2.Driver"/>
+		<property name="url" value="#{'jdbc:h2:./tmp/db-'+uid}"/>
+		<property name="poolSize" value="5"/>
+	</bean>
+
+	<bean id="dataSource" 
+		factory-bean="dataSourceManager"
+		factory-method="getDataSource"/> 
+		
+		
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  <property name="dataSource" ref="dataSource" />
+	  <property name="mapperLocations" value="classpath*:mybatis/mapper/**/*.xml" />
+	  <property name="transactionFactory">
+	  	<bean class="org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory" />
+	  </property>  
+	</bean>
+	
+	
+	
+	<bean id="storageEngine" class="com.gf.core.Engine">
+		<property name="name" value="Storage Engine"/>
+		<property name="scanAndPut">
+			<list>
+				<value>mybatis.storage</value>
+			</list>
+		</property>
+		<property name="contextObjects">
+			<list>
+				<ref bean="sqlSessionFactory"/>
+			</list>
+		</property>
+		<property name="filterTypes">
+			<list>
+				<value>com.gf.components.mybatis.SqlSessionInInvoke</value>
+			</list>
+		</property>
+		<property name="initializers">
+			<list>
+				<bean class="com.gf.components.mybatis.InjectMappers"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="storage" class="example.storage.StorageImpl">
+		<constructor-arg ref="storageEngine"/>
+	</bean>
+	
+	
+	
+	<bean id="appEngine" class="com.gf.core.Engine">
+		<property name="name" value="App Engine"/>
+		<property name="scanAndPut">
+			<list>
+				<value>example.app</value>
+			</list>
+		</property>
+		<property name="contextObjects">
+			<list>
+				<ref bean="storage"/>
+			</list>
+		</property>
+		<property name="configValues">
+			<props>
+				<prop key="com.gf.key.TraceHandlers">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="app" class="example.app.AppImpl">
+		<constructor-arg ref="appEngine"/>
+	</bean>
+
+
+</beans>

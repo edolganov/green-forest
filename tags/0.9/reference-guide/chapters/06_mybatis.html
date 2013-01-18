@@ -1,0 +1,111 @@
+<h2>MyBatis Integration</h2>
+
+<p>
+<span class="title">SqlSession</span>
+<br>You can use <tt>SqlSession</tt> of <span class="name">MyBatis</span> 
+by adding <a target="_blank" href="../javadoc/com/gf/components/mybatis/SqlSessionInInvoke.html"><tt>SqlSessionInInvoke</tt></a> filter 
+and <tt>SqlSessionFactory</tt> object into <tt>Engine</tt>.
+<br>Example:
+<pre class="brush: java;">
+//engine
+import org.apache.ibatis.session.SqlSessionFactory;
+import com.gf.components.mybatis.SqlSessionInInvoke;
+
+SqlSessionFactory sqlSessionFactory = ... 
+
+Engine engine = new Engine();
+engine.putFilter(SqlSessionInInvoke.class);
+engine.addToContext(sqlSessionFactory);
+engine.putHandler(SomeHandler.class);
+
+
+//handler
+import java.sql.Connection;
+import org.apache.ibatis.session.SqlSession;
+
+@Mapping(SomeAction.class)
+public class SomeHandler extends Handler&lt;SomeAction>{
+	
+	@Inject
+	Connection connection;
+	
+	@Inject
+	SqlSession session;
+
+	public void invoke(SomeAction action) throws Exception {
+		...
+	}
+
+}</pre>
+
+<p class='text-align-left'>
+Also you can setup SqlSession's <tt>ExecutorType</tt> in a handler by 
+<a target="_blank" href="../javadoc/com/gf/components/mybatis/SqlSessionSettings.html"><tt>SqlSessionSettings</tt></a> annotation:
+<pre class="brush: java;">
+import org.apache.ibatis.session.ExecutorType;
+import com.gf.components.mybatis.SqlSessionSettings;
+
+@SqlSessionSettings(execType=ExecutorType.BATCH)
+@Mapping(SomeActon.class)
+public class SomeHandler extends Handler&lt;SomeActon>{
+
+	public void invoke(SomeActon action) throws Exception {
+		...
+	}
+	
+}</pre>
+
+
+
+<p class="more-top text-align-left">
+<span class="title">Inject Mappers</span>
+<br>With <tt>SqlSession</tt> you can inject mappers into your handlers by 
+<a target="_blank" href="../javadoc/com/gf/components/mybatis/InjectMappers.html"><tt>InjectMappers</tt></a> interceptor:
+<pre class="brush: java;">
+//engine
+import org.apache.ibatis.session.SqlSessionFactory;
+import com.gf.components.mybatis.SqlSessionInInvoke;
+import com.gf.components.mybatis.InjectMappers;
+
+SqlSessionFactory sqlSessionFactory = ... 
+
+Engine engine = new Engine();
+engine.putFilter(SqlSessionInInvoke.class);
+engine.putInitializer(new InjectMappers());
+engine.addToContext(sqlSessionFactory);
+engine.putHandler(SomeHandler.class);
+
+
+//mapper
+import org.apache.ibatis.annotations.Param;
+
+public interface DocMapper  {
+	
+	void createDoc(@Param("id")long id, @Param("name")String name);
+	
+	int renameDoc(@Param("id")long id, @Param("name")String name);
+
+}
+
+
+//handler
+import java.sql.Connection;
+import org.apache.ibatis.session.SqlSession;
+
+@Mapping(SomeAction.class)
+public class SomeHandler extends Handler&lt;SomeAction>{
+	
+	@Inject
+	DocMapper docMapper;
+
+	public void invoke(SomeAction action) throws Exception {
+		...
+	}
+
+}</pre>
+
+
+<p>
+<div class="def">
+	See example of app with <span class="name">MyBatis</span> <a target="_blank" href="./example-spring-mybatis.html">here</a>.
+</div>

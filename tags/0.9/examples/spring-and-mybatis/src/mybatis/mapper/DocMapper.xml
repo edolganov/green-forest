@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.DocMapper">
+	
+	<insert id="createDocSchema" parameterType="map">
+		CREATE TABLE IF NOT EXISTS doc 
+			(id INT NOT NULL,
+			name VARCHAR(${nameSize}) NOT NULL,
+			PRIMARY KEY (id));
+			
+		CREATE SEQUENCE IF NOT EXISTS doc_seq
+                START WITH 1 
+                INCREMENT BY 1;
+	</insert>
+	
+	<select id="nextDocId" resultType="int">
+		SELECT doc_seq.NEXTVAL
+    </select>
+    
+	<insert id="createDoc" parameterType="map">
+		INSERT INTO doc(id, name)
+		VALUES(#{id}, #{name})
+	</insert>
+	
+	<select id="getDocsCount" resultType="int">
+		SELECT count(id) 
+		FROM doc
+	</select>
+	
+	<select id="getDocsPage" parameterType="map" resultType="example.common.model.Doc">
+		SELECT * 
+		FROM doc 
+		LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<update id="renameDoc" parameterType="map">
+		UPDATE doc 
+		SET name=#{name} 
+		WHERE id=#{id}
+	</update>
+
+</mapper>

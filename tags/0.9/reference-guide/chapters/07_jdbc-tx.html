@@ -1,0 +1,60 @@
+<h2>JDBC and Transactions</h2>
+
+<p class='text-align-left'>
+If you have <tt>javax.sql.DataSource</tt> and (or) <tt>javax.transaction.UserTransaction</tt> you can 
+use <a target="_blank" href="../javadoc/com/gf/components/jdbc/ConnectionInInvoke.html"><tt>ConnectionInInvoke</tt></a> 
+and (or) <a target="_blank" href="../javadoc/com/gf/components/tx/UserTransactionInInvoke.html"><tt>UserTransactionInInvoke</tt></a>
+for adding <tt>java.sql.Connection</tt> and (or) <tt>javax.transaction.UserTransaction</tt> into handler's context:
+<pre class="brush: java;">
+//impl of DataSourceManager
+import javax.sql.DataSource;
+
+public class DataSourceManagerImpl implements DataSourceManager {
+
+	public DataSource getDataSource() {
+		return dataSource;
+	}
+
+}
+
+
+//impl of TxManager
+import javax.transaction.UserTransaction;
+
+public class TxManagerImpl implements TxManager {
+
+	public UserTransaction getUserTransaction() {
+		return userTx;
+	}
+
+}
+
+//engine
+DataSourceManagerImpl dataSourceManagerImpl = ...;
+TxManagerImpl txManagerImpl = ...;
+Engine engine = new Engine();
+engine.addToContext(dataSourceManagerImpl);
+engine.addToContext(txManagerImpl);
+engine.putFilter(ConnectionInInvoke.class);
+engine.putFilter(UserTransactionInInvoke.class);
+engine.putHandler(SomeHandler.class);
+
+
+//handler
+import java.sql.Connection;
+import javax.transaction.UserTransaction;
+
+@Mapping(SomeAction.class)
+public class SomeHandler extends Handler&lt;SomeAction>{
+	
+	@Inject
+	UserTransaction userTx;
+	
+	@Inject
+	Connection connection;
+
+	public void invoke(SomeAction action) throws Exception {
+		...
+	}
+
+}</pre>

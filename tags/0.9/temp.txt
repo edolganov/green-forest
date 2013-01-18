@@ -1,0 +1,209 @@
+
+— 
+
+<a id="p2">2. Features</a>
+
+
+*.css  = svn:mime-type=text/css
+*.html = svn:mime-type=text/html
+*.js   = svn:mime-type=text/javascript
+*.gif  = svn:mime-type=image/gif
+*.png  = svn:mime-type=image/png
+
+
+https://green-forest.googlecode.com/svn/trunk/changelog.txt
+
+examples\
+	01-basics\
+	02-servlet-and-jdbc\
+	03-spring-and-mybatis\
+	04-jee\
+
+${global.deploy-type}
+
+        <jar jarfile="${module.dist.dir}/${module.name}-${global.version}.jar">
+            <fileset dir="${module.build.dir}"/>
+        </jar>
+		
+			<!-- addititon artifacts -->
+    <target name="full-deploy" depends="deploy">
+		<javadoc sourcepath="${module.src.dir}" destdir="${build.dir}/javadoc-files">
+			<classpath refid="libs"/>
+		</javadoc>
+		<jar jarfile="${module.dist.dir}/javadoc/${module.name}-${global.version}-javadoc.jar">
+			<fileset dir="${build.dir}/javadoc-files"/>
+		</jar>
+		<jar jarfile="${module.dist.dir}/sources/${module.name}-${global.version}-sources.jar">
+			<fileset dir="${module.src.dir}"/>
+		</jar>
+	</target>
+ 
+Released: unreleased
+ 
+
+<tt>Engine</tt>
+<tt>Interceptor</tt>
+<tt>Filter</tt>
+<tt>Action</tt>
+<tt>Handler</tt>
+
+@ - &#064;
+< - &lt;
+> - &gt;
+
+		Reflections reflections = new Reflections(new ConfigurationBuilder()
+        .setUrls(ClasspathHelper.getUrlsForPackagePrefix(packagePreffix))
+        .setScanners(new TypeAnnotationsScanner())
+		.filterInputsBy(new FilterBuilder.Include(FilterBuilder.prefix(packagePreffix))));
+		
+		Set<Class<?>> all = reflections.getTypesAnnotatedWith(ControllerInfo.class);
+
+
+		Engine engine = new Engine();
+		engine.addToContext(entityManager);
+		engine.addToContext(sessionContext);
+		engine.putFilter(SimpleTransactionManager.class);
+		engine.scanForAnnotations(getClass().getPackage());
+		engine.putHandler(CheckDocNameHandler.class);
+
+
+[vfs:/C:/chapaj/projects/green-forest/app/jboss-as/server/default/deploy/gf-jee.war/WEB-INF/classes/jee/app/]
+
+
+@EJB(mappedName="StatlessEJBServiceImpl/local")
+
+Is used to specify a named query in the Java Persistence query language, which is a static query expressed in metadata. Query names are scoped to the persistence unit. 
+The following is an example of the definition of a named query in the Java Persistence query language: 
+
+    @NamedQuery(
+            name="findAllCustomersWithName",
+            query="SELECT c FROM Customer c WHERE c.name LIKE :custName"
+    )
+ 
+The following is an example of the use of a named query: 
+
+    @PersistenceContext
+    public EntityManager em;
+    ...
+    customers = em.createNamedQuery("findAllCustomersWithName")
+            .setParameter("custName", "Smith")
+            .getResultList();
+
+
+
+
+http://onjava.com/onjava/2005/07/20/transactions.html
+
+			Get TransactionManager Directly from JNDI (JBoss, WebLogic)
+
+			In JBoss 3 and WebLogic 8, TransactionManager is available in JNDI, albeit under different names, and therefore can be obtained by simple lookup:
+			private TransactionManager getFromJNDI() 
+					throws Exception {
+				InitialContext ctx = new InitialContext();
+				try {
+					// WebLogic
+					return (TransactionManager)
+						ctx.lookup("javax.transaction.TransactionManager");
+				 }
+				 catch (Exception e) {  }
+
+				try {
+					// JBoss
+					return (TransactionManager)
+						ctx.lookup("java:/TransactionManager");
+				}
+				catch (Exception e) { }
+				return null;
+			}
+
+
+
+http://onjava.com/pub/a/onjava/2005/07/20/transactions.html?page=2
+
+			// obtain UserTransaction object and start transaction
+			InitialContext ctx = new InitialContext();
+			UserTransaction userTransaction = (UserTransaction)
+				ctx.lookup("java:comp/UserTransaction");
+
+			// start first transaction
+			userTransaction.begin();
+						
+			// obtain TransactionManager 
+			// using one of the methods described above
+			TransactionManager tm = getTransactionManager();
+
+			// suspend transaction
+			// suspend() returns reference to suspended
+			// Transaction object which later should be passed
+			// to resume()
+			Transaction transaction = tm.suspend();
+							
+			// here you can do something outside of transaction
+			// or start new transaction, 
+			// do something and then commit or rollback
+			userTransaction.begin();
+				
+			// commit subtransaction
+			userTransaction.commit();
+
+			// resume suspended transaction
+			tm.resume(transaction);
+
+			// commit first transaction
+			userTransaction.commit();
+
+
+
+@TransactionAttribute(value= TransactionAttributeType.REQUIRED)
+
+
+sqlSession.flushStatements();
+ sqlSession.commit();
+
++CreateDataBaseHandler.java
++CreateDocsHandler.java
+GetDocsCountHandler.java
+GetDocsPageHandler.java
+RenameDocHandler.java
+
+
+String sql = "INSERT INTO tbl (col) VALUES (?)";
+preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+preparedStatement.setString(1, col);
+preparedStatement.executeUpdate();
+generatedKeys = preparedStatement.getGeneratedKeys();
+if (generatedKeys.next()) {
+    long id = generatedKeys.getLong(1);
+} else {
+    // Throw exception?
+}
+
+
+Ctrl+Shift+M
+
+border: 1px solid #DDDDDD;
+    border-radius: 15px 15px 15px 15px;
+
+
+servlet_jdbc.storage
+
+CREATE TABLE IF NOT EXISTS mind_data_users (
+  id INT NOT NULL ,
+  email VARCHAR(${emailSize}) NOT NULL UNIQUE,
+  password VARCHAR(${passwordSize}) NOT NULL,
+  name VARCHAR(${nameSize}) NOT NULL,
+  
+  PRIMARY KEY (id)
+);
+
+CREATE INDEX mind_data_users_email_index ON mind_data_users(email);
+
+
+CREATE SEQUENCE IF NOT EXISTS mind_data_users_seq START WITH 1 INCREMENT BY 1;
+
+		
+ds.setUser(config.getInitParameter("db-user"));
+ds.setPassword(config.getInitParameter("db-password"));
+ds.setDriverClassName(config.getInitParameter("db-driver"));
+ds.setUrl(config.getInitParameter("db-url"));
+ds.setPoolSize(Integer.parseInt(config.getInitParameter("db-pool-size")));

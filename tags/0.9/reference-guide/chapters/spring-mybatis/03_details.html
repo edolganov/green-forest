@@ -1,0 +1,185 @@
+
+<h2>Explanation of Example</h2>
+
+<p>
+<span class="title">I. Action API</span>
+<br>Package <b><tt>example.common.action</tt></b> contains Action API.
+<br>Package <b><tt>example.app.handler</tt></b> contains handlers for this actions.
+
+<p>Example of using this API from <tt>spring.web.AppController</tt>:
+<pre class="brush: java;">
+public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+
+	int pageIndex = ...;
+	int limit = ...;
+	
+	GetDocsPage action = new GetDocsPage(pageIndex, limit);
+	Page&lt;Doc> page = app.invoke(action);
+	
+	req.setAttribute("page", page);
+	
+}
+
+public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+	
+	int id = ...;
+	String newName = ...;
+	
+	RenameDoc action = new RenameDoc(id, newName);
+	app.invoke(action);
+	
+}</pre>
+
+
+<br>Example of app handler:
+<pre class="brush: java;">
+package example.app.handler;
+
+@Mapping(GetDocsPage.class)
+public class GetDocsPageHandler extends Handler&lt;GetDocsPage>{
+	
+	@Inject
+	Storage storage;
+
+	@Override
+	public void invoke(GetDocsPage action) throws Exception {
+		
+		Input input = action.input();
+		int updatedPageIndex = input.pageIndex;
+		int updatedLimit = input.limit;
+		
+		if(updatedPageIndex < 0){
+			updatedPageIndex = 0;
+		}
+		
+		if(updatedLimit < 0){
+			updatedLimit = 0;
+		} else if(updatedLimit > 50){
+			updatedLimit = 50;
+		}
+		
+		input.limit = updatedLimit;
+		input.pageIndex = updatedPageIndex;
+		
+		storage.invoke(action);
+		
+	}
+
+}</pre>
+
+
+
+<p class="more-top text-align-left">
+<span class="title">II. App Layer</span>
+<br>
+File <tt>gf-spring-mybatis.war/WEB-INF/<b>applicationContext.xml</b></tt> contains setup of App's 
+<a target="_blank" href="./single-page.html#engine">Engine</a>:
+<pre class="brush: xml;">
+&lt;bean id="appEngine" class="com.gf.core.Engine">
+	&lt;property name="name" value="App Engine"/>
+	&lt;property name="scanAndPut">
+		&lt;list>
+			&lt;value>example.app&lt;/value>
+		&lt;/list>
+	&lt;/property>
+	&lt;property name="contextObjects">
+		&lt;list>
+			&lt;ref bean="storage"/>
+		&lt;/list>
+	&lt;/property>
+	&lt;property name="configValues">
+		&lt;props>
+			&lt;prop key="com.gf.key.TraceHandlers">true&lt;/prop>
+		&lt;/props>
+	&lt;/property>
+&lt;/bean>
+
+&lt;bean id="app" class="example.app.AppImpl">
+	&lt;constructor-arg ref="appEngine"/>
+&lt;/bean>
+</pre>
+
+
+
+<p class="more-top text-align-left">
+<span class="title">III. Storage Layer</span>
+<br>
+File <tt>gf-spring-mybatis.war/WEB-INF/<b>applicationContext.xml</b></tt> contains setup of Storage's 
+<a target="_blank" href="./single-page.html#engine">Engine</a>:
+<pre class="brush: xml;">
+&lt;bean id="storageEngine" class="com.gf.core.Engine">
+	&lt;property name="name" value="Storage Engine"/>
+	&lt;property name="scanAndPut">
+		&lt;list>
+			&lt;value>mybatis.storage&lt;/value>
+		&lt;/list>
+	&lt;/property>
+	&lt;property name="contextObjects">
+		&lt;list>
+			&lt;ref bean="sqlSessionFactory"/>
+		&lt;/list>
+	&lt;/property>
+	&lt;property name="filterTypes">
+		&lt;list>
+			&lt;value>com.gf.components.mybatis.SqlSessionInInvoke&lt;/value>
+		&lt;/list>
+	&lt;/property>
+	&lt;property name="initializers">
+		&lt;list>
+			&lt;bean class="com.gf.components.mybatis.InjectMappers"/>
+		&lt;/list>
+	&lt;/property>
+&lt;/bean>
+
+&lt;bean id="storage" class="example.storage.StorageImpl">
+	&lt;constructor-arg ref="storageEngine"/>
+&lt;/bean>
+</pre>
+
+
+<br>Example of storage handler:
+<pre class="brush: java;">
+package mybatis.storage.handler;
+
+@Mapping(GetDocsPage.class)
+public class GetDocsPageHandler extends Handler&lt;GetDocsPage>{
+	
+	@Inject
+	DocMapper docMapper;
+
+	@Override
+	public void invoke(GetDocsPage action) throws Exception {
+		
+		Input input = action.input();
+		
+		int limit = input.limit;
+		int pageIndex = input.pageIndex;
+		int offset = pageIndex*limit;
+		
+		List&lt;Doc> list = docMapper.getDocsPage(limit, offset);
+		
+		Integer count = subInvoke(new GetDocsCount());
+
+		action.setOutput(new Page&lt;Doc>(list, pageIndex, limit, count));
+		
+	}
+
+}</pre>
+
+
+<p class="more-top text-align-left">
+<span class="title">IV. MyBatis</span>
+<br>
+File <tt>gf-spring-mybatis.war/WEB-INF/<b>applicationContext.xml</b></tt> contains setup of MyBatis:
+<pre class="brush: xml;">
+&lt;bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  &lt;property name="dataSource" ref="dataSource" />
+  &lt;property name="mapperLocations" value="classpath*:mybatis/mapper/**/*.xml" />
+  &lt;property name="transactionFactory">
+  	&lt;bean class="org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory" />
+  &lt;/property>  
+&lt;/bean>
+</pre>
+
+
+

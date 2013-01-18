@@ -1,0 +1,17 @@
+<h2>Configuration</h2>
+
+<span class="title">Trace invocation</span>
+<br>
+You can enable a trace information by <a target="_blank" href='../javadoc/com/gf/key/TraceHandlers.html'>TraceHandlers</a> key:
+<pre class="brush: java;">
+import com.gf.key.TraceHandlers;
+import com.gf.extra.trace.Trace;
+
+Engine engine = new Engine();
+engine.setConfig(TraceHandlers.class, true); //enable tracing
+...
+SomeAction someActon = new SomeAction();
+engine.invoke(someActon);
+     
+Trace trace = TraceHandlers.getTrace(someActon); //get trace info from the action
+</pre>

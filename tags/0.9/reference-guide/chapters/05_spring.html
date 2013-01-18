@@ -1,0 +1,40 @@
+
+<h2>Spring Integration</h2>
+
+<p>Use <gff> in <sf> like Spring bean for creating Action-Handler API instead of classic API.
+You can use <sf> features like context objects in your <a href="#engine">Engine</a> and inject them to handlers.
+<br>Example of Engine's bean in Spring config file:
+<pre class="brush: xml;">
+&lt;beans ...&gt;
+
+	&lt;bean id="someEngine" class="com.gf.core.Engine">
+		&lt;property name="scanAndPut">
+			&lt;list>
+				&lt;value>foo.blah&lt;/value>
+			&lt;/list>
+		&lt;/property>
+		&lt;property name="contextObjects">
+			&lt;list>
+				&lt;ref bean="someBean"/>
+				&lt;ref bean="otherBean"/>
+			&lt;/list>
+		&lt;/property>
+		&lt;property name="filterTypes">
+			&lt;list>
+				&lt;value>bar.baz.SomeFilter&lt;/value>
+			&lt;/list>
+		&lt;/property>
+		&lt;property name="interceptorTypes">
+			&lt;list>
+				&lt;value>bar.baz.SomeInterceptor&lt;/value>
+			&lt;/list>
+		&lt;/property>
+	&lt;/bean>
+
+&lt;/beans&gt;
+</pre>
+
+<p>
+<div class="def">
+	See example of <sf> app <a target="_blank" href="./example-spring-mybatis.html">here</a>.
+</div>
