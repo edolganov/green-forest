@@ -64,7 +64,7 @@
         
 		<mkdir dir="${module.build.dir}"/>
 		
-		<property name="src-all" value="${build.dir}/src-all"/>
+		<property name="src-all" value="${build.dir}/src"/>
 		<mkdir dir="${src-all}"/>
 		<copy todir="${src-all}">
 			<fileset dir="${module.src.dir}"/>

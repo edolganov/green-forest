@@ -19,19 +19,22 @@
 		<mkdir dir="build/02-servlet-and-jdbc"/>
 		<copy todir="build/02-servlet-and-jdbc">
 			<fileset dir="./servlet-and-jdbc/build" includes="*.war"/>
+			<fileset dir="./servlet-and-jdbc/build" includes="src/"/>
 			<fileset file="./servlet-and-jdbc/readme.txt"/>
-			
 		</copy>
+		
 		
 		<mkdir dir="build/03-spring-and-mybatis"/>
 		<copy todir="build/03-spring-and-mybatis">
 			<fileset dir="./spring-and-mybatis/build" includes="*.war"/>
+			<fileset dir="./spring-and-mybatis/build" includes="src/"/>
 			<fileset file="./spring-and-mybatis/readme.txt"/>
 		</copy>
 		
 		<mkdir dir="build/04-jee"/>
 		<copy todir="build/04-jee">
 			<fileset dir="./jee/build" includes="*.war"/>
+			<fileset dir="./jee/build" includes="src/"/>
 			<fileset file="./jee/readme.txt"/>
 		</copy>
 
