@@ -71,6 +71,87 @@ Green-forest Framework is the simple IoC Container with Action-Handler architect
 It's not a competitor for Spring Framework or JEE but it's a powerful addition for these frameworks. 
 You can use Green-forest for a single class implementation and for a complex business logic.
 
+<p>
+The Action-Handler architecture can be presents by this scheme:
+<br>
+<img src="http://green-forest.googlecode.com/svn/tags/0.9/reference-guide/i/action-handler-pattern.png"/>
+<br>
+As you see on the scheme we shared our logic into some classes:
+<ol>
+<li>
+<h4>Action</h4>
+Action class presents an "atomic business method" and contains input and output data:
+<pre lang="java">
+//Action with String input and Integer output data
+public class SomeAction extends Action&lt;String, Integer>{
+ 
+    public SomeAction(String input) {
+        super(input);
+    }
+     
+}</pre>
+</li>
+<li>
+<h4>Handler</h4>
+Handler class presents an implementation of business logic:
+<pre lang="java">
+@Mapping(SomeAction.class)
+public class SomeHandler extends Handler&lt;SomeAction>{
+ 
+    @Inject
+    SomeService service;
+     
+    public void invoke(SomeAction action) throws Exception {
+     
+        String input = action.getInput();
+        Integer result = service.doSomeWork(input);
+         
+        action.setOutput(result);
+    }
+}</pre>
+	
+</li>
+<li>
+<h4>Framework</h4>
+Framework's Engine ensures functioning of handlers:
+<pre lang="java">
+//create Engine instance
+Engine engine = new Engine();
+ 
+//register the handler
+engine.putHandler(SomeHandler.class);
+ 
+//invoke the action
+Integer result = engine.invoke(new SomeAction("some data"));
+</pre>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <br><br><br><br><br>
