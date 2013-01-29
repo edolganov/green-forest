@@ -67,7 +67,7 @@ License:     CPOL
 
 <!--  Add the article text. Please use simple formatting (<h2>, <p> etc)   -->
 <h2>Introduction</h2>
-Green-forest Framework is the simple IoC Container with Action-Handler architecture. 
+<a target="_blank" href='http://code.google.com/p/green-forest'>Green-forest Framework</a> is the simple IoC Container with Action-Handler architecture. 
 It's not a competitor for Spring Framework or JEE but it's a powerful addition for these frameworks. 
 You can use Green-forest for a single class implementation and for a complex business logic.
 
@@ -128,8 +128,46 @@ Integer result = engine.invoke(new SomeAction("some data"));
 </ol>
 
 
+<h2>Motivation</h2>
+What is the motivation for using Green-forest Framework? 
+The main task is to simplify the code: transfer of one big class (some service implementation) to 
+a set of small classes (handlers).
+<p>See the example:
+<br>"Classic" implementation presents one big class on 1000 lines of code:
+<pre lang="java">
+//"classic" impl of API
+public class SomeBigServiceImpl implements SomeService {
+	
+	public Doc createDoc(...){...}
+	
+	public Doc createDocWithAttach(...){...}
+	
+	public Doc getDocById(...){...}
+	
+	public List getDocsList(...){...}
+	
+	//and many many other methods on 1000 lines of a code
+	
+}</pre>
 
+<br>Action-Handler implementation presents a set of small classes:
+<pre lang="java">
+//Action-Handler API
+public class CreateDocHandler extends Handler&lt;CreateDoc>{
+  //10-20 lines of code
+}
 
+public class CreateDocWithAttachHandler extends Handler&lt;CreateDocWithAttach>{
+  //10-20 lines of code
+}
+
+public class GetDocByIdHandler extends Handler&lt;GetDoc>{
+  //10-20 lines of code
+}
+
+public class GetDocListHandler extends Handler&lt;GetDocList>{
+  //10-20 lines of code
+}</pre>
 
 
 
