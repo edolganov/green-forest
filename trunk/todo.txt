@@ -3,7 +3,6 @@
 
 === продвижение ===
 	- стать€ на инглиш аналоге хабра
-		- file://localhost/C:/chapaj/_download/article-template/codeproject_template.htm
 		- http://java.dzone.com/node/add/article
 	- стать€ на хабре
 	- ссылка јйрату, »горю
@@ -76,7 +75,9 @@
 _____________________	
 	
 
-=== продвижение ===	
+=== продвижение ===
+	- стать€ на инглиш аналоге хабра
+		- file://localhost/C:/chapaj/_download/article-template/codeproject_template.htm
 	- ссылка в линкедине
 	- ссылка в контакте
 
