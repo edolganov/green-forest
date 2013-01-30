@@ -232,7 +232,31 @@ public class AppServlet extends HttpServlet {
 
 }</pre>
 
+<p>And for every action we create its own handler:
+<pre lang="java">
+package jdbc.storage.handler;
 
+@Mapping(RenameDoc.class)
+public class RenameDocHandler extends Handler&lt;RenameDoc&gt;{
+	
+	@Inject
+	Connection c;
+
+	@Override
+	public void invoke(RenameDoc action) throws Exception {
+		
+		Doc input = action.input();
+		
+		PreparedStatement ps = c.prepareStatement("UPDATE doc SET name=? WHERE id=?");
+		ps.setInt(2, input.id);
+		ps.setString(1, input.name);
+		ps.executeUpdate();
+		
+	}
+
+}</pre>
+
+<p>That's it! We received a set of compact simple classes for API (Actions) and for implementation (Handlers).
 
 
 
