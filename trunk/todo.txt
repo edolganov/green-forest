@@ -4,6 +4,7 @@
 === продвижение ===
 	- статья на инглиш аналоге хабра
 		- http://java.dzone.com/node/add/article
+		- http://www.roseindia.net/
 	- статья на хабре
 	- ссылка Айрату, Игорю
 
