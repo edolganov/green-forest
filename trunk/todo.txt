@@ -2,7 +2,6 @@
 Цель: создание личной опен-сорс библиотеки
 
 === продвижение ===
-	- статья на хабре
 	- статья на инглиш аналоге хабра
 		- http://java.dzone.com/node/add/article
 		- http://www.roseindia.net/
@@ -80,6 +79,8 @@ _____________________
 	
 
 === продвижение ===
+	- статья на хабре
+		http://habrahabr.ru/post/168855/
 	- добавил ссылку dzone
 		http://www.dzone.com/links/greenforest_framework.html
 	- добавил примеры интеграции с jee и спрингом на главной
