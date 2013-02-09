@@ -2,23 +2,16 @@
 Цель: создание личной опен-сорс библиотеки
 
 === продвижение ===
-	- добавить гугл-аналитику для отслеживания количества просмотров
-		- https://www.google.com/analytics/
+	- статья на хабре
 	- статья на инглиш аналоге хабра
 		- http://java.dzone.com/node/add/article
 		- http://www.roseindia.net/
-	- статья на хабре
 	- ссылка Айрату, Игорю
+	- добавить гугл-аналитику для отслеживания количества просмотров
+		- https://www.google.com/analytics/
 
 === релиз 0.9.5 === 
-	- поиск "интеграция в центральные репозитории"
-		- пример http://repo1.maven.org/maven2/org/reflections/reflections/0.9.8/
-		- guide: https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
-			- раздел "7c. Deploy Snapshots and Stage Releases with Ant"
-		- guide: http://maven.apache.org/guides/mini/guide-central-repository-upload.html
-			- http://stackoverflow.com/questions/8331209/how-to-add-own-project-to-public-maven-repository
-	- кнопка донате как у http://code.google.com/p/reflections/
-		- добавить упоминание о ней в документашке
+
 
 	
 
@@ -66,11 +59,19 @@
 === servlet-and-jdbc ===
 === spring-and-mybatis ===	
 === jee ===	
+
 === другое ===
 	- в стректрейсе примеров-варников делать ссылки на java исходники (новый сервлет отдающий контент)
 	- писатель испольнения
 	- service-layer
-
+	- поиск "интеграция в центральные репозитории"
+		- пример http://repo1.maven.org/maven2/org/reflections/reflections/0.9.8/
+		- guide: https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+			- раздел "7c. Deploy Snapshots and Stage Releases with Ant"
+		- guide: http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+			- http://stackoverflow.com/questions/8331209/how-to-add-own-project-to-public-maven-repository
+	- кнопка донате как у http://code.google.com/p/reflections/
+		- добавить упоминание о ней в документашке
 
 	
 	
@@ -79,6 +80,9 @@ _____________________
 	
 
 === продвижение ===
+	- добавил ссылку dzone
+		http://www.dzone.com/links/greenforest_framework.html
+	- добавил примеры интеграции с jee и спрингом на главной
 	- статья на инглиш аналоге хабра
 		- file://localhost/C:/chapaj/_download/article-template/codeproject_template.htm
 	- ссылка в линкедине
@@ -117,8 +121,8 @@ _____________________
 	
 	
 _____________________
-2013-01-19
-_____________________
+#2013-01-19 	
+
 
 === релиз 0.9 ===
 	- основная страница
