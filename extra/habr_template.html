@@ -1,14 +1,10 @@
-﻿<html>
-<body>
-
-<h1>Знакомство с Green-forest Framework</h1>
-
-<img src="http://green-forest.googlecode.com/svn/trunk/reference-guide/i/gf-logo-label.png" alt="Green-forest Logo">
+﻿<img src="http://habrastorage.org/storage2/59e/ee4/6fc/59eee46fc539e760a1bd06c92fb9c15a.png" alt="Green-forest Logo"/>
 <p>
-Хочу рассказать Java-сообществу Хабра о небольшом, но очень полезном (на личном опыте) фреймворке 
-под названием <a target="_blank" href='http://code.google.com/p/green-forest'>Green-forest</a>. Данный фреймворк можно 
-использовать как самостоятельно, так и в контексте JEE или Spring. Как с помощью него упрощается 
-и структурируется код приложения, можно узнать под катом.
+Хочу рассказать Java-сообществу Хабра о небольшом, но очень полезном (на личном опыте) фреймворке под названием <a target="_blank" href='http://code.google.com/p/green-forest'>Green-forest</a>. Данный фреймворк можно использовать как самостоятельно, так и в контексте JEE или Spring. 
+
+Как с помощью него можно упростить код приложения узнаем под катом.
+
+<habracut>
 
 <p>В начале рассмотрим проблему для решения которой предназначен Green-forest.
 
@@ -20,9 +16,9 @@
 <li>Слой работы с данными</li>
 </ul>
 
-<p>При этом бизнес-слой и слой данных состоят из классов-сервисов, предоставляющих внешнему миру публичное API. 
-<br>Пример такого сервиса:
-<pre>
+<p>При этом бизнес-слой и слой данных состоят из классов-сервисов, предоставляющих внешнему миру публичное API.
+Пример такого сервиса:
+<source lang="java">
 public interface UserService {
 	
 	User createUser(Object someData);
@@ -36,10 +32,10 @@ public interface UserService {
 	void unblockUser(long id);
 
 }
-</pre>
+</source>
 
 <p>С ростом приложения растет количество методов в подобных сервисах - а значит растет громоздкость класса-реализации:
-<pre>
+<source lang="java">
 public class UserServiceImpl implements UserService {
 
 	//метод на 1-ой строке класса
@@ -60,15 +56,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 }
-</pre>
+</source>
 
-<p>В итоге появляются классы, содержащие десятки методов и 1000-ти строк кода. 
-Искать и поддерживать код в таких класса становится трудно и муторно.
+<p>В итоге появляются классы, содержащие десятки методов и 1000-ти строк кода. Искать и поддерживать код в таких классах становится трудно и муторно.
 
 <h2>Классическое решение</h2>
 
 <p>Очевидным решением видится разделение одного большого сервиса на множество более мелких:
-<pre>
+<source lang="java">
 public interface UserBasicService {
 	
 	User createUser(Object someData);
@@ -85,38 +80,37 @@ public interface UserModerationService {
 	
 	void unblockUser(long id);
 
-}</pre>
+}</source>
 
 <p>Однако, помимо простоты такой подход имеет ряд недостатков:
-<br>— <b>Трудность равномерного разделения</b>: часто бывает трудно разделить сервис на равные части. 
-В одном новом сервисе остается 3 метода, в другом - 10-ть.
-<br>— <b>Неоднозначность разделения</b>: бывает трудно определить в какой дочерний сервис перенести 
-конкретный метод. В результате методы переносятся нелогично и API усложняется для понимания.
-<br>— <b>Устранение симптомов, но не причины:</b> по сути, мы не решили проблему, т.к. с ростом методов в новых сервисах
-они тоже рискуют превратиться в громоздкие 1000-ти строчные реализации.
+
+<b>Трудность равномерного разделения</b>: бывает трудно разделить сервис на равные части. В одном новом сервисе остается 3 метода, в другом - 10-ть.
+
+<b>Неоднозначность разделения</b>: бывает трудно определить в какой дочерний сервис перенести конкретный метод. В результате методы переносятся нелогично и API усложняется для понимания.
+
+<b>Устранение симптомов, но не причины:</b> по сути, мы не решили проблему, т.к. с ростом методов в новых сервисах они тоже рискуют превратиться в громоздкие 1000-ти строчные реализации.
 
 <p>Попробуем решить проблему громоздких сервисом в новом ключе.
 
 <h2>Решение через атомарные функции</h2>
-<p>Раз наше простое разделение сервиса на несколько ему подобных не дает полного решения проблемы, зададимся вопросом,
-а можем ли мы разделить его на более атомариные сущности? Конечно же можем! Ведь целью любого сервиса являются его методы,
-а значит, создав множество отдельных методов, мы избавися от озвученных выше недостатков:
-<br>— <b>Нет проблем неравномерного и неоднозначного разделения</b>: множество методов разделено равномерно 
-и однозначно по своему определению.
-<br>— <b>Решена проблема роста:</b> при появлении новых методов мы просто создаем новые классы, не увеличивая размер старых.
+<p>Раз наше простое разделение сервиса на несколько ему подобных не дает полного решения проблемы, зададимся вопросом, а можем ли мы разделить его на более атомарные сущности? Конечно же можем! Ведь целью любого сервиса являются его методы, а значит, создав множество отдельных методов, мы избавимся от озвученных выше недостатков:
+
+<b>Нет проблем неравномерного и неоднозначного разделения</b>: множество методов разделено равномерно и однозначно по своему определению.
+
+<b>Решена проблема роста:</b> при появлении новых методов мы просто создаем новые классы, не увеличивая размер старых.
 
 <h2>Реализация решения в Green-forest</h2>
 
 <p>В Green-forest Framework применяется архитектура Action-Handler, иллюстрируемая схемой:
-<br>
-<img src="http://green-forest.googlecode.com/svn/tags/0.9/reference-guide/i/action-handler-pattern.png"/>
+<img src="http://habrastorage.org/storage2/5a2/12a/e40/5a212ae40d06c3bd4aee9106f093fa08.png"/>
 
 <p>Рассмотрим компоненты этой схемы:
+
 <ol>
 <li>
-<h4>Action</h4>
+<h3>Action</h3>
 Класс Action представляет атомарный "метод", который можно "вызвать". Внутри себя класс содержит входные и выходные данные: 
-<pre lang="java">
+<source lang="java">
 //Класс Action с типом входных данных - String и выходных - Integer
 public class SomeAction extends Action&lt;String, Integer&gt;{
  
@@ -124,12 +118,12 @@ public class SomeAction extends Action&lt;String, Integer&gt;{
         super(input);
     }
      
-}</pre>
+}</source>
 </li>
 <li>
-<h4>Handler</h4>
+<h3>Handler</h3>
 Класс Handler содержит конкретную реализацию для данного Action типа:
-<pre lang="java">
+<source lang="java">
 @Mapping(SomeAction.class)
 public class SomeHandler extends Handler&lt;SomeAction&gt;{
  
@@ -143,22 +137,22 @@ public class SomeHandler extends Handler&lt;SomeAction&gt;{
          
         action.setOutput(result);
     }
-}</pre>
+}</source>
 	
 </li>
 <li>
-<h4>Framework</h4>
+<h3>Framework</h3>
 Объект фреймворка Engine обеспечивает связь между Action и Handler объектами:
-<pre lang="java">
+<source lang="java">
 //создаем объект Engine
 Engine engine = new Engine();
  
-//регистрируем handler
+//регистрируем обработчик
 engine.putHandler(SomeHandler.class);
  
 //выполняем действие
 Integer result = engine.invoke(new SomeAction("some data"));
-</pre>
+</source>
 </li>
 </ol>
 
@@ -167,29 +161,29 @@ Integer result = engine.invoke(new SomeAction("some data"));
 <p>Итак, мы рассмотрели ключевые классы фреймворка. Используя их, проведем рефакторинг примера с нашим сервисом UserService.
 
 <p>В начале отнаследуем UserService от служебного интерфейса ActionService:
-<pre>
+<source lang="java">
 import com.gf.service.ActionService;
 
 public interface UserService extends ActionService { 
 
 	//интерфейс не содержит методов - они отнаследованы от ActionService
 }
-</pre>
+</source>
 
 <p>Далее создадим множество Action классов:
-<pre>
+<source lang="java">
 import com.gf.Action;
 
 public class CreateUser extends Action&lt;Object, User&gt; {
     
-    public RenameDoc(Object someData){
+    public CreateUser(Object someData){
         this(someData);
     }
 }
 
 public class ActivateUser extends Action&lt;Long, Void&gt; {
     
-    public RenameDoc(Long id){
+    public ActivateUser(Long id){
         this(id);
     }
 }
@@ -201,10 +195,10 @@ public class ActivateUser extends Action&lt;Long, Void&gt; {
 	UnblockUser.java
 	...
 */
-</pre>
+</source>
 
 <p>Осталось создать обработчики для данных классов. Например:
-<pre lang="java">
+<source lang="java">
 @Mapping(CreateUser.class)
 public class CreateUserHandler extends Handler&lt;CreateUser&gt;{
  
@@ -214,10 +208,10 @@ public class CreateUserHandler extends Handler&lt;CreateUser&gt;{
         User user = ... 
         action.setOutput(user);
     }
-}</pre>
+}</source>
 
-<p>Пример конечного вида реализации UserServiceImpl
-<pre>
+<p>Пример конечного вида реализации UserServiceImpl:
+<source lang="java">
 import com.gf.Action;
 import com.gf.core.Engine;
 
@@ -243,55 +237,15 @@ public class UserServiceImpl implements UserService {
 
 }
 
-</pre>
+</source>
 
-<p>В итоге мы разделили большой интерфейс UserService на множество Action классов, 
-а реализацию UserServiceImpl - на множество Handler классов.
+<p>В итоге мы разделили большой интерфейс UserService на множество Action классов, а реализацию UserServiceImpl - на множество Handler классов.
 
 <h2>Выводы и ссылки</h2>
-<p>Мы рассмотрели проблему концентрации логики в одном классе и способы решения, включая разделение на атомарные классы-методы.
-Далее мы познакомились с Green-forest Framework, который реализует послединй подход с помощью архитектуры Action-Handler.
-Используя Green-forest вы можете упростить и структурировать код своего приложения.
+<p>Мы рассмотрели проблему концентрации логики в одном классе и способы решения, включая разделение на атомарные классы-методы. Далее мы познакомились с Green-forest Framework, который реализует последний подход с помощью архитектуры Action-Handler. Используя Green-forest, вы можете упростить и структурировать код своего приложения.
 
-<p>Ниже список ссылок:
-<br><a target="_blank" href='http://code.google.com/p/green-forest'>Green-forest Framework</a>
-<br><a target="_blank" href='http://green-forest.googlecode.com/svn/tags/0.9/reference-guide/single-page.html'>Документация</a>
+Приятной работы, коллеги!
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+<p>Ссылки:
+<a target="_blank" href='http://code.google.com/p/green-forest'>Green-forest Framework</a>
+<a target="_blank" href='http://green-forest.googlecode.com/svn/tags/0.9/reference-guide/single-page.html'>Документация</a>
