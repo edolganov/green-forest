@@ -2,6 +2,8 @@
 <body>
 
 <h1>Знакомство с Green-forest Framework</h1>
+
+<img src="http://green-forest.googlecode.com/svn/trunk/reference-guide/i/gf-logo-label.png" alt="Green-forest Logo">
 <p>
 Хочу рассказать Java-сообществу Хабра о небольшом, но очень полезном (на личном опыте) фреймворке 
 под названием <a target="_blank" href='http://code.google.com/p/green-forest'>Green-forest</a>. Данный фреймворк можно 
@@ -101,9 +103,161 @@ public interface UserModerationService {
 а значит, создав множество отдельных методов, мы избавися от озвученных выше недостатков:
 <br>— <b>Нет проблем неравномерного и неоднозначного разделения</b>: множество методов разделено равномерно 
 и однозначно по своему определению.
-<br>— <b>Решена проблема роста:</b> с необходимостью новых методов - мы просто создаем новые классы, не увеличивая размер старых.
+<br>— <b>Решена проблема роста:</b> при появлении новых методов мы просто создаем новые классы, не увеличивая размер старых.
 
 <h2>Реализация решения в Green-forest</h2>
+
+<p>В Green-forest Framework применяется архитектура Action-Handler, иллюстрируемая схемой:
+<br>
+<img src="http://green-forest.googlecode.com/svn/tags/0.9/reference-guide/i/action-handler-pattern.png"/>
+
+<p>Рассмотрим компоненты этой схемы:
+<ol>
+<li>
+<h4>Action</h4>
+Класс Action представляет атомарный "метод", который можно "вызвать". Внутри себя класс содержит входные и выходные данные: 
+<pre lang="java">
+//Класс Action с типом входных данных - String и выходных - Integer
+public class SomeAction extends Action&lt;String, Integer&gt;{
+ 
+    public SomeAction(String input) {
+        super(input);
+    }
+     
+}</pre>
+</li>
+<li>
+<h4>Handler</h4>
+Класс Handler содержит конкретную реализацию для данного Action типа:
+<pre lang="java">
+@Mapping(SomeAction.class)
+public class SomeHandler extends Handler&lt;SomeAction&gt;{
+ 
+    @Inject
+    SomeService service;
+     
+    public void invoke(SomeAction action) throws Exception {
+     
+        String input = action.getInput();
+        Integer result = service.doSomeWork(input);
+         
+        action.setOutput(result);
+    }
+}</pre>
+	
+</li>
+<li>
+<h4>Framework</h4>
+Объект фреймворка Engine обеспечивает связь между Action и Handler объектами:
+<pre lang="java">
+//создаем объект Engine
+Engine engine = new Engine();
+ 
+//регистрируем handler
+engine.putHandler(SomeHandler.class);
+ 
+//выполняем действие
+Integer result = engine.invoke(new SomeAction("some data"));
+</pre>
+</li>
+</ol>
+
+
+<h2>Пример использования</h2>
+<p>Итак, мы рассмотрели ключевые классы фреймворка. Используя их, проведем рефакторинг примера с нашим сервисом UserService.
+
+<p>В начале отнаследуем UserService от служебного интерфейса ActionService:
+<pre>
+import com.gf.service.ActionService;
+
+public interface UserService extends ActionService { 
+
+	//интерфейс не содержит методов - они отнаследованы от ActionService
+}
+</pre>
+
+<p>Далее создадим множество Action классов:
+<pre>
+import com.gf.Action;
+
+public class CreateUser extends Action&lt;Object, User&gt; {
+    
+    public RenameDoc(Object someData){
+        this(someData);
+    }
+}
+
+public class ActivateUser extends Action&lt;Long, Void&gt; {
+    
+    public RenameDoc(Long id){
+        this(id);
+    }
+}
+
+/*
+и т.д для классов:
+	UpdateUser.java
+	BlockUser.java
+	UnblockUser.java
+	...
+*/
+</pre>
+
+<p>Осталось создать обработчики для данных классов. Например:
+<pre lang="java">
+@Mapping(CreateUser.class)
+public class CreateUserHandler extends Handler&lt;CreateUser&gt;{
+ 
+    public void invoke(CreateUser action) throws Exception {
+     
+        Object input = action.getInput();
+        User user = ... 
+        action.setOutput(user);
+    }
+}</pre>
+
+<p>Пример конечного вида реализации UserServiceImpl
+<pre>
+import com.gf.Action;
+import com.gf.core.Engine;
+
+public class UserServiceImpl implements UserService {
+	
+	Engine engine;
+
+	public UserServiceImpl(){
+		
+		engine = new Engine();
+		
+		//регистрируем Handler классы по имени пакета
+		engine.scanAndPut("some.package");
+	}
+
+	public &lt;I, O&gt; O invoke(Action&lt;I, O&gt; action) {
+		return engine.invoke(action);
+	}
+
+	public &lt;I, O&gt; O invokeUnwrap(Action&lt;I, O&gt; action) throws Exception {
+		return engine.invokeUnwrap(action);
+	}
+
+}
+
+</pre>
+
+<p>В итоге мы разделили большой интерфейс UserService на множество Action классов, 
+а реализацию UserServiceImpl - на множество Handler классов.
+
+<h2>Выводы и ссылки</h2>
+<p>Мы рассмотрели проблему концентрации логики в одном классе и способы решения, включая разделение на атомарные классы-методы.
+Далее мы познакомились с Green-forest Framework, который реализует послединй подход с помощью архитектуры Action-Handler.
+Используя Green-forest вы можете упростить и структурировать код своего приложения.
+
+<p>Ниже список ссылок:
+<br><a target="_blank" href='http://code.google.com/p/green-forest'>Green-forest Framework</a>
+<br><a target="_blank" href='http://green-forest.googlecode.com/svn/tags/0.9/reference-guide/single-page.html'>Документация</a>
+
+
 
 
 
