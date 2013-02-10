@@ -3,6 +3,7 @@
 
 === продвижение ===
 	- стать€ на инглиш аналоге хабра
+		- ссылку на реддит http://www.reddit.com/r/java/
 		- http://java.dzone.com/node/add/article
 		- http://www.roseindia.net/
 	- ссылка јйрату, »горю
@@ -79,13 +80,15 @@ _____________________
 	
 
 === продвижение ===
+	- ссылка на реддите
+		http://www.reddit.com/r/java/comments/188nyp/greenforest_addition_for_jee_spring_with/
 	- стать€ на хабре
 		http://habrahabr.ru/post/168855/
 	- добавил ссылку dzone
 		http://www.dzone.com/links/greenforest_framework.html
 	- добавил примеры интеграции с jee и спрингом на главной
 	- стать€ на инглиш аналоге хабра
-		- file://localhost/C:/chapaj/_download/article-template/codeproject_template.htm
+		http://www.codeproject.com/Articles/537867/Introduction-to-the-Green-forest-Framework
 	- ссылка в линкедине
 	- ссылка в контакте
 
