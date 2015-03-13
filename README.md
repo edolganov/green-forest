@@ -1,6 +1,6 @@
 ## Intro
 Green-forest Framework is the simple IoC Container with 
-<a href='http://green-forest.googlecode.com/svn/tags/0.9/reference-guide/single-page.html#action-handler'>Action-Handler architecture</a>. 
+<a href='http://htmlpreview.github.io/?https://github.com/edolganov/green-forest/blob/master/reference-guide/single-page.html#action-handler'>Action-Handler architecture</a>. 
 It's not a competitor for Spring Framework or JEE but it's a powerful addition for these frameworks. 
 You can use Green-forest for a single class implementation and for a complex business logic.
 
@@ -41,7 +41,7 @@ public class SomeActonHandler extends Handler<SomeAction>{
 
 
 ## Reference Guide
-[See Reference Guide](http://green-forest.googlecode.com/svn/tags/0.9/reference-guide/single-page.html)
+[See Reference Guide](http://htmlpreview.github.io/?https://github.com/edolganov/green-forest/blob/master/reference-guide/single-page.html)
 
 ## Articles
 
@@ -76,7 +76,7 @@ public class ActionServiceImpl implements ActionService {
 }
 ```
 
-[More details](http://green-forest.googlecode.com/svn/tags/0.9/reference-guide/single-page.html#p7)
+[More details](http://htmlpreview.github.io/?https://github.com/edolganov/green-forest/blob/master/reference-guide/single-page.html#p7)
 
 ## Spring Integration
 ```xml
@@ -100,7 +100,7 @@ public class ActionServiceImpl implements ActionService {
 </bean>
 ```
 
-[More details](http://green-forest.googlecode.com/svn/tags/0.9/reference-guide/single-page.html#p8)
+[More details](http://htmlpreview.github.io/?https://github.com/edolganov/green-forest/blob/master/reference-guide/single-page.html#p8)
 
 
 ## Android
